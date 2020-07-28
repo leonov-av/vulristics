@@ -505,3 +505,4 @@ venv/Lib/site-packages/vulners/common/__init__.py
 venv/Lib/site-packages/vulners/common/attributeList.py
 venv/Lib/site-packages/vulners/common/cookiejar.py
 venv/Lib/site-packages/vulners/common/ratelimit.py
+.idea/dictionaries/Alexander.xml
