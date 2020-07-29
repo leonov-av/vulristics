@@ -17,7 +17,3 @@ print(json.dumps(nvd_cve_data, indent=2))
 print("=== Vulners ===")
 vulners_cve_data = functions_source_vulners.get_vulners_data(cve_id, rewrite_flag)
 print(json.dumps(vulners_cve_data, indent=2))
-
-for reference in vulners_cve_data['data']['references'][cve_id.upper()]:
-    for bulletin in vulners_cve_data['data']['references'][cve_id.upper()][reference]:
-        print(bulletin)
