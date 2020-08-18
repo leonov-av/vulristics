@@ -3,7 +3,7 @@ import functions_source_ms_cve
 import functions_report_ms_patch_tuesday
 import re
 
-source_id = "July 2020"
+source_id = "August 2020"
 
 cves_text = patch_tuesday_profiles[source_id]['cves_text']
 

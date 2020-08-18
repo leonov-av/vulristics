@@ -4,6 +4,23 @@ import json
 import credentials
 import vulners
 
+
+### Search
+def get_last_vulners_exploits_by_release_date():
+    # https://vulners.com/search?query=published:2020-08-01%20AND%20bulletinFamily:exploit
+    # https://avleonov.com/2016/04/21/vulners-com-search-api/
+    try:
+        print("Request to Vulners with authorization key")
+        # date = "2020-08-01"
+        #r = requests.get( "https://vulners.com/api/v3/search/lucene/?query=published:" + date + "%20AND%20bulletinFamily:exploit&references=True&size=100&apiKey=" + credentials.vulners_key)
+        r = requests.get("https://vulners.com/api/v3/search/lucene/?query=last 5 days bulletinFamily:exploit&apiKey=" + credentials.vulners_key)
+        # Without API you will be banned if you haven't solved CAPTCHA on vulners.com for 3 hours.
+        vulners_exploits_data = r.json()
+        print(vulners_exploits_data)
+    except:
+        vulners_exploits_data = dict()
+    return(vulners_exploits_data)
+
 ### Data
 def get_vulners_data_from_vulners_site(vulners_id):
     # https://vulners.com/docs
