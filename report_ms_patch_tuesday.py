@@ -3,14 +3,24 @@ import functions_source_ms_cve
 import functions_report_ms_patch_tuesday
 import re
 
-source_id = "August 2020"
+#source_id = "August 2020"
+source_id = "Shadow August 2020"
+
+cves_exclude = set()
+if 'cves_exclude_text' in patch_tuesday_profiles[source_id]:
+    cves_exclude_text = patch_tuesday_profiles[source_id]['cves_exclude_text']
+    for line in cves_exclude_text.split("\n"):
+        if re.findall("^CVE", line.upper()):
+            cves_exclude.add(line.upper())
 
 cves_text = patch_tuesday_profiles[source_id]['cves_text']
 
 all_cves = set()
 for line in cves_text.split("\n"):
     if re.findall("^CVE", line.upper()):
-        all_cves.add(line.upper())
+        if line.upper() not in cves_exclude:
+            all_cves.add(line.upper())
+
 
 rewrite_flag = False
 ms_cve_data_all = dict()

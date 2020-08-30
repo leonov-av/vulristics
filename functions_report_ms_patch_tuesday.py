@@ -104,7 +104,7 @@ def get_cve_line_html(cves, cve_data):
         if severity == "important":
             color = "orange"
         if severity == "moderate":
-            color = "yellow"
+            color = "#CCCC00" #yellow
         if severity == "low":
             color = "blue"
         if color != "":
