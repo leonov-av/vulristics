@@ -3,8 +3,8 @@ import functions_source_ms_cve
 import functions_report_ms_patch_tuesday
 import re
 
-#source_id = "August 2020"
-source_id = "Shadow August 2020"
+source_id = "April 2020"
+#source_id = "Shadow August 2020"
 
 cves_exclude = set()
 if 'cves_exclude_text' in patch_tuesday_profiles[source_id]:
