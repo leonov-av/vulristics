@@ -5,3 +5,4 @@ data/ms_cve/*
 data/nvd_cve/*
 data/vulners/*
 credentials.py
+credentials.py
