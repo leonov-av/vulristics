@@ -1,7 +1,13 @@
+import credentials
 import re
-
+import json
+import os
+import data_ms_patch_tuesday
 import data_vulnerability_classification
-
+import functions_source_ms_cve
+import functions_source_nvd_cve
+import functions_profile_ms_patch_tuesday
+import functions_source_vulners
 
 def get_vuln_products(ms_cve_data_all):
     all_vuln_products = set()
@@ -174,6 +180,41 @@ def get_type_based_repot(current_cve_data, report_config, source):
             processed_cves.add(cve)
     return {"report_txt": report_txt, "report_html": report_html, "processed_cves": processed_cves}
 
+def get_sorted_cves(cve_scores):
+    score_to_cve = dict()
+    all_scores = list()
+    for cve in cve_scores:
+        all_scores.append(cve_scores[cve]['value'])
+        if not cve_scores[cve]['value'] in score_to_cve:
+            score_to_cve[cve_scores[cve]['value']] = list()
+        score_to_cve[cve_scores[cve]['value']].append(cve)
+    all_scores.sort(reverse=True)
+    sorted_cves = list()
+    for score in all_scores:
+        cves = score_to_cve[score]
+        cves.sort()
+        for cve in cves:
+            sorted_cves.append(cve)
+    return(sorted_cves)
+
+def get_vulristcs_score_report(cve_scores, ms_cve_data):
+    report_txt = ""
+    report_html = ""
+
+    sorted_cves = get_sorted_cves(cve_scores)
+
+    for cve in sorted_cves:
+        report_txt += cve + "\n"
+        report_html += "<p>" + str(int(cve_scores[cve]['value']*1000)) + " - " + cve + \
+                       " - " + str(ms_cve_data[cve]['vuln_type']) + \
+                       " - " + str(ms_cve_data[cve]['vuln_product'])  + \
+                       "</br>" + \
+                       str(cve_scores[cve])  + \
+                       "</p>\n"
+
+    # report_txt = str(cve_scores)
+    # report_html = str(cve_scores)
+    return {"report_txt": report_txt, "report_html": report_html}
 
 def get_statics_report(ms_cve_data_all):
     report_txt = ""
@@ -238,7 +279,9 @@ def get_comments_for_cves(source, processed_cves):
     return {"report_html": report_html}
 
 
-def make_pt_report(ms_cve_data, report_config, source):
+def make_pt_report_for_profile(cve_data_all, cve_scores, report_config, source):
+    ms_cve_data = cve_data_all['ms_cve_data_all']
+
     if report_config['ignore_comments']:
         source['comments'] = {}
 
@@ -248,7 +291,14 @@ def make_pt_report(ms_cve_data, report_config, source):
     html_content = "<h1>" + source['report_name'] + "</h1>"
 
     report_data = get_statics_report(ms_cve_data)
-    name = "Statistics"
+    name = "Basic MS Vulnerabilities Scores Statistics"
+    print("== " + name + " ==")
+    html_content += "<h3>" + name + "</h3>" + "\n"
+    print(report_data['report_txt'])
+    html_content += report_data['report_html']
+
+    report_data = get_vulristcs_score_report(cve_scores, ms_cve_data)
+    name = "Vulristics Vulnerability Scores"
     print("== " + name + " ==")
     html_content += "<h3>" + name + "</h3>" + "\n"
     print(report_data['report_txt'])
@@ -265,26 +315,27 @@ def make_pt_report(ms_cve_data, report_config, source):
     # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
     current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
 
-    exploitation_more_likely = get_vulns_filtered_by_exploitation_likeliness("Exploitation More Likely",
-                                                                             current_cve_data)
-    report_data = get_type_based_repot(exploitation_more_likely, report_config, source)
-    name = "Exploitation more likely"
-    print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
-    html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
-    print(report_data['report_txt'])
-    html_content += report_data['report_html']
-    # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
-    current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
 
-    report_data = get_product_based_repot(current_cve_data, min_cve_number=5, report_config=report_config,
-                                          source=source)
-    name = "Other Product based"
-    print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
-    html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
-    print(report_data['report_txt'])
-    html_content += report_data['report_html']
-    # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
-    current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
+    # exploitation_more_likely = get_vulns_filtered_by_exploitation_likeliness("Exploitation More Likely",
+    #                                                                          current_cve_data)
+    # report_data = get_type_based_repot(exploitation_more_likely, report_config, source)
+    # name = "Exploitation more likely"
+    # print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
+    # html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
+    # print(report_data['report_txt'])
+    # html_content += report_data['report_html']
+    # # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
+    # current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
+
+    # report_data = get_product_based_repot(current_cve_data, min_cve_number=5, report_config=report_config,
+    #                                       source=source)
+    # name = "Other Product based"
+    # print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
+    # html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
+    # print(report_data['report_txt'])
+    # html_content += report_data['report_html']
+    # # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
+    # current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
 
     report_data = get_type_based_repot(current_cve_data, report_config, source)
     name = "Other Vulnerability Type based"
@@ -300,3 +351,185 @@ def make_pt_report(ms_cve_data, report_config, source):
     f = open("report/" + source['file_name_prefix'] + "_" + report_config['file_name_suffix'] + ".html", "w")
     f.write(html_content)
     f.close()
+
+import json
+
+def get_cve_scores(all_cves,cve_data_all,profile):
+    scores_dict = dict()
+    for cve in all_cves:
+
+        ######## NVD CVSS
+
+        # print(json.dumps(cve_data_all['nvd_cve_data_all'][cve], indent=4))
+        # print(cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3'])
+        cvss_base_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['baseScore']
+        cvss_base_score_n = int(cvss_base_score)/10
+        cvss_base_score_k = 9
+        cvss_attack_is_network = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackVector']
+        if cvss_attack_is_network == "NETWORK":
+            cvss_attack_is_network_n = 1
+        else:
+            cvss_attack_is_network_n = 0
+        cvss_attack_is_network_k = 10
+        cvss_attack_ease = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackComplexity']
+        if cvss_attack_ease == "LOW":
+            cvss_attack_ease_n = 1
+        else:
+            cvss_attack_ease_n = 0.2
+        cvss_attack_ease_k = 5
+        cvss_exploitability_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['exploitabilityScore']
+        cvss_exploitability_score_n = int(cvss_exploitability_score) / 10
+        cvss_exploitability_score_k = 5
+        cvss_impact_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['impactScore']
+        cvss_impact_score_n = int(cvss_impact_score) / 10
+        cvss_impact_score_k = 3
+
+        ######## Mentioned by vendors
+        all_vendors_in_report = len(profile['comments'].keys())
+        mentioned = 0
+        for vendor in profile['comments']:
+            if cve in profile['comments'][vendor]:
+                mentioned += 1
+        mentioned_by_vm_vendor_n = mentioned / all_vendors_in_report
+        mentioned_by_vm_vendor_k = 20
+
+        ######## Exploit
+        # Currently works only with Vulners data
+        is_public_exploit = cve_data_all['vulners_cve_data_all'][cve]['public_exploit']
+        if is_public_exploit:
+            public_exploit_exists_n = 1
+        else:
+            public_exploit_exists_n = 0
+        public_exploit_exists_k = 25
+
+        ######## Product
+        # Currently works only with Microsoft data
+        vuln_product = cve_data_all['ms_cve_data_all'][cve]['vuln_product']
+        vulnerable_product_is_common_n = 0.3
+        if "Windows" in vuln_product: #Some standard Windows component
+            vulnerable_product_is_common_n = 1
+        elif "DNS" in vuln_product or "RDP" in vuln_product:
+            vulnerable_product_is_common_n = 0.9
+        elif "Office" in vuln_product or "Word" in vuln_product or "Excel" in vuln_product or "Outlook" in vuln_product:
+            vulnerable_product_is_common_n = 0.7
+        elif "SharePoint" in vuln_product:
+            vulnerable_product_is_common_n = 0.6
+        vulnerable_product_is_common_k = 12
+
+        ######## Vulnerability type
+        # Currently works only with Microsoft data
+        #print(json.dumps(cve_data_all['ms_cve_data_all'][cve]))
+        vuln_type = cve_data_all['ms_cve_data_all'][cve]['vuln_type']
+        criticality_of_vulnerability_type_n = data_vulnerability_classification.type_to_criticality[vuln_type]
+        criticality_of_vulnerability_type_k = 15
+
+        scores_dict[cve] =  { 'components':
+                      {
+                          'cvss_base_score': {
+                              'value': cvss_base_score_n,
+                              'weight': cvss_base_score_k
+                          },
+                          'cvss_attack_is_network': {
+                              'value': cvss_attack_is_network_n,
+                              'weight': cvss_attack_is_network_k
+                          },
+                          'cvss_attack_ease': {
+                              'value': cvss_attack_ease_n,
+                              'weight': cvss_attack_ease_k
+                          },
+                          'cvss_exploitability_score': {
+                              'value': cvss_exploitability_score_n,
+                              'weight': cvss_exploitability_score_k
+                          },
+                          'cvss_impact_score': {
+                              'value': cvss_impact_score_n,
+                              'weight': cvss_impact_score_k
+                          },
+                          'criticality_of_vulnerability_type': {
+                              'value': criticality_of_vulnerability_type_n,
+                              'weight': criticality_of_vulnerability_type_k
+                          },
+                          'mentioned_by_vm_vendor': {
+                              'value': mentioned_by_vm_vendor_n,
+                              'weight': mentioned_by_vm_vendor_k
+                          },
+                          'vulnerable_product_is_common': {
+                              'value': vulnerable_product_is_common_n,
+                              'weight': vulnerable_product_is_common_k
+                          },
+                          'public_exploit_exists': {
+                              'value': public_exploit_exists_n,
+                              'weight': public_exploit_exists_k
+                          },
+                      }
+
+                  }
+        score_value = 0
+        for component in scores_dict[cve]['components']:
+            score_value += scores_dict[cve]['components'][component]['value'] * scores_dict[cve]['components'][component]['weight']
+        all_weights = 0
+        for component in scores_dict[cve]['components']:
+            all_weights  += scores_dict[cve]['components'][component]['weight']
+        score_value = score_value/all_weights
+        scores_dict[cve]['value'] = score_value
+
+    return(scores_dict)
+
+def make_make_pt_reports(month, year, patch_tuesday_date, rewrite_flag=False):
+    # month = "October"
+    # year = "2020"
+    # patch_tuesday_date = "10/13/2020"
+
+    source_id = month + " " + year
+    file_name = month.lower() + year + ".json"
+
+    if not os.path.isfile("data/profile_ms_patch_tuesday/" + file_name):
+        functions_profile_ms_patch_tuesday.create_profile(month, year, patch_tuesday_date)
+
+    f = open("data/profile_ms_patch_tuesday/" + file_name, "r")
+    patch_tuesday_profiles = json.loads(f.read())
+    f.close()
+
+    cves_exclude = set()
+    if 'cves_exclude_text' in patch_tuesday_profiles[source_id]:
+        cves_exclude_text = patch_tuesday_profiles[source_id]['cves_exclude_text']
+        for line in cves_exclude_text.split("\n"):
+            if re.findall("^CVE", line.upper()):
+                cves_exclude.add(line.upper())
+
+    cves_text = patch_tuesday_profiles[source_id]['cves_text']
+
+    all_cves = set()
+    for line in cves_text.split("\n"):
+        if re.findall("^CVE", line.upper()):
+            if line.upper() not in cves_exclude:
+                all_cves.add(line.upper())
+
+    ms_cve_data_all = dict()
+    for cve_id in all_cves:
+        ms_cve_data = functions_source_ms_cve.get_ms_cve_data(cve_id, rewrite_flag)
+        if not ms_cve_data['not_found_error']:
+            ms_cve_data_all[cve_id] = ms_cve_data
+
+    nvd_cve_data_all = dict()
+    for cve_id in all_cves:
+        nvd_cve_data = functions_source_nvd_cve.get_nvd_cve_data(cve_id, rewrite_flag)
+        nvd_cve_data_all[cve_id] =  nvd_cve_data
+
+    vulners_cve_data_all = dict()
+    if credentials.vulners_key != "": # If we  have some Vulners API key
+        for cve_id in all_cves:
+            vulners_cve_data = functions_source_vulners.get_vulners_data(cve_id, rewrite_flag)
+            vulners_cve_data_all[cve_id] = vulners_cve_data
+
+    cve_data_all = {'ms_cve_data_all':ms_cve_data_all,
+                    'nvd_cve_data_all':nvd_cve_data_all,
+                    'vulners_cve_data_all': vulners_cve_data_all}
+
+    cve_scores = get_cve_scores(all_cves, cve_data_all, patch_tuesday_profiles[source_id])
+    # print(json.dumps(cve_scores, indent=4))
+
+    for report_config_name in data_ms_patch_tuesday.patch_tuesday_report_configs:
+        make_pt_report_for_profile(cve_data_all, cve_scores,
+                                     data_ms_patch_tuesday.patch_tuesday_report_configs[report_config_name],
+                                     patch_tuesday_profiles[source_id])

@@ -2,8 +2,57 @@ import requests
 import json
 import re
 import os
+import requests
+import openpyxl
 import data_vulnerability_classification
 
+
+### CVE Search
+
+def get_ms_cves_for_date_range(fromPublishedDate, toPublishedDate):
+    # Interface for service https://portal.msrc.microsoft.com/en-us/security-guidance
+    # fromPublishedDate = "09/09/2020"
+    # toPublishedDate = "10/15/2020"
+
+    headers = {
+        'authority': 'portal.msrc.microsoft.com',
+        'accept': 'application/json, text/plain, */*',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36',
+        'content-type': 'application/json;charset=UTF-8',
+        'origin': 'https://portal.msrc.microsoft.com',
+        'sec-fetch-site': 'same-origin',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'referer': 'https://portal.msrc.microsoft.com/en-us/security-guidance',
+        'accept-language': 'en-US,en;q=0.9,ru;q=0.8',
+    }
+
+    data = {"familyIds":[],"productIds":[],"severityIds":[],"impactIds":[],"pageNumber":1,"pageSize":20,
+            "includeCveNumber":True,"includeSeverity":False,"includeImpact":False,
+            "orderBy":"publishedDate","orderByMonthly":"releaseDate","isDescending":True,"isDescendingMonthly":True,
+            "queryText":"","isSearch":False,"filterText":"",
+            "fromPublishedDate":fromPublishedDate,"toPublishedDate":toPublishedDate} #Month/Date/Year
+
+    response = requests.post('https://portal.msrc.microsoft.com/api/security-guidance/en-us/excel', headers=headers, data=json.dumps(data))
+    f = open("data/ms_search/temp.xlsx", "wb")
+    for chunk in response.iter_content(chunk_size=1024):
+        if chunk:  # filter out keep-alive new chunks
+            f.write(chunk)
+    f.close()
+
+    wb = openpyxl.load_workbook(filename="data/ms_search/temp.xlsx")
+    ws = wb.worksheets[0]
+    row_n = 1
+    first_col_value = ""
+    cve_ids = set()
+    while first_col_value != None:
+        first_col_value = ws.cell(column=1, row=row_n).value
+        vuln_id = ws.cell(column=7, row=row_n).value
+        if vuln_id != None:
+            if "CVE-" in vuln_id:
+                cve_ids.add(vuln_id)
+        row_n += 1
+    return(cve_ids)
 
 ### CVE Data
 def get_ms_cve_data_from_ms_site(cve_id):

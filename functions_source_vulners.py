@@ -29,7 +29,7 @@ def get_vulners_data_from_vulners_site(vulners_id):
     vulners_data = dict()
     if credentials.vulners_key == "":
         try:
-            print("Request to Vulners WITHOUT authorization key")
+            print("Request " + vulners_id + " to Vulners WITHOUT authorization key")
             r = requests.get("https://vulners.com/api/v3/search/id/?id=" + vulners_id + " &references=True")
             # Without API you will be banned if you haven't solved CAPTCHA on vulners.com for 3 hours.
             vulners_data = r.json()
@@ -54,7 +54,7 @@ def get_vulners_data_from_vulners_site(vulners_id):
         #     vulners_data['not_found_error'] = True
 
         try:
-            print("Request to Vulners with authorization key")
+            print("Request " + vulners_id + " to Vulners WITH authorization key")
             r = requests.get("https://vulners.com/api/v3/search/id/?id=" + vulners_id + " &references=True&apiKey=" + credentials.vulners_key)
             # Without API you will be banned if you haven't solved CAPTCHA on vulners.com for 3 hours.
             vulners_data = r.json()
