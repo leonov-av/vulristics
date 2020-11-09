@@ -2,7 +2,10 @@
 .idea/
 venv/
 data/ms_cve/*
+data/ms_search/*
 data/nvd_cve/*
+data/profile_ms_patch_tuesday/*
 data/vulners/*
-credentials.py
+data/vulners_exploit/*
+report/*.html
 credentials.py
