@@ -12,8 +12,6 @@ Currently, there are the following scripts available:
 3. report_ms_patch_tuesday_exploits.py - get Microsoft Patch Tuesday CVEs and filter vulnerabilities with public exploits (based on Vulners.com). 
 4. report_daily_exploits.py - daily exploits report I use for my news channel https://t.me/avleonovnews.
 
-[![Microsoft Patch Tuesday July 2020: my new open source project Vulristics, DNS SIGRed, RDP Client and SharePoint](https://yt-embed.herokuapp.com/embed?v=4Nbgh5TJnuw)](https://www.youtube.com/watch?v=4Nbgh5TJnuw "Microsoft Patch Tuesday July 2020: my new open source project Vulristics, DNS SIGRed, RDP Client and SharePoint")
-
 Of course, we can do much more than that. I have plans to add:
 
 * analysis of the vulnerability description based on keywords and phrases (it's good that such descriptions usually have a fairly regular structure)
