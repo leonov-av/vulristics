@@ -8,6 +8,7 @@ import functions_source_ms_cve
 import functions_source_nvd_cve
 import functions_profile_ms_patch_tuesday
 import functions_source_vulners
+import functions_tools
 
 def get_vuln_products(ms_cve_data_all):
     all_vuln_products = set()
@@ -180,37 +181,43 @@ def get_type_based_repot(current_cve_data, report_config, source):
             processed_cves.add(cve)
     return {"report_txt": report_txt, "report_html": report_html, "processed_cves": processed_cves}
 
-def get_sorted_cves(cve_scores):
-    score_to_cve = dict()
-    all_scores = list()
-    for cve in cve_scores:
-        all_scores.append(cve_scores[cve]['value'])
-        if not cve_scores[cve]['value'] in score_to_cve:
-            score_to_cve[cve_scores[cve]['value']] = list()
-        score_to_cve[cve_scores[cve]['value']].append(cve)
-    all_scores.sort(reverse=True)
-    sorted_cves = list()
-    for score in all_scores:
-        cves = score_to_cve[score]
-        cves.sort()
-        for cve in cves:
-            sorted_cves.append(cve)
-    return(sorted_cves)
+def get_components_list_sorted(cve_scores):
+    cve_id = list(cve_scores.keys())[0]
+    component_dict = dict()
+    for component in cve_scores[cve_id]['components']:
+        component_dict[component] = cve_scores[cve_id]['components'][component]['weight']
+    components = functions_tools.get_sorted_list_from_weighted_dict(component_dict)
+    # for component in components:
+    #     print(component + ";" + str(component_dict[component]))
+    return(components)
 
-def get_vulristcs_score_report(cve_scores, ms_cve_data):
+def get_vulristics_score_report(cve_scores, ms_cve_data):
     report_txt = ""
     report_html = ""
 
-    sorted_cves = get_sorted_cves(cve_scores)
+    cve_score_dict = dict()
+    for cve in cve_scores:
+        cve_score_dict[cve] = int(cve_scores[cve]['value']*1000)
+    sorted_cves = functions_tools.get_sorted_list_from_weighted_dict(cve_score_dict)
+
+    components = get_components_list_sorted(cve_scores)
 
     for cve in sorted_cves:
         report_txt += cve + "\n"
         report_html += "<p>" + str(int(cve_scores[cve]['value']*1000)) + " - " + cve + \
                        " - " + str(ms_cve_data[cve]['vuln_type']) + \
                        " - " + str(ms_cve_data[cve]['vuln_product'])  + \
-                       "</br>" + \
-                       str(cve_scores[cve])  + \
-                       "</p>\n"
+                       "</br>"
+        #report_html +=  str(cve_scores[cve])
+        report_html += "<table>"
+        for component in components:
+            report_html += "<tr>" + \
+                            "<td>" + component  + "</td>" +\
+                           "<td>" + str(cve_scores[cve]['components'][component]['value']) + "</td>" + \
+                           "<td>" + str(cve_scores[cve]['components'][component]['weight']) + "</td>" + \
+                           "</tr>"
+        report_html += "</table>"
+        report_html += "</p>\n"
 
     # report_txt = str(cve_scores)
     # report_html = str(cve_scores)
@@ -352,8 +359,6 @@ def make_pt_report_for_profile(cve_data_all, cve_scores, report_config, source):
     f.write(html_content)
     f.close()
 
-import json
-
 def get_cve_scores(all_cves,cve_data_all,profile):
     scores_dict = dict()
     for cve in all_cves:
@@ -475,7 +480,7 @@ def get_cve_scores(all_cves,cve_data_all,profile):
 
     return(scores_dict)
 
-def make_make_pt_reports(month, year, patch_tuesday_date, rewrite_flag=False):
+def make_ms_patch_tuesday_reports(month, year, patch_tuesday_date, rewrite_flag=False):
     # month = "October"
     # year = "2020"
     # patch_tuesday_date = "10/13/2020"
@@ -517,7 +522,7 @@ def make_make_pt_reports(month, year, patch_tuesday_date, rewrite_flag=False):
         nvd_cve_data_all[cve_id] =  nvd_cve_data
 
     vulners_cve_data_all = dict()
-    if credentials.vulners_key != "": # If we  have some Vulners API key
+    if credentials.vulners_key != "": # If we  have Vulners API key
         for cve_id in all_cves:
             vulners_cve_data = functions_source_vulners.get_vulners_data(cve_id, rewrite_flag)
             vulners_cve_data_all[cve_id] = vulners_cve_data
