@@ -108,4 +108,9 @@ def get_vulners_data(vulners_id, rewrite_flag):
             vulners_data['public_exploit'] = True
         else:
             vulners_data['public_exploit'] = False
+    vulners_data['wild_exploited'] = False
+    if 'enchantments' in vulners_data['data']['documents'][vulners_id]:
+        if 'exploitation' in vulners_data['data']['documents'][vulners_id]['enchantments']:
+            vulners_data['wild_exploited'] = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
+            vulners_data['wild_exploited_sources'] = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploitedSources']
     return(vulners_data)

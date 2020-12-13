@@ -15,3 +15,6 @@ def get_sorted_list_from_weighted_dict(dictionary):
         for item in items:
             results.append(item)
     return (results)
+
+def print_debug_message(message):
+    print(message)

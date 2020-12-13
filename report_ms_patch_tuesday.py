@@ -1,8 +1,12 @@
 import functions_report_ms_patch_tuesday
 
-month = "October"
 year = "2020"
-patch_tuesday_date = "10/13/2020"
+# month = "October"
+month = "November"
+# month = "December"
 
-functions_report_ms_patch_tuesday.make_ms_patch_tuesday_reports(month, year, patch_tuesday_date)
+#rewrite_flag = True
+rewrite_flag = False
+
+functions_report_ms_patch_tuesday.make_ms_patch_tuesday_reports(year=year, month=month, rewrite_flag=rewrite_flag)
 

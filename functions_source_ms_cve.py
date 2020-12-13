@@ -5,7 +5,7 @@ import os
 import requests
 import openpyxl
 import data_vulnerability_classification
-
+import functions_tools
 
 ### CVE Search
 
@@ -112,8 +112,15 @@ def add_cve_product_and_type_tags(ms_cve_data):
             ms_cve_data['vuln_type'] = data_vulnerability_classification.vulnerability_type_detection_patterns[pattern]
             ms_cve_data['vuln_product'] = re.sub( "[ \t]*" + pattern + ".*$", "", ms_cve_data['cveTitle'])
             #print(ms_cve_data[cve_id]['vul_product'] + " - " + ms_cve_data[cve_id]['cveTitle'] )
-    if (not 'vuln_type' in ms_cve_data) or (not 'vuln_product' in ms_cve_data):
-        print("Error in add_cve_product_and_type_tags for " + ms_cve_data['cveNumber'])
+    if ms_cve_data['cveTitle'] != "RETRACTED":
+        if not 'vuln_type' in ms_cve_data:
+            functions_tools.print_debug_message("No vuln_type in ms_cve_data for " +  ms_cve_data['cveNumber'])
+            functions_tools.print_debug_message(json.dumps(ms_cve_data, indent=4))
+            exit()
+        if not 'vuln_product' in ms_cve_data:
+            functions_tools.print_debug_message("No vuln_product in ms_cve_data for " +  ms_cve_data['cveNumber'])
+            functions_tools.print_debug_message(json.dumps(ms_cve_data, indent=4))
+            exit()
     return(ms_cve_data)
 
 
@@ -123,7 +130,8 @@ def add_ms_cve_severity(ms_cve_data):
 
     severities = set()
     severity_numbers = set()
-    severity_dict = {"critical": 4, "important": 3, "moderate": 2, "low": 1}
+    severity_numbers.add(0)
+    severity_dict = {"critical": 4, "important": 3, "moderate": 2, "low": 1, "n/a": 0}
     result_severity = ""
 
     for block in ms_cve_data['affectedProducts']:
