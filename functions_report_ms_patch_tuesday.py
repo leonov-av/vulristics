@@ -14,6 +14,7 @@ import functions_score
 
 
 def get_second_tuesday(year, long_month_name):
+    # Getting second tuesday of a month for MS Patch Tuesday date
     # year = "2020"
     # long_month_name = "October"
     datetime_object = datetime.datetime.strptime(long_month_name, "%B")
@@ -26,10 +27,11 @@ def get_second_tuesday(year, long_month_name):
         day_of_the_week = date_time_obj.strftime("%A")
         if day_of_the_week == "Tuesday":
             tuesdays.append(day_str)
-    return (tuesdays[1])
+    return tuesdays[1]
 
 
 def get_vuln_products(ms_cve_data_all):
+    # Getting vulnerable products for CVE items
     all_vuln_products = set()
     for cve_id in ms_cve_data_all:
         if 'vuln_product' in ms_cve_data_all[cve_id]:
@@ -44,25 +46,26 @@ def get_vuln_products(ms_cve_data_all):
 
 
 def get_vuln_types(ms_cve_data_all):
+    # Getting vulnerability types for CVE items
     all_vuln_types = set()
     for cve_id in ms_cve_data_all:
         all_vuln_types.add(ms_cve_data_all[cve_id]['vuln_type'])
     all_vuln_types = list(all_vuln_types)
     all_vuln_types.sort()
-    # add types in order of vulnerability_types_priority
+    # Add types in order of vulnerability_types_priority
     prioritized_vuln_types = list()
     for vuln_type in data_vulnerability_classification.vulnerability_types_priority:
         if vuln_type in all_vuln_types:
             prioritized_vuln_types.append(vuln_type)
-    # add other types in alphabetical order
+    # Add other types in alphabetical order
     for vuln_type in all_vuln_types:
         if vuln_type not in prioritized_vuln_types:
             prioritized_vuln_types.append(vuln_type)
     return prioritized_vuln_types
 
 
-### Filters
 def get_vulns_filtered_by_exploited(exploited, ms_cve_data):
+    # Getting exploited vulnerabilities (based on MS data)
     vulnerabilities = dict()
     for cve_id in ms_cve_data:
         if ms_cve_data[cve_id]['exploited'] == exploited:
@@ -71,15 +74,16 @@ def get_vulns_filtered_by_exploited(exploited, ms_cve_data):
 
 
 def get_vulns_filtered_by_exploitation_likeliness(exploitation_likeliness, ms_cve_data):
+    # Getting Exploitation is likely vulnerabilities (based on MS data)
     vulnerabilities = dict()
     for cve_id in ms_cve_data:
-        if ms_cve_data[cve_id]["exploitabilityAssessment"]["latestReleaseExploitability"][
-            "name"] == exploitation_likeliness:
+        latest_rel_expl = ms_cve_data[cve_id]["exploitabilityAssessment"]["latestReleaseExploitability"]["name"]
+        if latest_rel_expl == exploitation_likeliness:
             vulnerabilities[cve_id] = ms_cve_data[cve_id]
-        if ms_cve_data[cve_id]["exploitabilityAssessment"]["olderReleaseExploitability"][
-            "name"] == exploitation_likeliness:
+        older_rel_expl = ms_cve_data[cve_id]["exploitabilityAssessment"]["olderReleaseExploitability"]["name"]
+        if older_rel_expl == exploitation_likeliness:
             vulnerabilities[cve_id] = ms_cve_data[cve_id]
-    return (vulnerabilities)
+    return vulnerabilities
 
 
 def get_vulns_filtered_by_product(product, ms_cve_data):
@@ -90,10 +94,10 @@ def get_vulns_filtered_by_product(product, ms_cve_data):
     return (vulnerabilities)
 
 
-def get_vulns_filtered_by_type(type, ms_cve_data):
+def get_vulns_filtered_by_type(vuln_type, ms_cve_data):
     vulnerabilities = dict()
     for cve_id in ms_cve_data:
-        if ms_cve_data[cve_id]['vuln_type'] == type:
+        if ms_cve_data[cve_id]['vuln_type'] == vuln_type:
             vulnerabilities[cve_id] = ms_cve_data[cve_id]
     return (vulnerabilities)
 
@@ -108,13 +112,17 @@ def get_vulns_filtered_not_in_list(cve_ids, ms_cve_data):
 
 ### Formating
 def get_cve_line(cves):
+    # CVE list to string
     cves = list(cves)
     cves.sort()
     cve_line = ", ".join(cves)
     return (cve_line)
 
 
-def get_colored_text(color, text):
+def get_colored_text(color, text, c_type="text", params=None):
+    # Make colored HTML text or links
+    color_code = "#000000"
+    result = ""
     if color == "Urgent":
         color_code = "#C70039"
     if color == "Critical":
@@ -125,11 +133,30 @@ def get_colored_text(color, text):
         color_code = "#fece00"
     if color == "Low":
         color_code = "#8d9e63"
+    if c_type == "text":
+        result = '''<span style="color:''' + color_code + ''';">''' + text + '''</span>'''
+    elif c_type == "link":
+        result = '''<a style="color:''' + color_code + ''';" href="''' + params['url'] + '''">''' + text + '''</a>'''
+    return (result)
 
-    return ('''<span style="color:''' + color_code + ''';">''' + text + '''</span>''')
+
+def get_ms_cve_line_html_vss(cves, cve_scores):
+    # Make colored HTML MS CVE links based on VVS
+    cves = list(cves)
+    cves.sort()
+    cve_html = list()
+    for cve_id in cves:
+        params = {'url': 'https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/' + cve_id}
+        cve_html.append(get_colored_text(color=cve_scores[cve_id]['level'],
+                                      text=cve_id,
+                                      c_type="link",
+                                      params=params))
+    cve_line = ", ".join(cve_html)
+    return (cve_line)
 
 
-def get_cve_line_html(cves, cve_data):
+def get_ms_cve_line_html(cves, cve_data):
+    # Make colored HTML CVE links based on CVSS Base score (Legacy)
     cves = list(cves)
     cves.sort()
     cve_html = set()
@@ -171,7 +198,7 @@ def get_vuln_type_html(type, config):
 
 
 ### Reports
-def get_product_based_repot(current_cve_data, min_cve_number, report_config, source):
+def get_product_based_repot(current_cve_data, min_cve_number, report_config, source, cve_scores):
     processed_cves = set()
     report_txt = ""
     report_html = ""
@@ -186,8 +213,8 @@ def get_product_based_repot(current_cve_data, min_cve_number, report_config, sou
             for type in get_vuln_types(product_cves):
                 cves_by_type = get_vulns_filtered_by_type(type, product_cves)
                 report_txt += " - " + type + " (" + get_cve_line(cves_by_type.keys()) + ")" + "\n"
-                report_html += "<li>" + get_vuln_type_html(type, report_config) + " (" + get_cve_line_html(
-                    cves_by_type.keys(), current_cve_data) + ")" + "</li>" + "\n"
+                report_html += "<li>" + get_vuln_type_html(type, report_config) + " (" + get_ms_cve_line_html_vss(
+                    cves_by_type.keys(), cve_scores) + ")" + "</li>" + "\n"
                 report_html += get_comments_for_cves(source, cves_by_type)["report_html"]
             report_html += "</ul>" + "\n"
             for cve in product_cves.keys():
@@ -195,26 +222,65 @@ def get_product_based_repot(current_cve_data, min_cve_number, report_config, sou
     return {"report_txt": report_txt, "report_html": report_html, "processed_cves": processed_cves}
 
 
-def get_type_based_repot(current_cve_data, report_config, source):
+def get_type_based_report(current_cve_data, report_config, source, cve_scores):
+    # Make a report by grouping vulnerabilitites by product and vulnerability vuln_type
     processed_cves = set()
     report_txt = ""
     report_html = ""
-    all_types = get_vuln_types(current_cve_data)
-    for type in all_types:
-        type_cves = get_vulns_filtered_by_type(type, current_cve_data)
-        report_txt += type + "\n"
-        report_html += "<h4>" + get_vuln_type_html(type, report_config) + "</h4>" + "\n"
-        report_html += "<ul>" + "\n"
+    all_types = get_vuln_types(current_cve_data) #all vulnerability types
+    report_dict = dict()
+    for vuln_type in all_types:
+        report_dict[vuln_type] = dict()
+        report_dict[vuln_type]['score'] = 0
+        report_dict[vuln_type]['products'] = dict()
+        type_cves = get_vulns_filtered_by_type(vuln_type, current_cve_data)
         for product in get_vuln_products(type_cves):
+            report_dict[vuln_type]['products'][product] = dict()
+            report_dict[vuln_type]['products'][product]['score'] = 0
+            report_dict[vuln_type]['products'][product]['cves'] = dict()
             cves_by_product = get_vulns_filtered_by_product(product, type_cves)
-            report_txt += " - " + product + " (" + get_cve_line(cves_by_product.keys()) + ")" + "\n"
-            report_html += "<li>" + product + " (" + get_cve_line_html(cves_by_product.keys(),
-                                                                       current_cve_data) + ")" + "</li>" + "\n"
-            report_html += get_comments_for_cves(source, cves_by_product)["report_html"]
-        report_html += "</ul>" + "\n"
+            for cve in cves_by_product:
+                report_dict[vuln_type]['products'][product]['cves'][cve] = dict()
+                report_dict[vuln_type]['products'][product]['cves'][cve]['score'] = cve_scores[cve]
         for cve in type_cves.keys():
             processed_cves.add(cve)
-    return {"report_txt": report_txt, "report_html": report_html, "processed_cves": processed_cves}
+    # Adding max VVS of vulnerabilities as a score for product
+    for vuln_type in report_dict:
+        for product in report_dict[vuln_type]['products']:
+            all_scores = list()
+            for cve in report_dict[vuln_type]['products'][product]['cves']:
+                all_scores.append(report_dict[vuln_type]['products'][product]['cves'][cve]['score']['value'])
+            report_dict[vuln_type]['products'][product]['score'] = max(all_scores)
+    # Adding max VVS of products as a score for vulnerability type
+    for vuln_type in report_dict:
+        all_scores = list()
+        for product in report_dict[vuln_type]['products']:
+            all_scores.append(report_dict[vuln_type]['products'][product]['score'])
+        report_dict[vuln_type]['score'] = max(all_scores)
+    # Making sorted list of vulnerability types
+    vuln_types_dict = dict()
+    for vuln_type in report_dict:
+        vuln_types_dict[vuln_type] = report_dict[vuln_type]['score']
+    sorted_list_of_vulnerability_types =  functions_tools.get_sorted_list_from_weighted_dict(vuln_types_dict)
+    for vuln_type in sorted_list_of_vulnerability_types:
+        report_txt += vuln_type + "\n"
+        report_html += "<h4>" + get_vuln_type_html(vuln_type, report_config) + "</h4>" + "\n"
+        report_html += "<ul>" + "\n"
+        # Making sorted list of products
+        product_dict = dict()
+        for product in report_dict[vuln_type]['products']:
+            product_dict[product] = report_dict[vuln_type]['products'][product]['score']
+        sorted_list_of_products = functions_tools.get_sorted_list_from_weighted_dict(product_dict)
+        for product in sorted_list_of_products:
+            cves = report_dict[vuln_type]['products'][product]['cves'].keys()
+            cves = list(cves)
+            cves.sort()
+            report_txt += " - " + product + " (" + get_cve_line(cves) + ")" + "\n"
+            report_html += "<li>" + product + " (" + get_ms_cve_line_html_vss(cves, cve_scores) + ")" + "</li>" + "\n"
+            report_html += get_comments_for_cves(source, cves)["report_html"]
+        report_html += "</ul>" + "\n"
+
+    return {"report_txt": report_txt, "report_html": report_html, "report_dict":report_dict, "processed_cves": processed_cves}
 
 
 def get_components_list_sorted(cve_scores):
@@ -226,6 +292,7 @@ def get_components_list_sorted(cve_scores):
     # for component in components:
     #     print(component + ";" + str(component_dict[component]))
     return (components)
+
 
 def get_statistics(cve_scores):
     statistics = {
@@ -239,7 +306,8 @@ def get_statistics(cve_scores):
     for cve in cve_scores:
         statistics[cve_scores[cve]['level']].add(cve)
         statistics["All vulnerabilities"].add(cve)
-    return(statistics)
+    return (statistics)
+
 
 def get_vulristics_score_report(cve_scores, ms_cve_data, config, source):
     report_txt = ""
@@ -275,9 +343,11 @@ def get_vulristics_score_report(cve_scores, ms_cve_data, config, source):
             for component in components:
                 report_html += "<tr>" + \
                                "<td>" + component + "</td>" + \
-                               "<td>" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(cve_scores[cve]['components'][component]['value'])) + "</td>" + \
+                               "<td>" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(
+                    cve_scores[cve]['components'][component]['value'])) + "</td>" + \
                                "<td>" + str(cve_scores[cve]['components'][component]['weight']) + "</td>" + \
-                               "<td>" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(cve_scores[cve]['components'][component]['comment'])) + "</td>" + \
+                               "<td>" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(
+                    cve_scores[cve]['components'][component]['comment'])) + "</td>" + \
                                "</tr>"
             report_html += "</table>"
             report_html += get_comments_for_cves(source, [cve])['report_html']
@@ -375,8 +445,9 @@ def make_pt_report_for_profile(cve_data_all, cve_scores, report_config, source):
     html_content += report_data['report_html']
 
     current_cve_data = ms_cve_data
+
     exploited_cves = get_vulns_filtered_by_exploited("Yes", current_cve_data)
-    report_data = get_type_based_repot(exploited_cves, report_config, source)
+    report_data = get_type_based_report(exploited_cves, report_config, source, cve_scores)
     name = "Exploitation detected"
     print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
     html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
@@ -385,8 +456,9 @@ def make_pt_report_for_profile(cve_data_all, cve_scores, report_config, source):
     # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
     current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
 
+    ####### Commented legacy blocks from the report
     # exploitation_more_likely = get_vulns_filtered_by_exploitation_likeliness("Exploitation More Likely",
-    #                                                                          current_cve_data)
+    #                                                                          current_cve_data, cve_scores)
     # report_data = get_type_based_repot(exploitation_more_likely, report_config, source)
     # name = "Exploitation more likely"
     # print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
@@ -397,7 +469,7 @@ def make_pt_report_for_profile(cve_data_all, cve_scores, report_config, source):
     # current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
 
     # report_data = get_product_based_repot(current_cve_data, min_cve_number=5, report_config=report_config,
-    #                                       source=source)
+    #                                       source=source, cve_scores)
     # name = "Other Product based "
     # print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
     # html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
@@ -406,9 +478,8 @@ def make_pt_report_for_profile(cve_data_all, cve_scores, report_config, source):
     # # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
     # current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
 
-    report_data = get_type_based_repot(current_cve_data, report_config, source)
-    name = "Vulnerability Type based"
-    #name = "Other Vulnerability Type based"
+    report_data = get_type_based_report(current_cve_data, report_config, source, cve_scores)
+    name = "Other Vulnerability Type based"
     print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
     html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
     print(report_data['report_txt'])

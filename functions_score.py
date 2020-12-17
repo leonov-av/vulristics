@@ -26,7 +26,22 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         cvss_base_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['baseScore']
     cvss_base_score_n = int(cvss_base_score) / 10
     cvss_base_score_k = 10
-    cvss_base_score_c = "CVSS Base Score"
+    # Rating CVSS Score
+    # Low 0.1 - 3.9
+    # Medium 4.0 - 6.9
+    # High 7.0 - 8.9
+    # Critical 9.0 - 10.0
+    cvss_rating = "N/A"
+    if int(cvss_base_score) > 0 and int(cvss_base_score) < 4:
+        cvss_rating = "Low"
+    elif int(cvss_base_score) >= 4 and int(cvss_base_score) < 7:
+        cvss_rating = "Medium"
+    elif int(cvss_base_score) >= 7 and int(cvss_base_score) < 9:
+        cvss_rating = "High"
+    elif int(cvss_base_score) >= 9:
+        cvss_rating = "Critical"
+    cvss_base_score_c = "NVD Vulnerability Severity Rating is " + cvss_rating
+
     cvss_attack_is_network = "n/a"
     if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
         cvss_attack_is_network = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackVector']
@@ -119,7 +134,7 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         vulnerable_product_is_common_c = "MS Office product"
     elif "Office" in vuln_product or "Chakra" in vuln_product or "Internet Explorer" in vuln_product or "Microsoft Browser" in vuln_product or "Scripting Engine" in vuln_product:
         vulnerable_product_is_common_n = 0.7
-        vulnerable_product_is_common_c = "MS Office product"
+        vulnerable_product_is_common_c = "MS Internet Browser"
     elif "SharePoint" in vuln_product:
         vulnerable_product_is_common_n = 0.6
         vulnerable_product_is_common_c = "SharePoint"
@@ -129,11 +144,14 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     elif "Visual Studio" in vuln_product:
         vulnerable_product_is_common_n = 0.6
         vulnerable_product_is_common_c = "Visual Studio"
+    elif "Hyper-V" in vuln_product:
+        vulnerable_product_is_common_n = 0.6
+        vulnerable_product_is_common_c = "Hyper-V"
     elif "Microsoft Exchange" in vuln_product:
         vulnerable_product_is_common_n = 0.8
         vulnerable_product_is_common_c = "Microsoft Exchange"
     elif "Azure" in vuln_product:
-        vulnerable_product_is_common_n = 0.6
+        vulnerable_product_is_common_n = 0.4
         vulnerable_product_is_common_c = "Azure Sphere"
     elif "Microsoft Dynamics 365" in vuln_product:
         vulnerable_product_is_common_n = 0.6
