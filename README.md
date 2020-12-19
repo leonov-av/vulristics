@@ -9,14 +9,13 @@ Currently, there are the following scripts available:
 
 1. report_ms_patch_tuesday.py - analyze and group Microsoft Patch Tuesday CVEs.
 2. report_cve.py - collect and preprocess CVE ID-related data from NVD, Microsoft.com and Vulners. 
-3. report_ms_patch_tuesday_exploits.py - get Microsoft Patch Tuesday CVEs and filter vulnerabilities with public exploits (based on Vulners.com). 
-4. report_daily_exploits.py - daily exploits report I use for my news channel https://t.me/avleonovnews.
+3. report_daily_exploits.py - daily exploits report I use for my news channel https://t.me/avleonovnews.
 
 Of course, we can do much more than that. I have plans to add:
 
 * analysis of the vulnerability description based on keywords and phrases (it's good that such descriptions usually have a fairly regular structure)
 * analysis of references
-* danger and relevance metrics counting (vulnerability quadrants )
+* danger and relevance metrics counting (vulnerability quadrants)
 and so on.
 
 If you have good ideas please share them in the https://t.me/avleonovchat. The help in coding will be also pretty much appreciated. 😉
