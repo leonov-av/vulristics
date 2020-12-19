@@ -18,7 +18,8 @@ Of course, we can do much more than that. I have plans to add:
 * danger and relevance metrics counting (vulnerability quadrants)
 and so on.
 
-If you have good ideas please share them in the https://t.me/avleonovchat. The help in coding will be also pretty much appreciated. 😉
+If you have good ideas please share them in the https://t.me/avleonovchat. 
+The help in coding will be also pretty much appreciated! 😉
 
 Finally, some obvious warnings:
 
