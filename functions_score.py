@@ -87,7 +87,7 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         mentioned_by_vm_vendor_c = "CVE is mentioned by " + str(mentioned) + " from " + str(
             all_vendors_in_report) + " vendors"
 
-    ######## Exploit
+    ######## Public Exploit
     # Currently works only with Vulners data
     is_public_exploit = cve_data_all['vulners_cve_data_all'][cve]['public_exploit']
     if is_public_exploit:
@@ -98,13 +98,26 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         public_exploit_exists_c = "Public exploit is NOT found at vulners.com"
     public_exploit_exists_k = 17
 
-    is_wild_exploited = cve_data_all['vulners_cve_data_all'][cve]['wild_exploited']
-    if is_wild_exploited:
-        wild_exploited_n = 1.0
-        wild_exploited_c = "Exploitation in the wild is <a href=\"https://vulners.com/cve/" + cve + "\">found at vulners.com</a>"
-    else:
+    ######## Wild Exploit
+    # Currently with Vulners and MS data
+    wild_exploited = False
+    if not wild_exploited:
+        if cve in cve_data_all['vulners_cve_data_all']:
+            if 'wild_exploited' in cve_data_all['vulners_cve_data_all'][cve]:
+                if cve_data_all['vulners_cve_data_all'][cve]['wild_exploited']:
+                    wild_exploited = True
+                    wild_exploited_n = 1.0
+                    wild_exploited_c = "Exploitation in the wild is <a href=\"https://vulners.com/cve/" + cve + "\">found at vulners.com</a>"
+    if not wild_exploited:
+        if cve in cve_data_all['ms_cve_data_all']:
+            if 'exploited' in cve_data_all['ms_cve_data_all'][cve]:
+                if cve_data_all['ms_cve_data_all'][cve]['exploited'] == "Yes":
+                    wild_exploited = True
+                    wild_exploited_n = 1.0
+                    wild_exploited_c = "Exploitation in the wild is mentioned at <a href=\"https://msrc.microsoft.com/update-guide/vulnerability/" + cve + "\">Microsoft website</a>"
+    if not wild_exploited:
         wild_exploited_n = 0
-        wild_exploited_c = "Exploitation in the wild is NOT found at vulners.com"
+        wild_exploited_c = "Exploitation in the wild is NOT found at vulners.com and Microsoft website"
     wild_exploited_k = 18
 
     ######## Product
