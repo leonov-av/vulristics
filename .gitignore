@@ -4,6 +4,7 @@ venv/
 data/ms_cve/*
 data/ms_search/*
 data/nvd_cve/*
+data/attackerkb_cve/*
 data/profile_ms_patch_tuesday/*
 data/vulners/*
 data/vulners_exploit/*
