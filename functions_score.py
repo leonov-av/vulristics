@@ -95,7 +95,8 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         public_exploit_exists_n = 1.0
         links_str = list()
         for exploit_data in cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources']:
-            links_str.append("<a href=\"https://vulners.com/" + re.sub(":","/",exploit_data['id']) + "\">" + exploit_data['title'] + "</a>")
+            links_str.append("<a href=\"https://vulners.com/" + exploit_data['id'].split(":")[0].lower() + "/"
+                             + exploit_data['id'].lower() + "\">" + exploit_data['title'] + "</a>")
         public_exploit_exists_c = "Public exploit is found at Vulners (" + ", ".join(links_str) + ")"
     else:
         public_exploit_exists_n = 0
