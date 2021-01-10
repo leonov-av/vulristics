@@ -106,8 +106,10 @@ def get_vulners_data(vulners_id, rewrite_flag):
                         {"id": bulletin['id'], "title": bulletin['title'], "href": bulletin['href']})
         if 'exploit' in vulners_data['bulletins_types']:
             vulners_data['public_exploit'] = True
+            vulners_data['public_exploit_sources'] = vulners_data['bulletins_types']['exploit']
         else:
             vulners_data['public_exploit'] = False
+            vulners_data['public_exploit_sources'] = list()
     vulners_data['wild_exploited'] = False
     if 'enchantments' in vulners_data['data']['documents'][vulners_id]:
         if 'exploitation' in vulners_data['data']['documents'][vulners_id]['enchantments']:

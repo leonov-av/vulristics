@@ -7,6 +7,7 @@ import data_ms_patch_tuesday
 import data_vulnerability_classification
 import functions_source_ms_cve
 import functions_source_nvd_cve
+import functions_source_attackerkb_cve
 import functions_profile_ms_patch_tuesday
 import functions_source_vulners
 import functions_tools
@@ -387,8 +388,8 @@ def get_vulristics_score_report(cve_scores, ms_cve_data, config, source):
     n = 1
     for criticality in criticalities:
         report_html += "<h4>" + criticality + " (" + str(len(statistics[criticality])) + ")</h4>"
-        for cve in statistics[criticality]:
-            if cve in ms_cve_data:
+        for cve in sorted_cves:
+            if cve in statistics[criticality] and cve in ms_cve_data:
                 report_html += get_vulristics_score_vulner_block(cve_scores, ms_cve_data, config, components, source, cve, n)
                 n += 1
 
@@ -538,7 +539,7 @@ def make_pt_report_for_profile(cve_data_all, cve_scores, report_config, source):
 
     html_content = re.sub("##Content##", html_content, template)
 
-    f = open("report/" + source['file_name_prefix'] + "_" + report_config['file_name_suffix'] + ".html", "w")
+    f = open("report/" + source['file_name_prefix'] + "_" + report_config['file_name_suffix'] + ".html", "w", encoding="utf-8")
     f.write(html_content)
     f.close()
 
@@ -598,6 +599,12 @@ def make_ms_patch_tuesday_reports(year, month, patch_tuesday_date=False, rewrite
         nvd_cve_data = functions_source_nvd_cve.get_nvd_cve_data(cve_id, rewrite_flag)
         nvd_cve_data_all[cve_id] = nvd_cve_data
 
+    functions_tools.print_debug_message("Collecting AttackerKB CVE data...")
+    attackerkb_cve_data_all = dict()
+    for cve_id in all_cves:
+        attackerkb_cve_data = functions_source_attackerkb_cve.get_attackerkb_cve_data(cve_id, rewrite_flag)
+        attackerkb_cve_data_all[cve_id] = attackerkb_cve_data
+
     functions_tools.print_debug_message("Collecting Vulners CVE data...")
     vulners_cve_data_all = dict()
     if credentials.vulners_key != "":  # If we  have Vulners API key
@@ -607,6 +614,7 @@ def make_ms_patch_tuesday_reports(year, month, patch_tuesday_date=False, rewrite
 
     cve_data_all = {'ms_cve_data_all': ms_cve_data_all,
                     'nvd_cve_data_all': nvd_cve_data_all,
+                    'attackerkb_cve_data_all': attackerkb_cve_data_all,
                     'vulners_cve_data_all': vulners_cve_data_all}
 
     functions_tools.print_debug_message("Counting CVE scores...")

@@ -1,4 +1,5 @@
 import data_vulnerability_classification
+import re
 
 def get_level(score_value):
     if score_value >= 0 and score_value < 0.2:
@@ -92,32 +93,95 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     is_public_exploit = cve_data_all['vulners_cve_data_all'][cve]['public_exploit']
     if is_public_exploit:
         public_exploit_exists_n = 1.0
-        public_exploit_exists_c = "Public exploit is <a href=\"https://vulners.com/cve/" + cve + "\">found at vulners.com</a>"
+        links_str = list()
+        for exploit_data in cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources']:
+            links_str.append("<a href=\"https://vulners.com/" + re.sub(":","/",exploit_data['id']) + "\">" + exploit_data['title'] + "</a>")
+        public_exploit_exists_c = "Public exploit is found at Vulners (" + ", ".join(links_str) + ")"
     else:
         public_exploit_exists_n = 0
-        public_exploit_exists_c = "Public exploit is NOT found at vulners.com"
+        public_exploit_exists_c = "Public exploit is NOT found at Vulners website"
     public_exploit_exists_k = 17
 
     ######## Wild Exploit
     # Currently with Vulners and MS data
     wild_exploited = False
-    if not wild_exploited:
-        if cve in cve_data_all['vulners_cve_data_all']:
-            if 'wild_exploited' in cve_data_all['vulners_cve_data_all'][cve]:
-                if cve_data_all['vulners_cve_data_all'][cve]['wild_exploited']:
+    mentioned = list()
+
+    flag_vulners_attackerkb = False
+    flag_vulners_cisa = False
+    flag_vulners_other = False
+    flag_attackerkb = False
+    flag_ms_cve_data_all = False
+
+    if cve in cve_data_all['vulners_cve_data_all']:
+        if 'wild_exploited' in cve_data_all['vulners_cve_data_all'][cve]:
+            if cve_data_all['vulners_cve_data_all'][cve]['wild_exploited']:
+                wild_exploited = True
+                wild_exploited_n = 1.0
+                links_str = list()
+                for ref in cve_data_all['vulners_cve_data_all'][cve]['wild_exploited_sources']:
+                    for ref_id in ref['idList']:
+                        if ref['type'] == "attackerkb":
+                            type = "AttackerKB"
+                            flag_vulners_attackerkb = True
+                        elif ref['type'] == "cisa":
+                            type = "CISA"
+                            flag_vulners_cisa = True
+                        else:
+                            type = ref['type']
+                            flag_vulners_other = True
+                        links_str.append("<a href=\"https://vulners.com/" + ref['type'] + "/" +
+                                         ref_id + "\">" + type + "</a> object")
+                mentioned.append("Vulners (" + ", ".join(links_str) + ")")
+
+    if cve in cve_data_all['attackerkb_cve_data_all']:
+        if 'Exploited in the Wild' in cve_data_all['attackerkb_cve_data_all'][cve]:
+            if cve_data_all['attackerkb_cve_data_all'][cve]['Exploited in the Wild']:
+                print(cve_data_all['attackerkb_cve_data_all'][cve])
+                for url in cve_data_all['attackerkb_cve_data_all'][cve]['urls']:
                     wild_exploited = True
                     wild_exploited_n = 1.0
-                    wild_exploited_c = "Exploitation in the wild is <a href=\"https://vulners.com/cve/" + cve + "\">found at vulners.com</a>"
-    if not wild_exploited:
-        if cve in cve_data_all['ms_cve_data_all']:
-            if 'exploited' in cve_data_all['ms_cve_data_all'][cve]:
-                if cve_data_all['ms_cve_data_all'][cve]['exploited'] == "Yes":
-                    wild_exploited = True
-                    wild_exploited_n = 1.0
-                    wild_exploited_c = "Exploitation in the wild is mentioned at <a href=\"https://msrc.microsoft.com/update-guide/vulnerability/" + cve + "\">Microsoft website</a>"
+                    flag_attackerkb = True
+                    mentioned.append("<a href=\"" + url + "\">AttackerKB</a>")
+
+    if cve in cve_data_all['ms_cve_data_all']:
+        if 'exploited' in cve_data_all['ms_cve_data_all'][cve]:
+            if cve_data_all['ms_cve_data_all'][cve]['exploited'] == "Yes":
+                wild_exploited = True
+                wild_exploited_n = 1.0
+                flag_ms_cve_data_all = True
+                mentioned.append("<a href=\"https://msrc.microsoft.com/update-guide/vulnerability/" + cve +
+                                 "\">Microsoft</a>")
+
+    # Detecting false positives
+
+    if  flag_vulners_cisa == True and \
+        flag_vulners_attackerkb == False and \
+        flag_vulners_other == False and \
+        flag_attackerkb == False and \
+        flag_ms_cve_data_all == False:
+        # If we have only a link to CISA, most likely CISA report doesn't have direct 'Exploited in the wild' mention
+        wild_exploited = False
+
+    if  flag_vulners_attackerkb == True and \
+        flag_vulners_other == False and \
+        flag_attackerkb == False and \
+        flag_ms_cve_data_all == False:
+        # If we have an attackerkb object link in Vulners and don't have direct link to attackerkb, most likely it's
+        # an error at Vulners (CISA object link doesn't matter)
+        wild_exploited = False
+
+    # flag_vulners_attackerkb = False
+    # flag_vulners_cisa = False
+    # flag_vulners_other = False
+    # flag_attackerkb = False
+    # flag_ms_cve_data_all = False
+
     if not wild_exploited:
         wild_exploited_n = 0
-        wild_exploited_c = "Exploitation in the wild is NOT found at vulners.com and Microsoft website"
+        wild_exploited_c = "Exploitation in the wild is NOT found at Vulners, Microsoft and AttackerKB websites"
+    else:
+        wild_exploited_c = "Exploitation in the wild is mentioned at " + ", ".join(mentioned)
     wild_exploited_k = 18
 
     ######## Product

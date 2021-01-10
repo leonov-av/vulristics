@@ -6,7 +6,7 @@ months.append("October")
 months.append("November")
 months.append("December")
 
-# rewrite_flag = True
+#rewrite_flag = True
 rewrite_flag = False
 
 for month in months:
