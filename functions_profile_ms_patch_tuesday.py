@@ -50,8 +50,10 @@ def create_profile(month,year,patch_tuesday_date):
     functions_tools.print_debug_message(rapid7_text)
     functions_tools.print_debug_message("=== End of Rapid7 text ===")
 
-    query = "site:https://www.zerodayinitiative.com/blog Microsoft Patches for " + month + " " + year
-    zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results(query)
+    queries = [
+        "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year
+    ]
+    zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
     zdi_text = functions_source_analytic_sites.get_zdi_text_from_url(zdi_link['url'])
     functions_tools.print_debug_message("ZDI query: " + query)
     functions_tools.print_debug_message("ZDI url found: " + zdi_link['url'])
