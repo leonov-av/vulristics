@@ -2,9 +2,9 @@ import requests
 import trafilatura
 import re
 
+
 #### Qualys
 def get_qualys_link(query):
-
     # coveo API
     headers = {
         'Connection': 'keep-alive',
@@ -19,8 +19,9 @@ def get_qualys_link(query):
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
 
-    html_with_coveo_key = requests.get("https://community.qualys.com/search/#q=Patch&t=Blog&sort=relevancy", headers=headers).text
-    coveo_key = re.findall('''"coveo":{"public":{"api":{"key":"([^"]*)"}}}''',html_with_coveo_key)[0]
+    html_with_coveo_key = requests.get("https://community.qualys.com/search/#q=Patch&t=Blog&sort=relevancy",
+                                       headers=headers).text
+    coveo_key = re.findall('''"coveo":{"public":{"api":{"key":"([^"]*)"}}}''', html_with_coveo_key)[0]
 
     headers = {
         'Connection': 'keep-alive',
@@ -41,28 +42,30 @@ def get_qualys_link(query):
     )
 
     data = {
-      'q': query,
-      'cq': '@source=(Blog,Notifications)',
-      'searchHub': 'CommunitySearch',
-      'tab': 'Blog',
-      'locale': 'en',
-      'firstResult': '0',
-      'numberOfResults': '10',
-      'excerptLength': '200',
-      'filterField': '@foldingcollection',
-      'filterFieldRange': '2',
-      'enableDidYouMean': 'true',
-      'sortCriteria': 'relevancy'
+        'q': query,
+        'cq': '@source=(Blog,Notifications)',
+        'searchHub': 'CommunitySearch',
+        'tab': 'Blog',
+        'locale': 'en',
+        'firstResult': '0',
+        'numberOfResults': '10',
+        'excerptLength': '200',
+        'filterField': '@foldingcollection',
+        'filterFieldRange': '2',
+        'enableDidYouMean': 'true',
+        'sortCriteria': 'relevancy'
     }
 
-    response = requests.post('https://platform.cloud.coveo.com/rest/search/v2', headers=headers, params=params, data=data)
+    response = requests.post('https://platform.cloud.coveo.com/rest/search/v2', headers=headers, params=params,
+                             data=data)
     for result in response.json()['results']:
         result_status = True
         for keyword in query.split(" "):
             if not keyword in result['title']:
                 result_status = False
         if result_status:
-            return({'title':result['title'], 'url':result['uri']})
+            return ({'title': result['title'], 'url': result['uri']})
+
 
 def get_qualys_text_from_url(url):
     headers = {
@@ -78,7 +81,8 @@ def get_qualys_text_from_url(url):
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
     response = requests.get(url, headers=headers)
-    return(trafilatura.extract(response.text))
+    return (trafilatura.extract(response.text))
+
 
 #### Tenable
 
@@ -100,7 +104,7 @@ def get_tenable_link(query):
     for a_tag in a_tags:
         # print(a_tag)
         url = a_tag.split('"')[1]
-        title = re.sub("<[^>]*>","",a_tag)
+        title = re.sub("<[^>]*>", "", a_tag)
 
         result_status = True
         for keyword in query.split(" "):
@@ -108,7 +112,8 @@ def get_tenable_link(query):
                 result_status = False
 
         if result_status:
-            return({'title':title, 'url':url})
+            return ({'title': title, 'url': url})
+
 
 def get_tenable_text_from_url(url):
     headers = {
@@ -122,7 +127,8 @@ def get_tenable_text_from_url(url):
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
     response = requests.get(url, headers=headers)
-    return(trafilatura.extract(response.text))
+    return (trafilatura.extract(response.text))
+
 
 ### Rapid7
 
@@ -140,16 +146,20 @@ def get_rapid7_link(query):
 
     js_with_key = requests.get("https://blog.rapid7.com/assets/js/all.js", headers=headers).text
     # print(js_with_key)
-    ghost_content_api_key = re.findall('''GhostContentAPI\({url:"https://blog.rapid7.com",key:"([^"]*)",version:"[^"]*"}\)''',js_with_key)[0]
+    ghost_content_api_key = \
+    re.findall('''GhostContentAPI\({url:"https://blog.rapid7.com",key:"([^"]*)",version:"[^"]*"}\)''', js_with_key)[0]
 
-    response = requests.get("https://blog.rapid7.com/ghost/api/v3/content/posts/?key=" + ghost_content_api_key + "&limit=all&fields=url%2Ctitle", headers=headers)
+    response = requests.get(
+        "https://blog.rapid7.com/ghost/api/v3/content/posts/?key=" + ghost_content_api_key + "&limit=all&fields=url%2Ctitle",
+        headers=headers)
     for post in response.json()['posts']:
         result_status = True
         for keyword in query.split(" "):
             if not keyword in post['title']:
                 result_status = False
-        if result_status:      
+        if result_status:
             return ({'title': post['title'], 'url': post['url']})
+
 
 def get_rapid7_text_from_url(url):
     headers = {
@@ -167,17 +177,18 @@ def get_rapid7_text_from_url(url):
     new_text = ""
     for line in text.split("\n"):
         skip = False
-        if re.findall("^\|", line): # remove tables
+        if re.findall("^\|", line):  # remove tables
             skip = True
         if re.findall("^- ", line):
-            line = re.sub("^- ","",line)
+            line = re.sub("^- ", "", line)
         if not skip:
-            if not re.findall("\.$", line) and "CVE-" in line: # looks like a header; don't add new line
+            if not re.findall("\.$", line) and "CVE-" in line:  # looks like a header; don't add new line
                 new_text += line + ". "
             else:
-                new_text += re.sub("\.$", ". ", line) + "\n" # normal line
+                new_text += re.sub("\.$", ". ", line) + "\n"  # normal line
 
-    return(new_text)
+    return (new_text)
+
 
 ### DuckDuckGo
 
@@ -193,19 +204,29 @@ def get_duckduckgo_search_results(query):
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
     url = "https://duckduckgo.com/html/?q=" + query
+    print(url)
     a_tags = re.findall('''<a rel="nofollow" class="result__a".*?</a>''', requests.get(url, headers=headers).text)
     for a_tag in a_tags:
         url = a_tag.split('"')[5]
-        title = re.sub("<[^>]*>","",a_tag)
-
+        title = re.sub("<[^>]*>", "", a_tag)
         result_status = True
         for keyword in query.split(" "):
-            if not "site:" in keyword: #ignoring ""site:https://www.zerodayinitiative.com/blog" part
+            if not "site:" in keyword:  # ignoring ""site:https://www.zerodayinitiative.com/blog" part
                 if not keyword in title:
                     result_status = False
-
         if result_status:
-            return({'title':title, 'url':url})
+            return {'title': title, 'url': url}
+    return None
+
+
+def get_duckduckgo_search_results_multiple_queries(queries):
+    for query in queries:
+        print(query)
+        result = get_duckduckgo_search_results(query)
+        if result is not None:
+            return result
+    return None
+
 
 ### ZDI
 
@@ -225,16 +246,16 @@ def get_zdi_text_from_url(url):
     new_text = ""
     for line in text.split("\n"):
         skip = False
-        if re.findall("^\|", line): # remove tables
+        if re.findall("^\|", line):  # remove tables
             skip = True
         if re.findall("^- ", line):
-            line = re.sub("^- ","",line)
+            line = re.sub("^- ", "", line)
         if not skip:
-            if not re.findall("\.$", line) and "CVE-" in line: # looks like a header; don't add new line
+            if not re.findall("\.$", line) and "CVE-" in line:  # looks like a header; don't add new line
                 new_text += line + ". "
             else:
-                new_text += re.sub("\.$", ". ", line) + "\n" # normal line
+                new_text += re.sub("\.$", ". ", line) + "\n"  # normal line
 
-    return(new_text)
+    return (new_text)
 
     # return(new_text)
