@@ -23,8 +23,21 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     # print(json.dumps(cve_data_all['nvd_cve_data_all'][cve], indent=4))
     # print(cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3'])
     cvss_base_score = 0
+    cvss_base_score_source = ""
     if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
         cvss_base_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['baseScore']
+        cvss_base_score_source = "NVD"
+    else:
+        if 'ms_cve_data_all' in cve_data_all:
+            if cve in cve_data_all['ms_cve_data_all']:
+                all_base_score = list()
+                if 'affectedProducts' in cve_data_all['ms_cve_data_all'][cve]:
+                    for data in cve_data_all['ms_cve_data_all'][cve]['affectedProducts']:
+                        all_base_score.append(data['baseScore'])
+                if all_base_score != list():
+                    cvss_base_score = max(all_base_score)
+                    cvss_base_score_source = "Microsoft"
+
     cvss_base_score_n = int(cvss_base_score) / 10
     cvss_base_score_k = 10
     # Rating CVSS Score
@@ -41,7 +54,7 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         cvss_rating = "High"
     elif int(cvss_base_score) >= 9:
         cvss_rating = "Critical"
-    cvss_base_score_c = "NVD Vulnerability Severity Rating is " + cvss_rating
+    cvss_base_score_c = "Vulnerability Severity Rating is " + cvss_rating + " (based on " + cvss_base_score_source + " CVSS data)"
 
     cvss_attack_is_network = "n/a"
     if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
