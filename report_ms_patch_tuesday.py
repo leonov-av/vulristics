@@ -1,14 +1,20 @@
 import functions_report_ms_patch_tuesday
 
-year = "2020"
+# year = "2020"
+# months = list()
+# months.append("October")
+# months.append("November")
+# months.append("December")
+
+year = "2021"
 months = list()
-months.append("October")
-months.append("November")
-months.append("December")
+months.append("January")
 
 #rewrite_flag = True
 rewrite_flag = False
 
 for month in months:
-    functions_report_ms_patch_tuesday.make_ms_patch_tuesday_reports(year=year, month=month, rewrite_flag=rewrite_flag)
+    functions_report_ms_patch_tuesday.make_ms_patch_tuesday_reports(year=year,
+                                                                    month=month,
+                                                                    rewrite_flag=rewrite_flag)
 

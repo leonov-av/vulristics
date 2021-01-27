@@ -208,48 +208,58 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         vuln_product = "Unknown product"
         vulnerable_product_is_common_n = 0
         vulnerable_product_is_common_c = "Unknown product"
-    if "Windows" in vuln_product:  # Some standard Windows component
+
+    if "RDP" in vuln_product or "Remote Desktop Protocol" in vuln_product:
         vulnerable_product_is_common_n = 1.0
-        vulnerable_product_is_common_c = "Windows component"
+        vulnerable_product_is_common_c = "RDP"
+    elif "SMB" in vuln_product:
+        vulnerable_product_is_common_n = 1.0
+        vulnerable_product_is_common_c = "SMB"
     elif "Kerberos" in vuln_product:
-        vulnerable_product_is_common_n = 1.0
+        vulnerable_product_is_common_n = 0.9
         vulnerable_product_is_common_c = "Kerberos"
     elif "DNS" in vuln_product:
-        vulnerable_product_is_common_n = 0.9
+        vulnerable_product_is_common_n = 0.8
         vulnerable_product_is_common_c = "DNS"
-    elif "RDP" in vuln_product or "Remote Desktop Protocol" in vuln_product:
-        vulnerable_product_is_common_n = 0.9
-        vulnerable_product_is_common_c = "RDP"
+    elif "Microsoft Defender" in vuln_product:
+        vulnerable_product_is_common_n = 0.8
+        vulnerable_product_is_common_c = "Microsoft Defender"
+    elif "Remote Procedure Call Runtime" in vuln_product or "RPC" in vuln_product:
+        vulnerable_product_is_common_n = 0.8
+        vulnerable_product_is_common_c = "RPC"
+    elif "splwow64" in vuln_product:
+        vulnerable_product_is_common_n = 0.8
+        vulnerable_product_is_common_c = "splwow64 (printer driver host for 32-bit applications)"
+    elif "Windows" in vuln_product: # Other standard windows component
+        vulnerable_product_is_common_n = 0.8
+        vulnerable_product_is_common_c = "Windows component"
+    elif "Microsoft Exchange" in vuln_product:
+        vulnerable_product_is_common_n = 0.7
+        vulnerable_product_is_common_c = "Microsoft Exchange"
     elif "Office" in vuln_product or "Word" in vuln_product or "Excel" in vuln_product or "Outlook" in vuln_product or "Office" in vuln_product or "Teams" in vuln_product:
-        vulnerable_product_is_common_n = 0.7
+        vulnerable_product_is_common_n = 0.6
         vulnerable_product_is_common_c = "MS Office product"
-    elif "Office" in vuln_product or "Chakra" in vuln_product or "Internet Explorer" in vuln_product or "Microsoft Browser" in vuln_product or "Scripting Engine" in vuln_product:
-        vulnerable_product_is_common_n = 0.7
+    elif "Chakra" in vuln_product or "Internet Explorer" in vuln_product or "Microsoft Browser" in vuln_product or "Scripting Engine" in vuln_product:
+        vulnerable_product_is_common_n = 0.6
         vulnerable_product_is_common_c = "MS Internet Browser"
-    elif "SharePoint" in vuln_product:
-        vulnerable_product_is_common_n = 0.6
-        vulnerable_product_is_common_c = "SharePoint"
     elif "DirectX" in vuln_product:
-        vulnerable_product_is_common_n = 0.9
-        vulnerable_product_is_common_c = "DirectX"
-    elif "Visual Studio" in vuln_product:
         vulnerable_product_is_common_n = 0.6
+        vulnerable_product_is_common_c = "DirectX"
+    elif "SharePoint" in vuln_product:
+        vulnerable_product_is_common_n = 0.5
+        vulnerable_product_is_common_c = "SharePoint"
+    elif "Visual Studio" in vuln_product:
+        vulnerable_product_is_common_n = 0.5
         vulnerable_product_is_common_c = "Visual Studio"
     elif "Hyper-V" in vuln_product:
-        vulnerable_product_is_common_n = 0.6
+        vulnerable_product_is_common_n = 0.5
         vulnerable_product_is_common_c = "Hyper-V"
-    elif "Microsoft Exchange" in vuln_product:
-        vulnerable_product_is_common_n = 0.8
-        vulnerable_product_is_common_c = "Microsoft Exchange"
-    elif "Azure" in vuln_product:
-        vulnerable_product_is_common_n = 0.4
-        vulnerable_product_is_common_c = "Azure Sphere"
     elif "Microsoft Dynamics 365" in vuln_product:
-        vulnerable_product_is_common_n = 0.6
+        vulnerable_product_is_common_n = 0.5
         vulnerable_product_is_common_c = "Microsoft Dynamics 365"
-    elif "Microsoft Defender" in vuln_product:
-        vulnerable_product_is_common_n = 0.9
-        vulnerable_product_is_common_c = "Microsoft Defender"
+    elif "Azure" in vuln_product:
+        vulnerable_product_is_common_n = 0.3
+        vulnerable_product_is_common_c = "Azure Sphere"
     vulnerable_product_is_common_k = 14
 
     ######## Vulnerability type
