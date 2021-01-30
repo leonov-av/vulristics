@@ -14,7 +14,7 @@ months.append("January")
 rewrite_flag = False
 
 for month in months:
-    functions_report_ms_patch_tuesday.make_ms_patch_tuesday_reports(year=year,
-                                                                    month=month,
-                                                                    rewrite_flag=rewrite_flag)
+    functions_report_ms_patch_tuesday.make_ms_patch_tuesday_report(year=year,
+                                                                   month=month,
+                                                                   rewrite_flag=rewrite_flag)
 
