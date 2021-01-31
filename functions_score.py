@@ -174,7 +174,7 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         flag_vulners_other == False and \
         flag_attackerkb == False and \
         flag_ms_cve_data_all == False:
-        # If we have only a link to CISA, most likely CISA report doesn't have direct 'Exploited in the wild' mention
+        # If we have only a link to CISA, most likely CISA reports doesn't have direct 'Exploited in the wild' mention
         wild_exploited = False
 
     if  flag_vulners_attackerkb == True and \

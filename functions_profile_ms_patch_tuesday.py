@@ -10,8 +10,24 @@ def get_ms_date(normal_date):
     ms_date = date_time_obj.strftime("%m/%d/%Y")
     return (ms_date)
 
-def create_profile(month,year,patch_tuesday_date):
-    # This profile (json file) will describe Microsoft Patch Tuesday report
+def get_second_tuesday(year, long_month_name):
+    # Getting second tuesday of a month for MS Patch Tuesday date
+    # year = "2020"
+    # long_month_name = "October"
+    datetime_object = datetime.datetime.strptime(long_month_name, "%B")
+    month_number = datetime_object.month
+    tuesdays = list()
+    for day_number in range(1, 28):
+        day_str = str(year) + '-' + str(month_number) + '-' + str(day_number)
+        date_time_str = day_str
+        date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
+        day_of_the_week = date_time_obj.strftime("%A")
+        if day_of_the_week == "Tuesday":
+            tuesdays.append(day_str)
+    return tuesdays[1]
+
+def create_profile(month,year,patch_tuesday_date,file_name):
+    # This profile (json file) will describe Microsoft Patch Tuesday reports
     # month = "October"
     # year = "2020"
     # patch_tuesday_date = "10/13/2020"
@@ -64,7 +80,7 @@ def create_profile(month,year,patch_tuesday_date):
     data = {
         month + " " + year: {
             'report_name': 'Microsoft Patch Tuesday, ' + month + " " + year,
-            'file_name_prefix': month.lower() + year,
+            'file_name_prefix': "ms_patch_tuesday_" + month.lower() + year,
             'cves_text': ms_cves_for_date_range,
             'comments': {
                 'qualys': qualys_text,
@@ -75,7 +91,7 @@ def create_profile(month,year,patch_tuesday_date):
         }
     }
 
-    f = open("data/profile_ms_patch_tuesday/" + month.lower() + year + ".json", "w")
+    f = open("data/profiles/" + file_name, "w")
     f.write(json.dumps(data,indent=4))
     f.close()
 
