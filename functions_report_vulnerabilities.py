@@ -330,6 +330,8 @@ def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config,
                    " - " + get_colored_text(cve_scores[cve]['level'], cve_scores[cve]['level'] + " [" + str(
         int(cve_scores[cve]['value'] * 1000)) + "] ") + \
                    "</br>"
+    report_html += "<b>Description:</b> " + combined_cve_data_all[cve]['description']
+    report_html += "</br>"
     report_html += "<table><tr><th>component</th><th>value</th><th>weight</th><th>comment</th></tr>"
     for component in components:
         report_html += "<tr>" + \
@@ -566,6 +568,12 @@ def collect_cve_related_data(all_cves, rewrite_flag):
             combined_cve_data_all[cve_id]['vuln_type'] = ms_cve_data_all[cve_id]['vuln_type']
         if 'severity' in ms_cve_data_all[cve_id]:
             combined_cve_data_all[cve_id]['basic_severity'] = ms_cve_data_all[cve_id]['severity']
+
+        try:
+            nvd_description = nvd_cve_data_all[cve_id]['result']['CVE_Items'][0]['cve']['description']['description_data'][0]['value']
+        except:
+            nvd_description = ""
+        combined_cve_data_all[cve_id]['description'] = nvd_description
 
     cve_data_all = {'ms_cve_data_all': ms_cve_data_all,
                     'nvd_cve_data_all': nvd_cve_data_all,
