@@ -1,19 +1,16 @@
-import functions_source_ms_cve
-import functions_source_nvd_cve
-import functions_source_vulners
-import json
+import functions_profile
+import functions_report_vulnerabilities
 
-cve_id = "CVE-2020-1350"
-rewrite_flag = False
+file_name = "test_cve_profile.json"
+report_id = "test_cve_report"
+report_name = 'CVE report'
+file_name_prefix = "test_cve_report"
+cves_text = '''CVE-2020-1350
+CVE-2021-3156'''
 
-print("=== Microsoft ===")
-ms_cve_data = functions_source_ms_cve.get_ms_cve_data(cve_id, rewrite_flag)
-print(json.dumps(ms_cve_data, indent=2))
+comments = []
 
-print("=== NVD ===")
-nvd_cve_data = functions_source_nvd_cve.get_nvd_cve_data(cve_id, rewrite_flag)
-print(json.dumps(nvd_cve_data, indent=2))
+rewrite_flag = True
 
-print("=== Vulners ===")
-vulners_cve_data = functions_source_vulners.get_vulners_data(cve_id, rewrite_flag)
-print(json.dumps(vulners_cve_data, indent=2))
+functions_profile.save_profile(file_name, report_id, report_name, file_name_prefix, cves_text, comments)
+functions_report_vulnerabilities.make_vulnerability_report_for_profile(file_name, rewrite_flag)

@@ -1,7 +1,7 @@
+import functions_analysis_text
 import requests
 import os
 import json
-
 
 ### CVE Data
 def get_nvd_cve_data_from_nvd_site(cve_id):
@@ -55,3 +55,12 @@ def get_nvd_cve_data(cve_id, rewrite_flag):
     #     nvd_cve_data = heuristic_change_product_vuln_type(nvd_cve_data)
     #     nvd_cve_data = add_nvd_cve_severity(nvd_cve_data)
     return(nvd_cve_data)
+
+nvd_cve_data = get_nvd_cve_data("CVE-2021-1647",False)
+description = nvd_cve_data['result']['CVE_Items'][0]['cve']['description']['description_data'][0]['value']
+analysed_description = functions_analysis_text.get_analysed_description(description)
+print(analysed_description)
+print(analysed_description['html_content'])
+print(analysed_description['vulnerability_types'])
+print(analysed_description['vulnerable_products'])
+print(analysed_description['tags'])

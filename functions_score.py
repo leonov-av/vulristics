@@ -1,4 +1,4 @@
-import data_vulnerability_classification
+import data_classification_vulnerabilities
 import re
 
 def get_level(score_value):
@@ -23,20 +23,20 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     # print(json.dumps(cve_data_all['nvd_cve_data_all'][cve], indent=4))
     # print(cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3'])
     cvss_base_score = 0
-    cvss_base_score_source = ""
-    if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
-        cvss_base_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['baseScore']
-        cvss_base_score_source = "NVD"
-    else:
-        if 'ms_cve_data_all' in cve_data_all:
-            if cve in cve_data_all['ms_cve_data_all']:
-                all_base_score = list()
-                if 'affectedProducts' in cve_data_all['ms_cve_data_all'][cve]:
-                    for data in cve_data_all['ms_cve_data_all'][cve]['affectedProducts']:
-                        all_base_score.append(data['baseScore'])
-                if all_base_score != list():
-                    cvss_base_score = max(all_base_score)
-                    cvss_base_score_source = "Microsoft"
+    cvss_base_score_source = "No data"
+    if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
+        if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
+            cvss_base_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['baseScore']
+            cvss_base_score_source = "NVD"
+    elif 'ms_cve_data_all' in cve_data_all:
+        if cve in cve_data_all['ms_cve_data_all']:
+            all_base_score = list()
+            if 'affectedProducts' in cve_data_all['ms_cve_data_all'][cve]:
+                for data in cve_data_all['ms_cve_data_all'][cve]['affectedProducts']:
+                    all_base_score.append(data['baseScore'])
+            if all_base_score != list():
+                cvss_base_score = max(all_base_score)
+                cvss_base_score_source = "Microsoft"
 
     cvss_base_score_n = int(cvss_base_score) / 10
     cvss_base_score_k = 10
@@ -57,8 +57,9 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     cvss_base_score_c = "Vulnerability Severity Rating is " + cvss_rating + " (based on " + cvss_base_score_source + " CVSS data)"
 
     cvss_attack_is_network = "n/a"
-    if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
-        cvss_attack_is_network = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackVector']
+    if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
+        if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
+            cvss_attack_is_network = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackVector']
     if cvss_attack_is_network == "NETWORK":
         cvss_attack_is_network_n = 1.0
         cvss_attack_is_network_c = "CVSS attackVector is NETWORK"
@@ -67,8 +68,9 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         cvss_attack_is_network_c = "CVSS attackVector is NOT NETWORK"
     cvss_attack_is_network_k = 10
     cvss_attack_ease = "n/a"
-    if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
-        cvss_attack_ease = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackComplexity']
+    if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
+        if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
+            cvss_attack_ease = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackComplexity']
     if cvss_attack_ease == "LOW":
         cvss_attack_ease_n = 1.0
         cvss_attack_ease_c = "CVSS attackComplexity is LOW"
@@ -77,14 +79,16 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         cvss_attack_ease_c = "CVSS attackComplexity is NOT LOW"
     cvss_attack_ease_k = 5
     cvss_exploitability_score = 0
-    if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
-        cvss_exploitability_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['exploitabilityScore']
+    if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
+        if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
+            cvss_exploitability_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['exploitabilityScore']
     cvss_exploitability_score_n = int(cvss_exploitability_score) / 10
     cvss_exploitability_score_k = 5
     cvss_exploitability_score_c = "CVSS exploitabilityScore"
     cvss_impact_score = 0
-    if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
-        cvss_impact_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['impactScore']
+    if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
+        if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
+            cvss_impact_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['impactScore']
     cvss_impact_score_n = int(cvss_impact_score) / 10
     cvss_impact_score_k = 3
     cvss_impact_score_c = "CVSS impactScore"
@@ -269,7 +273,7 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         vuln_type = cve_data_all['ms_cve_data_all'][cve]['vuln_type']
     else:
         vuln_type = "Unknown vulnerability type"
-    criticality_of_vulnerability_type_n = data_vulnerability_classification.type_to_criticality[vuln_type]
+    criticality_of_vulnerability_type_n = data_classification_vulnerabilities.type_to_criticality[vuln_type]
     criticality_of_vulnerability_type_k = 15
     criticality_of_vulnerability_type_c = vuln_type
 

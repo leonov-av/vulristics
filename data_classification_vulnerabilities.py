@@ -44,7 +44,8 @@ type_to_icon = {
     "Authentication Bypass": "auth_bypass",
     "Code Injection": "code_injection",
     "Open Redirect": "open_redirect",
-    "Tampering": "tampering"
+    "Tampering": "tampering",
+    "Unknown Vulnerability Type": "unknown"
 }
 
 type_to_criticality = {

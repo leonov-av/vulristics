@@ -4,7 +4,7 @@ import re
 import os
 import requests
 import openpyxl
-import data_vulnerability_classification
+import data_classification_vulnerabilities
 import functions_tools
 
 ### CVE Search
@@ -107,9 +107,9 @@ def get_ms_cve_data(cve_id, rewrite_flag):
 
 
 def add_cve_product_and_type_tags(ms_cve_data):
-    for pattern in data_vulnerability_classification.vulnerability_type_detection_patterns:
+    for pattern in data_classification_vulnerabilities.vulnerability_type_detection_patterns:
         if pattern in ms_cve_data['cveTitle']:
-            ms_cve_data['vuln_type'] = data_vulnerability_classification.vulnerability_type_detection_patterns[pattern]
+            ms_cve_data['vuln_type'] = data_classification_vulnerabilities.vulnerability_type_detection_patterns[pattern]
             ms_cve_data['vuln_product'] = re.sub( "[ \t]*" + pattern + ".*$", "", ms_cve_data['cveTitle'])
             #print(ms_cve_data[cve_id]['vul_product'] + " - " + ms_cve_data[cve_id]['cveTitle'] )
     if ms_cve_data['cveTitle'] != "RETRACTED":

@@ -1,14 +1,16 @@
 import functions_source_ms_cve
 import functions_source_analytic_sites
 import functions_tools
-import json
+import functions_profile
 import datetime
+
 
 def get_ms_date(normal_date):
     # "10/13/2020"
     date_time_obj = datetime.datetime.strptime(normal_date, '%Y-%m-%d')
     ms_date = date_time_obj.strftime("%m/%d/%Y")
-    return (ms_date)
+    return ms_date
+
 
 def get_second_tuesday(year, long_month_name):
     # Getting second tuesday of a month for MS Patch Tuesday date
@@ -26,7 +28,8 @@ def get_second_tuesday(year, long_month_name):
             tuesdays.append(day_str)
     return tuesdays[1]
 
-def create_profile(month,year,patch_tuesday_date,file_name):
+
+def create_profile(month, year, patch_tuesday_date, file_name):
     # This profile (json file) will describe Microsoft Patch Tuesday reports
     # month = "October"
     # year = "2020"
@@ -36,7 +39,8 @@ def create_profile(month,year,patch_tuesday_date,file_name):
     functions_tools.print_debug_message("Month: " + month)
     ms_patch_tuesday_date = get_ms_date(patch_tuesday_date)  # patch_tuesday_date = "10/13/2020"
     functions_tools.print_debug_message("Date: " + patch_tuesday_date + " (" + ms_patch_tuesday_date + ")")
-    ms_cves_for_date_range = functions_source_ms_cve.get_ms_cves_for_date_range(ms_patch_tuesday_date, ms_patch_tuesday_date)
+    ms_cves_for_date_range = functions_source_ms_cve.get_ms_cves_for_date_range(ms_patch_tuesday_date,
+                                                                                ms_patch_tuesday_date)
     functions_tools.print_debug_message("MS CVEs found: " + str(len(ms_cves_for_date_range)))
     ms_cves_for_date_range = "\n".join(ms_cves_for_date_range)
 
@@ -77,21 +81,16 @@ def create_profile(month,year,patch_tuesday_date,file_name):
     functions_tools.print_debug_message(zdi_text)
     functions_tools.print_debug_message("=== End of ZDI text ===")
 
-    data = {
-        month + " " + year: {
-            'report_name': 'Microsoft Patch Tuesday, ' + month + " " + year,
-            'file_name_prefix': "ms_patch_tuesday_" + month.lower() + year,
-            'cves_text': ms_cves_for_date_range,
-            'comments': {
-                'qualys': qualys_text,
-                'tenable': tenable_text,
-                'rapid7': rapid7_text,
-                'zdi': zdi_text
-            }
-        }
+    comments = {
+        'qualys': qualys_text,
+        'tenable': tenable_text,
+        'rapid7': rapid7_text,
+        'zdi': zdi_text
     }
 
-    f = open("data/profiles/" + file_name, "w")
-    f.write(json.dumps(data,indent=4))
-    f.close()
+    report_id = month + " " + year
+    report_name = 'Microsoft Patch Tuesday, ' + month + " " + year
+    file_name_prefix = "ms_patch_tuesday_" + month.lower() + year
+    cves_text = ms_cves_for_date_range
 
+    functions_profile.save_profile(file_name, report_id, report_name, file_name_prefix, cves_text, comments)
