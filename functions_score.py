@@ -1,4 +1,4 @@
-import data_classification_vulnerabilities
+import data_classification_vulnerability_types
 import re
 
 def get_level(score_value):
@@ -273,7 +273,7 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         vuln_type = cve_data_all['ms_cve_data_all'][cve]['vuln_type']
     else:
         vuln_type = "Unknown vulnerability type"
-    criticality_of_vulnerability_type_n = data_classification_vulnerabilities.type_to_criticality[vuln_type]
+    criticality_of_vulnerability_type_n = data_classification_vulnerability_types.vulnerability_type_data[vuln_type]['criticality']
     criticality_of_vulnerability_type_k = 15
     criticality_of_vulnerability_type_c = vuln_type
 

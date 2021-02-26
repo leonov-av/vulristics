@@ -2,7 +2,7 @@ import credentials
 import re
 import json
 import data_report_configs
-import data_classification_vulnerabilities
+import data_classification_vulnerability_types
 import functions_source_ms_cve
 import functions_source_nvd_cve
 import functions_source_attackerkb_cve
@@ -35,7 +35,7 @@ def get_vuln_types(ms_cve_data_all):
     all_vuln_types.sort()
     # Add types in order of vulnerability_types_priority
     prioritized_vuln_types = list()
-    for vuln_type in data_classification_vulnerabilities.vulnerability_types_priority:
+    for vuln_type in data_classification_vulnerability_types.vulnerability_types_priority:
         if vuln_type in all_vuln_types:
             prioritized_vuln_types.append(vuln_type)
     # Add other types in alphabetical order
@@ -192,7 +192,7 @@ def get_vuln_type_icon_html(type, config):
     html_img_tag = '<img style="vertical-align: middle; margin-right: 15px; margin-top: 2px; margin-bottom: 2px;" ' \
                    'width="32"  src=" '
     html_img_tag += vuln_icons_source
-    html_img_tag += '/' + data_classification_vulnerabilities.type_to_icon[type] + '.png">'
+    html_img_tag += '/' + data_classification_vulnerability_types.type_to_icon[type] + '.png">'
     return (html_img_tag)
 
 
@@ -566,6 +566,13 @@ def collect_cve_related_data(all_cves, rewrite_flag):
         combined_cve_data_all[cve_id]['vuln_product'] = "Unknown Product"
         combined_cve_data_all[cve_id]['vuln_type'] = "Unknown Vulnerability Type"
         combined_cve_data_all[cve_id]['basic_severity'] = 0
+        if cve_id in nvd_cve_data_all:
+            if 'vuln_product' in nvd_cve_data_all[cve_id]:
+                combined_cve_data_all[cve_id]['vuln_product'] = nvd_cve_data_all[cve_id]['vuln_product']
+            if 'vuln_type' in nvd_cve_data_all[cve_id]:
+                combined_cve_data_all[cve_id]['vuln_type'] = nvd_cve_data_all[cve_id]['vuln_type']
+            if 'severity' in nvd_cve_data_all[cve_id]:
+                combined_cve_data_all[cve_id]['basic_severity'] = nvd_cve_data_all[cve_id]['severity']
         if cve_id in ms_cve_data_all:
             if 'vuln_product' in ms_cve_data_all[cve_id]:
                 combined_cve_data_all[cve_id]['vuln_product'] = ms_cve_data_all[cve_id]['vuln_product']

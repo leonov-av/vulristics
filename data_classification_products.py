@@ -2,10 +2,18 @@ product_data = {
     "Sudo": {
         "priority": 0.9,
         "description": "Sudo is a program for Unix-like computer operating systems that allows users to run programs with the security privileges of another user",
-        "detection":[
-            "<by_name>",
-        ]
-    }
+        "additional_detection_strings":[ "visudo", "sudoers" ]
+    },
+    "vSphere Client": {
+        "priority": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "ESXi": {
+        "priority": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
 }
 
 
