@@ -3,7 +3,8 @@ import requests
 import os
 import json
 
-### CVE Data
+
+# CVE Data
 def get_nvd_cve_data_from_nvd_site(cve_id):
     # https://nvd.nist.gov/General/News/New-NVD-CVE-CPE-API-and-SOAP-Retirement
     # https://csrc.nist.gov/CSRC/media/Projects/National-Vulnerability-Database/documents/web%20service%20documentation/Automation%20Support%20for%20CVE%20Retrieval.pdf
@@ -20,10 +21,10 @@ def get_nvd_cve_data_from_nvd_site(cve_id):
         nvd_cve_data['error'] = True
         nvd_cve_data['status'] = "CVE ID is NOT found on nvd.nist.gov portal"
         nvd_cve_data['not_found_error'] = True
-    return(nvd_cve_data)
+    return nvd_cve_data
 
 
-def download_nvd_cve_data_raw(cve_id, rewrite_flag = True):
+def download_nvd_cve_data_raw(cve_id, rewrite_flag=True):
     file_path = "data/nvd_cve/" + cve_id + ".json"
     if not rewrite_flag:
         if not os.path.exists(file_path):
@@ -44,14 +45,23 @@ def get_nvd_cve_data_raw(cve_id):
     f = open("data/nvd_cve/" + cve_id + ".json", "r")
     nvd_cve_data = json.loads(f.read())
     f.close()
-    return(nvd_cve_data)
+    return nvd_cve_data
 
 
 def get_nvd_cve_data(cve_id, rewrite_flag):
     download_nvd_cve_data_raw(cve_id, rewrite_flag)
     nvd_cve_data = get_nvd_cve_data_raw(cve_id)
-    description = nvd_cve_data['result']['CVE_Items'][0]['cve']['description']['description_data'][0]['value']
+    description = ""
+    cvss_base_score = ""
+    if 'result' in nvd_cve_data:
+        description = nvd_cve_data['result']['CVE_Items'][0]['cve']['description']['description_data'][0]['value']
+        if 'impact' in nvd_cve_data['result']['CVE_Items'][0]:
+            cvss_base_score = nvd_cve_data['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['baseScore']
     detection_results = functions_analysis_text.analyse_sentence(description)
+    nvd_cve_data['description'] = description
+    nvd_cve_data['description_tags'] = detection_results
+    nvd_cve_data['cvss_base_score'] = cvss_base_score
+    nvd_cve_data['basic_severity'] = ""
     nvd_cve_data['vuln_product'] = detection_results['detected_product_name']
     nvd_cve_data['vuln_type'] = detection_results['detected_vulnerability_type']
-    return(nvd_cve_data)
+    return nvd_cve_data

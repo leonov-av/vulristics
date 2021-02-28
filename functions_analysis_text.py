@@ -58,8 +58,8 @@ def analyse_sentence(sentence):
     max_priority = 0
     detected_product_name = ""
     for product in detected_products:
-        if data_classification_products.product_data[product]['priority'] > max_priority:
-            max_priority = data_classification_products.product_data[product]['priority']
+        if data_classification_products.product_data[product]['prevalence'] > max_priority:
+            max_priority = data_classification_products.product_data[product]['prevalence']
             detected_product_name = product
 
     detected_vulnerability_types = get_detected_entities(sentence,

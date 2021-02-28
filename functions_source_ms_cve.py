@@ -7,7 +7,6 @@ import openpyxl
 import data_classification_vulnerability_types
 import functions_tools
 
-### CVE Search
 
 def get_ms_cves_for_date_range(fromPublishedDate, toPublishedDate):
     # Interface for service https://portal.msrc.microsoft.com/en-us/security-guidance
@@ -17,7 +16,8 @@ def get_ms_cves_for_date_range(fromPublishedDate, toPublishedDate):
     headers = {
         'authority': 'portal.msrc.microsoft.com',
         'accept': 'application/json, text/plain, */*',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' + \
+                      'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36',
         'content-type': 'application/json;charset=UTF-8',
         'origin': 'https://portal.msrc.microsoft.com',
         'sec-fetch-site': 'same-origin',
@@ -27,11 +27,26 @@ def get_ms_cves_for_date_range(fromPublishedDate, toPublishedDate):
         'accept-language': 'en-US,en;q=0.9,ru;q=0.8',
     }
 
-    data = {"familyIds":[],"productIds":[],"severityIds":[],"impactIds":[],"pageNumber":1,"pageSize":20,
-            "includeCveNumber":True,"includeSeverity":False,"includeImpact":False,
-            "orderBy":"publishedDate","orderByMonthly":"releaseDate","isDescending":True,"isDescendingMonthly":True,
-            "queryText":"","isSearch":False,"filterText":"",
-            "fromPublishedDate":fromPublishedDate,"toPublishedDate":toPublishedDate} #Month/Date/Year
+    data = {
+                "familyIds": [],
+                "productIds": [],
+                "severityIds": [],
+                "impactIds": [],
+                "pageNumber": 1,
+                "pageSize": 20,
+                "includeCveNumber": True,
+                "includeSeverity": False,
+                "includeImpact": False,
+                "orderBy": "publishedDate",
+                "orderByMonthly": "releaseDate",
+                "isDescending": True,
+                "isDescendingMonthly": True,
+                "queryText": "",
+                "isSearch": False,
+                "filterText": "",
+                "fromPublishedDate": fromPublishedDate,
+                "toPublishedDate": toPublishedDate
+    }  #Month/Date/Year
 
     response = requests.post('https://portal.msrc.microsoft.com/api/security-guidance/en-us/excel', headers=headers, data=json.dumps(data))
     f = open("data/ms_search/temp.xlsx", "wb")
@@ -69,7 +84,7 @@ def get_ms_cve_data_from_ms_site(cve_id):
         ms_cve_data['error'] = True
         ms_cve_data['status'] = "CVE ID is NOT found on microsoft.com portal"
         ms_cve_data['not_found_error'] = True
-    return(ms_cve_data)
+    return ms_cve_data
 
 
 def download_ms_cve_data_raw(cve_id, rewrite_flag = True):
@@ -93,18 +108,7 @@ def get_ms_cve_data_raw(cve_id):
     f = open("data/ms_cve/" + cve_id + ".json", "r")
     ms_cve_data = json.loads(f.read())
     f.close()
-    return(ms_cve_data)
-
-
-def get_ms_cve_data(cve_id, rewrite_flag):
-    download_ms_cve_data_raw(cve_id, rewrite_flag)
-    ms_cve_data = get_ms_cve_data_raw(cve_id)
-    if ms_cve_data['not_found_error'] == False:
-        ms_cve_data = add_cve_product_and_type_tags(ms_cve_data)
-        ms_cve_data = heuristic_change_product_vuln_type(ms_cve_data)
-        ms_cve_data = add_ms_cve_severity(ms_cve_data)
-    return(ms_cve_data)
-
+    return ms_cve_data
 
 def add_cve_product_and_type_tags(ms_cve_data):
     for pattern in data_classification_vulnerability_types.vulnerability_type_detection_patterns:
@@ -121,7 +125,7 @@ def add_cve_product_and_type_tags(ms_cve_data):
             functions_tools.print_debug_message("No vuln_product in ms_cve_data for " +  ms_cve_data['cveNumber'])
             functions_tools.print_debug_message(json.dumps(ms_cve_data, indent=4))
             exit()
-    return(ms_cve_data)
+    return ms_cve_data
 
 
 def add_ms_cve_severity(ms_cve_data):
@@ -145,8 +149,18 @@ def add_ms_cve_severity(ms_cve_data):
         if severity_dict[severity_val] == max_severity_number:
             result_severity = severity_val
     ms_cve_data['severity'] = result_severity
-    return(ms_cve_data)
+    return ms_cve_data
 
+def add_ms_cve_cvss_base_score(ms_cve_data):
+    all_base_score = list()
+    cvss_base_score = ""
+    if 'affectedProducts' in ms_cve_data:
+        for data in ms_cve_data['affectedProducts']:
+            all_base_score.append(data['baseScore'])
+    if all_base_score != list():
+        cvss_base_score = max(all_base_score)
+    ms_cve_data['cvss_base_score'] = cvss_base_score
+    return ms_cve_data
 
 # Heuristics
 def heuristic_change_product_vuln_type(ms_cve_data):
@@ -175,3 +189,13 @@ def heuristic_change_product_vuln_type(ms_cve_data):
             ms_cve_data['vuln_type'] = "Remote Code Execution"
     return(ms_cve_data)
 
+
+def get_ms_cve_data(cve_id, rewrite_flag):
+    download_ms_cve_data_raw(cve_id, rewrite_flag)
+    ms_cve_data = get_ms_cve_data_raw(cve_id)
+    if ms_cve_data['not_found_error'] == False:
+        ms_cve_data = add_cve_product_and_type_tags(ms_cve_data)
+        ms_cve_data = heuristic_change_product_vuln_type(ms_cve_data)
+        ms_cve_data = add_ms_cve_severity(ms_cve_data)
+        ms_cve_data = add_ms_cve_cvss_base_score(ms_cve_data)
+    return ms_cve_data

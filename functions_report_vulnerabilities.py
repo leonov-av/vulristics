@@ -1,6 +1,4 @@
 import credentials
-import re
-import json
 import data_report_configs
 import data_classification_vulnerability_types
 import functions_source_ms_cve
@@ -9,6 +7,8 @@ import functions_source_attackerkb_cve
 import functions_source_vulners
 import functions_tools
 import functions_score
+import re
+import json
 
 
 def get_vuln_products(ms_cve_data_all):
@@ -89,7 +89,7 @@ def get_vulns_filtered_by_product(product, cve_data):
     for cve_id in cve_data:
         if cve_data[cve_id]['vuln_product'] == product:
             vulnerabilities[cve_id] = cve_data[cve_id]
-    return (vulnerabilities)
+    return vulnerabilities
 
 
 def get_vulns_filtered_by_type(vuln_type, cve_data):
@@ -97,7 +97,7 @@ def get_vulns_filtered_by_type(vuln_type, cve_data):
     for cve_id in cve_data:
         if cve_data[cve_id]['vuln_type'] == vuln_type:
             vulnerabilities[cve_id] = cve_data[cve_id]
-    return (vulnerabilities)
+    return vulnerabilities
 
 
 def get_vulns_filtered_not_in_list(cve_ids, cve_data):
@@ -105,7 +105,7 @@ def get_vulns_filtered_not_in_list(cve_ids, cve_data):
     for cve_id in cve_data:
         if cve_id not in cve_ids:
             vulnerabilities[cve_id] = cve_data[cve_id]
-    return (vulnerabilities)
+    return vulnerabilities
 
 
 ### Formating
@@ -114,7 +114,7 @@ def get_cve_line(cves):
     cves = list(cves)
     cves.sort()
     cve_line = ", ".join(cves)
-    return (cve_line)
+    return cve_line
 
 
 def get_colored_text(color, text, c_type="text", params=None):
@@ -137,15 +137,15 @@ def get_colored_text(color, text, c_type="text", params=None):
         result = '''<span style="color:''' + color_code + ''';">''' + text + '''</span>'''
     elif c_type == "link":
         result = '''<a style="color:''' + color_code + ''';" href="''' + params['url'] + '''">''' + text + '''</a>'''
-    return (result)
+    return result
 
 
 def get_ms_cve_line_html_vss(cve, cve_scores):
     params = {'url': 'https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/' + cve}
-    return(get_colored_text(color=cve_scores[cve]['level'],
-                     text=cve,
-                     c_type="link",
-                     params=params))
+    return (get_colored_text(color=cve_scores[cve]['level'],
+                             text=cve,
+                             c_type="link",
+                             params=params))
 
 
 def get_ms_cve_lines_html_vss(cves, cve_scores):
@@ -156,7 +156,7 @@ def get_ms_cve_lines_html_vss(cves, cve_scores):
     for cve_id in cves:
         cve_html.append(get_ms_cve_line_html_vss(cve_id, cve_scores))
     cve_line = ", ".join(cve_html)
-    return (cve_line)
+    return cve_line
 
 
 def get_ms_cve_line_html(cves, cve_data):
@@ -177,14 +177,15 @@ def get_ms_cve_line_html(cves, cve_data):
             color = "blue"
         if color != "":
             cve_html.add(
-                '<a style="color:' + color + ';" href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/' + \
+                '<a style="color:' + color + \
+                ';" href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/' + \
                 cve_id + '">' + cve_id + "</a>")
         else:
             cve_html.add("<" + severity + ">" + cve_id + "</" + severity + ">")
     cve_html = list(cve_html)
     cve_html.sort()
     cve_line = ", ".join(cve_html)
-    return (cve_line)
+    return cve_line
 
 
 def get_vuln_type_icon_html(type, config):
@@ -193,7 +194,7 @@ def get_vuln_type_icon_html(type, config):
                    'width="32"  src=" '
     html_img_tag += vuln_icons_source
     html_img_tag += '/' + data_classification_vulnerability_types.type_to_icon[type] + '.png">'
-    return (html_img_tag)
+    return html_img_tag
 
 
 def get_vuln_type_html(type, config):
@@ -231,7 +232,7 @@ def get_type_based_report(current_cve_data, report_config, source, cve_scores):
     processed_cves = set()
     report_txt = ""
     report_html = ""
-    all_types = get_vuln_types(current_cve_data) #all vulnerability types
+    all_types = get_vuln_types(current_cve_data)  # all vulnerability types
     report_dict = dict()
     for vuln_type in all_types:
         report_dict[vuln_type] = dict()
@@ -261,21 +262,23 @@ def get_type_based_report(current_cve_data, report_config, source, cve_scores):
         for product in report_dict[vuln_type]['products']:
             all_scores.append(report_dict[vuln_type]['products'][product]['score'])
         report_dict[vuln_type]['score'] = max(all_scores)
+
     def get_cve_for_vuln_type(vuln_type_data):
         all_cves = list()
         for product in vuln_type_data['products']:
             for cve in vuln_type_data['products'][product]['cves']:
                 all_cves.append(cve)
-        return(all_cves)
+        return all_cves
 
     # Making sorted list of vulnerability types
     vuln_types_dict = dict()
     for vuln_type in report_dict:
         vuln_types_dict[vuln_type] = report_dict[vuln_type]['score']
-    sorted_list_of_vulnerability_types =  functions_tools.get_sorted_list_from_weighted_dict(vuln_types_dict)
+    sorted_list_of_vulnerability_types = functions_tools.get_sorted_list_from_weighted_dict(vuln_types_dict)
     for vuln_type in sorted_list_of_vulnerability_types:
         report_txt += vuln_type + "\n"
-        report_html += "<h4>" + get_vuln_type_html(vuln_type, report_config) + " (" + str(len(get_cve_for_vuln_type(report_dict[vuln_type]))) + ")</h4>" + "\n"
+        report_html += "<h4>" + get_vuln_type_html(vuln_type, report_config) + " (" + str(
+            len(get_cve_for_vuln_type(report_dict[vuln_type]))) + ")</h4>" + "\n"
         report_html += "<ul>" + "\n"
         # Making sorted list of products
         product_dict = dict()
@@ -291,7 +294,8 @@ def get_type_based_report(current_cve_data, report_config, source, cve_scores):
             report_html += get_comments_for_cves(source, cves)["report_html"]
         report_html += "</ul>" + "\n"
 
-    return {"report_txt": report_txt, "report_html": report_html, "report_dict":report_dict, "processed_cves": processed_cves}
+    return {"report_txt": report_txt, "report_html": report_html, "report_dict": report_dict,
+            "processed_cves": processed_cves}
 
 
 def get_components_list_sorted(cve_scores):
@@ -302,7 +306,7 @@ def get_components_list_sorted(cve_scores):
     components = functions_tools.get_sorted_list_from_weighted_dict(component_dict)
     # for component in components:
     #     print(component + ";" + str(component_dict[component]))
-    return (components)
+    return components
 
 
 def get_statistics(cve_scores):
@@ -317,7 +321,7 @@ def get_statistics(cve_scores):
     for cve in cve_scores:
         statistics[cve_scores[cve]['level']].add(cve)
         statistics["All vulnerabilities"].add(cve)
-    return (statistics)
+    return statistics
 
 
 def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config, components, source, cve, n):
@@ -345,7 +349,7 @@ def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config,
     report_html += "</table>"
     report_html += get_comments_for_cves(source, [cve])['report_html']
     report_html += "</p>\n"
-    return(report_html)
+    return report_html
 
 
 def get_vulristics_score_report(combined_cve_data_all, cve_scores, config, source):
@@ -364,7 +368,8 @@ def get_vulristics_score_report(combined_cve_data_all, cve_scores, config, sourc
     report_html += "<ul>"
     report_html += "<li>" + "All vulnerabilities" + ': ' + str(len(statistics["All vulnerabilities"])) + "</li>"
     for criticality in criticalities:
-        report_html += "<li>" + get_colored_text(criticality, criticality) + ': ' + str(len(statistics[criticality])) + "</li>"
+        report_html += "<li>" + get_colored_text(criticality, criticality) + ': ' + str(
+            len(statistics[criticality])) + "</li>"
     report_html += "</ul>"
 
     n = 1
@@ -372,11 +377,13 @@ def get_vulristics_score_report(combined_cve_data_all, cve_scores, config, sourc
         report_html += "<h4>" + criticality + " (" + str(len(statistics[criticality])) + ")</h4>"
         for cve in sorted_cves:
             if cve in statistics[criticality] and cve in combined_cve_data_all:
-                report_html += get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config, components, source, cve, n)
+                report_html += get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config, components,
+                                                                 source, cve, n)
                 n += 1
 
     return {"report_txt": report_txt, "report_html": report_html}
 
+import functions_tools
 
 def get_basic_severity_statistics_report(combined_cve_data_all):
     report_txt = ""
@@ -387,36 +394,32 @@ def get_basic_severity_statistics_report(combined_cve_data_all):
         all_vulnerabilities.add(vulnerability)
 
     critical_vulnerability = set()
-    for vulnerability in combined_cve_data_all:
-        if combined_cve_data_all[vulnerability]['basic_severity'] == "critical":
-            critical_vulnerability.add(vulnerability)
-
-    important_vulnerability = set()
-    for vulnerability in combined_cve_data_all:
-        if combined_cve_data_all[vulnerability]['basic_severity'] == "important":
-            important_vulnerability.add(vulnerability)
-
-    moderate_vulnerability = set()
-    for vulnerability in combined_cve_data_all:
-        if combined_cve_data_all[vulnerability]['basic_severity'] == "moderate":
-            moderate_vulnerability.add(vulnerability)
-
+    high_vulnerability = set()
+    medium_vulnerability = set()
     low_vulnerability = set()
+
     for vulnerability in combined_cve_data_all:
-        if combined_cve_data_all[vulnerability]['basic_severity'] == "low":
+        cvss_base_score = combined_cve_data_all[vulnerability]['cvss_base_score']
+        basic_severity = functions_tools.get_rating_from_cvss_base_score(cvss_base_score)
+        if basic_severity == "Critical":
+            critical_vulnerability.add(vulnerability)
+        elif basic_severity == "High":
+            high_vulnerability.add(vulnerability)
+        elif basic_severity == "Medium":
+            medium_vulnerability.add(vulnerability)
+        elif basic_severity == "low":
             low_vulnerability.add(vulnerability)
 
     report_txt += "All vulnerabilities: " + str(len(all_vulnerabilities)) + "\n"
     report_txt += "Critical: " + str(len(critical_vulnerability)) + "\n"
-    report_txt += "Important: " + str(len(important_vulnerability)) + "\n"
-    report_txt += "Moderate: " + str(len(moderate_vulnerability)) + "\n"
+    report_txt += "High: " + str(len(high_vulnerability)) + "\n"
+    report_txt += "Medium: " + str(len(medium_vulnerability)) + "\n"
     report_txt += "Low: " + str(len(low_vulnerability)) + "\n"
-
     report_html += "<ul>" + "\n"
     report_html += "<li>" + "All vulnerabilities: " + str(len(all_vulnerabilities)) + "</li>" + "\n"
     report_html += "<li>" + "Critical: " + str(len(critical_vulnerability)) + "</li>" + "\n"
-    report_html += "<li>" + "Important: " + str(len(important_vulnerability)) + "</li>" + "\n"
-    report_html += "<li>" + "Moderate: " + str(len(moderate_vulnerability)) + "</li>" + "\n"
+    report_html += "<li>" + "High: " + str(len(high_vulnerability)) + "</li>" + "\n"
+    report_html += "<li>" + "Medium: " + str(len(medium_vulnerability)) + "</li>" + "\n"
     report_html += "<li>" + "Low: " + str(len(low_vulnerability)) + "</li>" + "\n"
     report_html += "</ul>" + "\n"
 
@@ -520,12 +523,23 @@ def make_vulnerability_report(cve_related_data, cve_scores, report_config, profi
 
     html_content = re.sub("##Content##", html_content, template)
 
-    f = open("reports/" + profile_data['file_name_prefix'] + "_" + report_config['file_name_suffix'] + ".html", "w", encoding="utf-8")
+    f = open("reports/" + profile_data['file_name_prefix'] + "_" + report_config['file_name_suffix'] + ".html", "w",
+             encoding="utf-8")
     f.write(html_content)
     f.close()
 
 
 def collect_cve_related_data(all_cves, rewrite_flag):
+    """
+    Collecting vulnerability data from the supported sources and
+                                                        combining basic vulnerability data in combined_cve_data_all
+    :param all_cves:
+    :param rewrite_flag:
+    :return:
+    """
+
+    # Collecting vulnerability data from the supported sources
+
     cves_to_exclude = set()
     functions_tools.print_debug_message("Collecting MS CVE data...")
     ms_cve_data_all = dict()
@@ -560,42 +574,109 @@ def collect_cve_related_data(all_cves, rewrite_flag):
             vulners_cve_data = functions_source_vulners.get_vulners_data(cve_id, rewrite_flag)
             vulners_cve_data_all[cve_id] = vulners_cve_data
 
+    # Combining basic vulnerability data in combined_cve_data_all
     combined_cve_data_all = dict()
     for cve_id in all_cves:
         combined_cve_data_all[cve_id] = dict()
-        combined_cve_data_all[cve_id]['vuln_product'] = "Unknown Product"
-        combined_cve_data_all[cve_id]['vuln_type'] = "Unknown Vulnerability Type"
-        combined_cve_data_all[cve_id]['basic_severity'] = 0
-        if cve_id in nvd_cve_data_all:
-            if 'vuln_product' in nvd_cve_data_all[cve_id]:
-                combined_cve_data_all[cve_id]['vuln_product'] = nvd_cve_data_all[cve_id]['vuln_product']
-            if 'vuln_type' in nvd_cve_data_all[cve_id]:
-                combined_cve_data_all[cve_id]['vuln_type'] = nvd_cve_data_all[cve_id]['vuln_type']
-            if 'severity' in nvd_cve_data_all[cve_id]:
-                combined_cve_data_all[cve_id]['basic_severity'] = nvd_cve_data_all[cve_id]['severity']
-        if cve_id in ms_cve_data_all:
-            if 'vuln_product' in ms_cve_data_all[cve_id]:
-                combined_cve_data_all[cve_id]['vuln_product'] = ms_cve_data_all[cve_id]['vuln_product']
-            if 'vuln_type' in ms_cve_data_all[cve_id]:
-                combined_cve_data_all[cve_id]['vuln_type'] = ms_cve_data_all[cve_id]['vuln_type']
-            if 'severity' in ms_cve_data_all[cve_id]:
-                combined_cve_data_all[cve_id]['basic_severity'] = ms_cve_data_all[cve_id]['severity']
 
-        try:
-            nvd_description = nvd_cve_data_all[cve_id]['result']['CVE_Items'][0]['cve']['description']['description_data'][0]['value']
-        except:
-            nvd_description = ""
-        combined_cve_data_all[cve_id]['description'] = nvd_description
+        # Combining the data about the Product
+        combined_cve_data_all[cve_id]['vuln_product'] = ""
+        combined_cve_data_all[cve_id]['vuln_product_detection_comment'] = ""
+        # Microsoft has the most accurate data, so I give it the first priority
+        if combined_cve_data_all[cve_id]['vuln_product'] == "":
+            if cve_id in ms_cve_data_all:
+                if 'vuln_product' in ms_cve_data_all[cve_id]:
+                    combined_cve_data_all[cve_id]['vuln_product'] = ms_cve_data_all[cve_id]['vuln_product']
+                    combined_cve_data_all[cve_id]['vuln_product_detection_comment'] = "Based on Microsoft title"
+        # If there is no data in MS, let's get it from NVD description
+        if combined_cve_data_all[cve_id]['vuln_product'] == "":
+            if cve_id in nvd_cve_data_all:
+                if 'vuln_product' in nvd_cve_data_all[cve_id]:
+                    combined_cve_data_all[cve_id]['vuln_product'] = nvd_cve_data_all[cve_id]['vuln_product']
+                    combined_cve_data_all[cve_id]['vuln_product_detection_comment'] = "Based on NVD description"
+        # If it's still empty, then set it to  "Unknown Product"
+        if combined_cve_data_all[cve_id]['vuln_product'] == "":
+            combined_cve_data_all[cve_id]['vuln_product'] = "Unknown Product"
+            combined_cve_data_all[cve_id]['vuln_product_detection_comment'] = "Detection methods failed"
 
-    cve_data_all = {'ms_cve_data_all': ms_cve_data_all,
-                    'nvd_cve_data_all': nvd_cve_data_all,
-                    'attackerkb_cve_data_all': attackerkb_cve_data_all,
-                    'vulners_cve_data_all': vulners_cve_data_all,
-                    'combined_cve_data_all': combined_cve_data_all,
-                    'all_cves': all_cves,
-                    'cves_to_exclude': cves_to_exclude}
+        # Combining the data about the Vulnerability Type
+        combined_cve_data_all[cve_id]['vuln_type'] = ""
+        combined_cve_data_all[cve_id]['vuln_type_detection_comment'] = ""
+        # Microsoft has the most accurate data, so I give it the first priority
+        if combined_cve_data_all[cve_id]['vuln_type'] == "":
+            if cve_id in ms_cve_data_all:
+                if 'vuln_type' in ms_cve_data_all[cve_id]:
+                    combined_cve_data_all[cve_id]['vuln_type'] = ms_cve_data_all[cve_id]['vuln_type']
+                    combined_cve_data_all[cve_id]['vuln_type_detection_comment'] = "Based on Microsoft title"
+        # If there is no data in MS, let's get it from NVD description
+        if combined_cve_data_all[cve_id]['vuln_type'] == "":
+            if cve_id in nvd_cve_data_all:
+                if 'vuln_type' in nvd_cve_data_all[cve_id]:
+                    combined_cve_data_all[cve_id]['vuln_type'] = nvd_cve_data_all[cve_id]['vuln_type']
+                    combined_cve_data_all[cve_id]['vuln_type_detection_comment'] = "Based on NVD description"
+        # If it's still empty, then set it to  "Unknown type"
+        if combined_cve_data_all[cve_id]['vuln_type'] == "":
+            combined_cve_data_all[cve_id]['vuln_type'] = "Unknown Vulnerability Type"
+            combined_cve_data_all[cve_id]['vuln_type_detection_comment'] = "Detection methods failed"
 
-    return(cve_data_all)
+        # Combining the data about the Basic Severity
+        combined_cve_data_all[cve_id]['basic_severity'] = ""
+        combined_cve_data_all[cve_id]['basic_severity_detection_comment'] = ""
+        # Microsoft has the most accurate data, so I give it the first priority
+        if combined_cve_data_all[cve_id]['basic_severity'] == "":
+            if cve_id in ms_cve_data_all:
+                if 'basic_severity' in ms_cve_data_all[cve_id]:
+                    combined_cve_data_all[cve_id]['basic_severity'] = ms_cve_data_all[cve_id]['basic_severity']
+                    combined_cve_data_all[cve_id]['basic_severity_detection_comment'] = "Based on Microsoft title"
+        # If there is no data in MS, let's get it from NVD description
+        if combined_cve_data_all[cve_id]['basic_severity'] == "":
+            if cve_id in nvd_cve_data_all:
+                if 'basic_severity' in nvd_cve_data_all[cve_id]:
+                    combined_cve_data_all[cve_id]['basic_severity'] = nvd_cve_data_all[cve_id]['basic_severity']
+                    combined_cve_data_all[cve_id]['basic_severity_detection_comment'] = "Based on NVD description"
+        # If it's still empty, then set it to  "Unknown type"
+        if combined_cve_data_all[cve_id]['basic_severity'] == "":
+            combined_cve_data_all[cve_id]['basic_severity'] = "Unknown Basic Severity"
+            combined_cve_data_all[cve_id]['basic_severity_detection_comment'] = "Detection methods failed"
+
+        # Combining the data about the CVSS Base Score
+        combined_cve_data_all[cve_id]['cvss_base_score'] = ""
+        combined_cve_data_all[cve_id]['cvss_base_score_detection_comment'] = ""
+        # Microsoft has the most accurate data, so I give it the first priority
+        if combined_cve_data_all[cve_id]['cvss_base_score'] == "":
+            if cve_id in ms_cve_data_all:
+                if 'cvss_base_score' in ms_cve_data_all[cve_id]:
+                    combined_cve_data_all[cve_id]['cvss_base_score'] = ms_cve_data_all[cve_id]['cvss_base_score']
+                    combined_cve_data_all[cve_id]['cvss_base_score_detection_comment'] = "Based on Microsoft data"
+        # If there is no data in MS, let's get it from NVD description
+        if combined_cve_data_all[cve_id]['cvss_base_score'] == "":
+            if cve_id in nvd_cve_data_all:
+                if 'cvss_base_score' in nvd_cve_data_all[cve_id]:
+                    combined_cve_data_all[cve_id]['cvss_base_score'] = nvd_cve_data_all[cve_id]['cvss_base_score']
+                    combined_cve_data_all[cve_id]['cvss_base_score_detection_comment'] = "Based on NVD data"
+        # If it's still empty, then set it to  "Unknown type"
+        if combined_cve_data_all[cve_id]['cvss_base_score'] == "":
+            combined_cve_data_all[cve_id]['cvss_base_score'] = "Unknown CVSS Base Score"
+            combined_cve_data_all[cve_id]['cvss_base_score_detection_comment'] = "Detection methods failed"
+
+        # Combining the data about Vulnerability Description
+        combined_cve_data_all[cve_id]['description'] = ""
+        combined_cve_data_all[cve_id]['description_tags'] = ""
+        combined_cve_data_all[cve_id]['description_detection_comment'] = ""
+        # I take it only from NVD
+        if combined_cve_data_all[cve_id]['description'] == "":
+            if cve_id in nvd_cve_data_all:
+                if 'description' in nvd_cve_data_all[cve_id]:
+                    combined_cve_data_all[cve_id]['description'] = nvd_cve_data_all[cve_id]['description']
+                    # I should use description_tags (ranges) to mark products and vuln types in the description
+                    combined_cve_data_all[cve_id]['description_tags'] = nvd_cve_data_all[cve_id]['description_tags']
+                    combined_cve_data_all[cve_id]['description_detection_comment'] = "Based on NVD data"
+
+    cve_data_all = dict(ms_cve_data_all=ms_cve_data_all, nvd_cve_data_all=nvd_cve_data_all,
+                        attackerkb_cve_data_all=attackerkb_cve_data_all, vulners_cve_data_all=vulners_cve_data_all,
+                        combined_cve_data_all=combined_cve_data_all, all_cves=all_cves, cves_to_exclude=cves_to_exclude)
+
+    return cve_data_all
 
 
 def make_vulnerability_report_for_profile(file_name, rewrite_flag):
@@ -622,16 +703,29 @@ def make_vulnerability_report_for_profile(file_name, rewrite_flag):
                 all_cves.add(line.upper())
     functions_tools.print_debug_message("All CVEs: " + str(len(all_cves)))
 
-    cve_related_data = collect_cve_related_data(all_cves = all_cves, rewrite_flag = rewrite_flag)
+    cve_related_data = collect_cve_related_data(all_cves=all_cves, rewrite_flag=rewrite_flag)
     cve_related_data['cves_to_exclude'] = cves_to_exclude.union(cve_related_data['cves_to_exclude'])
 
     functions_tools.print_debug_message("Counting CVE scores...")
     cve_scores = functions_score.get_cve_scores(all_cves, cve_related_data, profile[source_id])
+    unclassified_products = set()
+    for cve in cve_scores:
+        if cve_scores[cve]['components']['Vulnerable Product is Common']['comment'] == "Unclassified product":
+            unclassified_products.add(cve_related_data['combined_cve_data_all'][cve]['vuln_product'])
+    unclassified_products = list(unclassified_products)
+    unclassified_products.sort()
+    for product in unclassified_products:
+        print('''    "''' + product + '''": {
+        "prevalence": 0,
+        "description": "",
+        "additional_detection_strings": []
+    },''')
+
 
     functions_tools.print_debug_message("Making vulnerability reports for each reports config...")
     for report_config_name in data_report_configs.patch_tuesday_report_configs:
         functions_tools.print_debug_message("Report config: " + report_config_name)
-        make_vulnerability_report(cve_related_data = cve_related_data,
-                                  cve_scores = cve_scores,
-                                  report_config = data_report_configs.patch_tuesday_report_configs[report_config_name],
-                                  profile_data = profile[source_id])
+        make_vulnerability_report(cve_related_data=cve_related_data,
+                                  cve_scores=cve_scores,
+                                  report_config=data_report_configs.patch_tuesday_report_configs[report_config_name],
+                                  profile_data=profile[source_id])

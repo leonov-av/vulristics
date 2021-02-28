@@ -1,4 +1,5 @@
 import data_classification_vulnerability_types
+import data_classification_products
 import re
 
 def get_level(score_value):
@@ -12,49 +13,23 @@ def get_level(score_value):
         level = "Critical"
     if score_value >= 0.8 and score_value <= 1:
         level = "Urgent"
-    return(level)
+    return level
 
 def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     # Process CVE-related data and make score structure
     vvs_struct = dict()
     use_comments = False
 
-    ######## NVD CVSS
-    # print(json.dumps(cve_data_all['nvd_cve_data_all'][cve], indent=4))
-    # print(cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3'])
-    cvss_base_score = 0
-    cvss_base_score_source = "No data"
-    if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
-        if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
-            cvss_base_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['baseScore']
-            cvss_base_score_source = "NVD"
-    elif 'ms_cve_data_all' in cve_data_all:
-        if cve in cve_data_all['ms_cve_data_all']:
-            all_base_score = list()
-            if 'affectedProducts' in cve_data_all['ms_cve_data_all'][cve]:
-                for data in cve_data_all['ms_cve_data_all'][cve]['affectedProducts']:
-                    all_base_score.append(data['baseScore'])
-            if all_base_score != list():
-                cvss_base_score = max(all_base_score)
-                cvss_base_score_source = "Microsoft"
-
+    ######## CVSS Base Score from NVD or Microsoft
+    if cve_data_all['combined_cve_data_all'][cve]['cvss_base_score'] == "Unknown CVSS Base Score":
+        cvss_base_score = 0
+        cvss_base_score_c = "Vulnerability Severity Rating based on CVSS Base Score is NA. No data."
+    else:
+        cvss_base_score = cve_data_all['combined_cve_data_all'][cve]['cvss_base_score']
+        cvss_base_score_c = "Vulnerability Severity Rating based on CVSS Base Score is " + str(cvss_base_score) + ". " \
+                            + cve_data_all['combined_cve_data_all'][cve]['cvss_base_score_detection_comment']
     cvss_base_score_n = int(cvss_base_score) / 10
     cvss_base_score_k = 10
-    # Rating CVSS Score
-    # Low 0.1 - 3.9
-    # Medium 4.0 - 6.9
-    # High 7.0 - 8.9
-    # Critical 9.0 - 10.0
-    cvss_rating = "N/A"
-    if int(cvss_base_score) > 0 and int(cvss_base_score) < 4:
-        cvss_rating = "Low"
-    elif int(cvss_base_score) >= 4 and int(cvss_base_score) < 7:
-        cvss_rating = "Medium"
-    elif int(cvss_base_score) >= 7 and int(cvss_base_score) < 9:
-        cvss_rating = "High"
-    elif int(cvss_base_score) >= 9:
-        cvss_rating = "Critical"
-    cvss_base_score_c = "Vulnerability Severity Rating is " + cvss_rating + " (based on " + cvss_base_score_source + " CVSS data)"
 
     cvss_attack_is_network = "n/a"
     if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
@@ -171,7 +146,7 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
                 mentioned.append("<a href=\"https://msrc.microsoft.com/update-guide/vulnerability/" + cve +
                                  "\">Microsoft</a>")
 
-    # Detecting false positives
+    # Detecting false positives in wild exploitation
 
     if  flag_vulners_cisa == True and \
         flag_vulners_attackerkb == False and \
@@ -203,76 +178,27 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     wild_exploited_k = 18
 
     ######## Product
-    # Currently works only with Microsoft data
-    if cve in cve_data_all['ms_cve_data_all']:
-        vuln_product = cve_data_all['ms_cve_data_all'][cve]['vuln_product']
-        vulnerable_product_is_common_n = 0.1
-        vulnerable_product_is_common_c = "Other less common product"
+    # Using the Product from combined_cve_data_all, that is from NVD or Microsoft
+    if cve in cve_data_all['combined_cve_data_all']:
+        vuln_product = cve_data_all['combined_cve_data_all'][cve]['vuln_product']
+        vulnerable_product_is_common_n = 0
+        vulnerable_product_is_common_c = "Unclassified product"
     else:
         vuln_product = "Unknown product"
         vulnerable_product_is_common_n = 0
         vulnerable_product_is_common_c = "Unknown product"
 
-    if "RDP" in vuln_product or "Remote Desktop Protocol" in vuln_product:
-        vulnerable_product_is_common_n = 1.0
-        vulnerable_product_is_common_c = "RDP"
-    elif "SMB" in vuln_product:
-        vulnerable_product_is_common_n = 1.0
-        vulnerable_product_is_common_c = "SMB"
-    elif "Kerberos" in vuln_product:
-        vulnerable_product_is_common_n = 0.9
-        vulnerable_product_is_common_c = "Kerberos"
-    elif "DNS" in vuln_product:
-        vulnerable_product_is_common_n = 0.8
-        vulnerable_product_is_common_c = "DNS"
-    elif "Microsoft Defender" in vuln_product:
-        vulnerable_product_is_common_n = 0.8
-        vulnerable_product_is_common_c = "Microsoft Defender"
-    elif "Remote Procedure Call Runtime" in vuln_product or "RPC" in vuln_product:
-        vulnerable_product_is_common_n = 0.8
-        vulnerable_product_is_common_c = "RPC"
-    elif "splwow64" in vuln_product:
-        vulnerable_product_is_common_n = 0.8
-        vulnerable_product_is_common_c = "splwow64 (printer driver host for 32-bit applications)"
-    elif "Windows" in vuln_product: # Other standard windows component
-        vulnerable_product_is_common_n = 0.8
-        vulnerable_product_is_common_c = "Windows component"
-    elif "Microsoft Exchange" in vuln_product:
-        vulnerable_product_is_common_n = 0.7
-        vulnerable_product_is_common_c = "Microsoft Exchange"
-    elif "Office" in vuln_product or "Word" in vuln_product or "Excel" in vuln_product or "Outlook" in vuln_product or "Office" in vuln_product or "Teams" in vuln_product:
-        vulnerable_product_is_common_n = 0.6
-        vulnerable_product_is_common_c = "MS Office product"
-    elif "Chakra" in vuln_product or "Internet Explorer" in vuln_product or "Microsoft Browser" in vuln_product or "Scripting Engine" in vuln_product:
-        vulnerable_product_is_common_n = 0.6
-        vulnerable_product_is_common_c = "MS Internet Browser"
-    elif "DirectX" in vuln_product:
-        vulnerable_product_is_common_n = 0.6
-        vulnerable_product_is_common_c = "DirectX"
-    elif "SharePoint" in vuln_product:
-        vulnerable_product_is_common_n = 0.5
-        vulnerable_product_is_common_c = "SharePoint"
-    elif "Visual Studio" in vuln_product:
-        vulnerable_product_is_common_n = 0.5
-        vulnerable_product_is_common_c = "Visual Studio"
-    elif "Hyper-V" in vuln_product:
-        vulnerable_product_is_common_n = 0.5
-        vulnerable_product_is_common_c = "Hyper-V"
-    elif "Microsoft Dynamics 365" in vuln_product:
-        vulnerable_product_is_common_n = 0.5
-        vulnerable_product_is_common_c = "Microsoft Dynamics 365"
-    elif "Azure" in vuln_product:
-        vulnerable_product_is_common_n = 0.3
-        vulnerable_product_is_common_c = "Azure Sphere"
+    if vuln_product in data_classification_products.product_data:
+        vulnerable_product_is_common_n = data_classification_products.product_data[vuln_product]['prevalence']
+        vulnerable_product_is_common_c = vuln_product
+        if "description" in data_classification_products.product_data[vuln_product]:
+            if data_classification_products.product_data[vuln_product]["description"] != "":
+                vulnerable_product_is_common_c = data_classification_products.product_data[vuln_product]["description"]
     vulnerable_product_is_common_k = 14
 
     ######## Vulnerability type
-    # Currently works only with Microsoft data
-    # print(json.dumps(cve_data_all['ms_cve_data_all'][cve]))
-    if cve in cve_data_all['ms_cve_data_all']:
-        vuln_type = cve_data_all['ms_cve_data_all'][cve]['vuln_type']
-    else:
-        vuln_type = "Unknown vulnerability type"
+    # Using the Vulnerability Type from combined_cve_data_all, that is from NVD or Microsoft
+    vuln_type = cve_data_all['combined_cve_data_all'][cve]['vuln_type']
     criticality_of_vulnerability_type_n = data_classification_vulnerability_types.vulnerability_type_data[vuln_type]['criticality']
     criticality_of_vulnerability_type_k = 15
     criticality_of_vulnerability_type_c = vuln_type
