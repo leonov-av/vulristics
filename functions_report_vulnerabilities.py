@@ -339,7 +339,7 @@ def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config,
     report_html += "<table><tr><th>component</th><th>value</th><th>weight</th><th>comment</th></tr>"
     for component in components:
         report_html += "<tr>" + \
-                       "<td>" + component + "</td>" + \
+                       "<td class=\"nowrap\">" + component + "</td>" + \
                        "<td>" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(
             cve_scores[cve]['components'][component]['value'])) + "</td>" + \
                        "<td>" + str(cve_scores[cve]['components'][component]['weight']) + "</td>" + \

@@ -199,7 +199,10 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     ######## Vulnerability type
     # Using the Vulnerability Type from combined_cve_data_all, that is from NVD or Microsoft
     vuln_type = cve_data_all['combined_cve_data_all'][cve]['vuln_type']
-    criticality_of_vulnerability_type_n = data_classification_vulnerability_types.vulnerability_type_data[vuln_type]['criticality']
+    if  vuln_type in data_classification_vulnerability_types.vulnerability_type_data:
+        criticality_of_vulnerability_type_n = data_classification_vulnerability_types.vulnerability_type_data[vuln_type]['criticality']
+    else:
+        criticality_of_vulnerability_type_n = 0
     criticality_of_vulnerability_type_k = 15
     criticality_of_vulnerability_type_c = vuln_type
 

@@ -5,8 +5,10 @@ file_name = "test_cve_profile.json"
 report_id = "test_cve_report"
 report_name = 'CVE report'
 file_name_prefix = "test_cve_report"
-cves_text = '''CVE-2020-1350
-CVE-2021-3156'''
+cves_text = '''CVE-2021-3156
+CVE-2021-21972
+CVE-2021-21973
+CVE-2021-21974'''
 
 comments = []
 

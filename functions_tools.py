@@ -23,6 +23,8 @@ def get_rating_from_cvss_base_score(cvss_base_score):
     # High 7.0 - 8.9
     # Critical 9.0 - 10.0
     cvss_rating = "N/A"
+    if cvss_base_score == "Unknown CVSS Base Score":
+        cvss_base_score = 0
     if int(cvss_base_score) > 0 and int(cvss_base_score) < 4:
         cvss_rating = "Low"
     elif int(cvss_base_score) >= 4 and int(cvss_base_score) < 7:
