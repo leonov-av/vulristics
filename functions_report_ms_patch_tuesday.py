@@ -12,4 +12,6 @@ def make_ms_patch_tuesday_report(year, month, patch_tuesday_date=False, rewrite_
     if rewrite_flag or not os.path.isfile("data/profiles/" + file_name):
         functions_tools.print_debug_message("Creating Patch Tuesday profile...")
         functions_profile_ms_patch_tuesday.create_profile(month, year, patch_tuesday_date, file_name)
-    functions_report_vulnerabilities.make_vulnerability_report_for_profile(file_name, rewrite_flag)
+
+    profile_file_path = "data/profiles/" + file_name
+    functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path, rewrite_flag)

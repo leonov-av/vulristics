@@ -2,6 +2,7 @@ import requests
 import os
 import json
 import credentials
+import functions_analysis_text
 import vulners
 
 
@@ -120,8 +121,22 @@ def get_vulners_data(vulners_id, rewrite_flag):
                 if 'enchantments' in vulners_data['data']['documents'][vulners_id]:
                     if 'exploitation' in vulners_data['data']['documents'][vulners_id]['enchantments']:
                         vulners_data['wild_exploited'] = \
-                        vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
+                            vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
                         vulners_data['wild_exploited_sources'] = \
-                        vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation'][
-                            'wildExploitedSources']
+                            vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation'][
+                                'wildExploitedSources']
+
+                description = vulners_data['data']['documents'][vulners_id]['description']
+                cvss_base_score = ""
+                if 'cvss' in  vulners_data['data']['documents'][vulners_id]:
+                    cvss_base_score = vulners_data['data']['documents'][vulners_id]['cvss']['score']
+
+                detection_results = functions_analysis_text.analyse_sentence(description)
+                vulners_data['description'] = description
+                vulners_data['description_tags'] = detection_results
+                vulners_data['cvss_base_score'] = cvss_base_score
+                vulners_data['basic_severity'] = ""
+                vulners_data['vuln_product'] = detection_results['detected_product_name']
+                vulners_data['vuln_type'] = detection_results['detected_vulnerability_type']
+
     return (vulners_data)

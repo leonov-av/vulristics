@@ -1,5 +1,6 @@
 import data_classification_vulnerability_types
 import data_classification_products
+import functions_tools
 import re
 
 def get_level(score_value):
@@ -32,9 +33,10 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     cvss_base_score_k = 10
 
     cvss_attack_is_network = "n/a"
-    if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
-        if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
-            cvss_attack_is_network = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackVector']
+    if 'nvd_cve_data_all' in cve_data_all:
+        if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
+            if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
+                cvss_attack_is_network = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackVector']
     if cvss_attack_is_network == "NETWORK":
         cvss_attack_is_network_n = 1.0
         cvss_attack_is_network_c = "CVSS attackVector is NETWORK"
@@ -43,9 +45,10 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         cvss_attack_is_network_c = "CVSS attackVector is NOT NETWORK"
     cvss_attack_is_network_k = 10
     cvss_attack_ease = "n/a"
-    if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
-        if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
-            cvss_attack_ease = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackComplexity']
+    if 'nvd_cve_data_all' in cve_data_all:
+        if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
+            if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
+                cvss_attack_ease = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['attackComplexity']
     if cvss_attack_ease == "LOW":
         cvss_attack_ease_n = 1.0
         cvss_attack_ease_c = "CVSS attackComplexity is LOW"
@@ -54,16 +57,18 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         cvss_attack_ease_c = "CVSS attackComplexity is NOT LOW"
     cvss_attack_ease_k = 5
     cvss_exploitability_score = 0
-    if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
-        if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
-            cvss_exploitability_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['exploitabilityScore']
+    if 'nvd_cve_data_all' in cve_data_all:
+        if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
+            if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
+                cvss_exploitability_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['exploitabilityScore']
     cvss_exploitability_score_n = int(cvss_exploitability_score) / 10
     cvss_exploitability_score_k = 5
     cvss_exploitability_score_c = "CVSS exploitabilityScore"
     cvss_impact_score = 0
-    if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
-        if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
-            cvss_impact_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['impactScore']
+    if 'nvd_cve_data_all' in cve_data_all:
+        if 'result' in cve_data_all['nvd_cve_data_all'][cve]:
+            if 'impact' in cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]:
+                cvss_impact_score = cve_data_all['nvd_cve_data_all'][cve]['result']['CVE_Items'][0]['impact']['baseMetricV3']['impactScore']
     cvss_impact_score_n = int(cvss_impact_score) / 10
     cvss_impact_score_k = 3
     cvss_impact_score_c = "CVSS impactScore"
@@ -127,24 +132,26 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
                                          ref_id + "\">" + type + "</a> object")
                 mentioned.append("Vulners (" + ", ".join(links_str) + ")")
 
-    if cve in cve_data_all['attackerkb_cve_data_all']:
-        if 'Exploited in the Wild' in cve_data_all['attackerkb_cve_data_all'][cve]:
-            if cve_data_all['attackerkb_cve_data_all'][cve]['Exploited in the Wild']:
-                print(cve_data_all['attackerkb_cve_data_all'][cve])
-                for url in cve_data_all['attackerkb_cve_data_all'][cve]['urls']:
+    if 'attackerkb_cve_data_all' in cve_data_all:
+        if cve in cve_data_all['attackerkb_cve_data_all']:
+            if 'Exploited in the Wild' in cve_data_all['attackerkb_cve_data_all'][cve]:
+                if cve_data_all['attackerkb_cve_data_all'][cve]['Exploited in the Wild']:
+                    print(cve_data_all['attackerkb_cve_data_all'][cve])
+                    for url in cve_data_all['attackerkb_cve_data_all'][cve]['urls']:
+                        wild_exploited = True
+                        wild_exploited_n = 1.0
+                        flag_attackerkb = True
+                        mentioned.append("<a href=\"" + url + "\">AttackerKB</a>")
+
+    if 'ms_cve_data_all' in cve_data_all:
+        if cve in cve_data_all['ms_cve_data_all']:
+            if 'exploited' in cve_data_all['ms_cve_data_all'][cve]:
+                if cve_data_all['ms_cve_data_all'][cve]['exploited'] == "Yes":
                     wild_exploited = True
                     wild_exploited_n = 1.0
-                    flag_attackerkb = True
-                    mentioned.append("<a href=\"" + url + "\">AttackerKB</a>")
-
-    if cve in cve_data_all['ms_cve_data_all']:
-        if 'exploited' in cve_data_all['ms_cve_data_all'][cve]:
-            if cve_data_all['ms_cve_data_all'][cve]['exploited'] == "Yes":
-                wild_exploited = True
-                wild_exploited_n = 1.0
-                flag_ms_cve_data_all = True
-                mentioned.append("<a href=\"https://msrc.microsoft.com/update-guide/vulnerability/" + cve +
-                                 "\">Microsoft</a>")
+                    flag_ms_cve_data_all = True
+                    mentioned.append("<a href=\"https://msrc.microsoft.com/update-guide/vulnerability/" + cve +
+                                     "\">Microsoft</a>")
 
     # Detecting false positives in wild exploitation
 
@@ -156,7 +163,8 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         # If we have only a link to CISA, most likely CISA reports doesn't have direct 'Exploited in the wild' mention
         wild_exploited = False
 
-    if  flag_vulners_attackerkb == True and \
+    if  flag_vulners_cisa == True and \
+        flag_vulners_attackerkb == False and \
         flag_vulners_other == False and \
         flag_attackerkb == False and \
         flag_ms_cve_data_all == False:
@@ -276,6 +284,7 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     return(vvs_struct)
 
 def get_cve_scores(all_cves,cve_data_all,profile):
+    functions_tools.print_debug_message("Counting CVE scores...")
     scores_dict = dict()
     for cve in all_cves:
         scores_dict[cve] = get_vvs_struct_for_cve(cve,cve_data_all,profile)
