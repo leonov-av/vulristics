@@ -87,7 +87,9 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
 
     ######## Public Exploit
     # Currently works only with Vulners data
-    is_public_exploit = cve_data_all['vulners_cve_data_all'][cve]['public_exploit']
+    is_public_exploit = False
+    if 'vulners_cve_data_all' in cve_data_all:
+        is_public_exploit = cve_data_all['vulners_cve_data_all'][cve]['public_exploit']
     if is_public_exploit:
         public_exploit_exists_n = 1.0
         links_str = list()
@@ -111,26 +113,27 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     flag_attackerkb = False
     flag_ms_cve_data_all = False
 
-    if cve in cve_data_all['vulners_cve_data_all']:
-        if 'wild_exploited' in cve_data_all['vulners_cve_data_all'][cve]:
-            if cve_data_all['vulners_cve_data_all'][cve]['wild_exploited']:
-                wild_exploited = True
-                wild_exploited_n = 1.0
-                links_str = list()
-                for ref in cve_data_all['vulners_cve_data_all'][cve]['wild_exploited_sources']:
-                    for ref_id in ref['idList']:
-                        if ref['type'] == "attackerkb":
-                            type = "AttackerKB"
-                            flag_vulners_attackerkb = True
-                        elif ref['type'] == "cisa":
-                            type = "CISA"
-                            flag_vulners_cisa = True
-                        else:
-                            type = ref['type']
-                            flag_vulners_other = True
-                        links_str.append("<a href=\"https://vulners.com/" + ref['type'] + "/" +
-                                         ref_id + "\">" + type + "</a> object")
-                mentioned.append("Vulners (" + ", ".join(links_str) + ")")
+    if 'vulners_cve_data_all' in cve_data_all:
+        if cve in cve_data_all['vulners_cve_data_all']:
+            if 'wild_exploited' in cve_data_all['vulners_cve_data_all'][cve]:
+                if cve_data_all['vulners_cve_data_all'][cve]['wild_exploited']:
+                    wild_exploited = True
+                    wild_exploited_n = 1.0
+                    links_str = list()
+                    for ref in cve_data_all['vulners_cve_data_all'][cve]['wild_exploited_sources']:
+                        for ref_id in ref['idList']:
+                            if ref['type'] == "attackerkb":
+                                type = "AttackerKB"
+                                flag_vulners_attackerkb = True
+                            elif ref['type'] == "cisa":
+                                type = "CISA"
+                                flag_vulners_cisa = True
+                            else:
+                                type = ref['type']
+                                flag_vulners_other = True
+                            links_str.append("<a href=\"https://vulners.com/" + ref['type'] + "/" +
+                                             ref_id + "\">" + type + "</a> object")
+                    mentioned.append("Vulners (" + ", ".join(links_str) + ")")
 
     if 'attackerkb_cve_data_all' in cve_data_all:
         if cve in cve_data_all['attackerkb_cve_data_all']:
