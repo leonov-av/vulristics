@@ -21,7 +21,9 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     vvs_struct = dict()
     use_comments = False
 
-    ######## CVSS Base Score from NVD or Microsoft
+    ######## CVSS Base Score from NVD, Microsoft or Vulners
+    if not cve_data_all['combined_cve_data_all'][cve]['cvss_base_score']:
+        cve_data_all['combined_cve_data_all'][cve]['cvss_base_score'] = "Unknown CVSS Base Score"
     if cve_data_all['combined_cve_data_all'][cve]['cvss_base_score'] == "Unknown CVSS Base Score":
         cvss_base_score = 0
         cvss_base_score_c = "Vulnerability Severity Rating based on CVSS Base Score is NA. No data."
