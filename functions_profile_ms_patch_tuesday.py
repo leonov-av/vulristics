@@ -21,7 +21,15 @@ def get_second_tuesday(year, long_month_name):
     month_number = datetime_object.month
     tuesdays = list()
     for day_number in range(1, 28):
-        day_str = str(year) + '-' + str(month_number) + '-' + str(day_number)
+        if month_number < 10:
+            month_number_str = "0" + str(month_number)
+        else:
+            month_number_str = str(month_number)
+        if day_number < 10:
+            day_number_str = "0" + str(day_number)
+        else:
+            day_number_str = str(day_number)
+        day_str = str(year) + '-' + month_number_str + '-' + day_number_str
         date_time_str = day_str
         date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
         day_of_the_week = date_time_obj.strftime("%A")
@@ -39,7 +47,7 @@ def get_other_ms_cves(from_date, to_date, patch_tuesdays):
         patch_tuesday_cves = functions_source_ms_cve.get_ms_cves_for_date_range(patch_tuesday_date, patch_tuesday_date)
         all_cves = all_cves - patch_tuesday_cves
         print(len(all_cves))
-    all_cves_txt = re.sub(" ","", "\n".join(all_cves))
+    all_cves_txt = re.sub(" ", "", "\n".join(all_cves))
     return all_cves_txt
 
 
@@ -106,6 +114,6 @@ def create_profile(month, year, patch_tuesday_date, file_name):
     file_name_prefix = "ms_patch_tuesday_" + month.lower() + year
     cves_text = ms_cves_for_date_range
 
-    data_sources = None # Use all data sources
+    data_sources = None  # Use all data sources
     functions_profile.save_profile("data/profiles/" + file_name, report_id, report_name, file_name_prefix, cves_text,
-                 data_sources, comments)
+                                   data_sources, comments)
