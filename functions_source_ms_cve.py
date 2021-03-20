@@ -1,76 +1,57 @@
-import requests
 import json
 import re
 import os
 import requests
-import openpyxl
 import data_classification_vulnerability_types
 import functions_tools
 
 
-def get_ms_cves_for_date_range(fromPublishedDate, toPublishedDate):
-    # Interface for service https://portal.msrc.microsoft.com/en-us/security-guidance
-    # fromPublishedDate = "09/09/2020"
-    # toPublishedDate = "10/15/2020"
-
+def get_ms_cve_search_data(from_date, to_date, skip):
     headers = {
-        'authority': 'portal.msrc.microsoft.com',
+        'authority': 'api.msrc.microsoft.com',
+        'sec-ch-ua': '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
         'accept': 'application/json, text/plain, */*',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' + \
-                      'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36',
-        'content-type': 'application/json;charset=UTF-8',
-        'origin': 'https://portal.msrc.microsoft.com',
-        'sec-fetch-site': 'same-origin',
+        'sec-ch-ua-mobile': '?0',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)' +
+                      ' Chrome/89.0.4389.90 Safari/537.36',
+        'origin': 'https://msrc.microsoft.com',
+        'sec-fetch-site': 'same-site',
         'sec-fetch-mode': 'cors',
         'sec-fetch-dest': 'empty',
-        'referer': 'https://portal.msrc.microsoft.com/en-us/security-guidance',
+        'referer': 'https://msrc.microsoft.com/',
         'accept-language': 'en-US,en;q=0.9,ru;q=0.8',
     }
+    params = (
+        ('$orderby', 'releaseDate desc'),
+        ('$filter', '(releaseDate gt ' + from_date + 'T00:00:00+03:00) and (releaseDate lt ' +
+         to_date + 'T23:59:59+03:00)'),
+        ('$skip', str(skip)),
+    )
+    response = requests.get('https://api.msrc.microsoft.com/sug/v2.0/en-US/affectedProduct', headers=headers,
+                            params=params)
+    return response.json()
 
-    data = {
-                "familyIds": [],
-                "productIds": [],
-                "severityIds": [],
-                "impactIds": [],
-                "pageNumber": 1,
-                "pageSize": 20,
-                "includeCveNumber": True,
-                "includeSeverity": False,
-                "includeImpact": False,
-                "orderBy": "publishedDate",
-                "orderByMonthly": "releaseDate",
-                "isDescending": True,
-                "isDescendingMonthly": True,
-                "queryText": "",
-                "isSearch": False,
-                "filterText": "",
-                "fromPublishedDate": fromPublishedDate,
-                "toPublishedDate": toPublishedDate
-    }  #Month/Date/Year
 
-    response = requests.post('https://portal.msrc.microsoft.com/api/security-guidance/en-us/excel', headers=headers, data=json.dumps(data))
-    f = open("data/ms_search/temp.xlsx", "wb")
-    for chunk in response.iter_content(chunk_size=1024):
-        if chunk:  # filter out keep-alive new chunks
-            f.write(chunk)
-    f.close()
+def get_ms_cves_for_date_range(from_date, to_date):
+    # Interface for service https://msrc.microsoft.com/update-guide/en-us
+    # from_date = "2021-03-09"
+    # to_date = "2021-03-09"
+    all_cves = list()
+    continue_processing = True
+    skip = 0
+    while continue_processing:
+        data = get_ms_cve_search_data(from_date, to_date, skip)
+        if len(data['value']) != 0:
+            for value in data['value']:
+                all_cves.append(value['cveNumber'])
+        else:
+            continue_processing = False
+        skip += 500
+    return set(all_cves)
 
-    wb = openpyxl.load_workbook(filename="data/ms_search/temp.xlsx")
-    ws = wb.worksheets[0]
-    row_n = 1
-    first_col_value = ""
-    cve_ids = set()
-    while first_col_value != None:
-        first_col_value = ws.cell(column=1, row=row_n).value
-        vuln_id = ws.cell(column=7, row=row_n).value
-        if vuln_id != None:
-            if "CVE-" in vuln_id:
-                cve_ids.add(vuln_id)
-        row_n += 1
-    return(cve_ids)
 
-### CVE Data
 def get_ms_cve_data_from_ms_site(cve_id):
+    # CVE Data
     # https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1003
     # cve_id = "CVE-2020-1003"
     ms_cve_data = dict()
@@ -87,7 +68,7 @@ def get_ms_cve_data_from_ms_site(cve_id):
     return ms_cve_data
 
 
-def download_ms_cve_data_raw(cve_id, rewrite_flag = True):
+def download_ms_cve_data_raw(cve_id, rewrite_flag=True):
     file_path = "data/ms_cve/" + cve_id + ".json"
     if not rewrite_flag:
         if not os.path.exists(file_path):
@@ -110,28 +91,33 @@ def get_ms_cve_data_raw(cve_id):
     f.close()
     return ms_cve_data
 
-def add_cve_product_and_type_tags(ms_cve_data):
+
+def get_vuln_product_and_type_from_title(title):
+    vuln_type = ""
+    vuln_product = ""
     for pattern in data_classification_vulnerability_types.vulnerability_type_detection_patterns:
-        if pattern in ms_cve_data['cveTitle']:
-            ms_cve_data['vuln_type'] = data_classification_vulnerability_types.vulnerability_type_detection_patterns[pattern]
-            ms_cve_data['vuln_product'] = re.sub( "[ \t]*" + pattern + ".*$", "", ms_cve_data['cveTitle'])
-            #print(ms_cve_data[cve_id]['vul_product'] + " - " + ms_cve_data[cve_id]['cveTitle'] )
+        if pattern in title:
+            vuln_type = data_classification_vulnerability_types.vulnerability_type_detection_patterns[pattern]
+            vuln_product = re.sub("[ \t]*" + pattern + ".*$", "", title)
+    return vuln_type, vuln_product
+
+
+def add_cve_product_and_type_tags(ms_cve_data):
+    ms_cve_data['vuln_type'], ms_cve_data['vuln_product'] = get_vuln_product_and_type_from_title(
+        ms_cve_data['cveTitle'])
     if ms_cve_data['cveTitle'] != "RETRACTED":
-        if not 'vuln_type' in ms_cve_data:
-            functions_tools.print_debug_message("No vuln_type in ms_cve_data for " +  ms_cve_data['cveNumber'])
+        if 'vuln_type' not in ms_cve_data:
+            functions_tools.print_debug_message("No vuln_type in ms_cve_data for " + ms_cve_data['cveNumber'])
             functions_tools.print_debug_message(json.dumps(ms_cve_data, indent=4))
             exit()
-        if not 'vuln_product' in ms_cve_data:
-            functions_tools.print_debug_message("No vuln_product in ms_cve_data for " +  ms_cve_data['cveNumber'])
+        if 'vuln_product' not in ms_cve_data:
+            functions_tools.print_debug_message("No vuln_product in ms_cve_data for " + ms_cve_data['cveNumber'])
             functions_tools.print_debug_message(json.dumps(ms_cve_data, indent=4))
             exit()
     return ms_cve_data
 
 
 def add_ms_cve_severity(ms_cve_data):
-    def MAX(sets):
-        return (max(sets))
-
     severities = set()
     severity_numbers = set()
     severity_numbers.add(0)
@@ -144,12 +130,13 @@ def add_ms_cve_severity(ms_cve_data):
         for severity_val in severity_dict:
             if severity == severity_val:
                 severity_numbers.add(severity_dict[severity_val])
-    max_severity_number = MAX(severity_numbers)
+    max_severity_number = max(severity_numbers)
     for severity_val in severity_dict:
         if severity_dict[severity_val] == max_severity_number:
             result_severity = severity_val
     ms_cve_data['severity'] = result_severity
     return ms_cve_data
+
 
 def add_ms_cve_cvss_base_score(ms_cve_data):
     all_base_score = list()
@@ -162,11 +149,16 @@ def add_ms_cve_cvss_base_score(ms_cve_data):
     ms_cve_data['cvss_base_score'] = cvss_base_score
     return ms_cve_data
 
+
 # Heuristics
 def heuristic_change_product_vuln_type(ms_cve_data):
     if 'vuln_product' in ms_cve_data:
         if ms_cve_data['vuln_product'] == "Microsoft Office SharePoint":
             ms_cve_data['vuln_product'] = "Microsoft SharePoint"
+        if ms_cve_data['vuln_product'] == "ASP.NET Core and Visual Studio":
+            ms_cve_data['vuln_product'] = "ASP.NET Core"
+        if ms_cve_data['vuln_product'] == "Microsoft splwow64":
+            ms_cve_data['vuln_product'] = "splwow64"
         if ms_cve_data['vuln_product'] == "Microsoft SharePoint Server":
             ms_cve_data['vuln_product'] = "Microsoft SharePoint"
         if ms_cve_data['vuln_product'] == "Windows VBScript Engine":
@@ -187,13 +179,13 @@ def heuristic_change_product_vuln_type(ms_cve_data):
         if ms_cve_data['vuln_type'] == "Memory Corruption" and \
                 re.findall("[Rr]emote code execution", ms_cve_data['description']):
             ms_cve_data['vuln_type'] = "Remote Code Execution"
-    return(ms_cve_data)
+    return ms_cve_data
 
 
 def get_ms_cve_data(cve_id, rewrite_flag):
     download_ms_cve_data_raw(cve_id, rewrite_flag)
     ms_cve_data = get_ms_cve_data_raw(cve_id)
-    if ms_cve_data['not_found_error'] == False:
+    if not ms_cve_data['not_found_error']:
         ms_cve_data = add_cve_product_and_type_tags(ms_cve_data)
         ms_cve_data = heuristic_change_product_vuln_type(ms_cve_data)
         ms_cve_data = add_ms_cve_severity(ms_cve_data)
