@@ -3,6 +3,7 @@ import functions_source_analytic_sites
 import functions_tools
 import functions_profile
 import datetime
+import re
 
 
 def get_ms_date(normal_date):
@@ -29,6 +30,19 @@ def get_second_tuesday(year, long_month_name):
     return tuesdays[1]
 
 
+def get_other_ms_cves(from_date, to_date, patch_tuesdays):
+    all_cves = functions_source_ms_cve.get_ms_cves_for_date_range(from_date, to_date)
+    print(len(all_cves))
+    for patch_tuesday in patch_tuesdays:
+        print(patch_tuesday)
+        patch_tuesday_date = get_second_tuesday(year=patch_tuesday[0],  long_month_name=patch_tuesday[1])
+        patch_tuesday_cves = functions_source_ms_cve.get_ms_cves_for_date_range(patch_tuesday_date, patch_tuesday_date)
+        all_cves = all_cves - patch_tuesday_cves
+        print(len(all_cves))
+    all_cves_txt = re.sub(" ","", "\n".join(all_cves))
+    return all_cves_txt
+
+
 def create_profile(month, year, patch_tuesday_date, file_name):
     # This profile (json file) will describe Microsoft Patch Tuesday reports
     # month = "October"
@@ -37,10 +51,9 @@ def create_profile(month, year, patch_tuesday_date, file_name):
 
     functions_tools.print_debug_message("Year: " + year)
     functions_tools.print_debug_message("Month: " + month)
-    ms_patch_tuesday_date = get_ms_date(patch_tuesday_date)  # patch_tuesday_date = "10/13/2020"
-    functions_tools.print_debug_message("Date: " + patch_tuesday_date + " (" + ms_patch_tuesday_date + ")")
-    ms_cves_for_date_range = functions_source_ms_cve.get_ms_cves_for_date_range(ms_patch_tuesday_date,
-                                                                                ms_patch_tuesday_date)
+    functions_tools.print_debug_message("Date: " + patch_tuesday_date)
+    ms_cves_for_date_range = functions_source_ms_cve.get_ms_cves_for_date_range(patch_tuesday_date,
+                                                                                patch_tuesday_date)
     functions_tools.print_debug_message("MS CVEs found: " + str(len(ms_cves_for_date_range)))
     ms_cves_for_date_range = "\n".join(ms_cves_for_date_range)
 
@@ -93,4 +106,6 @@ def create_profile(month, year, patch_tuesday_date, file_name):
     file_name_prefix = "ms_patch_tuesday_" + month.lower() + year
     cves_text = ms_cves_for_date_range
 
-    functions_profile.save_profile(file_name, report_id, report_name, file_name_prefix, cves_text, comments)
+    data_sources = None # Use all data sources
+    functions_profile.save_profile("data/profiles/" + file_name, report_id, report_name, file_name_prefix, cves_text,
+                 data_sources, comments)
