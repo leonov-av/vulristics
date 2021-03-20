@@ -1,5 +1,6 @@
 import json
 
+
 def save_profile(file_path, report_id, report_name, file_name_prefix, cves_text,
                  data_sources=None, comments=None):
     data = {
