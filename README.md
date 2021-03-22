@@ -1,5 +1,4 @@
-# Vulristics
-Vulristics (from “Vulnerability” and “Heuristics”) is an extensible framework for analyzing publicly available information about vulnerabilities. It started as a Microsoft Patch Tuesday reporting tool. Now you can use it to analyse (classify, prioritize) any set of CVEs using the data from Vulners.com, Microsoft website, NVD and AttackerKB.
+**Vulristics** (from “Vulnerability” and “Heuristics”) is an extensible framework for analyzing publicly available information about vulnerabilities. It started as a Microsoft Patch Tuesday reporting tool. Now you can use it to analyse (classify, prioritize) any set of CVEs using the data from Vulners.com, Microsoft website, NVD and AttackerKB.
 
 ![vulristics logo](https://github.com/leonov-av/vulristics/blob/master/logo/vulristics_line.png)
 
@@ -12,13 +11,13 @@ Currently, there are the following scripts available:
 1. report_ms_patch_tuesday.py - make html report for Microsoft Patch Tuesday CVEs
 2. report_ms_patch_tuesday_other.py - make html report for Microsoft CVEs not in Patch Tuesdays
 3. report_cve.py - make html report for any set of CVEs
-4. report_daily_exploits.py - make daily exploits report that I use for my news channel https://t.me/avleonovnews.
+4. report_daily_exploits.py - make daily exploits report that I use for my [Telegram Security news channel](https://t.me/avleonovnews)
 
 ## Where to read more?
 * My posts about Vulristics in [avleonov.com blog](https://avleonov.com/category/projects/vulristics/)
 * My videos about Vulristics (and vulnerabilities) in [AVLEONOV Media YouTube Channel](https://www.youtube.com/playlist?list=PL2Viq8X7eAaZVQsVG1lcFoEOUr2wRpoha)
 
-If you have good ideas please share them in the https://t.me/avleonovchat. 
+If you have good ideas please share them in the [AVLEONOV Chat](https://t.me/avleonovchat). 
 The help in coding will be also pretty much appreciated! 😉
 
 ## Some obvious warnings (!!)
