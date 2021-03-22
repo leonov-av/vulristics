@@ -1,28 +1,23 @@
 # Vulristics
-Extensible framework for analyzing publicly available information about vulnerabilities
+Vulristics (from “Vulnerability” and “Heuristics”) is an extensible framework for analyzing publicly available information about vulnerabilities. It started as a Microsoft Patch Tuesday reporting tool. Now you can use it to analyse any set of CVEs using the data from Vulners.com, Microsoft website, NVD and AttackerKB.
 
-I decided to release my Microsoft Patch Tuesday reporting tool as part of a larger open source project. I named it Vulristics (from “Vulnerability” and “Heuristics”). Let's say we have a vulnerability ID (CVE ID) and we need to decide whether it is really critical or not. We will probably go to some vulnerability databases (NVD, CVE page on the Microsoft website, Vulners.com, etc.) and somehow analyze the descriptions and parameters. Right?  Such analysis can be quite complex and not so obvious. My idea is to formalize it and make it shareable. It may not be the most efficient way to process data, but it should reflect real human experience, the things that real vulnerability analysts do. This is the main goal.
+## Why is this needed?
+Let's say we have a vulnerability ID (CVE ID) and we need to decide whether it is really critical or not. We will probably go to some vulnerability databases (NVD, CVE page on the , etc.) and somehow analyze the descriptions and parameters. Right? Such analysis can be quite complex and not so obvious. My idea is to formalize it and make it shareable. It may not be the most efficient way to process data, but it should reflect real human experience, the things that real vulnerability analysts do. This is the main goal.
 
 ![vulristics logo](https://github.com/leonov-av/vulristics/blob/master/logo/vulristics_line.png)
 
+## What's ready right now?
 Currently, there are the following scripts available:
 
-1. report_ms_patch_tuesday.py - analyze and group Microsoft Patch Tuesday CVEs.
-2. report_cve.py - collect and preprocess CVE ID-related data from NVD, Microsoft.com and Vulners. 
-3. report_daily_exploits.py - daily exploits report I use for my news channel https://t.me/avleonovnews.
-
-Of course, we can do much more than that. I have plans to add:
-
-* analysis of the vulnerability description based on keywords and phrases (it's good that such descriptions usually have a fairly regular structure)
-* analysis of references
-* danger and relevance metrics counting (vulnerability quadrants)
-and so on.
+1. report_ms_patch_tuesday.py - make html report for Microsoft Patch Tuesday CVEs
+2. report_ms_patch_tuesday_other.py - make html report for Microsoft CVEs not in Patch Tuesday 
+3. report_cve.py - make html report for any set of CVEs
+4. report_daily_exploits.py - make daily exploits report that I use for my news channel https://t.me/avleonovnews.
 
 If you have good ideas please share them in the https://t.me/avleonovchat. 
 The help in coding will be also pretty much appreciated! 😉
 
-Finally, some obvious warnings:
-
+## Some obvious warnings (!!)
 * This tool is NOT an interface to any particular database.
 * The tool makes requests to third-party sources.
 
