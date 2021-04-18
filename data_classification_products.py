@@ -59,7 +59,7 @@ product_data = {
         "description": "MS Office product",
         "additional_detection_strings": []
     },
-    "Word": {
+    "Microsoft Word": {
         "prevalence": 0.6,
         "description": "MS Office product",
         "additional_detection_strings": []
@@ -132,7 +132,7 @@ product_data = {
     ".NET Core": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": ["NET Core"]
     },
     ".NET Core and Visual Studio": {
         "prevalence": 0.8,
@@ -140,6 +140,11 @@ product_data = {
         "additional_detection_strings": []
     },
     ".NET Framework": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "ASP.NET Core": {
         "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
@@ -166,7 +171,12 @@ product_data = {
     },
     "Microsoft Edge for Android": {
         "prevalence": 0.1,
-        "description": "",
+        "description": "Web browser",
+        "additional_detection_strings": []
+    },
+    "Microsoft Edge (Chromium-based)": {
+        "prevalence": 0.8,
+        "description": "Web browser",
         "additional_detection_strings": []
     },
     "Microsoft Teams iOS": {
@@ -210,7 +220,7 @@ product_data = {
         "additional_detection_strings": []
     },
     "Sysinternals PsExec": {
-        "prevalence": 0,
+        "prevalence": 0.8,
         "description": "0.9",
         "additional_detection_strings": []
     },
@@ -315,6 +325,366 @@ product_data = {
         "additional_detection_strings": []
     },
     "Windows Trust Verification API": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Active Template Library": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Azure Active Directory Pod Identity": {
+            "prevalence": 0.4,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Bot Framework SDK": {
+            "prevalence": 0.4,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Diagnostics Hub Standard Collector": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "GDI+": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "HEVC Video Extensions": {
+            "prevalence": 0.7,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Microsoft DTV-DVD Video Decoder": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Microsoft Edge (HTML-based)": {
+            "prevalence": 0.8,
+            "description": "Web browser",
+            "additional_detection_strings": []
+        },
+    "Google Chrome": {
+        "prevalence": 0.8,
+        "description": "Web browser",
+        "additional_detection_strings": []
+    },
+    "Microsoft Office": {
+            "prevalence": 0.6,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Microsoft SQL": {
+            "prevalence": 0.6,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Microsoft Windows Media Foundation": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "NTLM": {
+            "prevalence": 0.9,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Remote Procedure Call Runtime": {
+            "prevalence": 0.9,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "TPM Device Driver": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows (modem.sys)": {
+            "prevalence": 0.9,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows AppX Deployment Extensions": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Bluetooth": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows CSC Service": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows CryptoAPI": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows DNS Query": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Docker": {
+            "prevalence": 0.7,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Event Logging Service": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Fax Compose Form": {
+            "prevalence": 0.7,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows GDI+": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Hyper-V": {
+            "prevalence": 0.6,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows InstallService": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows LUAFV": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Multipoint Management": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows NT Lan Manager Datagram Receiver Driver": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Print Spooler": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Projected File System FS Filter Driver": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Remote Desktop": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Remote Desktop Protocol Core": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Remote Procedure Call Runtime": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Runtime C++ Template Library": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows Update Stack": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows WLAN Service": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Windows WalletService": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Application Virtualization": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Azure Sphere": {
+        "prevalence": 0.4,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Azure Virtual Machine": {
+        "prevalence": 0.4,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Git": {
+        "prevalence": 0.4,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Git for Visual Studio": {
+        "prevalence": 0.4,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Office ClickToRun": {
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Power BI": {
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft PowerPoint": {
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Visio": {
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Windows Folder Redirection": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "OpenType Font Parsing": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Quantum Development Kit for Visual Studio Code": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Remote Access API": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Storage Spaces Controller": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "User Profile Service": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Visual Studio Code ESLint Extension": {
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Visual Studio Code Java Extension Pack": {
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows 10 Update Assistant": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows ActiveX Installer Service": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Admin Center": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows App-V Overlay Filter": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Container Execution Agent": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Error Reporting": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Extensible Firmware Interface": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Media Photo Codec": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows NAT": {
+        "prevalence": 0.9,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Overlay Filter": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Projected File System": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows UPnP Device Host": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Update Service": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Update Stack Setup": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows User Profile Service": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Virtual Registry Provider": {
         "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
