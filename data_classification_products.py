@@ -44,6 +44,11 @@ product_data = {
         "description": "Remote Procedure Call Runtime",
         "additional_detection_strings": []
     },
+    "RPC Endpoint Mapper Service": {
+        "prevalence":  0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
     "splwow64": {
         "prevalence": 0.8,
         "description": "splwow64 (printer driver host for 32-bit applications)",
@@ -184,17 +189,17 @@ product_data = {
         "description": "",
         "additional_detection_strings": []
     },
-    "Microsoft Windows": {
+    "Windows": {
         "prevalence": 0.9,
         "description": "Windows Kernel",
         "additional_detection_strings": []
     },
-    "Microsoft Windows Codecs Library": {
+    "Windows Codecs Library": {
         "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
     },
-    "Microsoft Windows VMSwitch": {
+    "Windows VMSwitch": {
         "prevalence": 0.7,
         "description": "",
         "additional_detection_strings": []
@@ -205,6 +210,16 @@ product_data = {
         "additional_detection_strings": []
     },
     "PFX Encryption": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Raw Image Extension": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "VP9 Video Extensions": {
         "prevalence": 0.7,
         "description": "",
         "additional_detection_strings": []
@@ -261,6 +276,11 @@ product_data = {
     },
     "Windows DNS Server": {
         "prevalence": 0.9,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "NTFS": {
+        "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
     },
@@ -335,7 +355,12 @@ product_data = {
             "additional_detection_strings": []
         },
     "Azure Active Directory Pod Identity": {
-            "prevalence": 0.4,
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Microsoft Internet Messaging API": {
+            "prevalence": 0.6,
             "description": "",
             "additional_detection_strings": []
         },
@@ -384,7 +409,7 @@ product_data = {
             "description": "",
             "additional_detection_strings": []
         },
-    "Microsoft Windows Media Foundation": {
+    "Windows Media Foundation": {
             "prevalence": 0.8,
             "description": "",
             "additional_detection_strings": []
@@ -404,126 +429,7 @@ product_data = {
             "description": "",
             "additional_detection_strings": []
         },
-    "Windows (modem.sys)": {
-            "prevalence": 0.9,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows AppX Deployment Extensions": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Bluetooth": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows CSC Service": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows CryptoAPI": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows DNS Query": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Docker": {
-            "prevalence": 0.7,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Event Logging Service": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Fax Compose Form": {
-            "prevalence": 0.7,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows GDI+": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Hyper-V": {
-            "prevalence": 0.6,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows InstallService": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows LUAFV": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Multipoint Management": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows NT Lan Manager Datagram Receiver Driver": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Print Spooler": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Projected File System FS Filter Driver": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Remote Desktop": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Remote Desktop Protocol Core": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Remote Procedure Call Runtime": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Runtime C++ Template Library": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows Update Stack": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows WLAN Service": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows WalletService": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
+
     "Application Virtualization": {
         "prevalence": 0.8,
         "description": "",
@@ -535,6 +441,11 @@ product_data = {
         "additional_detection_strings": []
     },
     "Azure Virtual Machine": {
+        "prevalence": 0.4,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Azure": {
         "prevalence": 0.4,
         "description": "",
         "additional_detection_strings": []
@@ -566,11 +477,6 @@ product_data = {
     },
     "Microsoft Visio": {
         "prevalence": 0.6,
-        "description": "",
-        "additional_detection_strings": []
-    },
-    "Microsoft Windows Folder Redirection": {
-        "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
     },
@@ -609,84 +515,256 @@ product_data = {
         "description": "",
         "additional_detection_strings": []
     },
+
+    "Windows (modem.sys)": {
+        "prevalence": 0.9,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows AppX Deployment Extensions": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Bluetooth": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows CSC Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows CryptoAPI": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows DNS Query": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Docker": {
+        "prevalence": 0.7,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Event Logging Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Fax Compose Form": {
+        "prevalence": 0.7,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows GDI+": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Hyper-V": {
+        "prevalence": 0.6,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows InstallService": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows LUAFV": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Multipoint Management": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows NT Lan Manager Datagram Receiver Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Print Spooler": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Projected File System FS Filter Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Remote Desktop": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Remote Desktop Protocol Core": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Remote Procedure Call Runtime": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Runtime C++ Template Library": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Update Stack": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows WLAN Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows WalletService": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+
+    "Windows Folder Redirection": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
     "Windows 10 Update Assistant": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows ActiveX Installer Service": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows Admin Center": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows App-V Overlay Filter": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows Container Execution Agent": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows Error Reporting": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows Extensible Firmware Interface": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows Media Photo Codec": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows NAT": {
         "prevalence": 0.9,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows Overlay Filter": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows Projected File System": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows UPnP Device Host": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows Update Service": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows Update Stack Setup": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows User Profile Service": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
         "additional_detection_strings": []
     },
     "Windows Virtual Registry Provider": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows AppX Deployment Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Application Compatibility Cache": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Early Launch Antimalware Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Media Video Decoder": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Resource Manager PSM Service Extension": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Secure Kernel Mode": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Services and Controller App": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Speech Runtime": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows WLAN AutoConfig Service": {
+        "prevalence": 0.8,
+        "description": "Windows сomponent",
         "additional_detection_strings": []
     },
 }
