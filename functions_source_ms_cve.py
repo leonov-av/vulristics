@@ -56,12 +56,28 @@ def get_ms_cve_data_from_ms_site(cve_id):
     # cve_id = "CVE-2020-1003"
     ms_cve_data = dict()
     try:
-        r = requests.get("https://portal.msrc.microsoft.com/api/security-guidance/en-US/CVE/" + cve_id)
-        ms_cve_data = r.json()
+        print("Requesting " + cve_id + " from Microsoft website")
+        # HTML page https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2020-1003
+        # 1) Main information: https://api.msrc.microsoft.com/sug/v2.0/en-US/vulnerability/CVE-2020-1003
+        # cveTitle, description
+        # Flags:
+        # "publiclyDisclosed": "No",
+        # "exploited": "No",
+        # "latestSoftwareRelease": "Exploitation Less Likely",
+        # "olderSoftwareRelease": "Exploitation Less Likely",
+        # "denialOfService": "N/A"
+        # 2) CVSS and vulnerable products  https://api.msrc.microsoft.com
+        #                           /sug/v2.0/en-US/affectedProduct?%24filter=cveNumber+eq+%27CVE-2020-1003%27
+        ms_cve_data = dict()
+        ms_cve_data['main'] = requests.get("https://api.msrc.microsoft.com/sug/v2.0/en-US/vulnerability/" + cve_id).json()
+        ms_cve_data['vuln_products'] = requests.get("https://api.msrc.microsoft.com/sug/v2.0/en-US/"
+                                                    "affectedProduct?%24filter=cveNumber+eq+%27" + cve_id + "%27").json()
         ms_cve_data['error'] = False
         ms_cve_data['status'] = "CVE ID was found on microsoft.com portal"
         ms_cve_data['not_found_error'] = False
     except:
+        ms_cve_data['main'] = dict()
+        ms_cve_data['vuln_products'] = dict()
         ms_cve_data['error'] = True
         ms_cve_data['status'] = "CVE ID is NOT found on microsoft.com portal"
         ms_cve_data['not_found_error'] = True
@@ -75,13 +91,13 @@ def download_ms_cve_data_raw(cve_id, rewrite_flag=True):
             # print(cve_id)
             cve_data = get_ms_cve_data_from_ms_site(cve_id)
             f = open(file_path, "w")
-            f.write(json.dumps(cve_data))
+            f.write(json.dumps(cve_data, indent=4))
             f.close()
     else:
         # print(cve_id)
         cve_data = get_ms_cve_data_from_ms_site(cve_id)
         f = open(file_path, "w")
-        f.write(json.dumps(cve_data))
+        f.write(json.dumps(cve_data, indent=4))
         f.close()
 
 
@@ -104,8 +120,8 @@ def get_vuln_product_and_type_from_title(title):
 
 def add_cve_product_and_type_tags(ms_cve_data):
     ms_cve_data['vuln_type'], ms_cve_data['vuln_product'] = get_vuln_product_and_type_from_title(
-        ms_cve_data['cveTitle'])
-    if ms_cve_data['cveTitle'] != "RETRACTED":
+        ms_cve_data['main']['cveTitle'])
+    if ms_cve_data['main']['cveTitle'] != "RETRACTED":
         if 'vuln_type' not in ms_cve_data:
             functions_tools.print_debug_message("No vuln_type in ms_cve_data for " + ms_cve_data['cveNumber'])
             functions_tools.print_debug_message(json.dumps(ms_cve_data, indent=4))
@@ -124,7 +140,7 @@ def add_ms_cve_severity(ms_cve_data):
     severity_dict = {"critical": 4, "important": 3, "moderate": 2, "low": 1, "n/a": 0}
     result_severity = ""
 
-    for block in ms_cve_data['affectedProducts']:
+    for block in ms_cve_data['vuln_products']['value']:
         severities.add(block['severity'].lower())
     for severity in severities:
         for severity_val in severity_dict:
@@ -141,8 +157,8 @@ def add_ms_cve_severity(ms_cve_data):
 def add_ms_cve_cvss_base_score(ms_cve_data):
     all_base_score = list()
     cvss_base_score = ""
-    if 'affectedProducts' in ms_cve_data:
-        for data in ms_cve_data['affectedProducts']:
+    if 'value' in ms_cve_data['vuln_products']:
+        for data in ms_cve_data['vuln_products']['value']:
             all_base_score.append(data['baseScore'])
     if all_base_score != list():
         cvss_base_score = max(all_base_score)
@@ -187,7 +203,13 @@ def get_ms_cve_data(cve_id, rewrite_flag):
     ms_cve_data = get_ms_cve_data_raw(cve_id)
     if not ms_cve_data['not_found_error']:
         ms_cve_data = add_cve_product_and_type_tags(ms_cve_data)
+        ms_cve_data['description'] =  ms_cve_data['main']['description']
         ms_cve_data = heuristic_change_product_vuln_type(ms_cve_data)
         ms_cve_data = add_ms_cve_severity(ms_cve_data)
         ms_cve_data = add_ms_cve_cvss_base_score(ms_cve_data)
     return ms_cve_data
+
+
+def debug_get_ms_cve_data():
+    ms_cve_data = get_ms_cve_data(cve_id="CVE-2021-28471", rewrite_flag=True)
+    print(json.dumps(ms_cve_data, indent=4))
