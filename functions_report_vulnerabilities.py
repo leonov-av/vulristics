@@ -534,8 +534,8 @@ def add_ms_cve_data(enabled_data_sources, all_cves, cve_data_all, cves_to_exclud
         ms_cve_data_all = dict()
         for cve_id in all_cves:
             ms_cve_data = functions_source_ms_cve.get_ms_cve_data(cve_id, rewrite_flag)
-            if 'cveTitle' in ms_cve_data:
-                if ms_cve_data['cveTitle'] == "RETRACTED":
+            if 'cveTitle' in ms_cve_data['main']:
+                if ms_cve_data['main']['cveTitle'] == "RETRACTED":
                     functions_tools.print_debug_message("Adding RETRACTED " + cve_id + " to cves_to_exclude")
                     cves_to_exclude.add(cve_id)
                 elif ms_cve_data['not_found_error']:
