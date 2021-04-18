@@ -169,6 +169,26 @@ def add_ms_cve_cvss_base_score(ms_cve_data):
 # Heuristics
 def heuristic_change_product_vuln_type(ms_cve_data):
     if 'vuln_product' in ms_cve_data:
+        ms_cve_data['vuln_product'] = re.sub("Microsoft Windows","Windows", ms_cve_data['vuln_product'])
+
+        if re.findall("Azure .*",  ms_cve_data['vuln_product']):
+            ms_cve_data['vuln_product'] = "Azure"
+        if re.findall("Visual Studio .*",  ms_cve_data['vuln_product']):
+            ms_cve_data['vuln_product'] = "Visual Studio"
+
+        if ms_cve_data['vuln_product'] == "Windows SMB":
+            ms_cve_data['vuln_product'] = "SMB"
+        if ms_cve_data['vuln_product'] == "Windows NTFS":
+            ms_cve_data['vuln_product'] = "NTFS"
+
+        if ms_cve_data['vuln_product'] == "Windows TCP/IP Driver":
+            ms_cve_data['vuln_product'] = "Windows TCP/IP"
+        if ms_cve_data['vuln_product'] == "Microsoft Outlook":
+            ms_cve_data['vuln_product'] = "Outlook"
+        if ms_cve_data['vuln_product'] == "Diagnostics Hub Standard Collector Service":
+            ms_cve_data['vuln_product'] = "Diagnostics Hub Standard Collector"
+        if ms_cve_data['vuln_product'] == "Windows DNS":
+            ms_cve_data['vuln_product'] = "Windows DNS Server"
         if ms_cve_data['vuln_product'] == "Microsoft Office SharePoint":
             ms_cve_data['vuln_product'] = "Microsoft SharePoint"
         if ms_cve_data['vuln_product'] == "ASP.NET Core and Visual Studio":
