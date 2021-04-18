@@ -836,7 +836,7 @@ def print_unclassified_products_templates(cve_scores, cve_related_data):
     unclassified_products = list(unclassified_products)
     unclassified_products.sort()
     if unclassified_products != list():
-        functions_tools.print_debug_message("Add this to sdf")
+        functions_tools.print_debug_message("Add this to data_classification_products.py")
         for product in unclassified_products:
             print('''    "''' + product + '''": {
             "prevalence": 0,
