@@ -11,7 +11,7 @@ def get_last_vulners_exploits_by_release_date():
     # https://vulners.com/search?query=published:2020-08-01%20AND%20bulletinFamily:exploit
     # https://avleonov.com/2016/04/21/vulners-com-search-api/
     try:
-        print("Request to Vulners with authorization key")
+        print("Requesting from Vulners website WITH authorization key")
         # date = "2020-08-01"
         # r = requests.get( "https://vulners.com/api/v3/search/lucene/?query=published:" + date + "%20AND%20bulletinFamily:exploit&references=True&size=100&apiKey=" + credentials.vulners_key)
         r = requests.get(
@@ -32,7 +32,7 @@ def get_vulners_data_from_vulners_site(vulners_id):
     vulners_data = dict()
     if credentials.vulners_key == "":
         try:
-            print("Request " + vulners_id + " to Vulners WITHOUT authorization key")
+            print("Requesting " + vulners_id + " from Vulners website WITHOUT authorization key")
             r = requests.get("https://vulners.com/api/v3/search/id/?id=" + vulners_id + " &references=True")
             # Without API you will be banned if you haven't solved CAPTCHA on vulners.com for 3 hours.
             vulners_data = r.json()
@@ -57,7 +57,7 @@ def get_vulners_data_from_vulners_site(vulners_id):
         #     vulners_data['not_found_error'] = True
 
         try:
-            print("Request " + vulners_id + " to Vulners WITH authorization key")
+            print("Requesting " + vulners_id + " from Vulners website WITH authorization key")
             r = requests.get(
                 "https://vulners.com/api/v3/search/id/?id=" + vulners_id + " &references=True&apiKey=" + credentials.vulners_key)
             # Without API you will be banned if you haven't solved CAPTCHA on vulners.com for 3 hours.
@@ -79,13 +79,13 @@ def download_vulners_data_raw(vulners_id, rewrite_flag=True):
             # print(vulners_id)
             cve_data = get_vulners_data_from_vulners_site(vulners_id)
             f = open(file_path, "w")
-            f.write(json.dumps(cve_data))
+            f.write(json.dumps(cve_data, indent=4))
             f.close()
     else:
         # print(vulners_id)
         cve_data = get_vulners_data_from_vulners_site(vulners_id)
         f = open(file_path, "w")
-        f.write(json.dumps(cve_data))
+        f.write(json.dumps(cve_data, indent=4))
         f.close()
 
 

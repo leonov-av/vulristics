@@ -62,7 +62,7 @@ def get_attackerkb_cve_data_from_attackerkb_site(cve_id):
     # cve_id = "CVE-2020-1003"
     attackerkb_cve_data = dict()
     try:
-        print("Request " + cve_id + " to AttackerKB WITHOUT authorization key")
+        print("Requesting " + cve_id + " from AttackerKB website WITHOUT authorization key")
         urls_with_cve_id = get_direct_links_for_cve(cve_id)
         results = dict()
         results['Exploited in the Wild'] = False

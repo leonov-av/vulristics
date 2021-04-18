@@ -12,6 +12,7 @@ def get_nvd_cve_data_from_nvd_site(cve_id):
     # cve_id = "CVE-2020-1003"
     nvd_cve_data = dict()
     try:
+        print("Requesting " + cve_id + " from NVD website")
         r = requests.get("https://services.nvd.nist.gov/rest/json/cve/1.0/" + cve_id)
         nvd_cve_data = r.json()
         nvd_cve_data['error'] = False
@@ -37,7 +38,7 @@ def download_nvd_cve_data_raw(cve_id, rewrite_flag=True):
         # print(cve_id)
         cve_data = get_nvd_cve_data_from_nvd_site(cve_id)
         f = open(file_path, "w")
-        f.write(json.dumps(cve_data))
+        f.write(json.dumps(cve_data, indent=4))
         f.close()
 
 
