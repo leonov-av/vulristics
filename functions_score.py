@@ -141,7 +141,6 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         if cve in cve_data_all['attackerkb_cve_data_all']:
             if 'Exploited in the Wild' in cve_data_all['attackerkb_cve_data_all'][cve]:
                 if cve_data_all['attackerkb_cve_data_all'][cve]['Exploited in the Wild']:
-                    print(cve_data_all['attackerkb_cve_data_all'][cve])
                     for url in cve_data_all['attackerkb_cve_data_all'][cve]['urls']:
                         wild_exploited = True
                         wild_exploited_n = 1.0
