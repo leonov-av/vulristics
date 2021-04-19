@@ -31,7 +31,7 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
         cvss_base_score = cve_data_all['combined_cve_data_all'][cve]['cvss_base_score']
         cvss_base_score_c = "Vulnerability Severity Rating based on CVSS Base Score is " + str(cvss_base_score) + ". " \
                             + cve_data_all['combined_cve_data_all'][cve]['cvss_base_score_detection_comment']
-    cvss_base_score_n = float(cvss_base_score) / 10
+    cvss_base_score_n = round(float(cvss_base_score) / 10, 1)
     cvss_base_score_k = 10
 
     cvss_attack_is_network = "n/a"
