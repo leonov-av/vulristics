@@ -26,6 +26,23 @@ def get_vuln_products(ms_cve_data_all):
     return all_vuln_products
 
 
+def get_vulnerability_types_priority(vulnerability_type_data):
+    vulnerability_types_priority = list()
+    criticalities = dict()
+    for vuln_type in vulnerability_type_data:
+        if not vulnerability_type_data[vuln_type]['criticality'] in criticalities:
+            criticalities[vulnerability_type_data[vuln_type]['criticality']] = list()
+        criticalities[vulnerability_type_data[vuln_type]['criticality']].append(vuln_type)
+    criticality_keys = list(criticalities.keys())
+    criticality_keys.sort(reverse=True)
+    for criticality_key in criticality_keys:
+        vuln_types = criticalities[criticality_key]
+        vuln_types.sort()
+        for vuln_type in vuln_types:
+            vulnerability_types_priority.append(vuln_type)
+    return vulnerability_types_priority
+
+
 def get_vuln_types(ms_cve_data_all):
     # Getting vulnerability types for CVE items
     all_vuln_types = set()
@@ -35,7 +52,7 @@ def get_vuln_types(ms_cve_data_all):
     all_vuln_types.sort()
     # Add types in order of vulnerability_types_priority
     prioritized_vuln_types = list()
-    for vuln_type in data_classification_vulnerability_types.vulnerability_types_priority:
+    for vuln_type in get_vulnerability_types_priority(data_classification_vulnerability_types.vulnerability_type_data):
         if vuln_type in all_vuln_types:
             prioritized_vuln_types.append(vuln_type)
     # Add other types in alphabetical order
@@ -193,7 +210,7 @@ def get_vuln_type_icon_html(type, config):
     html_img_tag = '<img style="vertical-align: middle; margin-right: 15px; margin-top: 2px; margin-bottom: 2px;" ' \
                    'width="32"  src=" '
     html_img_tag += vuln_icons_source
-    html_img_tag += '/' + data_classification_vulnerability_types.type_to_icon[type] + '.png">'
+    html_img_tag += '/' + data_classification_vulnerability_types.vulnerability_type_data[type]['icon'] + '.png">'
     return html_img_tag
 
 

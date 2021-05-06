@@ -14,6 +14,16 @@ product_data = {
         "description": "",
         "additional_detection_strings": []
     },
+    "Pulse Connect Secure": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Zimbra Collaboration Suite": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
     "RDP": {
         "prevalence": 1,
         "description": "Remote Desktop Protocol",
@@ -765,6 +775,21 @@ product_data = {
     "Windows WLAN AutoConfig Service": {
         "prevalence": 0.8,
         "description": "Windows сomponent",
+        "additional_detection_strings": []
+    },
+    "Fortinet FortiOS": {
+        "prevalence": 0.9,
+        "description": "Network Device",
+        "additional_detection_strings": []
+    },
+    "Citrix Application Delivery Controller": {
+        "prevalence": 0.9,
+        "description": "Network Device",
+        "additional_detection_strings": []
+    },
+    "VMware Workspace One": {
+        "prevalence": 0.9,
+        "description": "Virtualization",
         "additional_detection_strings": []
     },
 }
