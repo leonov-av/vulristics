@@ -158,7 +158,8 @@ def get_colored_text(color, text, c_type="text", params=None):
 
 
 def get_ms_cve_line_html_vss(cve, cve_scores):
-    params = {'url': 'https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/' + cve}
+    #params = {'url': 'https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/' + cve}
+    params = {'url': 'https://vulners.com/cve/' + cve}
     return (get_colored_text(color=cve_scores[cve]['level'],
                              text=cve,
                              c_type="link",
@@ -172,35 +173,6 @@ def get_ms_cve_lines_html_vss(cves, cve_scores):
     cve_html = list()
     for cve_id in cves:
         cve_html.append(get_ms_cve_line_html_vss(cve_id, cve_scores))
-    cve_line = ", ".join(cve_html)
-    return cve_line
-
-
-def get_ms_cve_line_html(cves, cve_data):
-    # Make colored HTML CVE links based on CVSS Base score (Legacy)
-    cves = list(cves)
-    cves.sort()
-    cve_html = set()
-    for cve_id in cves:
-        severity = cve_data[cve_id]['severity']
-        color = ""
-        if severity == "critical":
-            color = "red"
-        if severity == "important":
-            color = "orange"
-        if severity == "moderate":
-            color = "#CCCC00"  # yellow
-        if severity == "low":
-            color = "blue"
-        if color != "":
-            cve_html.add(
-                '<a style="color:' + color + \
-                ';" href="https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/' + \
-                cve_id + '">' + cve_id + "</a>")
-        else:
-            cve_html.add("<" + severity + ">" + cve_id + "</" + severity + ">")
-    cve_html = list(cve_html)
-    cve_html.sort()
     cve_line = ", ".join(cve_html)
     return cve_line
 
