@@ -787,9 +787,29 @@ product_data = {
         "description": "Network Device",
         "additional_detection_strings": []
     },
+    "Cisco Small Business Router": {
+        "prevalence": 0.7,
+        "description": "Network Device",
+        "additional_detection_strings": ["Cisco Small Business"]
+    },
+    "BIG-IP": {
+        "prevalence": 0.9,
+        "description": "Network Device",
+        "additional_detection_strings": []
+    },
     "VMware Workspace One": {
         "prevalence": 0.9,
         "description": "Virtualization",
+        "additional_detection_strings": []
+    },
+    "Kibana": {
+        "prevalence": 0.9,
+        "description": "Data visualization dashboard software",
+        "additional_detection_strings": []
+    },
+    "Oracle WebLogic Server": {
+        "prevalence": 0.9,
+        "description": "Unified and extensible platform for developing, deploying and running enterprise applications",
         "additional_detection_strings": []
     },
 }
