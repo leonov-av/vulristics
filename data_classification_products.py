@@ -84,6 +84,16 @@ product_data = {
         "description": "MS Office product",
         "additional_detection_strings": []
     },
+    "Adobe Illustrator": {
+        "prevalence": 0.5,
+        "description": "Adobe product",
+        "additional_detection_strings": []
+    },
+    "Adobe Animate": {
+        "prevalence": 0.5,
+        "description": "Adobe product",
+        "additional_detection_strings": []
+    },
     "Outlook": {
         "prevalence": 0.6,
         "description": "MS Office product",
@@ -120,7 +130,7 @@ product_data = {
         "additional_detection_strings": []
     },
     "Microsoft SharePoint": {
-        "prevalence": 0.5,
+        "prevalence": 0.7,
         "description": "",
         "additional_detection_strings": ['SharePoint']
     },
@@ -240,7 +250,7 @@ product_data = {
         "additional_detection_strings": []
     },
     "Skype for Business and Lync": {
-        "prevalence": 0.9,
+        "prevalence": 0.6,
         "description": "",
         "additional_detection_strings": []
     },
@@ -802,6 +812,11 @@ product_data = {
         "description": "Virtualization",
         "additional_detection_strings": []
     },
+    "VMware vRealize Operations Manager": {
+        "prevalence": 0.9,
+        "description": "Virtualization",
+        "additional_detection_strings": ["vRealize Operations Manager"]
+    },
     "Kibana": {
         "prevalence": 0.9,
         "description": "Data visualization dashboard software",
@@ -812,4 +827,104 @@ product_data = {
         "description": "Unified and extensible platform for developing, deploying and running enterprise applications",
         "additional_detection_strings": []
     },
+    "SonicWall Email Security": {
+        "prevalence": 0.7,
+        "description": "Email Security Appliance",
+        "additional_detection_strings": []
+    },
+    ".NET and Visual Studio": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Common Utilities": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Dynamics Finance and Operations": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "HTTP Protocol Stack": {
+        "prevalence": 0.9,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Accessibility Insights for Web": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Bluetooth Driver": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Jet Red Database Engine and Access Connectivity Engine": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Office Graphics": {
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "OLE Automation": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Web Media Extensions": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Container Isolation FS Filter Driver": {
+        "prevalence": 0.9,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Container Manager Service": {
+        "prevalence": 0.9,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Desktop Bridge": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Infrared Data Association (IrDA)": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Media Foundation Core": {
+        "prevalence": 0.9,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Remote Desktop Protocol (RDP)": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows SMB Client": {
+        "prevalence": 0.9,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows SSDP Service": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Wireless Networking": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    }
 }
