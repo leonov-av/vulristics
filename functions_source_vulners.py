@@ -104,10 +104,11 @@ def get_vulners_data(vulners_id, rewrite_flag):
         if 'references' in vulners_data['data']:
             for reference in vulners_data['data']['references'][vulners_id.upper()]:
                 for bulletin in vulners_data['data']['references'][vulners_id.upper()][reference]:
-                    if bulletin['bulletinFamily'] not in vulners_data['bulletins_types']:
-                        vulners_data['bulletins_types'][bulletin['bulletinFamily']] = list()
-                    vulners_data['bulletins_types'][bulletin['bulletinFamily']].append(
-                        {"id": bulletin['id'], "type": bulletin['type'], "title": bulletin['title'], "href": bulletin['href']})
+                    if not "msf:ilities" in bulletin['id'].lower(): # Ignoring Rapid7 Metasploit IDs that are in fact vulnerabilities, not exploits
+                        if bulletin['bulletinFamily'] not in vulners_data['bulletins_types']:
+                            vulners_data['bulletins_types'][bulletin['bulletinFamily']] = list()
+                        vulners_data['bulletins_types'][bulletin['bulletinFamily']].append(
+                            {"id": bulletin['id'], "type": bulletin['type'], "title": bulletin['title'], "href": bulletin['href']})
         if 'exploit' in vulners_data['bulletins_types']:
             vulners_data['public_exploit'] = True
             vulners_data['public_exploit_sources'] = vulners_data['bulletins_types']['exploit']
