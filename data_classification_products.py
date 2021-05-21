@@ -1,4 +1,9 @@
 product_data = {
+    "Zoom": {
+        "prevalence": 0.8,
+        "description": "Zoom is the leader in modern enterprise video communications",
+        "additional_detection_strings": []
+    },
     "Sudo": {
         "prevalence": 0.9,
         "description": "Sudo is a program for Unix-like computer operating systems that allows users to run programs with the security privileges of another user",
@@ -926,5 +931,30 @@ product_data = {
         "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
-    }
+    },
+    "MyBB": {
+        "prevalence": 0.6,
+        "description": "MyBB, formerly MyBBoard and originally MyBulletinBoard, is a free and open-source forum software developed by the MyBB Group",
+        "additional_detection_strings": []
+    },
+    "Envira Gallery Lite WordPress plugin": {
+        "prevalence": 0.6,
+        "description": "WordPress plugin",
+        "additional_detection_strings": []
+    },
+    "Facebook for WordPress plugin": {
+        "prevalence": 0.6,
+        "description": "WordPress plugin",
+        "additional_detection_strings": []
+    },
+    "WP Google Map Plugin WordPress plugin": {
+        "prevalence": 0.6,
+        "description": "WordPress plugin",
+        "additional_detection_strings": []
+    },
+    "b2evolution": {
+        "prevalence": 0.6,
+        "description": "b2evolution is a content and community management system",
+        "additional_detection_strings": []
+    },
 }
