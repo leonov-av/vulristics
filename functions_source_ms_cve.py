@@ -224,12 +224,13 @@ def get_ms_cve_data(cve_id, rewrite_flag):
     if not ms_cve_data['not_found_error']:
         ms_cve_data = add_cve_product_and_type_tags(ms_cve_data)
         ms_cve_data['description'] =  ms_cve_data['main']['description']
+        ms_cve_data['exploited'] = ms_cve_data['main']['exploited']
         ms_cve_data = heuristic_change_product_vuln_type(ms_cve_data)
         ms_cve_data = add_ms_cve_severity(ms_cve_data)
         ms_cve_data = add_ms_cve_cvss_base_score(ms_cve_data)
     return ms_cve_data
 
 
-def debug_get_ms_cve_data():
-    ms_cve_data = get_ms_cve_data(cve_id="CVE-2021-28471", rewrite_flag=True)
-    print(json.dumps(ms_cve_data, indent=4))
+# def debug_get_ms_cve_data():
+#     ms_cve_data = get_ms_cve_data(cve_id="CVE-2021-31955", rewrite_flag=True)
+#     print(json.dumps(ms_cve_data, indent=4))
