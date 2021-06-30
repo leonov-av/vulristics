@@ -9,6 +9,7 @@ import functions_tools
 import functions_score
 import re
 import json
+from datetime import datetime
 
 
 def get_vuln_products(ms_cve_data_all):
@@ -20,7 +21,6 @@ def get_vuln_products(ms_cve_data_all):
         else:
             print("No vuln_product for item")
             print(ms_cve_data_all[cve_id])
-            exit()
     all_vuln_products = list(all_vuln_products)
     all_vuln_products.sort()
     return all_vuln_products
@@ -323,22 +323,43 @@ def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config,
                    " - " + get_colored_text(cve_scores[cve]['level'], cve_scores[cve]['level'] + " [" + str(
         int(cve_scores[cve]['value'] * 1000)) + "] ") + \
                    "</br>"
-    report_html += "<b>Description:</b> " + combined_cve_data_all[cve]['description']
-    report_html += "</br>"
-    report_html += "<table><tr><th>component</th><th>value</th><th>weight</th><th>comment</th></tr>"
+    report_html += "<p><b>Description:</b> " + combined_cve_data_all[cve]['description'] + "</p>"
+
+    report_html += "<table class=\"vvs_table\"><tr class=\"vvs_table\"><th class=\"vvs_table\">component</th><th class=\"vvs_table\">value</th><th class=\"vvs_table\">weight</th><th class=\"vvs_table\">comment</th></tr>"
     for component in components:
-        report_html += "<tr>" + \
-                       "<td class=\"nowrap\">" + component + "</td>" + \
-                       "<td>" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(
+        report_html += "<tr class=\"vvs_table\">" + \
+                       "<td class=\"vvs_table\"><nowrap>" + component + "</nowrap></td>" + \
+                       "<td class=\"vvs_table\">" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(
             cve_scores[cve]['components'][component]['value'])) + "</td>" + \
-                       "<td>" + str(cve_scores[cve]['components'][component]['weight']) + "</td>" + \
-                       "<td>" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(
+                       "<td class=\"vvs_table\">" + str(cve_scores[cve]['components'][component]['weight']) + "</td>" + \
+                       "<td class=\"vvs_table\">" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(
             cve_scores[cve]['components'][component]['comment'])) + "</td>" + \
                        "</tr>"
     report_html += "</table>"
     report_html += get_comments_for_cves(source, [cve])['report_html']
     report_html += "</p>\n"
     return report_html
+
+
+def get_vvs_statistics_report(cve_scores):
+    report_txt = ""
+    report_html = ""
+
+    statistics = get_statistics(cve_scores)
+
+    cve_score_dict = dict()
+    for cve in cve_scores:
+        cve_score_dict[cve] = int(cve_scores[cve]['value'] * 1000)
+
+    criticalities = ["Urgent", "Critical", "High", "Medium", "Low"]
+    report_html += "<ul>"
+    report_html += "<li>" + "All vulnerabilities" + ': ' + str(len(statistics["All vulnerabilities"])) + "</li>"
+    for criticality in criticalities:
+        report_html += "<li>" + get_colored_text(criticality, criticality) + ': ' + str(
+            len(statistics[criticality])) + "</li>"
+    report_html += "</ul>"
+
+    return {"report_txt": report_txt, "report_html": report_html}
 
 
 def get_vulristics_score_report(combined_cve_data_all, cve_scores, config, source):
@@ -354,12 +375,6 @@ def get_vulristics_score_report(combined_cve_data_all, cve_scores, config, sourc
 
     criticalities = ["Urgent", "Critical", "High", "Medium", "Low"]
     components = get_components_list_sorted(cve_scores)
-    report_html += "<ul>"
-    report_html += "<li>" + "All vulnerabilities" + ': ' + str(len(statistics["All vulnerabilities"])) + "</li>"
-    for criticality in criticalities:
-        report_html += "<li>" + get_colored_text(criticality, criticality) + ': ' + str(
-            len(statistics[criticality])) + "</li>"
-    report_html += "</ul>"
 
     n = 1
     for criticality in criticalities:
@@ -372,6 +387,27 @@ def get_vulristics_score_report(combined_cve_data_all, cve_scores, config, sourc
 
     return {"report_txt": report_txt, "report_html": report_html}
 
+
+def get_products_report(combined_cve_data_all, cve_scores, config, source):
+    report_txt = ""
+    report_html = ""
+    criticalities = ["Urgent", "Critical", "High", "Medium", "Low"]
+    product_data = dict()
+    for cve in combined_cve_data_all:
+        product = combined_cve_data_all[cve]['vuln_product']
+        value = cve_scores[cve]['components']['Vulnerable Product is Common']['value']
+        comment = cve_scores[cve]['components']['Vulnerable Product is Common']['comment']
+        cve_level = cve_scores[cve]['level']
+        if not product in product_data:
+            product_data[product] = dict()
+            product_data[product]['cves'] = dict()
+            product_data[product]['value'] = value
+            product_data[product]['comment'] = comment
+            for crit in criticalities:
+                product_data[product]['cves'][crit] = list()
+        product_data[product]['cves'][cve_level].append(cve)
+    print(product_data)
+    return {"report_txt": report_txt, "report_html": report_html}
 
 def get_basic_severity_statistics_report(combined_cve_data_all):
     report_txt = ""
@@ -433,6 +469,7 @@ def get_comments_for_cves(source, processed_cves):
 
 
 def make_html_vulnerability_report_for_report_config(cve_related_data, cve_scores, report_config, profile_data):
+    html_content = "<center><img class=\"logo\" src=\"" + report_config['vuln_icons_source'] + "/vulristics.png\"></center>"
     combined_cve_data = cve_related_data['combined_cve_data_all']
 
     if report_config['ignore_comments']:
@@ -441,21 +478,47 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
     f = open("reports/template.html", "r")
     template = f.read()
     f.close()
-    html_content = "<h1>" + profile_data['report_name'] + "</h1>"
+
+    now = datetime.now()
+    html_content += "<p><b>Report name:</b> " + profile_data['report_name'] + "</br>"
+    html_content += "<b>Generated:</b> " + now.strftime("%Y-%m-%d %H:%M:%S") + "</p>"
+
 
     report_data = get_basic_severity_statistics_report(combined_cve_data)
-    name = "Basic Vulnerability Scores Statistics"
+    name = "Basic Vulnerability Scores"
     print("== " + name + " ==")
-    html_content += "<h3>" + name + "</h3>" + "\n"
+    basic_score_html_content = "<b>" + name + "</b>" + "\n"
+    print(report_data['report_txt'])
+    basic_score_html_content += report_data['report_html']
+
+    report_data = get_vvs_statistics_report(cve_scores)
+    name = "Vulristics Vulnerability Scores"
+    print("== " + name + " ==")
+    vulristics_score_html_content = "<b>" + name + "</b>" + "\n"
+    print(report_data['report_txt'])
+    vulristics_score_html_content += report_data['report_html']
+
+    html_content += "<div class=\"row\"> <div class=\"column\">" + vulristics_score_html_content + "</div>" + \
+                    "<div class=\"column\">" +  basic_score_html_content + "</div> </div>"
+    # ^^^  - two columns with VVS and CVSS
+
+    # list of all products
+
+    report_data = get_products_report(combined_cve_data, cve_scores, report_config, profile_data)
+    name = "Products"
+    print("== " + name + " ==")
+    html_content += "<b>" + name + "</b>" + "\n"
+    print(report_data['report_txt'])
+    html_content += report_data['report_html']
+    html_content += "</br>"
+
+    report_data = get_vulristics_score_report(combined_cve_data, cve_scores, report_config, profile_data)
+    name = "Vulnerabilities"
+    print("== " + name + " ==")
+    html_content += "<b>" + name + "</b>" + "\n"
     print(report_data['report_txt'])
     html_content += report_data['report_html']
 
-    report_data = get_vulristics_score_report(combined_cve_data, cve_scores, report_config, profile_data)
-    name = "Vulristics Vulnerability Scores"
-    print("== " + name + " ==")
-    html_content += "<h3>" + name + "</h3>" + "\n"
-    print(report_data['report_txt'])
-    html_content += report_data['report_html']
 
     current_cve_data = combined_cve_data
     exploited_cves = get_vulns_filtered_by_wild_exploited("Yes", current_cve_data, cve_scores)

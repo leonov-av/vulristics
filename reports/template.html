@@ -8,12 +8,35 @@
     font-family: Geneva, Arial, Helvetica, sans-serif;
     table-layout: fixed
 }
-td.nowrap {
+nowrap {
     white-space: nowrap;
+}
+table.vvs_table, tr.vvs_table, td.vvs_table, th.vvs_table {
+    border-collapse: collapse;
+    border: 1px solid black;
 }
 h3 {
     padding: 40px 0px 0px;
 }
+body {
+    width: 800px;
+    align-items: center; 
+    margin: auto;
+}
+.column {
+    float: left;
+    width: 50%;
+}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+img.logo {
+    width: 500px;
+}
+
 </style>
 <body>
 ##Content##
