@@ -115,6 +115,11 @@ def get_vuln_product_and_type_from_title(title):
         if pattern in title:
             vuln_type = data_classification_vulnerability_types.vulnerability_type_detection_patterns[pattern]
             vuln_product = re.sub("[ \t]*" + pattern + ".*$", "", title)
+    vuln_type = re.sub("^ *","",vuln_type)
+    vuln_type = re.sub(" *$", "", vuln_type)
+    vuln_product = re.sub("^ *", "", vuln_product)
+    vuln_product = re.sub(" *$", "", vuln_product)
+    vuln_product = re.sub("\xa0", "", vuln_product)
     return vuln_type, vuln_product
 
 
@@ -176,15 +181,17 @@ def heuristic_change_product_vuln_type(ms_cve_data):
         if re.findall("Visual Studio .*",  ms_cve_data['vuln_product']):
             ms_cve_data['vuln_product'] = "Visual Studio"
 
-        if ms_cve_data['vuln_product'] == "Windows SMB":
-            ms_cve_data['vuln_product'] = "SMB"
-        if ms_cve_data['vuln_product'] == "Windows NTFS":
-            ms_cve_data['vuln_product'] = "NTFS"
+        if ms_cve_data['vuln_product'] == "Scripting Engine":
+            ms_cve_data['vuln_product'] = "Microsoft Scripting Engine"
 
-        if ms_cve_data['vuln_product'] == "Windows TCP/IP Driver":
-            ms_cve_data['vuln_product'] = "Windows TCP/IP"
-        if ms_cve_data['vuln_product'] == "Microsoft Outlook":
-            ms_cve_data['vuln_product'] = "Outlook"
+        if ms_cve_data['vuln_product'] == "ASP.NET Core":
+            ms_cve_data['vuln_product'] = "ASP.NET"
+        if ms_cve_data['vuln_product'] == "SMB":
+            ms_cve_data['vuln_product'] = "Windows SMB"
+        if ms_cve_data['vuln_product'] == "NTFS":
+            ms_cve_data['vuln_product'] = "Windows NTFS"
+        if ms_cve_data['vuln_product'] == "Hyper-V":
+            ms_cve_data['vuln_product'] = "Windows Hyper-V"
         if ms_cve_data['vuln_product'] == "Diagnostics Hub Standard Collector Service":
             ms_cve_data['vuln_product'] = "Diagnostics Hub Standard Collector"
         if ms_cve_data['vuln_product'] == "Windows DNS":
@@ -205,12 +212,6 @@ def heuristic_change_product_vuln_type(ms_cve_data):
             ms_cve_data['vuln_product'] = "Windows Kernel"
         if ms_cve_data['vuln_product'] == "SharePoint":
             ms_cve_data['vuln_product'] = "Microsoft SharePoint"
-        if ms_cve_data['vuln_product'] == "Scripting Engine" and \
-                "Internet Explorer" in ms_cve_data['description']:
-            ms_cve_data['vuln_product'] = "Internet Explorer"
-        if ms_cve_data['vuln_product'] == "Scripting Engine" and \
-                "ChakraCore scripting engine" in ms_cve_data['description']:
-            ms_cve_data['vuln_product'] = "Chakra Scripting Engine"
     if 'vuln_product' in ms_cve_data:
         if ms_cve_data['vuln_type'] == "Memory Corruption" and \
                 re.findall("[Rr]emote code execution", ms_cve_data['description']):
@@ -228,6 +229,10 @@ def get_ms_cve_data(cve_id, rewrite_flag):
         ms_cve_data = heuristic_change_product_vuln_type(ms_cve_data)
         ms_cve_data = add_ms_cve_severity(ms_cve_data)
         ms_cve_data = add_ms_cve_cvss_base_score(ms_cve_data)
+        # # DEBUG
+        # if cve_id == "CVE-2021-31968":
+        #     print(ms_cve_data)
+        #     exit()
     return ms_cve_data
 
 
