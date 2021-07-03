@@ -556,6 +556,16 @@ product_data = {
         "description": "Windows component",
         "additional_detection_strings": []
     },
+    "OpenSSL": {
+        "prevalence": 0.8,
+        "description": "A software library for applications that secure communications over computer networks against eavesdropping or need to identify the party at the other end",
+        "additional_detection_strings": []
+    },
+    "APT": {
+        "prevalence": 0.8,
+        "description": "A free-software user interface that works with core libraries to handle the installation and removal of software on Debian",
+        "additional_detection_strings": []
+    },
     "Windows CryptoAPI": {
         "prevalence": 0.8,
         "description": "Windows component",
