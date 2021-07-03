@@ -452,6 +452,56 @@ def get_products_report(combined_cve_data_all, cve_scores, config, source):
 
     return {"report_txt": report_txt, "report_html": html_report}
 
+def get_vulnerability_types_report(combined_cve_data_all, cve_scores, config, source):
+    report_txt = ""
+    report_html = ""
+    criticalities = ["Urgent", "Critical", "High", "Medium", "Low"]
+    vulnerability_type_data = dict()
+    for cve in combined_cve_data_all:
+        vulnerability_type = combined_cve_data_all[cve]['vuln_type']
+        value = cve_scores[cve]['components']['Criticality of Vulnerability Type']['value']
+        comment = cve_scores[cve]['components']['Criticality of Vulnerability Type']['comment']
+        cve_level = cve_scores[cve]['level']
+        if not vulnerability_type in vulnerability_type_data:
+            vulnerability_type_data[vulnerability_type] = dict()
+            vulnerability_type_data[vulnerability_type]['cves'] = dict()
+            vulnerability_type_data[vulnerability_type]['value'] = value
+            vulnerability_type_data[vulnerability_type]['comment'] = comment
+            for crit in criticalities:
+                vulnerability_type_data[vulnerability_type]['cves'][crit] = list()
+        vulnerability_type_data[vulnerability_type]['cves'][cve_level].append(cve)
+
+    html_report = "<p><table class=\"vulnerability_type_table\">"
+    html_report += "<tr class=\"vulnerability_type_table\">"
+    html_report += "<th class=\"vulnerability_type_table\">" + "Vulnerability Type" + "</th>"
+    html_report += "<th class=\"vulnerability_type_table\">" + "Criticality" + "</th>"
+    for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low']:
+        text = get_colored_text(color=criticality, text= criticality[0][0], c_type="text", params=None)
+        html_report += "<th class=\"vulnerability_type_table\">" + text + "</th>"
+    html_report += "<th class=\"vulnerability_type_table\">" + "Comment" + "</th>"
+    html_report += "</tr>\n"
+    sorted_product_name_list = get_sorted_product_name_list(vulnerability_type_data)
+    for vulnerability_type in sorted_product_name_list:
+        html_report += "<tr class=\"vulnerability_type_table\">"
+        html_report += "<td class=\"vulnerability_type_table\">" + vulnerability_type + "</td>"
+        text = str(vulnerability_type_data[vulnerability_type]['value'])
+        if text == "0":
+            text = get_colored_text(color="Error", text=text, c_type="text", params=None)
+        html_report += "<td class=\"vulnerability_type_table\">" + text + "</td>"
+        for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low']:
+            text = get_cves_count_value_products_table(criticality, vulnerability_type_data, vulnerability_type)
+            html_report += "<td class=\"vulnerability_type_table\">" + text + "</td>"
+        text = vulnerability_type_data[vulnerability_type]['comment']
+        if text == "Unknown Vulnerability Type":
+            text = get_colored_text(color="Error", text=text, c_type="text", params=None)
+        html_report += "<td class=\"vulnerability_type_table\">" + text + "</td>"
+        html_report += "</tr>\n"
+    html_report += "</table></p>"
+
+    return {"report_txt": report_txt, "report_html": html_report}
+
+
+
 def get_basic_severity_statistics_report(combined_cve_data_all):
     report_txt = ""
     report_html = ""
@@ -549,6 +599,14 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
 
     report_data = get_products_report(combined_cve_data, cve_scores, report_config, profile_data)
     name = "Products"
+    print("== " + name + " ==")
+    html_content += "<b>" + name + "</b>" + "\n"
+    print(report_data['report_txt'])
+    html_content += report_data['report_html']
+    html_content += "</br>"
+
+    report_data = get_vulnerability_types_report(combined_cve_data, cve_scores, report_config, profile_data)
+    name = "Vulnerability Types"
     print("== " + name + " ==")
     html_content += "<b>" + name + "</b>" + "\n"
     print(report_data['report_txt'])
