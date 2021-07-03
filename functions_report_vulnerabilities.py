@@ -132,24 +132,13 @@ def get_cve_line(cves):
 
 def get_colored_text(color, text, c_type="text", params=None):
     # Make colored HTML text or links
-    color_code = "#000000"
-    result = ""
-    if color == "red":
-        color_code = "red"
-    if color == "Urgent":
-        color_code = "#C70039"
-    if color == "Critical":
-        color_code = "#FF5733"
-    if color == "High":
-        color_code = "#E67E22"
-    if color == "Medium":
-        color_code = "#e6bc0b"
-    if color == "Low":
-        color_code = "#8d9e63"
+    if color == "":
+        color = "default"
+    class_name = color.lower()
     if c_type == "text":
-        result = '''<span style="color:''' + color_code + ''';">''' + text + '''</span>'''
+        result = "<span class=\"" + class_name + "\">" + text + "</span>"
     elif c_type == "link":
-        result = '''<a style="color:''' + color_code + ''';" href="''' + params['url'] + '''">''' + text + '''</a>'''
+        result = "<a class=\"" + class_name + "\" href=\"" + params['url'] + "\">" + text + "</a>"
     return result
 
 
@@ -175,10 +164,9 @@ def get_ms_cve_lines_html_vss(cves, cve_scores):
 
 def get_vuln_type_icon_html(type, config):
     vuln_icons_source = config['vuln_icons_source']
-    html_img_tag = '<img style="vertical-align: middle; margin-right: 15px; margin-top: 2px; margin-bottom: 2px;" ' \
-                   'width="32"  src=" '
-    html_img_tag += vuln_icons_source
-    html_img_tag += '/' + data_classification_vulnerability_types.vulnerability_type_data[type]['icon'] + '.png">'
+    icon = data_classification_vulnerability_types.vulnerability_type_data[type]['icon']
+    img_src = vuln_icons_source + '/' +  icon + '.png'
+    html_img_tag = '<img class="vulnerability_type" src="' + img_src + '">'
     return html_img_tag
 
 
@@ -321,15 +309,23 @@ def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config,
                    "</br>"
     report_html += "<p><b>Description:</b> " + combined_cve_data_all[cve]['description'] + "</p>"
 
-    report_html += "<table class=\"vvs_table\"><tr class=\"vvs_table\"><th class=\"vvs_table\">component</th><th class=\"vvs_table\">value</th><th class=\"vvs_table\">weight</th><th class=\"vvs_table\">comment</th></tr>"
+    report_html += "<table class=\"vvs_table\">" \
+                   "<tr class=\"vvs_table\">" \
+                        "<th class=\"vvs_table\">Component</th>" \
+                        "<th class=\"vvs_table\">Value</th>" \
+                        "<th class=\"vvs_table\">Weight</th>" \
+                        "<th class=\"vvs_table\">Comment</th>" \
+                   "</tr>"
     for component in components:
         report_html += "<tr class=\"vvs_table\">" + \
                        "<td class=\"vvs_table\"><nowrap>" + component + "</nowrap></td>" + \
-                       "<td class=\"vvs_table\">" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(
-            cve_scores[cve]['components'][component]['value'])) + "</td>" + \
-                       "<td class=\"vvs_table\">" + str(cve_scores[cve]['components'][component]['weight']) + "</td>" + \
-                       "<td class=\"vvs_table\">" + get_colored_text(cve_scores[cve]['components'][component]['level'], str(
-            cve_scores[cve]['components'][component]['comment'])) + "</td>" + \
+                       "<td class=\"vvs_table\">" + get_colored_text(cve_scores[cve]['components'][component]['level'],
+                                                            str(cve_scores[cve]['components'][component]['value'])) \
+                       + "</td>" + \
+                       "<td class=\"vvs_table\">" + str(cve_scores[cve]['components'][component]['weight']) + "</td>" +\
+                       "<td class=\"vvs_table\">" + get_colored_text(cve_scores[cve]['components'][component]['level'],
+                                                    str(cve_scores[cve]['components'][component]['comment'])) \
+                       + "</td>" + \
                        "</tr>"
     report_html += "</table>"
     report_html += get_comments_for_cves(source, [cve])['report_html']
@@ -400,6 +396,14 @@ def get_sorted_product_name_list(product_data):
     return product_names
 
 
+def get_cves_count_value_products_table(criticality, product_data, product_name):
+    n = len(product_data[product_name]['cves'][criticality])
+    if n == 0:
+        return ""
+    else:
+        return get_colored_text(color=criticality, text=str(n), c_type="text", params=None)
+
+
 def get_products_report(combined_cve_data_all, cve_scores, config, source):
     report_txt = ""
     report_html = ""
@@ -419,30 +423,32 @@ def get_products_report(combined_cve_data_all, cve_scores, config, source):
                 product_data[product_name]['cves'][crit] = list()
         product_data[product_name]['cves'][cve_level].append(cve)
 
-    html_report = "<table>"
-    html_report += "<tr>"
-    html_report += "<th>" + "Product Name" + "</th>"
-    html_report += "<th>" + "Prevalence" + "</th>"
-    html_report += "<th>" + "U" + "</th>"
-    html_report += "<th>" + "C" + "</th>"
-    html_report += "<th>" + "H" + "</th>"
-    html_report += "<th>" + "M" + "</th>"
-    html_report += "<th>" + "L" + "</th>"
-    html_report += "<th>" + "Comment" + "</th>"
+    html_report = "<p><table class=\"product_table\">"
+    html_report += "<tr class=\"product_table\">"
+    html_report += "<th class=\"product_table\">" + "Product Name" + "</th>"
+    html_report += "<th class=\"product_table\">" + "Prevalence" + "</th>"
+    for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low']:
+        text = get_colored_text(color=criticality, text= criticality[0][0], c_type="text", params=None)
+        html_report += "<th class=\"product_table\">" + text + "</th>"
+    html_report += "<th class=\"product_table\">" + "Comment" + "</th>"
     html_report += "</tr>\n"
     sorted_product_name_list = get_sorted_product_name_list(product_data)
     for product_name in sorted_product_name_list:
-        html_report += "<tr>"
-        html_report += "<td>" + product_name + "</td>"
-        html_report += "<td>" + str(product_data[product_name]['value']) + "</td>"
-        html_report += "<td>" + str(len(product_data[product_name]['cves']['Urgent'])) + "</td>"
-        html_report += "<td>" + str(len(product_data[product_name]['cves']['Critical'])) + "</td>"
-        html_report += "<td>" + str(len(product_data[product_name]['cves']['High'])) + "</td>"
-        html_report += "<td>" + str(len(product_data[product_name]['cves']['Medium'])) + "</td>"
-        html_report += "<td>" + str(len(product_data[product_name]['cves']['Low'])) + "</td>"
-        html_report += "<td>" + product_data[product_name]['comment'] + "</td>"
+        html_report += "<tr class=\"product_table\">"
+        html_report += "<td class=\"product_table\">" + product_name + "</td>"
+        text = str(product_data[product_name]['value'])
+        if text == "0":
+            text = get_colored_text(color="Error", text=text, c_type="text", params=None)
+        html_report += "<td class=\"product_table\">" + text + "</td>"
+        for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low']:
+            text = get_cves_count_value_products_table(criticality, product_data, product_name)
+            html_report += "<td class=\"product_table\">" + text + "</td>"
+        text = product_data[product_name]['comment']
+        if text == "Unclassified product" or text == "Unknown Product":
+            text = get_colored_text(color="Error", text=text, c_type="text", params=None)
+        html_report += "<td class=\"product_table\">" + text + "</td>"
         html_report += "</tr>\n"
-    html_report += "</table>"
+    html_report += "</table></p>"
 
     return {"report_txt": report_txt, "report_html": html_report}
 
@@ -517,7 +523,7 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
     f.close()
 
     now = datetime.now()
-    html_content += "<p><b>Report name:</b> " + profile_data['report_name'] + "</br>"
+    html_content += "<p><b>Report Name:</b> " + profile_data['report_name'] + "</br>"
     html_content += "<b>Generated:</b> " + now.strftime("%Y-%m-%d %H:%M:%S") + "</p>"
 
 
