@@ -34,7 +34,7 @@ product_data = {
         "description": "Remote Desktop Protocol",
         "additional_detection_strings": []
     },
-    "SMB": {
+    "Windows SMB": {
         "prevalence": 1,
         "description": "",
         "additional_detection_strings": []
@@ -51,7 +51,7 @@ product_data = {
     },
     "Microsoft Defender": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "Anti-malware component of Microsoft Windows",
         "additional_detection_strings": []
     },
     "RPC": {
@@ -99,7 +99,7 @@ product_data = {
         "description": "Adobe product",
         "additional_detection_strings": []
     },
-    "Outlook": {
+    "Microsoft Outlook": {
         "prevalence": 0.6,
         "description": "MS Office product",
         "additional_detection_strings": []
@@ -124,9 +124,9 @@ product_data = {
         "description": "MS Internet Browser",
         "additional_detection_strings": []
     },
-    "Scripting Engine": {
+    "Microsoft Scripting Engine": {
         "prevalence": 0.6,
-        "description": "MS Internet Browser",
+        "description": "",
         "additional_detection_strings": []
     },
     "DirectX": {
@@ -140,11 +140,6 @@ product_data = {
         "additional_detection_strings": ['SharePoint']
     },
     "Visual Studio": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": []
-    },
-    "Hyper-V": {
         "prevalence": 0.5,
         "description": "",
         "additional_detection_strings": []
@@ -174,9 +169,9 @@ product_data = {
         "description": "",
         "additional_detection_strings": []
     },
-    "ASP.NET Core": {
+    "ASP.NET": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "An open-source, server-side web-application framework designed for web development",
         "additional_detection_strings": []
     },
     "Azure IoT CLI extension": {
@@ -246,7 +241,7 @@ product_data = {
     },
     "VP9 Video Extensions": {
         "prevalence": 0.7,
-        "description": "",
+        "description": "VP9 is an open and royalty-free video coding format developed by Google",
         "additional_detection_strings": []
     },
     "Package Managers Configurations": {
@@ -304,9 +299,9 @@ product_data = {
         "description": "",
         "additional_detection_strings": []
     },
-    "NTFS": {
+    "Windows NTFS": {
         "prevalence": 0.8,
-        "description": "",
+        "description": "The default file system of the Windows NT family",
         "additional_detection_strings": []
     },
     "Windows DirectX": {
@@ -364,9 +359,9 @@ product_data = {
         "description": "",
         "additional_detection_strings": []
     },
-    "Windows TCP/IP": {
+    "Windows TCP/IP Driver": {
         "prevalence": 0.9,
-        "description": "",
+        "description": "A kernel mode driver",
         "additional_detection_strings": []
     },
     "Windows Trust Verification API": {
@@ -439,9 +434,9 @@ product_data = {
             "description": "",
             "additional_detection_strings": []
         },
-    "NTLM": {
+    "Windows NTLM": {
             "prevalence": 0.9,
-            "description": "",
+            "description": "A suite of security protocols to authenticate users' identity and protect the integrity and confidentiality of their activity",
             "additional_detection_strings": []
         },
     "Remote Procedure Call Runtime": {
@@ -593,7 +588,7 @@ product_data = {
     },
     "Windows Hyper-V": {
         "prevalence": 0.6,
-        "description": "Windows component",
+        "description": "Hardware virtualization component of the client editions of Windows NT",
         "additional_detection_strings": []
     },
     "Windows InstallService": {
@@ -627,6 +622,11 @@ product_data = {
         "additional_detection_strings": []
     },
     "Windows Remote Desktop": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Remote Desktop Services": {
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": []
