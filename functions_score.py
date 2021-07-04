@@ -195,14 +195,15 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
 
     ######## Product
     # Using the Product from combined_cve_data_all, that is from NVD or Microsoft
+    vuln_product = "Unknown Product"
+    vulnerable_product_is_common_n = 0
+    vulnerable_product_is_common_c = "Unknown Product"
     if cve in cve_data_all['combined_cve_data_all']:
         vuln_product = cve_data_all['combined_cve_data_all'][cve]['vuln_product']
-        vulnerable_product_is_common_n = 0
-        vulnerable_product_is_common_c = "Unclassified product"
-    else:
-        vuln_product = "Unknown product"
-        vulnerable_product_is_common_n = 0
-        vulnerable_product_is_common_c = "Unknown product"
+        if vuln_product != "Unknown Product":
+            vulnerable_product_is_common_n = 0
+            vulnerable_product_is_common_c = "Unclassified Product"
+
 
     if vuln_product in data_classification_products.product_data:
         vulnerable_product_is_common_n = data_classification_products.product_data[vuln_product]['prevalence']

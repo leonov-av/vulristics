@@ -444,7 +444,7 @@ def get_products_report(combined_cve_data_all, cve_scores, config, source):
             text = get_cves_count_value_products_table(criticality, product_data, product_name)
             html_report += "<td class=\"product_table\">" + text + "</td>"
         text = product_data[product_name]['comment']
-        if text == "Unclassified product" or text == "Unknown Product":
+        if text == "Unclassified Product" or text == "Unknown Product":
             text = get_colored_text(color="Error", text=text, c_type="text", params=None)
         html_report += "<td class=\"product_table\">" + text + "</td>"
         html_report += "</tr>\n"
