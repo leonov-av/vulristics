@@ -175,11 +175,10 @@ def add_ms_cve_cvss_base_score(ms_cve_data):
 def heuristic_change_product_vuln_type(ms_cve_data):
     if 'vuln_product' in ms_cve_data:
         ms_cve_data['vuln_product'] = re.sub("Microsoft Windows","Windows", ms_cve_data['vuln_product'])
+        ms_cve_data['vuln_product'] = re.sub("Microsoft VsCode", "Visual Studio Code", ms_cve_data['vuln_product'])
 
         if re.findall("Azure .*",  ms_cve_data['vuln_product']):
             ms_cve_data['vuln_product'] = "Azure"
-        if re.findall("Visual Studio .*",  ms_cve_data['vuln_product']):
-            ms_cve_data['vuln_product'] = "Visual Studio"
 
         if ms_cve_data['vuln_product'] == "Scripting Engine":
             ms_cve_data['vuln_product'] = "Microsoft Scripting Engine"
