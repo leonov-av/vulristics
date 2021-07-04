@@ -274,6 +274,11 @@ product_data = {
         "description": "",
         "additional_detection_strings": []
     },
+    "Visual Studio Code Kubernetes Tools Extension": {
+        "prevalence": 0.2,
+        "description": "",
+        "additional_detection_strings": []
+    },
     "Windows Address Book": {
         "prevalence": 0.8,
         "description": "",
