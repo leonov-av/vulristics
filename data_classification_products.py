@@ -44,6 +44,16 @@ product_data = {
         "description": "Windows kernel-mode driver",
         "additional_detection_strings": []
     },
+    "Windows TCP/IP": {
+        "prevalence": 0.9,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Portmapping": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
     "Kerberos": {
         "prevalence": 1,
         "description": "",
@@ -266,17 +276,47 @@ product_data = {
     },
     "Visual Studio Code": {
         "prevalence": 0.3,
-        "description": "",
+        "description": "Integrated development environment",
+        "additional_detection_strings": []
+    },
+    "Visual Studio Installer": {
+        "prevalence": 0.3,
+        "description": "Integrated development environment",
         "additional_detection_strings": []
     },
     "Visual Studio Code npm-script Extension": {
         "prevalence": 0.2,
-        "description": "",
+        "description": "Extension for Visual Studio Code IDE",
+        "additional_detection_strings": []
+    },
+    "Remote Development Extension for Visual Studio Code": {
+        "prevalence": 0.2,
+        "description": "Extension for Visual Studio Code IDE",
+        "additional_detection_strings": []
+    },
+    "Visual Studio Code GitHub Pull Requests and Issues Extension": {
+        "prevalence": 0.2,
+        "description": "Extension for Visual Studio Code IDE",
+        "additional_detection_strings": []
+    },
+    "Visual Studio Code Kubernetes Tools": {
+        "prevalence": 0.2,
+        "description": "Extension for Visual Studio Code IDE",
         "additional_detection_strings": []
     },
     "Visual Studio Code Kubernetes Tools Extension": {
         "prevalence": 0.2,
-        "description": "",
+        "description": "Extension for Visual Studio Code IDE",
+        "additional_detection_strings": []
+    },
+    "Visual Studio Code Maven for Java Extension": {
+        "prevalence": 0.2,
+        "description": "Extension for Visual Studio Code IDE",
+        "additional_detection_strings": []
+    },
+    "Visual Studio Code Remote Containers Extension": {
+        "prevalence": 0.2,
+        "description": "Extension for Visual Studio Code IDE",
         "additional_detection_strings": []
     },
     "Windows Address Book": {
@@ -483,6 +523,16 @@ product_data = {
     "Git for Visual Studio": {
         "prevalence": 0.4,
         "description": "",
+        "additional_detection_strings": []
+    },
+    "3D Viewer": {
+        "prevalence": 0.7,
+        "description": "Standard Windows Application",
+        "additional_detection_strings": []
+    },
+    "Paint 3D": {
+        "prevalence": 0.7,
+        "description": "Standard Windows Application",
         "additional_detection_strings": []
     },
     "Microsoft Office ClickToRun": {
@@ -693,6 +743,81 @@ product_data = {
         "additional_detection_strings": []
     },
     "Windows Admin Center": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Bind Filter Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Cloud Files Mini Filter Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Common Log File System Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows DCOM Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Filter Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows GPSVC": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows HTML Platform": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Kernel-Mode Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows MSHTML Platform": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Server for NFS": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Microsoft DWM Core Library": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Event Tracing for Windows": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Kerberos AppContainer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Kerberos AppContainer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Microsoft Enhanced Cryptographic Provider": {
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": []
@@ -970,6 +1095,11 @@ product_data = {
     "b2evolution": {
         "prevalence": 0.6,
         "description": "b2evolution is a content and community management system",
+        "additional_detection_strings": []
+    },
+    "Microsoft Intune Management Extension": {
+        "prevalence": 0.3,
+        "description": "Optional agent for Microsoft Intune",
         "additional_detection_strings": []
     },
 }
