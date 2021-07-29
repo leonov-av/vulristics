@@ -68,6 +68,8 @@ def create_profile(month, year, patch_tuesday_date, file_name):
     query = month + " " + year + " " + "Patch Tuesday"
 
     qualys_link = functions_source_analytic_sites.get_qualys_link(query)
+    # qualys_link = {'title':'Microsoft and Adobe Patch Tuesday (July 2021) – Microsoft 117 Vulnerabilities with 13 Critical, Adobe 26 Vulnerabilities',
+    #                'url':'https://blog.qualys.com/vulnerabilities-threat-research/2021/07/13/microsoft-and-adobe-patch-tuesday-july-2021-microsoft-117-vulnerabilities-with-13-critical-adobe-26-vulnerabilities'}
     qualys_text = functions_source_analytic_sites.get_qualys_text_from_url(qualys_link['url'])
     functions_tools.print_debug_message("Qualys query: " + query)
     functions_tools.print_debug_message("Qualys url found: " + qualys_link['url'])
@@ -95,6 +97,8 @@ def create_profile(month, year, patch_tuesday_date, file_name):
         "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year
     ]
     zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
+    # zdi_link = {'title':'THE JULY 2021 SECURITY UPDATE REVIEW',
+    #                'url':'https://www.zerodayinitiative.com/blog/2021/7/13/the-july-2021-security-update-review'}
     zdi_text = functions_source_analytic_sites.get_zdi_text_from_url(zdi_link['url'])
     functions_tools.print_debug_message("ZDI query: " + query)
     functions_tools.print_debug_message("ZDI url found: " + zdi_link['url'])
