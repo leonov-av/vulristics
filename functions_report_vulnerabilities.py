@@ -714,14 +714,21 @@ def get_all_cves(profile, source_id, cves_to_exclude):
 def print_unclassified_products_templates(cve_scores, cve_related_data):
     unclassified_products = set()
     for cve in cve_scores:
-        if cve_scores[cve]['components']['Vulnerable Product is Common']['comment'] == "Unclassified product":
+        if cve_scores[cve]['components']['Vulnerable Product is Common']['comment'] == "Unclassified Product":
             unclassified_products.add(cve_related_data['combined_cve_data_all'][cve]['vuln_product'])
     unclassified_products = list(unclassified_products)
     unclassified_products.sort()
     if unclassified_products != list():
         functions_tools.print_debug_message("Add this to data_classification_products.py")
         for product in unclassified_products:
-            print('''    "''' + product + '''": {
+            if "Windows" in product:
+                print('''    "''' + product + '''": {
+            "prevalence": 0.8,
+            "description": "Windows component",
+            "additional_detection_strings": []
+        },''')
+            else:
+                print('''    "''' + product + '''": {
             "prevalence": 0,
             "description": "",
             "additional_detection_strings": []
