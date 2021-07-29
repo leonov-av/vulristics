@@ -80,7 +80,7 @@ product_data = {
         "additional_detection_strings": []
     },
     "Microsoft Exchange Server": {
-        "prevalence": 0.7,
+        "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
     },
@@ -150,8 +150,13 @@ product_data = {
         "additional_detection_strings": ['SharePoint']
     },
     "Visual Studio": {
-        "prevalence": 0.5,
-        "description": "",
+        "prevalence": 0.3,
+        "description": "Integrated development environment",
+        "additional_detection_strings": []
+    },
+    "Visual Studio Code .NET Runtime": {
+        "prevalence": 0.3,
+        "description": "Integrated development environment",
         "additional_detection_strings": []
     },
     "Microsoft Dynamics 365": {
@@ -342,6 +347,11 @@ product_data = {
     "Windows DNS Server": {
         "prevalence": 0.9,
         "description": "",
+        "additional_detection_strings": []
+    },
+    "Active Directory": {
+        "prevalence": 0.9,
+        "description": "Active Directory is a directory service developed by Microsoft for Windows domain networks",
         "additional_detection_strings": []
     },
     "Windows NTFS": {
@@ -882,6 +892,96 @@ product_data = {
         "description": "Windows component",
         "additional_detection_strings": []
     },
+    "Windows ADFS": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows AF_UNIX Socket Provider": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Authenticode": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Certificate": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows DNS Snap-in": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows File History Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Font Driver Host": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows GDI": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows HTML Platforms": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Hello": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Kernel Memory": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Key Distribution Center": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows LSA": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Media": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Partition Management Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Remote Access Connection Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Remote Assistance": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Security Account Manager Remote Protocol": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
     "Windows Virtual Registry Provider": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -930,6 +1030,56 @@ product_data = {
     "Windows WLAN AutoConfig Service": {
         "prevalence": 0.8,
         "description": "Windows сomponent",
+        "additional_detection_strings": []
+    },
+    "Bowser.sys": {
+        "prevalence": 0.8,
+        "description": "Windows сomponent",
+        "additional_detection_strings": []
+    },
+    "DirectWrite": {
+        "prevalence": 0.8,
+        "description": "Windows сomponent",
+        "additional_detection_strings": []
+    },
+    "Dynamics Business Central": {
+        "prevalence": 0.4,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Media Foundation": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Microsoft Bing Search": {
+        "prevalence": 0.2,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Exchange": {
+        "prevalence": 0.8,
+        "description": "Exchange",
+        "additional_detection_strings": []
+    },
+    "Microsoft Office Online Server": {
+        "prevalence": 0.3,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Visual Studio": {
+        "prevalence": 0.3,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Open Enclave SDK": {
+        "prevalence": 0.3,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Power BI": {
+        "prevalence": 0.3,
+        "description": "",
         "additional_detection_strings": []
     },
     "Fortinet FortiOS": {
