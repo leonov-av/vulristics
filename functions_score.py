@@ -95,7 +95,9 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
     # Currently works only with Vulners data
     is_public_exploit = False
     if 'vulners_cve_data_all' in cve_data_all:
-        is_public_exploit = cve_data_all['vulners_cve_data_all'][cve]['public_exploit']
+        if cve in cve_data_all['vulners_cve_data_all']:
+            if 'public_exploit' in cve_data_all['vulners_cve_data_all'][cve]:
+                is_public_exploit = cve_data_all['vulners_cve_data_all'][cve]['public_exploit']
     if is_public_exploit:
         public_exploit_exists_n = 1.0
         links_str = list()
