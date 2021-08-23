@@ -1252,4 +1252,69 @@ product_data = {
         "description": "Optional agent for Microsoft Intune",
         "additional_detection_strings": []
     },
+    "ASP.NET Core": {
+        "prevalence": 0.8,
+        "description": "An open-source, server-side web-application framework designed for web development",
+        "additional_detection_strings": []
+    },
+    "Microsoft Dynamics 365 (on-premises)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Remote Desktop Client": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Windows Bluetooth Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Cryptographic Primitives Library": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Defender": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Digital TV Tuner device registration application": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Graphics Component Font Parsing": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Media MPEG-4 Video Decoder": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Recovery Environment Agent": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Services for NFS ONCRPC XDR Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Update Medic Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows User Account Profile Picture": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
 }
