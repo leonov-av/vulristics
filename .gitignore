@@ -9,4 +9,5 @@ data/profiles/*
 data/vulners/*
 data/vulners_exploit/*
 report/*.html
+reports/*.html
 credentials.py
