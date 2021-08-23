@@ -272,6 +272,8 @@ def get_type_based_report(current_cve_data, report_config, source, cve_scores):
 
 
 def get_components_list_sorted(cve_scores):
+    if len(cve_scores) == 0: # fix for empty list
+        return list()
     cve_id = list(cve_scores.keys())[0]
     component_dict = dict()
     for component in cve_scores[cve_id]['components']:
@@ -710,6 +712,16 @@ def get_all_cves(profile, source_id, cves_to_exclude):
     functions_tools.print_debug_message("All CVEs: " + str(len(all_cves)))
     return all_cves
 
+def get_products(profile, source_id):
+    all_prodcts = set()
+    if 'products_text' in profile[source_id]:
+        products_text = profile[source_id]['products_text']
+        for line in products_text.split("\n"):
+            all_prodcts.add(line.upper())
+        functions_tools.print_debug_message("All products to analyze: " + str(len(all_prodcts)))
+    else:
+        functions_tools.print_debug_message("No specified products to analyze set in profile, reporting everything")
+    return all_prodcts
 
 def print_unclassified_products_templates(cve_scores, cve_related_data):
     unclassified_products = set()
@@ -759,12 +771,50 @@ def make_vulnerability_report_for_profile(profile_file_path, rewrite_flag):
     profile = get_profile(profile_file_path)
     source_id = list(profile.keys())[0]
     cves_to_exclude = get_cves_to_exclude(profile, source_id)
-    all_cves = get_all_cves(profile, source_id, cves_to_exclude)
+    
+    all_products_to_analyze = get_products(profile, source_id)
+    
+    # making list of CVEs not about products in products_to_analyze to exclude it 
+    if len(all_products_to_analyze) == 0:
+        selected_cves_to_exclude = cves_to_exclude
+    else:
+        all_cves_tmp= get_all_cves(profile, source_id, cves_to_exclude)
+        enabled_data_sources = get_eanbled_data_sources(profile, source_id)
+        cve_related_data_tmp, cves_to_exclude = functions_combined_vulnerability_data.collect_cve_related_data(
+                                            enabled_data_sources, all_cves_tmp,
+                                            cves_to_exclude, rewrite_flag)
+        selected_cves_to_exclude = cves_to_exclude
+        
+        for selected_cve in all_cves_tmp:
+            functions_tools.print_debug_message ("filtering " + selected_cve + " for one of products_to_analyze")
+            b_product_found = False
+            for list_type_str in cve_related_data_tmp: 
+                functions_tools.print_debug_message ("    checking in "+ list_type_str)
+                if not selected_cve in cve_related_data_tmp[list_type_str]:
+                    functions_tools.print_debug_message("      no data for "+ selected_cve + " in " + list_type_str)
+                    continue
+                if not 'vuln_product' in cve_related_data_tmp[list_type_str][selected_cve]:
+                    functions_tools.print_debug_message("      no vuln_product for "+ selected_cve + " in " + list_type_str)
+                    continue
+                product_name = (cve_related_data_tmp[list_type_str][selected_cve]['vuln_product']).upper()
+                for product_name_from_list in all_products_to_analyze:
+                    product_name_from_list = product_name_from_list.upper()
+                    if product_name_from_list in product_name:
+                        b_product_found = True
+                        functions_tools.print_debug_message("                 found")
 
+            if not b_product_found:
+                selected_cves_to_exclude.add(selected_cve)
+                functions_tools.print_debug_message("- final result: no one of products_to_analyze found")
+            else:    
+                functions_tools.print_debug_message("- final result: some of products_to_analyze found")
+
+    # collecting data without filtered out CVEs
+    all_cves = get_all_cves(profile, source_id, selected_cves_to_exclude)
     enabled_data_sources = get_eanbled_data_sources(profile, source_id)
-    cve_related_data, cves_to_exclude = functions_combined_vulnerability_data.collect_cve_related_data(
+    cve_related_data, selected_cves_to_exclude = functions_combined_vulnerability_data.collect_cve_related_data(
                                         enabled_data_sources, all_cves,
-                                        cves_to_exclude, rewrite_flag)
+                                        selected_cves_to_exclude, rewrite_flag)
     cve_scores = functions_score.get_cve_scores(all_cves, cve_related_data, profile[source_id])
 
     print_unclassified_products_templates(cve_scores, cve_related_data)
