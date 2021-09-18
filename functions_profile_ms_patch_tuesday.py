@@ -95,8 +95,8 @@ def create_profile(month, year, patch_tuesday_date, file_name):
     functions_tools.print_debug_message("=== End of Rapid7 text ===")
 
     queries = [
-        # "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year,
-        "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW"
+        "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW",
+        "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year
     ]
     zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
     # zdi_link = {'title':'THE SEPTEMBER 2021 SECURITY UPDATE REVIEW',
