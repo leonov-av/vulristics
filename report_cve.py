@@ -1,21 +1,22 @@
 import functions_profile
 import functions_report_vulnerabilities
 
-report_name = 'CVE NCSC JOINT report'
-# https://www.ncsc.gov.uk/news/joint-advisory-further-ttps-associated-with-svr-cyber-actors
-file_name_prefix = "cve_ncsc_joint"
+name = "test"
+report_name = name + ' report'
+file_name_prefix = name.lower()
 
-with open('csv_list_to_analyze.txt', 'r') as file:
+with open('analyze_cve_list.txt', 'r') as file:
     cves_text = file.read()
 
-
-with open('products_to_analyze.txt', 'r') as file:
+with open('analyze_product_list.txt', 'r') as file:
     products_text = file.read()
-file_name = "test_cve_profile.json"
-report_id = "test_cve_report"
+file_name = name + "_profile.json"
+report_id = name + "_report"
 data_sources = ['ms', 'nvd', 'vulners', 'attackerkb']
 
-comments = []
+comments = dict()
+comments["hosts"] = ''''''
+comments["recent_attack"] = ''''''
 
 rewrite_flag = False
 
