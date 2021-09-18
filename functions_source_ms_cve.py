@@ -3,6 +3,7 @@ import re
 import os
 import requests
 import data_classification_vulnerability_types
+import functions_analysis_text
 import functions_tools
 
 
@@ -223,11 +224,24 @@ def get_ms_cve_data(cve_id, rewrite_flag):
     ms_cve_data = get_ms_cve_data_raw(cve_id)
     if not ms_cve_data['not_found_error']:
         ms_cve_data = add_cve_product_and_type_tags(ms_cve_data)
-        ms_cve_data['description'] =  ms_cve_data['main']['description']
+        if not 'description' in ms_cve_data:
+            ms_cve_data['description'] = re.sub("<[^>]*>","",ms_cve_data['main']['description'])
+        if ms_cve_data['description'] == "":
+            ms_cve_data['description'] = ms_cve_data['main']['cveTitle']
+        else:
+            ms_cve_data['description'] =  ms_cve_data['main']['cveTitle'] + ". " + ms_cve_data['description']
         ms_cve_data['exploited'] = ms_cve_data['main']['exploited']
         ms_cve_data = heuristic_change_product_vuln_type(ms_cve_data)
         ms_cve_data = add_ms_cve_severity(ms_cve_data)
         ms_cve_data = add_ms_cve_cvss_base_score(ms_cve_data)
+        if ms_cve_data['vuln_product'] == "":
+            detection_results = functions_analysis_text.analyse_sentence(ms_cve_data['description'])
+            ms_cve_data['description_tags'] = detection_results
+            ms_cve_data['vuln_product'] = detection_results['detected_product_name']
+        if ms_cve_data['vuln_type'] == "":
+            detection_results = functions_analysis_text.analyse_sentence(ms_cve_data['description'])
+            ms_cve_data['description_tags'] = detection_results
+            ms_cve_data['vuln_type'] = detection_results['detected_vulnerability_type']
         # # DEBUG
         # if cve_id == "CVE-2021-31968":
         #     print(ms_cve_data)
