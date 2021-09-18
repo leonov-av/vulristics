@@ -224,7 +224,7 @@ def get_duckduckgo_search_results(query):
             for keyword in query.split(" "):
                 if not "site:" in keyword:  # ignoring ""site:https://www.zerodayinitiative.com/blog" part
                     if not keyword.lower() in title.lower():
-                        print("Error: '" + keyword.lower() + "' is not in '" + title.lower() + "'")
+                        # print("Error: '" + keyword.lower() + "' is not in '" + title.lower() + "'")
                         result_status = False
             if result_status:
                 return {'title': title, 'url': url}
