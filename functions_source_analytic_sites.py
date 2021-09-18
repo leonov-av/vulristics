@@ -213,9 +213,11 @@ def get_duckduckgo_search_results(query):
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
     url = "https://duckduckgo.com/html/?q=" + query
-    a_tags = re.findall('''<a class="result__snippet" href.*?</a>''', requests.get(url, headers=headers).text)
+    result_text = requests.get(url, headers=headers).text
+    a_tags = re.findall('''<a class="result__snippet" href.*?</a>''', result_text)
     for a_tag in a_tags:
-        if len(a_tag.split('"')) > 3:
+        a_tag = re.sub('">.*',"",a_tag)
+        if len(a_tag.split('"')) >= 3:
             url = a_tag.split('"')[3]
             title = re.sub("<[^>]*>", "", a_tag)
             result_status = True
