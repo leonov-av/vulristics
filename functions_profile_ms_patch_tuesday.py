@@ -68,9 +68,10 @@ def create_profile(month, year, patch_tuesday_date, file_name):
     query = month + " " + year + " " + "Patch Tuesday"
 
     qualys_link = functions_source_analytic_sites.get_qualys_link(query)
-    # qualys_link = {'title':'Microsoft and Adobe Patch Tuesday (July 2021) – Microsoft 117 Vulnerabilities with 13 Critical, Adobe 26 Vulnerabilities',
-    #                'url':'https://blog.qualys.com/vulnerabilities-threat-research/2021/07/13/microsoft-and-adobe-patch-tuesday-july-2021-microsoft-117-vulnerabilities-with-13-critical-adobe-26-vulnerabilities'}
+    # qualys_link = {'title':'Microsoft and Adobe Patch Tuesday (September 2021) – Microsoft 60 Vulnerabilities with 3 Critical, Adobe 61 Vulnerabilities',
+    #                'url':'https://blog.qualys.com/vulnerabilities-threat-research/2021/09/14/microsoft-and-adobe-patch-tuesday-september-2021-microsoft-60-vulnerabilities-with-3-critical-adobe-61-vulnerabilities'}
     qualys_text = functions_source_analytic_sites.get_qualys_text_from_url(qualys_link['url'])
+    qualys_text = functions_source_analytic_sites.process_qualys_text(qualys_text)
     functions_tools.print_debug_message("Qualys query: " + query)
     functions_tools.print_debug_message("Qualys url found: " + qualys_link['url'])
     functions_tools.print_debug_message("=== Qualys text ===")
@@ -94,11 +95,12 @@ def create_profile(month, year, patch_tuesday_date, file_name):
     functions_tools.print_debug_message("=== End of Rapid7 text ===")
 
     queries = [
-        "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year
+        "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year,
+        "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW"
     ]
     zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
-    # zdi_link = {'title':'THE JULY 2021 SECURITY UPDATE REVIEW',
-    #                'url':'https://www.zerodayinitiative.com/blog/2021/7/13/the-july-2021-security-update-review'}
+    # zdi_link = {'title':'THE SEPTEMBER 2021 SECURITY UPDATE REVIEW',
+    #             'url':'https://www.zerodayinitiative.com/blog/2021/9/14/the-september-2021-security-update-review-kpgpb'}
     zdi_text = functions_source_analytic_sites.get_zdi_text_from_url(zdi_link['url'])
     functions_tools.print_debug_message("ZDI query: " + query)
     functions_tools.print_debug_message("ZDI url found: " + zdi_link['url'])
@@ -119,5 +121,7 @@ def create_profile(month, year, patch_tuesday_date, file_name):
     cves_text = ms_cves_for_date_range
 
     data_sources = None  # Use all data sources
-    functions_profile.save_profile("data/profiles/" + file_name, report_id, report_name, file_name_prefix, cves_text,
-                                   data_sources, comments)
+    file_path = "data/profiles/" + file_name
+    products_text = ""
+    functions_profile.save_profile(file_path, report_id, report_name, file_name_prefix,
+                                   cves_text, products_text, data_sources, comments)

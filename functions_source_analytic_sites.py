@@ -59,6 +59,7 @@ def get_qualys_link(query):
     response = requests.post('https://platform.cloud.coveo.com/rest/search/v2', headers=headers, params=params,
                              data=data)
     for result in response.json()['results']:
+        # print(result['title'])
         result_status = True
         for keyword in query.split(" "):
             if not keyword in result['title']:
@@ -83,6 +84,14 @@ def get_qualys_text_from_url(url):
     response = requests.get(url, headers=headers)
     return (trafilatura.extract(response.text))
 
+def process_qualys_text(qualys_text):
+    new_qualys_text = ""
+    for line in qualys_text.split("\n"):
+        if re.findall("^CVE",line) and not(re.findall("\.$",line)): # Eg: CVE-2021-40444 – Microsoft MSHTML Remote Code Execution Vulnerability
+            new_qualys_text += line + ". " # Header
+        else:
+            new_qualys_text += line + "\n"
+    return new_qualys_text
 
 #### Tenable
 
@@ -204,18 +213,19 @@ def get_duckduckgo_search_results(query):
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
     url = "https://duckduckgo.com/html/?q=" + query
-    print(url)
-    a_tags = re.findall('''<a rel="nofollow" class="result__a".*?</a>''', requests.get(url, headers=headers).text)
+    a_tags = re.findall('''<a class="result__snippet" href.*?</a>''', requests.get(url, headers=headers).text)
     for a_tag in a_tags:
-        url = a_tag.split('"')[5]
-        title = re.sub("<[^>]*>", "", a_tag)
-        result_status = True
-        for keyword in query.split(" "):
-            if not "site:" in keyword:  # ignoring ""site:https://www.zerodayinitiative.com/blog" part
-                if not keyword in title:
-                    result_status = False
-        if result_status:
-            return {'title': title, 'url': url}
+        if len(a_tag.split('"')) > 3:
+            url = a_tag.split('"')[3]
+            title = re.sub("<[^>]*>", "", a_tag)
+            result_status = True
+            for keyword in query.split(" "):
+                if not "site:" in keyword:  # ignoring ""site:https://www.zerodayinitiative.com/blog" part
+                    if not keyword.lower() in title.lower():
+                        print("Error: '" + keyword.lower() + "' is not in '" + title.lower() + "'")
+                        result_status = False
+            if result_status:
+                return {'title': title, 'url': url}
     return None
 
 
