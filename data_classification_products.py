@@ -39,6 +39,16 @@ product_data = {
         "description": "",
         "additional_detection_strings": []
     },
+    "Confluence Server": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "macOS": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
     "Windows Win32k": {
         "prevalence": 0.9,
         "description": "Windows kernel-mode driver",
