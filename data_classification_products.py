@@ -89,6 +89,11 @@ product_data = {
         "description": "MS Office product",
         "additional_detection_strings": []
     },
+    "Microsoft Office Access Connectivity Engine": {
+        "prevalence": 0.6,
+        "description": "MS Office product",
+        "additional_detection_strings": []
+    },
     "Microsoft Word": {
         "prevalence": 0.6,
         "description": "MS Office product",
@@ -562,12 +567,32 @@ product_data = {
     },
     "Microsoft Visio": {
         "prevalence": 0.6,
-        "description": "",
+        "description": "Microsoft Visio",
+        "additional_detection_strings": []
+    },
+    "Microsoft Office Visio": {
+        "prevalence": 0.6,
+        "description": "Microsoft Visio",
+        "additional_detection_strings": []
+    },
+    "Microsoft Office Graphics Component": {
+        "prevalence": 0.6,
+        "description": "Microsoft Office",
+        "additional_detection_strings": []
+    },
+    "Microsoft Accessibility Insights for Android": {
+        "prevalence": 0.2,
+        "description": "Accessibility Insights for Android is a free, open source tool that helps developers find and fix accessibility issues in Android apps",
         "additional_detection_strings": []
     },
     "OpenType Font Parsing": {
         "prevalence": 0.8,
         "description": "",
+        "additional_detection_strings": []
+    },
+    "Open Management Infrastructure": {
+        "prevalence": 0.8,
+        "description": "An open source project to further the development of a production quality implementation of the DMTF CIM/WBEM standards",
         "additional_detection_strings": []
     },
     "Quantum Development Kit for Visual Studio Code": {
@@ -1122,6 +1147,11 @@ product_data = {
         "description": "Unified and extensible platform for developing, deploying and running enterprise applications",
         "additional_detection_strings": []
     },
+    "Oracle Java SE": {
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": ["Java SE","JRE"]
+    },
     "SonicWall Email Security": {
         "prevalence": 0.7,
         "description": "Email Security Appliance",
@@ -1297,6 +1327,11 @@ product_data = {
         "description": "Windows component",
         "additional_detection_strings": []
     },
+    "Microsoft MPEG-2 Video Extension": {
+        "prevalence": 0.4,
+        "description": "This extension helps video apps installed on Windows 10, such as Microsoft Movies & TV, to play MPEG-1 and MPEG-2 videos.",
+        "additional_detection_strings": []
+    },
     "Windows Recovery Environment Agent": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -1317,4 +1352,50 @@ product_data = {
         "description": "Windows component",
         "additional_detection_strings": []
     },
+    "Windows Ancillary Function Driver for WinSock": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Key Storage Provider": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Redirected Drive Buffering SubSystem Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Redirected Drive Buffering System": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Scripting Engine": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Storage": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Subsystem for Linux": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Update Client": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "BitLocker": {
+        "prevalence": 0.8,
+        "description": "A full volume encryption feature included with Microsoft Windows versions starting with Windows Vista",
+        "additional_detection_strings": []
+    },
+
 }
