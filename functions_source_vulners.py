@@ -116,16 +116,40 @@ def get_vulners_data(vulners_id, rewrite_flag):
             vulners_data['public_exploit'] = False
             vulners_data['public_exploit_sources'] = list()
     vulners_data['wild_exploited'] = False
+    bul_dict = dict()
+    for bul_type in vulners_data['bulletins_types']:
+        for bul in vulners_data['bulletins_types'][bul_type]:
+            bul_dict[bul['id']] = bul
     if 'data' in vulners_data:
         if 'documents' in vulners_data['data']:
             if vulners_id in vulners_data['data']['documents']:
                 if 'enchantments' in vulners_data['data']['documents'][vulners_id]:
                     if 'exploitation' in vulners_data['data']['documents'][vulners_id]['enchantments']:
-                        vulners_data['wild_exploited'] = \
-                            vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
-                        vulners_data['wild_exploited_sources'] = \
-                            vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation'][
-                                'wildExploitedSources']
+                        print(vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation'])
+
+                        wild_exploited = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
+                        wild_exploited_sources = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploitedSources']
+
+                        new_wild_exploited_sources = list()
+                        if wild_exploited: # Additional check
+                            for wild_exploited_source in wild_exploited_sources:
+                                print(wild_exploited_source)
+                                if wild_exploited_source['type'] == "attackerkb": #Filtering only this type
+                                    new_id_list = list()
+                                    for attackerkb_id in wild_exploited_source['idList']:
+                                        print(attackerkb_id)
+                                        if vulners_id in bul_dict[attackerkb_id]['title']:
+                                            new_id_list.append(attackerkb_id)
+                                    if new_id_list != list():
+                                        new_wild_exploited_sources.append({'type': 'attackerkb', 'idList': new_id_list})
+                                else:
+                                    new_wild_exploited_sources.append(wild_exploited_source)
+                            if new_wild_exploited_sources == list():
+                                wild_exploited = False
+                            wild_exploited_sources = new_wild_exploited_sources
+
+                        vulners_data['wild_exploited'] = wild_exploited
+                        vulners_data['wild_exploited_sources'] = wild_exploited_sources
 
                 description = vulners_data['data']['documents'][vulners_id]['description']
                 cvss_base_score = ""
@@ -139,5 +163,6 @@ def get_vulners_data(vulners_id, rewrite_flag):
                 vulners_data['basic_severity'] = ""
                 vulners_data['vuln_product'] = detection_results['detected_product_name']
                 vulners_data['vuln_type'] = detection_results['detected_vulnerability_type']
-
     return (vulners_data)
+
+# print(get_vulners_data(vulners_id="CVE-2021-40450", rewrite_flag=False))
