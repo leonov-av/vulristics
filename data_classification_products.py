@@ -364,7 +364,17 @@ product_data = {
         "description": "",
         "additional_detection_strings": []
     },
+    "SCOM": {
+        "prevalence": 0.9,
+        "description": "System Center Operations Manager",
+        "additional_detection_strings": []
+    },
     "Active Directory": {
+        "prevalence": 0.9,
+        "description": "Active Directory is a directory service developed by Microsoft for Windows domain networks",
+        "additional_detection_strings": []
+    },
+    "Active Directory Federation Server": {
         "prevalence": 0.9,
         "description": "Active Directory is a directory service developed by Microsoft for Windows domain networks",
         "additional_detection_strings": []
@@ -375,6 +385,11 @@ product_data = {
         "additional_detection_strings": []
     },
     "Windows DirectX": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "DirectX Graphics Kernel": {
         "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
@@ -1292,12 +1307,22 @@ product_data = {
         "description": "Optional agent for Microsoft Intune",
         "additional_detection_strings": []
     },
+    "Intune Management Extension": {
+        "prevalence": 0.3,
+        "description": "Optional agent for Microsoft Intune",
+        "additional_detection_strings": []
+    },
     "ASP.NET Core": {
         "prevalence": 0.8,
         "description": "An open-source, server-side web-application framework designed for web development",
         "additional_detection_strings": []
     },
     "Microsoft Dynamics 365 (on-premises)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Dynamics 365 Customer Engagement": {
         "prevalence": 0.5,
         "description": "",
         "additional_detection_strings": []
@@ -1407,5 +1432,69 @@ product_data = {
         "description": "A full volume encryption feature included with Microsoft Windows versions starting with Windows Vista",
         "additional_detection_strings": []
     },
-
+    "Windows AD FS": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows AppContainer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows AppContainer Firewall Rules": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows AppX Deployment Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Fast FAT File System Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows HTTP.sys": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Media Audio Decoder": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Media Foundation Dolby Digital Atmos Decoders": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Nearby Sharing": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Text Shaping": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows exFAT File System": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Console Window Host": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Rich Text Edit Control": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
 }
