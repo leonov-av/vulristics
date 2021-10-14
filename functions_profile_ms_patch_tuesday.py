@@ -66,33 +66,40 @@ def create_profile(month, year, patch_tuesday_date, file_name):
     ms_cves_for_date_range = "\n".join(ms_cves_for_date_range)
 
     query = month + " " + year + " " + "Patch Tuesday"
+    comments = dict()
 
     qualys_link = functions_source_analytic_sites.get_qualys_link(query)
-    # qualys_link = {'title':'Microsoft and Adobe Patch Tuesday (September 2021) – Microsoft 60 Vulnerabilities with 3 Critical, Adobe 61 Vulnerabilities',
-    #                'url':'https://blog.qualys.com/vulnerabilities-threat-research/2021/09/14/microsoft-and-adobe-patch-tuesday-september-2021-microsoft-60-vulnerabilities-with-3-critical-adobe-61-vulnerabilities'}
-    qualys_text = functions_source_analytic_sites.get_qualys_text_from_url(qualys_link['url'])
-    qualys_text = functions_source_analytic_sites.process_qualys_text(qualys_text)
-    functions_tools.print_debug_message("Qualys query: " + query)
-    functions_tools.print_debug_message("Qualys url found: " + qualys_link['url'])
-    functions_tools.print_debug_message("=== Qualys text ===")
-    functions_tools.print_debug_message(qualys_text)
-    functions_tools.print_debug_message("=== End of Qualys text ===")
+    # qualys_link = {'title':'Microsoft & Adobe Patch Tuesday (October 2021) – Microsoft 74 Vulnerabilities with 3 Critical, 4 Zero-Days. Adobe 10 Vulnerabilities',
+    #                'url':'https://blog.qualys.com/product-tech/2021/10/13/microsoft-adobe-patch-tuesday-october-2021-microsoft-74-vulnerabilities-with-3-critical-4-zero-days-adobe-10-vulnerabilities'}
+    if qualys_link:
+        qualys_text = functions_source_analytic_sites.get_qualys_text_from_url(qualys_link['url'])
+        qualys_text = functions_source_analytic_sites.process_qualys_text(qualys_text)
+        functions_tools.print_debug_message("Qualys query: " + query)
+        functions_tools.print_debug_message("Qualys url found: " + qualys_link['url'])
+        functions_tools.print_debug_message("=== Qualys text ===")
+        functions_tools.print_debug_message(qualys_text)
+        functions_tools.print_debug_message("=== End of Qualys text ===")
+        comments['qualys'] = qualys_text
 
     tenable_link = functions_source_analytic_sites.get_tenable_link(query)
-    tenable_text = functions_source_analytic_sites.get_tenable_text_from_url(tenable_link['url'])
-    functions_tools.print_debug_message("Tenable query: " + query)
-    functions_tools.print_debug_message("Tenable url found: " + tenable_link['url'])
-    functions_tools.print_debug_message("=== Tenable text ===")
-    functions_tools.print_debug_message(tenable_text)
-    functions_tools.print_debug_message("=== End of Tenable text ===")
+    if tenable_link:
+        tenable_text = functions_source_analytic_sites.get_tenable_text_from_url(tenable_link['url'])
+        functions_tools.print_debug_message("Tenable query: " + query)
+        functions_tools.print_debug_message("Tenable url found: " + tenable_link['url'])
+        functions_tools.print_debug_message("=== Tenable text ===")
+        functions_tools.print_debug_message(tenable_text)
+        functions_tools.print_debug_message("=== End of Tenable text ===")
+        comments['tenable'] = tenable_text
 
     rapid7_link = functions_source_analytic_sites.get_rapid7_link(query)
-    rapid7_text = functions_source_analytic_sites.get_rapid7_text_from_url(rapid7_link['url'])
-    functions_tools.print_debug_message("Rapid7 query: " + query)
-    functions_tools.print_debug_message("Rapid7 url found: " + rapid7_link['url'])
-    functions_tools.print_debug_message("=== Rapid7 text ===")
-    functions_tools.print_debug_message(rapid7_text)
-    functions_tools.print_debug_message("=== End of Rapid7 text ===")
+    if rapid7_link:
+        rapid7_text = functions_source_analytic_sites.get_rapid7_text_from_url(rapid7_link['url'])
+        functions_tools.print_debug_message("Rapid7 query: " + query)
+        functions_tools.print_debug_message("Rapid7 url found: " + rapid7_link['url'])
+        functions_tools.print_debug_message("=== Rapid7 text ===")
+        functions_tools.print_debug_message(rapid7_text)
+        functions_tools.print_debug_message("=== End of Rapid7 text ===")
+        comments['rapid7'] = rapid7_text
 
     queries = [
         "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW",
@@ -101,19 +108,14 @@ def create_profile(month, year, patch_tuesday_date, file_name):
     zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
     # zdi_link = {'title':'THE SEPTEMBER 2021 SECURITY UPDATE REVIEW',
     #             'url':'https://www.zerodayinitiative.com/blog/2021/9/14/the-september-2021-security-update-review-kpgpb'}
-    zdi_text = functions_source_analytic_sites.get_zdi_text_from_url(zdi_link['url'])
-    functions_tools.print_debug_message("ZDI query: " + query)
-    functions_tools.print_debug_message("ZDI url found: " + zdi_link['url'])
-    functions_tools.print_debug_message("=== ZDI text ===")
-    functions_tools.print_debug_message(zdi_text)
-    functions_tools.print_debug_message("=== End of ZDI text ===")
-
-    comments = {
-        'qualys': qualys_text,
-        'tenable': tenable_text,
-        'rapid7': rapid7_text,
-        'zdi': zdi_text
-    }
+    if zdi_link:
+        zdi_text = functions_source_analytic_sites.get_zdi_text_from_url(zdi_link['url'])
+        functions_tools.print_debug_message("ZDI query: " + query)
+        functions_tools.print_debug_message("ZDI url found: " + zdi_link['url'])
+        functions_tools.print_debug_message("=== ZDI text ===")
+        functions_tools.print_debug_message(zdi_text)
+        functions_tools.print_debug_message("=== End of ZDI text ===")
+        comments['zdi'] = zdi_text
 
     report_id = month + " " + year
     report_name = 'Microsoft Patch Tuesday, ' + month + " " + year
