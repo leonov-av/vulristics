@@ -1,7 +1,7 @@
 import functions_report_ms_patch_tuesday
 import argparse
 
-parser = argparse.ArgumentParser(description='Simple password manager')
+parser = argparse.ArgumentParser(description='An extensible framework for analyzing publicly available information about vulnerabilities')
 const = ""
 parser.add_argument('--report-type', help='Report type')
 parser.add_argument('--mspt-year', help='Microsoft Patch Tuesday year')
