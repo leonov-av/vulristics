@@ -48,22 +48,20 @@ def get_detected_entities(sentence, detection_entities):
             detected_entities[entity] = copy.copy(temp_ranges)
     return detected_entities
 
-def analyse_sentence(sentence):
+def analyse_sentence(sentence, product_data):
     """
     Get product and vulnerability_type from the sentence
-    :param sentence:
-    :return:
     """
-    detected_products = get_detected_entities(sentence, data_classification_products.product_data)
+    detected_products = get_detected_entities(sentence, product_data)
     max_priority = 0
     detected_product_name = ""
     for product in detected_products:
-        if data_classification_products.product_data[product]['prevalence'] > max_priority:
-            max_priority = data_classification_products.product_data[product]['prevalence']
+        if product_data[product]['prevalence'] > max_priority:
+            max_priority = product_data[product]['prevalence']
             detected_product_name = product
 
     detected_vulnerability_types = get_detected_entities(sentence,
-                                                data_classification_vulnerability_types.vulnerability_type_data)
+                                   data_classification_vulnerability_types.vulnerability_type_data)
     max_criticality = 0
     detected_vulnerability_type = ""
     for vulnerability_type in detected_vulnerability_types:
@@ -76,11 +74,3 @@ def analyse_sentence(sentence):
                 "detected_vulnerability_type":detected_vulnerability_type,
                 "detected_vulnerability_types":detected_vulnerability_types
             }
-
-def old_get_html(block):
-    print_block = re.sub("\[sentence_delim\]","",block['processed_block'])
-    print_block = re.sub("\[newline\]", "", print_block)
-    for tag in block['tags']:
-        print_block = re.sub('\[' + tag['text'] + '\|' + tag['param_name'] + '=\'' + tag['param_value'] +
-                             '\'\]','<span class="' + tag['param_name'] + '">' + tag['text'] + '</span>',print_block)
-    return(print_block)

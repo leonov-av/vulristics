@@ -96,7 +96,7 @@ def get_vulners_data_raw(vulners_id):
     return (vulners_data)
 
 
-def get_vulners_data(vulners_id, rewrite_flag):
+def get_vulners_data(vulners_id, product_data, rewrite_flag):
     download_vulners_data_raw(vulners_id, rewrite_flag)
     vulners_data = get_vulners_data_raw(vulners_id)
     if not vulners_data['not_found_error']:
@@ -125,7 +125,7 @@ def get_vulners_data(vulners_id, rewrite_flag):
             if vulners_id in vulners_data['data']['documents']:
                 if 'enchantments' in vulners_data['data']['documents'][vulners_id]:
                     if 'exploitation' in vulners_data['data']['documents'][vulners_id]['enchantments']:
-                        print(vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation'])
+                        # print(vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation'])
 
                         wild_exploited = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
                         wild_exploited_sources = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploitedSources']
@@ -133,11 +133,11 @@ def get_vulners_data(vulners_id, rewrite_flag):
                         new_wild_exploited_sources = list()
                         if wild_exploited: # Additional check
                             for wild_exploited_source in wild_exploited_sources:
-                                print(wild_exploited_source)
+                                # print(wild_exploited_source)
                                 if wild_exploited_source['type'] == "attackerkb": #Filtering only this type
                                     new_id_list = list()
                                     for attackerkb_id in wild_exploited_source['idList']:
-                                        print(attackerkb_id)
+                                        # print(attackerkb_id)
                                         if vulners_id in bul_dict[attackerkb_id]['title']:
                                             new_id_list.append(attackerkb_id)
                                     if new_id_list != list():
@@ -156,7 +156,7 @@ def get_vulners_data(vulners_id, rewrite_flag):
                 if 'cvss' in  vulners_data['data']['documents'][vulners_id]:
                     cvss_base_score = vulners_data['data']['documents'][vulners_id]['cvss']['score']
 
-                detection_results = functions_analysis_text.analyse_sentence(description)
+                detection_results = functions_analysis_text.analyse_sentence(description, product_data)
                 vulners_data['description'] = description
                 vulners_data['description_tags'] = detection_results
                 vulners_data['cvss_base_score'] = cvss_base_score

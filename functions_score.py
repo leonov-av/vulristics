@@ -16,7 +16,7 @@ def get_level(score_value):
         level = "Urgent"
     return level
 
-def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
+def get_vvs_struct_for_cve(cve, cve_data_all, profile):
     # Process CVE-related data and make score structure
     vvs_struct = dict()
     use_comments = False
@@ -206,13 +206,13 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
             vulnerable_product_is_common_n = 0
             vulnerable_product_is_common_c = "Unclassified Product"
 
-
-    if vuln_product in data_classification_products.product_data:
-        vulnerable_product_is_common_n = data_classification_products.product_data[vuln_product]['prevalence']
+    product_data = profile['product_data']
+    if vuln_product in product_data:
+        vulnerable_product_is_common_n = product_data[vuln_product]['prevalence']
         vulnerable_product_is_common_c = vuln_product
-        if "description" in data_classification_products.product_data[vuln_product]:
-            if data_classification_products.product_data[vuln_product]["description"] != "":
-                vulnerable_product_is_common_c = data_classification_products.product_data[vuln_product]["description"]
+        if "description" in product_data[vuln_product]:
+            if product_data[vuln_product]["description"] != "":
+                vulnerable_product_is_common_c = product_data[vuln_product]["description"]
     vulnerable_product_is_common_k = 14
 
     ######## Vulnerability type
@@ -294,9 +294,9 @@ def get_vvs_struct_for_cve(cve,cve_data_all,profile = False):
 
     return(vvs_struct)
 
-def get_cve_scores(all_cves,cve_data_all,profile):
+def get_cve_scores(all_cves, cve_data_all, profile):
     functions_tools.print_debug_message("Counting CVE scores...")
     scores_dict = dict()
     for cve in all_cves:
-        scores_dict[cve] = get_vvs_struct_for_cve(cve,cve_data_all,profile)
+        scores_dict[cve] = get_vvs_struct_for_cve(cve, cve_data_all, profile)
     return(scores_dict)

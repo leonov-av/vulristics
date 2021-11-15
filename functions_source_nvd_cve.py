@@ -49,7 +49,7 @@ def get_nvd_cve_data_raw(cve_id):
     return nvd_cve_data
 
 
-def get_nvd_cve_data(cve_id, rewrite_flag):
+def get_nvd_cve_data(cve_id, product_data, rewrite_flag):
     download_nvd_cve_data_raw(cve_id, rewrite_flag)
     nvd_cve_data = get_nvd_cve_data_raw(cve_id)
     description = ""
@@ -59,7 +59,7 @@ def get_nvd_cve_data(cve_id, rewrite_flag):
         if 'impact' in nvd_cve_data['result']['CVE_Items'][0]:
             if 'baseMetricV3' in nvd_cve_data['result']['CVE_Items'][0]['impact']:
                 cvss_base_score = nvd_cve_data['result']['CVE_Items'][0]['impact']['baseMetricV3']['cvssV3']['baseScore']
-    detection_results = functions_analysis_text.analyse_sentence(description)
+    detection_results = functions_analysis_text.analyse_sentence(description, product_data,)
     nvd_cve_data['description'] = description
     nvd_cve_data['description_tags'] = detection_results
     nvd_cve_data['cvss_base_score'] = cvss_base_score

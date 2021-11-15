@@ -581,16 +581,16 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
 
     report_data = get_basic_severity_statistics_report(combined_cve_data)
     name = "Basic Vulnerability Scores"
-    print("== " + name + " ==")
+    # print("== " + name + " ==")
     basic_score_html_content = "<b>" + name + "</b>" + "\n"
-    print(report_data['report_txt'])
+    # print(report_data['report_txt'])
     basic_score_html_content += report_data['report_html']
 
     report_data = get_vvs_statistics_report(cve_scores)
     name = "Vulristics Vulnerability Scores"
-    print("== " + name + " ==")
+    # print("== " + name + " ==")
     vulristics_score_html_content = "<b>" + name + "</b>" + "\n"
-    print(report_data['report_txt'])
+    # print(report_data['report_txt'])
     vulristics_score_html_content += report_data['report_html']
 
     html_content += "<div class=\"row\"> <div class=\"column\">" + vulristics_score_html_content + "</div>" + \
@@ -601,25 +601,25 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
 
     report_data = get_products_report(combined_cve_data, cve_scores, report_config, profile_data)
     name = "Products"
-    print("== " + name + " ==")
+    # print("== " + name + " ==")
     html_content += "<b>" + name + "</b>" + "\n"
-    print(report_data['report_txt'])
+    # print(report_data['report_txt'])
     html_content += report_data['report_html']
     html_content += "</br>"
 
     report_data = get_vulnerability_types_report(combined_cve_data, cve_scores, report_config, profile_data)
     name = "Vulnerability Types"
-    print("== " + name + " ==")
+    # print("== " + name + " ==")
     html_content += "<b>" + name + "</b>" + "\n"
-    print(report_data['report_txt'])
+    # print(report_data['report_txt'])
     html_content += report_data['report_html']
     html_content += "</br>"
 
     report_data = get_vulristics_score_report(combined_cve_data, cve_scores, report_config, profile_data)
     name = "Vulnerabilities"
-    print("== " + name + " ==")
+    # print("== " + name + " ==")
     html_content += "<b>" + name + "</b>" + "\n"
-    print(report_data['report_txt'])
+    # print(report_data['report_txt'])
     html_content += report_data['report_html']
 
 
@@ -627,9 +627,9 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
     exploited_cves = get_vulns_filtered_by_wild_exploited("Yes", current_cve_data, cve_scores)
     report_data = get_type_based_report(exploited_cves, report_config, profile_data, cve_scores)
     name = "Exploitation in the wild detected"
-    print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
+    # print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
     html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
-    print(report_data['report_txt'])
+    # print(report_data['report_txt'])
     html_content += report_data['report_html']
     # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
     current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
@@ -637,9 +637,9 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
     exploited_cves = get_vulns_filtered_by_public_exploit_exists("Yes", current_cve_data, cve_scores)
     report_data = get_type_based_report(exploited_cves, report_config, profile_data, cve_scores)
     name = "Public exploit exists, but exploitation in the wild is NOT detected"
-    print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
+    # print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
     html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
-    print(report_data['report_txt'])
+    # print(report_data['report_txt'])
     html_content += report_data['report_html']
     # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
     current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
@@ -668,20 +668,20 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
 
     report_data = get_type_based_report(current_cve_data, report_config, profile_data, cve_scores)
     name = "Other Vulnerabilities"
-    print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
+    # print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
     html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
-    print(report_data['report_txt'])
+    # print(report_data['report_txt'])
     html_content += report_data['report_html']
     # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
     current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
 
     html_content = re.sub("##Content##", html_content, template)
 
-    f = open("reports/" + profile_data['file_name_prefix'] + "_" + report_config['file_name_suffix'] + ".html", "w",
-             encoding="utf-8")
+    report_file_path = "reports/" + profile_data['file_name_prefix'] + "_" + report_config['file_name_suffix'] + ".html"
+    f = open(report_file_path, "w",  encoding="utf-8")
     f.write(html_content)
     f.close()
-
+    print("Report generated: " + report_file_path)
 
 def get_profile(file_path):
     functions_tools.print_debug_message("Reading existing Patch Tuesday profile...")
@@ -766,12 +766,13 @@ def get_eanbled_data_sources(profile, source_id):
         enabled_data_sources = all_data_sources
     return enabled_data_sources
 
+import data_classification_products
 
 def make_vulnerability_report_for_profile(profile_file_path, rewrite_flag):
     profile = get_profile(profile_file_path)
     source_id = list(profile.keys())[0]
+    profile[source_id]['product_data'] = data_classification_products.get_product_data()
     cves_to_exclude = get_cves_to_exclude(profile, source_id)
-    
     all_products_to_analyze = get_products(profile, source_id)
     
     # making list of CVEs not about products in products_to_analyze to exclude it 
@@ -781,15 +782,15 @@ def make_vulnerability_report_for_profile(profile_file_path, rewrite_flag):
         all_cves_tmp= get_all_cves(profile, source_id, cves_to_exclude)
         enabled_data_sources = get_eanbled_data_sources(profile, source_id)
         cve_related_data_tmp, cves_to_exclude = functions_combined_vulnerability_data.collect_cve_related_data(
-                                            enabled_data_sources, all_cves_tmp,
-                                            cves_to_exclude, rewrite_flag)
+                                                enabled_data_sources, all_cves_tmp, cves_to_exclude,
+                                                profile[source_id]['product_data'], rewrite_flag)
         selected_cves_to_exclude = cves_to_exclude
         
         for selected_cve in all_cves_tmp:
-            functions_tools.print_debug_message ("filtering " + selected_cve + " for one of products_to_analyze")
+            functions_tools.print_debug_message("filtering " + selected_cve + " for one of products_to_analyze")
             b_product_found = False
             for list_type_str in cve_related_data_tmp: 
-                functions_tools.print_debug_message ("    checking in "+ list_type_str)
+                functions_tools.print_debug_message("    checking in "+ list_type_str)
                 if not selected_cve in cve_related_data_tmp[list_type_str]:
                     functions_tools.print_debug_message("      no data for "+ selected_cve + " in " + list_type_str)
                     continue
@@ -813,8 +814,8 @@ def make_vulnerability_report_for_profile(profile_file_path, rewrite_flag):
     all_cves = get_all_cves(profile, source_id, selected_cves_to_exclude)
     enabled_data_sources = get_eanbled_data_sources(profile, source_id)
     cve_related_data, selected_cves_to_exclude = functions_combined_vulnerability_data.collect_cve_related_data(
-                                        enabled_data_sources, all_cves,
-                                        selected_cves_to_exclude, rewrite_flag)
+                                                    enabled_data_sources, all_cves, selected_cves_to_exclude,
+                                                    profile[source_id]['product_data'], rewrite_flag)
     cve_scores = functions_score.get_cve_scores(all_cves, cve_related_data, profile[source_id])
 
     print_unclassified_products_templates(cve_scores, cve_related_data)
