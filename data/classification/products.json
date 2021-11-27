@@ -32,7 +32,13 @@
     "RDP": {
         "prevalence": 1,
         "description": "Remote Desktop Protocol",
+        "detection_priority": -0.5,
         "additional_detection_strings": []
+    },
+    "RDP Client": {
+        "prevalence": 0.8,
+        "description": "Remote Desktop Protocol Client",
+        "additional_detection_strings": ["Remote Desktop Protocol Client"]
     },
     "Windows SMB": {
         "prevalence": 1,
@@ -110,6 +116,11 @@
         "additional_detection_strings": []
     },
     "Microsoft Excel": {
+        "prevalence": 0.6,
+        "description": "MS Office product",
+        "additional_detection_strings": []
+    },
+    "Microsoft Access": {
         "prevalence": 0.6,
         "description": "MS Office product",
         "additional_detection_strings": []
@@ -232,6 +243,8 @@
     "Windows": {
         "prevalence": 0.9,
         "description": "Windows Kernel",
+        "detection_priority": -1,
+        "detection_priority_comment": "OS name, it is better to choose a specific name of the software",
         "additional_detection_strings": []
     },
     "Windows Codecs Library": {
@@ -703,10 +716,15 @@
         "description": "Windows component",
         "additional_detection_strings": []
     },
+    "Microsoft Virtual Machine Bus": {
+        "prevalence": 0.6,
+        "description": "Hyper-V Virtual Machine Bus (VMBus)",
+        "additional_detection_strings": ["VMBus"]
+    },
     "Windows Hyper-V": {
         "prevalence": 0.6,
         "description": "Hardware virtualization component of the client editions of Windows NT",
-        "additional_detection_strings": []
+        "additional_detection_strings": ["Hyper-V"]
     },
     "Windows InstallService": {
         "prevalence": 0.8,
@@ -1246,11 +1264,6 @@
     },
     "Windows Media Foundation Core": {
         "prevalence": 0.9,
-        "description": "",
-        "additional_detection_strings": []
-    },
-    "Windows Remote Desktop Protocol (RDP)": {
-        "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
     },

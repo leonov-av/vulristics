@@ -2,9 +2,6 @@ import json
 import re
 import os
 import requests
-import data_classification_vulnerability_types
-import functions_analysis_text
-import functions_tools
 
 
 def get_ms_cve_search_data(from_date, to_date, skip):
@@ -70,9 +67,11 @@ def get_ms_cve_data_from_ms_site(cve_id):
         # 2) CVSS and vulnerable products  https://api.msrc.microsoft.com
         #                           /sug/v2.0/en-US/affectedProduct?%24filter=cveNumber+eq+%27CVE-2020-1003%27
         ms_cve_data = dict()
-        ms_cve_data['main'] = requests.get("https://api.msrc.microsoft.com/sug/v2.0/en-US/vulnerability/" + cve_id).json()
+        ms_cve_data['main'] = requests.get("https://api.msrc.microsoft.com/sug/v2.0/en-US/vulnerability/" +
+                                           cve_id).json()
         ms_cve_data['vuln_products'] = requests.get("https://api.msrc.microsoft.com/sug/v2.0/en-US/"
-                                                    "affectedProduct?%24filter=cveNumber+eq+%27" + cve_id + "%27").json()
+                                                    "affectedProduct?%24filter=cveNumber+eq+%27" +
+                                                    cve_id + "%27").json()
         ms_cve_data['error'] = False
         ms_cve_data['status'] = "CVE ID was found on microsoft.com portal"
         ms_cve_data['not_found_error'] = False
@@ -109,36 +108,6 @@ def get_ms_cve_data_raw(cve_id):
     return ms_cve_data
 
 
-def get_vuln_product_and_type_from_title(title):
-    vuln_type = ""
-    vuln_product = ""
-    for pattern in data_classification_vulnerability_types.vulnerability_type_detection_patterns:
-        if pattern in title:
-            vuln_type = data_classification_vulnerability_types.vulnerability_type_detection_patterns[pattern]
-            vuln_product = re.sub("[ \t]*" + pattern + ".*$", "", title)
-    vuln_type = re.sub("^ *","",vuln_type)
-    vuln_type = re.sub(" *$", "", vuln_type)
-    vuln_product = re.sub("^ *", "", vuln_product)
-    vuln_product = re.sub(" *$", "", vuln_product)
-    vuln_product = re.sub("\xa0", "", vuln_product)
-    return vuln_type, vuln_product
-
-
-def add_cve_product_and_type_tags(ms_cve_data):
-    ms_cve_data['vuln_type'], ms_cve_data['vuln_product'] = get_vuln_product_and_type_from_title(
-        ms_cve_data['main']['cveTitle'])
-    if ms_cve_data['main']['cveTitle'] != "RETRACTED":
-        if 'vuln_type' not in ms_cve_data:
-            functions_tools.print_debug_message("No vuln_type in ms_cve_data for " + ms_cve_data['cveNumber'])
-            functions_tools.print_debug_message(json.dumps(ms_cve_data, indent=4))
-            exit()
-        if 'vuln_product' not in ms_cve_data:
-            functions_tools.print_debug_message("No vuln_product in ms_cve_data for " + ms_cve_data['cveNumber'])
-            functions_tools.print_debug_message(json.dumps(ms_cve_data, indent=4))
-            exit()
-    return ms_cve_data
-
-
 def add_ms_cve_severity(ms_cve_data):
     severities = set()
     severity_numbers = set()
@@ -171,93 +140,17 @@ def add_ms_cve_cvss_base_score(ms_cve_data):
     ms_cve_data['cvss_base_score'] = cvss_base_score
     return ms_cve_data
 
-
-# Heuristics
-def heuristic_change_product_vuln_type(ms_cve_data):
-    if 'vuln_product' in ms_cve_data:
-        ms_cve_data['vuln_product'] = re.sub("Microsoft Windows","Windows", ms_cve_data['vuln_product'])
-        ms_cve_data['vuln_product'] = re.sub("Microsoft VsCode", "Visual Studio Code", ms_cve_data['vuln_product'])
-
-        if re.findall("Azure .*",  ms_cve_data['vuln_product']):
-            ms_cve_data['vuln_product'] = "Azure"
-
-        if ms_cve_data['vuln_product'] == "Scripting Engine":
-            ms_cve_data['vuln_product'] = "Microsoft Scripting Engine"
-
-        if ms_cve_data['vuln_product'] == "ASP.NET Core":
-            ms_cve_data['vuln_product'] = "ASP.NET"
-        if ms_cve_data['vuln_product'] == "SMB":
-            ms_cve_data['vuln_product'] = "Windows SMB"
-        if ms_cve_data['vuln_product'] == "NTFS":
-            ms_cve_data['vuln_product'] = "Windows NTFS"
-        if ms_cve_data['vuln_product'] == "Hyper-V":
-            ms_cve_data['vuln_product'] = "Windows Hyper-V"
-        if ms_cve_data['vuln_product'] == "Diagnostics Hub Standard Collector Service":
-            ms_cve_data['vuln_product'] = "Diagnostics Hub Standard Collector"
-        if ms_cve_data['vuln_product'] == "Windows DNS":
-            ms_cve_data['vuln_product'] = "Windows DNS Server"
-        if ms_cve_data['vuln_product'] == "Microsoft Office SharePoint":
-            ms_cve_data['vuln_product'] = "Microsoft SharePoint"
-        if ms_cve_data['vuln_product'] == "ASP.NET Core and Visual Studio":
-            ms_cve_data['vuln_product'] = "ASP.NET Core"
-        if ms_cve_data['vuln_product'] == "Microsoft splwow64":
-            ms_cve_data['vuln_product'] = "splwow64"
-        if ms_cve_data['vuln_product'] == "Microsoft SharePoint Server":
-            ms_cve_data['vuln_product'] = "Microsoft SharePoint"
-        if ms_cve_data['vuln_product'] == "Windows VBScript Engine":
-            ms_cve_data['vuln_product'] = "VBScript"
-        if ms_cve_data['vuln_product'] == "Windows Defender Antimalware Platform Hard Link":
-            ms_cve_data['vuln_product'] = "Microsoft Defender"
-        if ms_cve_data['vuln_product'] == "Win32k":
-            ms_cve_data['vuln_product'] = "Windows Kernel"
-        if ms_cve_data['vuln_product'] == "SharePoint":
-            ms_cve_data['vuln_product'] = "Microsoft SharePoint"
-    if 'vuln_product' in ms_cve_data:
-        if ms_cve_data['vuln_type'] == "Memory Corruption" and \
-                re.findall("[Rr]emote code execution", ms_cve_data['description']):
-            ms_cve_data['vuln_type'] = "Remote Code Execution"
-    return ms_cve_data
-
-
-def get_ms_cve_data(cve_id, product_data, rewrite_flag):
+def get_ms_cve_data(cve_id, rewrite_flag):
     download_ms_cve_data_raw(cve_id, rewrite_flag)
     ms_cve_data = get_ms_cve_data_raw(cve_id)
     if not ms_cve_data['not_found_error']:
-        # ms_cve_data = add_cve_product_and_type_tags(ms_cve_data)
-        if not 'description' in ms_cve_data:
+        ms_cve_data['description'] = ""
+        if 'description' in ms_cve_data['main']:
             ms_cve_data['description'] = re.sub("<[^>]*>","",ms_cve_data['main']['description'])
-        if ms_cve_data['description'] == "":
-            ms_cve_data['description'] = ms_cve_data['main']['cveTitle']
-        else:
-            ms_cve_data['description'] =  ms_cve_data['main']['cveTitle'] + ". " + ms_cve_data['description']
+        ms_cve_data['title'] = ms_cve_data['main']['cveTitle']
         ms_cve_data['exploited'] = ms_cve_data['main']['exploited']
-        # ms_cve_data = heuristic_change_product_vuln_type(ms_cve_data)
         ms_cve_data = add_ms_cve_severity(ms_cve_data)
         ms_cve_data = add_ms_cve_cvss_base_score(ms_cve_data)
-        ms_cve_data['vuln_product'] = ""
-        ms_cve_data['vuln_type'] = ""
-
-        if ms_cve_data['vuln_product'] == "":
-            detection_results = functions_analysis_text.analyse_sentence(ms_cve_data['main']['cveTitle'], product_data)
-            ms_cve_data['description_tags'] = detection_results
-            ms_cve_data['vuln_product'] = detection_results['detected_product_name']
-        if ms_cve_data['vuln_type'] == "":
-            detection_results = functions_analysis_text.analyse_sentence(ms_cve_data['main']['cveTitle'], product_data)
-            ms_cve_data['description_tags'] = detection_results
-            ms_cve_data['vuln_type'] = detection_results['detected_vulnerability_type']
-        ###
-        if ms_cve_data['vuln_product'] == "":
-            detection_results = functions_analysis_text.analyse_sentence(ms_cve_data['description'], product_data)
-            ms_cve_data['description_tags'] = detection_results
-            ms_cve_data['vuln_product'] = detection_results['detected_product_name']
-        if ms_cve_data['vuln_type'] == "":
-            detection_results = functions_analysis_text.analyse_sentence(ms_cve_data['description'], product_data)
-            ms_cve_data['description_tags'] = detection_results
-            ms_cve_data['vuln_type'] = detection_results['detected_vulnerability_type']
-        # # DEBUG
-        # if cve_id == "CVE-2021-31968":
-        #     print(ms_cve_data)
-        #     exit()
     return ms_cve_data
 
 

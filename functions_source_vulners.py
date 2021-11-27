@@ -96,7 +96,7 @@ def get_vulners_data_raw(vulners_id):
     return (vulners_data)
 
 
-def get_vulners_data(vulners_id, product_data, rewrite_flag):
+def get_vulners_data(vulners_id, rewrite_flag):
     download_vulners_data_raw(vulners_id, rewrite_flag)
     vulners_data = get_vulners_data_raw(vulners_id)
     if not vulners_data['not_found_error']:
@@ -125,8 +125,6 @@ def get_vulners_data(vulners_id, product_data, rewrite_flag):
             if vulners_id in vulners_data['data']['documents']:
                 if 'enchantments' in vulners_data['data']['documents'][vulners_id]:
                     if 'exploitation' in vulners_data['data']['documents'][vulners_id]['enchantments']:
-                        # print(vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation'])
-
                         wild_exploited = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
                         wild_exploited_sources = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploitedSources']
 
@@ -156,13 +154,8 @@ def get_vulners_data(vulners_id, product_data, rewrite_flag):
                 if 'cvss' in  vulners_data['data']['documents'][vulners_id]:
                     cvss_base_score = vulners_data['data']['documents'][vulners_id]['cvss']['score']
 
-                detection_results = functions_analysis_text.analyse_sentence(description, product_data)
                 vulners_data['description'] = description
-                vulners_data['description_tags'] = detection_results
                 vulners_data['cvss_base_score'] = cvss_base_score
-                vulners_data['basic_severity'] = ""
-                vulners_data['vuln_product'] = detection_results['detected_product_name']
-                vulners_data['vuln_type'] = detection_results['detected_vulnerability_type']
     return (vulners_data)
 
 # print(get_vulners_data(vulners_id="CVE-2021-40450", rewrite_flag=False))
