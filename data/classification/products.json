@@ -29,13 +29,7 @@
         "description": "",
         "additional_detection_strings": []
     },
-    "RDP": {
-        "prevalence": 1,
-        "description": "Remote Desktop Protocol",
-        "detection_priority": -0.5,
-        "additional_detection_strings": []
-    },
-    "RDP Client": {
+    "Windows Remote Desktop Client": {
         "prevalence": 0.8,
         "description": "Remote Desktop Protocol Client",
         "additional_detection_strings": ["Remote Desktop Protocol Client", "Remote Desktop Client"]
@@ -147,12 +141,12 @@
     },
     "Chakra": {
         "prevalence": 0.6,
-        "description": "MS Internet Browser",
+        "description": "Chakra is a proprietary JScript engine used in the Internet Explorer web browser",
         "additional_detection_strings": []
     },
     "Internet Explorer": {
         "prevalence": 0.6,
-        "description": "MS Internet Browser",
+        "description": "Internet Explorer is a discontinued series of graphical web browsers developed by Microsoft",
         "additional_detection_strings": []
     },
     "Microsoft Browser": {
@@ -185,14 +179,27 @@
         "description": "Integrated development environment",
         "additional_detection_strings": []
     },
-    "Microsoft Dynamics 365": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": []
-    },
     "Azure": {
         "prevalence": 0.3,
         "description": "",
+        "additional_detection_strings": []
+    },
+    "Azure RTOS": {
+        "prevalence": 0.3,
+        "detection_priority": 1,
+        "description": "Azure RTOS is a small, fast, reliable, and easy-to-use real-time operating system (RTOS) for connecting deeply embedded IoT devices",
+        "additional_detection_strings": []
+    },
+    "CredSSP": {
+        "prevalence": 0.8,
+        "detection_priority": 1,
+        "description": "CredSSP is a Security Support Provider that lets an application delegate the user's credentials from the client to the target server for remote authentication",
+        "additional_detection_strings": []
+    },
+    "FSLogix": {
+        "prevalence": 0.8,
+        "detection_priority": 1,
+        "description": "FSLogix enhances and enables user profiles in Windows remote computing environments",
         "additional_detection_strings": []
     },
     ".NET Core": {
@@ -240,12 +247,27 @@
         "description": "",
         "additional_detection_strings": []
     },
-    "Windows": {
+    "Windows Kernel": {
         "prevalence": 0.9,
         "description": "Windows Kernel",
         "detection_priority": -1,
         "detection_priority_comment": "OS name, it is better to choose a specific name of the software",
-        "additional_detection_strings": []
+        "additional_detection_strings": ["Windows Kernel", "Windows"]
+    },
+    "CShell": {
+        "prevalence": 0.8,
+        "description": "CShell is a universal Windows Shell for Windows 10 that scales across PC, Mobile, and Xbox",
+        "additional_detection_strings": ["Composable Shell"]
+    },
+    "Microsoft COM": {
+        "prevalence": 0.8,
+        "description": "COM is a platform-independent, distributed, object-oriented system for creating binary software components that can interact",
+        "additional_detection_strings": ["Microsoft COM for Windows"]
+    },
+    "Windows Feedback Hub": {
+        "prevalence": 0.7,
+        "description": "Feedback Hub is a universal app designed to allow users to provide feedback, feature suggestions, and bug reports for the operating system",
+        "additional_detection_strings": ["Feedback Hub"]
     },
     "Windows Codecs Library": {
         "prevalence": 0.8,
@@ -417,11 +439,6 @@
         "description": "",
         "additional_detection_strings": []
     },
-    "Windows Kernel": {
-        "prevalence": 0.9,
-        "description": "",
-        "additional_detection_strings": []
-    },
     "Windows Local Spooler": {
         "prevalence": 0.7,
         "description": "",
@@ -479,7 +496,7 @@
         },
     "Diagnostics Hub Standard Collector": {
             "prevalence": 0.8,
-            "description": "",
+            "description": "Diagnostics Hub Standard Collector is part of Windows diagnostics tools and it collects real time ETW (Event Tracing for Windows) events and processes them",
             "additional_detection_strings": []
         },
     "GDI+": {
@@ -547,7 +564,7 @@
     },
     "Azure Sphere": {
         "prevalence": 0.4,
-        "description": "",
+        "description": "Microsoft Azure Sphere is a solution for creating highly-secured, connected, MCU-powered devices",
         "additional_detection_strings": []
     },
     "Azure Virtual Machine": {
@@ -581,11 +598,6 @@
         "additional_detection_strings": []
     },
     "Microsoft Office ClickToRun": {
-        "prevalence": 0.6,
-        "description": "",
-        "additional_detection_strings": []
-    },
-    "Microsoft Power BI": {
         "prevalence": 0.6,
         "description": "",
         "additional_detection_strings": []
@@ -756,17 +768,12 @@
         "description": "Windows component",
         "additional_detection_strings": []
     },
-    "Windows Remote Desktop": {
-        "prevalence": 0.8,
-        "description": "Windows component",
-        "additional_detection_strings": []
-    },
     "Windows Remote Desktop Services": {
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": []
     },
-    "Windows Remote Desktop Protocol Core": {
+    "Windows Remote Desktop Protocol": {
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": []
@@ -1139,7 +1146,7 @@
     },
     "Power BI": {
         "prevalence": 0.3,
-        "description": "",
+        "description": "Power BI is a business analytics service by Microsoft",
         "additional_detection_strings": []
     },
     "Fortinet FortiOS": {
@@ -1322,14 +1329,9 @@
         "description": "An open-source, server-side web-application framework designed for web development",
         "additional_detection_strings": []
     },
-    "Microsoft Dynamics 365 (on-premises)": {
+    "Microsoft Dynamics 365": {
         "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": []
-    },
-    "Microsoft Dynamics 365 Customer Engagement": {
-        "prevalence": 0.5,
-        "description": "",
+        "description": "Microsoft Dynamics 365 is a product line of enterprise resource planning (ERP) and customer relationship management (CRM) intelligent business applications",
         "additional_detection_strings": []
     },
     "Windows Bluetooth Driver": {

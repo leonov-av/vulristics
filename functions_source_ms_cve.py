@@ -134,7 +134,8 @@ def add_ms_cve_cvss_base_score(ms_cve_data):
     cvss_base_score = ""
     if 'value' in ms_cve_data['vuln_products']:
         for data in ms_cve_data['vuln_products']['value']:
-            all_base_score.append(data['baseScore'])
+            if 'baseScore' in data:
+                all_base_score.append(data['baseScore'])
     if all_base_score != list():
         cvss_base_score = max(all_base_score)
     ms_cve_data['cvss_base_score'] = cvss_base_score

@@ -11,6 +11,7 @@ parser.add_argument('--mspt-year', help='Microsoft Patch Tuesday year')
 parser.add_argument('--mspt-month', help='Microsoft Patch Tuesday month')
 parser.add_argument('--cve-project-name', help='Name of the CVE Project')
 parser.add_argument('--cve-list-path', help='Path to the list of CVE IDs')
+parser.add_argument('--cve-comments-path', help='Path to the CVE comments file')
 parser.add_argument('--cve-data-sources', help='Data sources for analysis, e.g. "ms,nvd,vulners,attackerkb"')
 
 
@@ -49,8 +50,25 @@ elif args.report_type == "cve_list":
     report_name = name + ' report'
     file_name_prefix = re.sub(" ","_",name).lower()
 
+    cve_list_text = ""
     with open(args.cve_list_path, 'r') as file:
-        cves_text = file.read()
+        cve_list_text = file.read()
+
+    comments = dict()
+    if args.cve_comments_path:
+        with open(args.cve_comments_path, 'r') as file:
+            cve_comments_text = file.read()
+            for line in cve_comments_text.split("\n"):
+                if "|" in line:
+                    group = line.split("|")[0]
+                    line = re.sub("[^\|]*\|","",line)
+                else:
+                    group = "Comment"
+                if not group in comments:
+                    comments[group] = ""
+                comments[group] += line + "\n"
+
+    print(comments)
 
     # with open('analyze_product_list.txt', 'r') as file:
     #     products_text = file.read()
@@ -60,12 +78,9 @@ elif args.report_type == "cve_list":
     report_id = name + "_report"
     data_sources = args.cve_data_sources.split(",")
 
-    comments = dict()
-    # comments["hosts"] = ''''''
-    # comments["recent_attack"] = ''''''
 
     profile_file_path = "data/profiles/" + file_name
-    functions_profile.save_profile(profile_file_path, report_id, report_name, file_name_prefix, cves_text,
+    functions_profile.save_profile(profile_file_path, report_id, report_name, file_name_prefix, cve_list_text,
                                    products_text,
                                    data_sources, comments)
     functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path, rewrite_flag)
