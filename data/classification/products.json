@@ -38,7 +38,7 @@
     "RDP Client": {
         "prevalence": 0.8,
         "description": "Remote Desktop Protocol Client",
-        "additional_detection_strings": ["Remote Desktop Protocol Client"]
+        "additional_detection_strings": ["Remote Desktop Protocol Client", "Remote Desktop Client"]
     },
     "Windows SMB": {
         "prevalence": 1,
@@ -1329,11 +1329,6 @@
     },
     "Microsoft Dynamics 365 Customer Engagement": {
         "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": []
-    },
-    "Remote Desktop Client": {
-        "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
     },
