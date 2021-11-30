@@ -6,12 +6,45 @@
 Let's say we have a vulnerability ID (CVE ID) and we need to decide whether it is really critical or not. We will probably go to some vulnerability databases (NVD, CVE page on the , etc.) and somehow analyze the descriptions and parameters. Right? Such analysis can be quite complex and not so obvious. My idea is to formalize it and make it shareable. It may not be the most efficient way to process data, but it should reflect real human experience, the things that real vulnerability analysts do. This is the main goal.
 
 ## What's ready right now?
-Currently, there are the following scripts available:
+You can generate the report for the following entities:
 
-1. report_ms_patch_tuesday.py - make html report for Microsoft Patch Tuesday CVEs
-2. report_ms_patch_tuesday_other.py - make html report for Microsoft CVEs not in Patch Tuesdays
-3. report_cve.py - make html report for any set of CVEs
-4. report_daily_exploits.py - make daily exploits report that I use for my [Telegram Security news channel](https://t.me/avleonovnews)
+* Arbitrary CVE list
+```buildoutcfg
+python3.8 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,vulners,attackerkb" --rewrite-flag "True"
+```
+* Microsoft Patch Tuesday ([HTML report example](https://avleonov.com/vulristics_reports/ms_patch_tuesday_november2021_report_with_comments_ext_img.html))
+```buildoutcfg
+python3.8 vulristics.py --report-type "ms_patch_tuesday" --mspt-year 2021 --mspt-month "November" --rewrite-flag "True"
+```
+### Example of output
+```buildoutcfg
+$ python3.8 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,vulners,attackerkb"  --rewrite-flag "True"
+                      /$$           /$$             /$$     /$$                    
+                     | $$          |__/            | $$    |__/                    
+ /$$    /$$ /$$   /$$| $$  /$$$$$$  /$$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$$  /$$$$$$$
+|  $$  /$$/| $$  | $$| $$ /$$__  $$| $$ /$$_____/|_  $$_/  | $$ /$$_____/ /$$_____/
+ \  $$/$$/ | $$  | $$| $$| $$  \__/| $$|  $$$$$$   | $$    | $$| $$      |  $$$$$$ 
+  \  $$$/  | $$  | $$| $$| $$      | $$ \____  $$  | $$ /$$| $$| $$       \____  $$
+   \  $/   |  $$$$$$/| $$| $$      | $$ /$$$$$$$/  |  $$$$/| $$|  $$$$$$$ /$$$$$$$/
+    \_/     \______/ |__/|__/      |__/|_______/    \___/  |__/ \_______/|_______/ 
+Reading existing Patch Tuesday profile...
+Exclude CVEs: 0
+No specified products to analyze set in profile, reporting everything
+All CVEs: 1
+Counting CVE scores...
+Collecting MS CVE data...
+Requesting CVE-2021-42284 from Microsoft website
+Collecting NVD CVE data...
+Requesting CVE-2021-42284 from NVD website
+Collecting AttackerKB CVE data...
+Requesting CVE-2021-42284 from AttackerKB website WITHOUT authorization key
+Collecting Vulners CVE data...
+Requesting CVE-2021-42284 from Vulners website WITH authorization key
+Counting CVE scores...
+Making vulnerability reports for each reports config...
+Report config: with_comments_ext_img
+Report generated: reports/new_project_report_with_comments_ext_img.html
+```
 
 ## Where to read more?
 * My posts about Vulristics in [avleonov.com blog](https://avleonov.com/category/projects/vulristics/)
