@@ -108,11 +108,11 @@ def get_tenable_link(query):
         'Referer': 'https://community.qualys.com/',
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
-    response = requests.get("https://tenable.com/search/node/" + query, headers=headers)
-    a_tags = re.findall('<a href="https://www.tenable.com/blog/.*?</a>', response.text)
+    response = requests.get("https://www.tenable.com/blog/search?field_blog_section_tid=All&combine=" + query, headers=headers)
+    a_tags = re.findall(' <h2><a href="/blog/.*?</a>', response.text)
     for a_tag in a_tags:
         # print(a_tag)
-        url = a_tag.split('"')[1]
+        url = "https://www.tenable.com" + a_tag.split('"')[1]
         title = re.sub("<[^>]*>", "", a_tag)
 
         result_status = True

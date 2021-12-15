@@ -68,8 +68,6 @@ elif args.report_type == "cve_list":
                     comments[group] = ""
                 comments[group] += line + "\n"
 
-    print(comments)
-
     # with open('analyze_product_list.txt', 'r') as file:
     #     products_text = file.read()
     products_text = ""

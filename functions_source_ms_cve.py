@@ -116,7 +116,8 @@ def add_ms_cve_severity(ms_cve_data):
     result_severity = ""
 
     for block in ms_cve_data['vuln_products']['value']:
-        severities.add(block['severity'].lower())
+        if 'severity' in block:
+            severities.add(block['severity'].lower())
     for severity in severities:
         for severity_val in severity_dict:
             if severity == severity_val:
@@ -149,7 +150,10 @@ def get_ms_cve_data(cve_id, rewrite_flag):
         if 'description' in ms_cve_data['main']:
             ms_cve_data['description'] = re.sub("<[^>]*>","",ms_cve_data['main']['description'])
         ms_cve_data['title'] = ms_cve_data['main']['cveTitle']
-        ms_cve_data['exploited'] = ms_cve_data['main']['exploited']
+        if 'exploited' in ms_cve_data['main']:
+            ms_cve_data['exploited'] = ms_cve_data['main']['exploited']
+        else:
+            ms_cve_data['exploited'] = "No"
         ms_cve_data = add_ms_cve_severity(ms_cve_data)
         ms_cve_data = add_ms_cve_cvss_base_score(ms_cve_data)
     return ms_cve_data
