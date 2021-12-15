@@ -54,6 +54,16 @@
         "description": "Windows kernel-mode driver",
         "additional_detection_strings": ["Win32k"]
     },
+    "Windows AppX Installer": {
+        "prevalence": 0.9,
+        "description": "Windows AppX Installer is a utility for side-loading Windows 10 apps, available on the App Store",
+        "additional_detection_strings": ["Win32k"]
+    },
+    "Windows Encrypting File System": {
+        "prevalence": 0.9,
+        "description": "Encrypting File System (EFS) on Microsoft Windows is a feature introduced in version 3.0 of NTFS that provides filesystem-level encryption",
+        "additional_detection_strings": ["EFS"]
+    },
     "Windows TCP/IP": {
         "prevalence": 0.9,
         "description": "Windows component",
@@ -71,7 +81,13 @@
     },
     "Microsoft Defender": {
         "prevalence": 0.8,
+        "detection_priority": -0.3,
         "description": "Anti-malware component of Microsoft Windows",
+        "additional_detection_strings": []
+    },
+    "Microsoft Defender for IoT": {
+        "prevalence": 0.8,
+        "description": "Microsoft Defender for IoT provides comprehensive threat detection for IoT/OT environments",
         "additional_detection_strings": []
     },
     "RPC": {
@@ -254,6 +270,16 @@
         "detection_priority_comment": "OS name, it is better to choose a specific name of the software",
         "additional_detection_strings": ["Windows Kernel", "Windows"]
     },
+     "Microsoft Message Queuing": {
+        "prevalence": 0.9,
+        "description": "Microsoft Message Queuing or MSMQ is a message queue implementation developed by Microsoft and deployed in its Windows Server operating systems since Windows NT 4 and Windows 95",
+        "additional_detection_strings": ["MSMQ"]
+    },
+     "SymCrypt": {
+        "prevalence": 0.9,
+        "description": "SymCrypt is the core cryptographic function library currently used by Windows",
+        "additional_detection_strings": []
+    },
     "CShell": {
         "prevalence": 0.8,
         "description": "CShell is a universal Windows Shell for Windows 10 that scales across PC, Mobile, and Xbox",
@@ -269,6 +295,16 @@
         "description": "Feedback Hub is a universal app designed to allow users to provide feedback, feature suggestions, and bug reports for the operating system",
         "additional_detection_strings": ["Feedback Hub"]
     },
+    "iSNS Server": {
+        "prevalence": 0.8,
+        "description": "An iSNS server uses the Internet Storage Name Service protocol to maintain information about active iSCSI devices on the network, including their IP addresses, iSCSI node names, and portal groups",
+        "additional_detection_strings": ["iSNS"]
+    },
+    "Microsoft 4K Wireless Display Adapter": {
+        "prevalence": 0.3,
+        "description": "Microsoft device that can display wirelessly to a 4K TV or monitor over Miracast",
+        "additional_detection_strings": ["iSNS"]
+    },
     "Windows Codecs Library": {
         "prevalence": 0.8,
         "description": "",
@@ -283,6 +319,28 @@
         "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
+    },
+    "Microsoft PowerShell": {
+        "prevalence": 0.8,
+        "detection_priority": -0.1,
+        "detection_comment": "pessimize for PowerShell modules",
+        "description": "PowerShell or Microsoft PowerShell (formerly Windows PowerShell) is a task automation and configuration management program from Microsoft, consisting of a command-line shell and the associated scripting language",
+        "additional_detection_strings": ["PowerShell"]
+    },
+    "Microsoft Local Security Authority Server": {
+        "prevalence": 0.8,
+        "description": "Local Security Authority Subsystem Service (LSASS) is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system",
+        "additional_detection_strings": ["lsasrv"]
+    },
+    "Microsoft BizTalk ESB Toolkit": {
+        "prevalence": 0.8,
+        "description": "The Microsoft BizTalk ESB Toolkit uses BizTalk Server to support a loosely coupled messaging architectur",
+        "additional_detection_strings": ["BizTalk ESB Toolkit"]
+    },
+    "Visual Basic for Applications": {
+        "prevalence": 0.8,
+        "description": "Visual Basic for Applications is a computer programming language developed and owned by Microsoft",
+        "additional_detection_strings": ["VBA"]
     },
     "PFX Encryption": {
         "prevalence": 0.7,
@@ -516,6 +574,8 @@
         },
     "Microsoft Edge": {
             "prevalence": 0.8,
+            "detection_priority": 0.3,
+            "detection_priority_comment": "For the vulnerabilities in Chrome, Chromium and Edge, it's better to choose Edge",
             "description": "Web browser",
             "additional_detection_strings": ["Microsoft Edge (HTML-based)",
                                              "Microsoft Edge for Android",
@@ -1340,11 +1400,6 @@
         "additional_detection_strings": []
     },
     "Windows Cryptographic Primitives Library": {
-        "prevalence": 0.8,
-        "description": "Windows component",
-        "additional_detection_strings": []
-    },
-    "Windows Defender": {
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": []
