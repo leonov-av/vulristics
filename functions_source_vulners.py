@@ -15,7 +15,7 @@ def get_last_vulners_exploits_by_release_date():
         # date = "2020-08-01"
         # r = requests.get( "https://vulners.com/api/v3/search/lucene/?query=published:" + date + "%20AND%20bulletinFamily:exploit&references=True&size=100&apiKey=" + credentials.vulners_key)
         r = requests.get(
-            "https://vulners.com/api/v3/search/lucene/?query=last 5 days bulletinFamily:exploit&apiKey=" + credentials.vulners_key)
+            "https://vulners.com/api/v3/search/lucene/?query=last 5 days (!type:githubexploit AND bulletinFamily:exploit)&apiKey=" + credentials.vulners_key)
         # Without API you will be banned if you haven't solved CAPTCHA on vulners.com for 3 hours.
         vulners_exploits_data = r.json()
         print(vulners_exploits_data)
