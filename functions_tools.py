@@ -1,4 +1,4 @@
-def get_sorted_list_from_weighted_dict(dictionary):
+def get_sorted_list_from_weighted_dict(dictionary, combined_cve_data_all=None):
     weight_to_item = dict()
     all_weights = set()
     for item in dictionary:
@@ -10,10 +10,21 @@ def get_sorted_list_from_weighted_dict(dictionary):
     all_weights.sort(reverse=True)
     results = list()
     for weight in all_weights:
-        items = weight_to_item[weight]
-        items.sort()
-        for item in items:
-            results.append(item)
+        if combined_cve_data_all: # Vulnerability sorting
+            items = weight_to_item[weight]
+            new_id_to_item = dict()
+            for item in items:
+                new_id_to_item[combined_cve_data_all[item]['vuln_type'] + " - " +
+                      combined_cve_data_all[item]['vuln_product'] + " - " + item] = item
+            new_ids = list(new_id_to_item.keys())
+            new_ids.sort()
+            for new_id in new_ids:
+                results.append(new_id_to_item[new_id])
+        else:
+            items = weight_to_item[weight]
+            items.sort()
+            for item in items:
+                results.append(item)
     return (results)
 
 def get_rating_from_cvss_base_score(cvss_base_score):

@@ -365,7 +365,8 @@ def get_vulristics_score_report(combined_cve_data_all, cve_scores, config, sourc
     cve_score_dict = dict()
     for cve in cve_scores:
         cve_score_dict[cve] = int(cve_scores[cve]['value'] * 1000)
-    sorted_cves = functions_tools.get_sorted_list_from_weighted_dict(cve_score_dict)
+    sorted_cves = functions_tools.get_sorted_list_from_weighted_dict(cve_score_dict,
+                                                                     combined_cve_data_all = combined_cve_data_all)
 
     criticalities = ["Urgent", "Critical", "High", "Medium", "Low"]
     components = get_components_list_sorted(cve_scores)
