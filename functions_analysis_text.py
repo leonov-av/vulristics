@@ -15,6 +15,7 @@ def get_ranges(value_string, search_string):
     ranges = list()
     while continue_processing:
         match = re.search(r"\b" + re.escape(str(search_string)) + r"\b", value_string)
+        match2 = re.search(re.escape(str(search_string)), value_string)
         if match:
             range = dict()
             range['start']  = match.start() + last_end
@@ -22,10 +23,19 @@ def get_ranges(value_string, search_string):
             ranges.append(range)
             value_string = value_string[range['end']:]
             last_end = match.end()
+        elif match2:
+            range = dict()
+            range['start']  = match2.start() + last_end
+            range['end'] = match2.end() + last_end
+            ranges.append(range)
+            value_string = value_string[range['end']:]
+            last_end = match2.end()
         else:
             continue_processing = False
     return ranges
 
+# ranges = get_ranges(value_string=".NET Framework Denial of Service Vulnerability", search_string=".NET Framework")
+# print(ranges)
 
 def get_detected_entities(sentence, detection_entities):
     """
