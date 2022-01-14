@@ -69,6 +69,16 @@
         "description": "Windows component",
         "additional_detection_strings": []
     },
+    "Windows IKE Extension": {
+        "prevalence": 0.7,
+        "description": "Internet Key Exchange (IKE, sometimes IKEv1 or IKEv2, depending on version) is the protocol used to set up a security association (SA) in the IPsec protocol suite",
+        "additional_detection_strings": []
+    },
+    "Windows Security Center": {
+        "prevalence": 0.7,
+        "description": "Windows Security Center (WSC) is a comprehensive reporting tool that helps users establish and maintain a protective security layer around their computer systems",
+        "additional_detection_strings": ["WSC"]
+    },
     "Windows Portmapping": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -233,6 +243,11 @@
         "description": "",
         "additional_detection_strings": []
     },
+    "Libarchive": {
+        "prevalence": 0.5,
+        "description": "Multi-format archive and compression library",
+        "additional_detection_strings": ["libarchive"]
+    },
     "ASP.NET": {
         "prevalence": 0.8,
         "description": "An open-source, server-side web-application framework designed for web development",
@@ -329,8 +344,18 @@
     },
     "Microsoft Local Security Authority Server": {
         "prevalence": 0.8,
-        "description": "Local Security Authority Subsystem Service (LSASS) is a process in Microsoft Windows operating systems that is responsible for enforcing the security policy on the system",
-        "additional_detection_strings": ["lsasrv"]
+        "description": "LSASS, the Windows Local Security Authority Server process, handles Windows security mechanisms",
+        "additional_detection_strings": ["lsasrv", "Local Security Authority", "LSASS"]
+    },
+    "Workstation Service Remote Protocol": {
+        "prevalence": 0.7,
+        "description": "Workstation Service Remote Protocol remotely queries and configures certain aspects of a Server Message Block network redirector on a remote computer",
+        "additional_detection_strings": ["MS-WKST"]
+    },
+    "Secure Boot": {
+        "prevalence": 0.8,
+        "description": "Secure boot is a security standard developed by members of the PC industry to help make sure that a device boots using only software that is trusted by the Original Equipment Manufacturer (OEM)",
+        "additional_detection_strings": ["Secure boot"]
     },
     "Microsoft BizTalk ESB Toolkit": {
         "prevalence": 0.8,
@@ -640,6 +665,8 @@
     "Git": {
         "prevalence": 0.4,
         "description": "",
+        "detection_priority": -0.3,
+        "detection_priority_comment": "False detections. E.g.: legitimate",
         "additional_detection_strings": []
     },
     "Git for Visual Studio": {
@@ -728,8 +755,98 @@
         "additional_detection_strings": []
     },
 
+    "Windows Geolocation Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Modern Execution Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Resilient File System (ReFS)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": ["ReFS"]
+    },
+    "Windows Defender Application Control": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows BackupKey Remote Protocol": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Defender Credential Guard": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows DWM Core Library": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows User-mode Driver Framework Reflector Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Accounts Control": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows AppContracts API Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows Application Model Core API": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows StateRepository API Server file": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows UI Immersive Server API": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Windows System Launcher": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+   "Windows Push Notifications Apps": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+   "Windows Devices Human Interface": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+   "Tablet Windows User Interface Application Core": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+   "Windows Cleanup Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
     "Windows (modem.sys)": {
-        "prevalence": 0.9,
+        "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": []
     },
@@ -793,6 +910,11 @@
         "description": "Hyper-V Virtual Machine Bus (VMBus)",
         "additional_detection_strings": ["VMBus"]
     },
+    "Virtual Machine IDE Drive": {
+        "prevalence": 0.6,
+        "description": "Hyper-V Virtual Machine IDE Drive",
+        "additional_detection_strings": []
+    },
     "Windows Hyper-V": {
         "prevalence": 0.6,
         "description": "Hardware virtualization component of the client editions of Windows NT",
@@ -836,7 +958,7 @@
     "Windows Remote Desktop Protocol": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": ["Remote Desktop Protocol"]
     },
     "Windows Remote Procedure Call Runtime": {
         "prevalence": 0.8,
@@ -957,6 +1079,41 @@
     "Microsoft Enhanced Cryptographic Provider": {
         "prevalence": 0.8,
         "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Microsoft Cluster Port Driver": {
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Connected Devices Platform Service": {
+        "prevalence": 0.3,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Clipboard User Service": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Tile Data Repository": {
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Remote Desktop Licensing Diagnoser": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Task Flow Data Engine": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    "Microsoft Cryptographic Services": {
+        "prevalence": 0.8,
+        "description": "he Cryptographic Services is a Microsoft Windows feature that encrypts and decrypts data on storage devices when they are accessed",
         "additional_detection_strings": []
     },
     "Windows App-V Overlay Filter": {
@@ -1102,6 +1259,11 @@
     "Windows Remote Assistance": {
         "prevalence": 0.8,
         "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Curl": {
+        "prevalence": 0.7,
+        "description": "Curl is a command-line tool for transferring data specified with URL syntax",
         "additional_detection_strings": []
     },
     "Windows Security Account Manager Remote Protocol": {
