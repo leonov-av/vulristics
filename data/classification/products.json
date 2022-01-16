@@ -57,7 +57,7 @@
     "Windows AppX Installer": {
         "prevalence": 0.9,
         "description": "Windows AppX Installer is a utility for side-loading Windows 10 apps, available on the App Store",
-        "additional_detection_strings": ["Win32k"]
+        "additional_detection_strings": []
     },
     "Windows Encrypting File System": {
         "prevalence": 0.9,
