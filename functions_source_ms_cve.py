@@ -25,7 +25,7 @@ def get_ms_cve_search_data(from_date, to_date, skip):
          to_date + 'T23:59:59+03:00)'),
         ('$skip', str(skip)),
     )
-    response = requests.get('https://api.msrc.microsoft.com/sug/v2.0/en-US/affectedProduct', headers=headers,
+    response = requests.get('https://api.msrc.microsoft.com/sug/v2.0/en-US/vulnerability', headers=headers,
                             params=params)
     return response.json()
 

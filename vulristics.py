@@ -9,6 +9,7 @@ const = ""
 parser.add_argument('--report-type', help='Report type')
 parser.add_argument('--mspt-year', help='Microsoft Patch Tuesday year')
 parser.add_argument('--mspt-month', help='Microsoft Patch Tuesday month')
+parser.add_argument('--mspt-comments-links-path', help='Microsoft Patch Tuesday comments links file')
 parser.add_argument('--cve-project-name', help='Name of the CVE Project')
 parser.add_argument('--cve-list-path', help='Path to the list of CVE IDs')
 parser.add_argument('--cve-comments-path', help='Path to the CVE comments file')
@@ -37,8 +38,13 @@ if args.report_type == "ms_patch_tuesday":
     else:
         rewrite_flag = False
 
+    comments_links_path = False
+    if args.mspt_comments_links_path:
+        comments_links_path = args.mspt_comments_links_path
+
     functions_report_ms_patch_tuesday.make_ms_patch_tuesday_report(year=year,
                                                                    month=month,
+                                                                   comments_links_path = comments_links_path,
                                                                    rewrite_flag=rewrite_flag)
 elif args.report_type == "cve_list":
     if args.rewrite_flag == "True" or args.rewrite_flag == "true":

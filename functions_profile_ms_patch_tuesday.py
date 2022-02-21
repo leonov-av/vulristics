@@ -51,7 +51,7 @@ def get_other_ms_cves(from_date, to_date, patch_tuesdays):
     return all_cves_txt
 
 
-def create_profile(month, year, patch_tuesday_date, file_name):
+def create_profile(month, year, patch_tuesday_date, comments_links, file_name):
     # This profile (json file) will describe Microsoft Patch Tuesday reports
     # month = "October"
     # year = "2020"
@@ -68,7 +68,10 @@ def create_profile(month, year, patch_tuesday_date, file_name):
     query = month + " " + year + " " + "Patch Tuesday"
     comments = dict()
 
-    qualys_link = functions_source_analytic_sites.get_qualys_link(query)
+    if "Qualys" in comments_links:
+        qualys_link = comments_links["Qualys"]
+    else:
+        qualys_link = functions_source_analytic_sites.get_qualys_link(query)
     # qualys_link = {'title':'Microsoft & Adobe Patch Tuesday (October 2021) – Microsoft 74 Vulnerabilities with 3 Critical, 4 Zero-Days. Adobe 10 Vulnerabilities',
     #                'url':'https://blog.qualys.com/product-tech/2021/10/13/microsoft-adobe-patch-tuesday-october-2021-microsoft-74-vulnerabilities-with-3-critical-4-zero-days-adobe-10-vulnerabilities'}
     if qualys_link:
@@ -81,7 +84,10 @@ def create_profile(month, year, patch_tuesday_date, file_name):
         functions_tools.print_debug_message("=== End of Qualys text ===")
         comments['qualys'] = qualys_text
 
-    tenable_link = functions_source_analytic_sites.get_tenable_link(query)
+    if "Tenable" in comments_links:
+        tenable_link = comments_links["Tenable"]
+    else:
+        tenable_link = functions_source_analytic_sites.get_tenable_link(query)
     if tenable_link:
         tenable_text = functions_source_analytic_sites.get_tenable_text_from_url(tenable_link['url'])
         functions_tools.print_debug_message("Tenable query: " + query)
@@ -91,7 +97,10 @@ def create_profile(month, year, patch_tuesday_date, file_name):
         functions_tools.print_debug_message("=== End of Tenable text ===")
         comments['tenable'] = tenable_text
 
-    rapid7_link = functions_source_analytic_sites.get_rapid7_link(query)
+    if "Rapid7" in comments_links:
+        rapid7_link = comments_links["Rapid7"]
+    else:
+        rapid7_link = functions_source_analytic_sites.get_rapid7_link(query)
     if rapid7_link:
         rapid7_text = functions_source_analytic_sites.get_rapid7_text_from_url(rapid7_link['url'])
         functions_tools.print_debug_message("Rapid7 query: " + query)
@@ -101,11 +110,14 @@ def create_profile(month, year, patch_tuesday_date, file_name):
         functions_tools.print_debug_message("=== End of Rapid7 text ===")
         comments['rapid7'] = rapid7_text
 
-    queries = [
-        "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW",
-        "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year
-    ]
-    zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
+    if "ZDI" in comments_links:
+        zdi_link = comments_links["ZDI"]
+    else:
+        queries = [
+            "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW",
+            "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year
+        ]
+        zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
     # zdi_link = {'title':'THE SEPTEMBER 2021 SECURITY UPDATE REVIEW',
     #             'url':'https://www.zerodayinitiative.com/blog/2021/9/14/the-september-2021-security-update-review-kpgpb'}
     if zdi_link:

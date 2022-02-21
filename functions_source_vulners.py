@@ -2,9 +2,9 @@ import requests
 import os
 import json
 import credentials
-import functions_analysis_text
 import vulners
 
+reuse_vulners_processed = False
 
 # Search
 def get_last_vulners_exploits_by_release_date():
@@ -96,7 +96,7 @@ def get_vulners_data_raw(vulners_id):
     return (vulners_data)
 
 
-def get_vulners_data(vulners_id, rewrite_flag):
+def collect_vulners_data(vulners_id, rewrite_flag):
     download_vulners_data_raw(vulners_id, rewrite_flag)
     vulners_data = get_vulners_data_raw(vulners_id)
     if not vulners_data['not_found_error']:
@@ -125,8 +125,11 @@ def get_vulners_data(vulners_id, rewrite_flag):
             if vulners_id in vulners_data['data']['documents']:
                 if 'enchantments' in vulners_data['data']['documents'][vulners_id]:
                     if 'exploitation' in vulners_data['data']['documents'][vulners_id]['enchantments']:
-                        wild_exploited = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
-                        wild_exploited_sources = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploitedSources']
+                        wild_exploited = False
+                        wild_exploited_sources = list()
+                        if vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']:
+                            wild_exploited = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
+                            wild_exploited_sources = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploitedSources']
 
                         new_wild_exploited_sources = list()
                         if wild_exploited: # Additional check
@@ -156,6 +159,21 @@ def get_vulners_data(vulners_id, rewrite_flag):
 
                 vulners_data['description'] = description
                 vulners_data['cvss_base_score'] = cvss_base_score
+
+    file_path_processed = "data/vulners_processed/" + vulners_id + ".json"
+    f = open(file_path_processed, "w")
+    f.write(json.dumps(vulners_data))
+    f.close()
+    return vulners_data
+
+def get_vulners_data(vulners_id, rewrite_flag):
+    file_path_processed = "data/vulners_processed/" + vulners_id + ".json"
+    if rewrite_flag or not os.path.exists(file_path_processed) or not reuse_vulners_processed:
+        vulners_data = collect_vulners_data(vulners_id, rewrite_flag)
+    else:
+        f = open(file_path_processed, "r")
+        vulners_data = json.loads(f.read())
+        f.close()
     return (vulners_data)
 
 # print(get_vulners_data(vulners_id="CVE-2021-40450", rewrite_flag=False))

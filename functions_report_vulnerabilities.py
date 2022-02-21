@@ -5,6 +5,8 @@ import functions_score
 import functions_combined_vulnerability_data
 import re
 import json
+import copy
+import html
 from datetime import datetime
 
 
@@ -309,7 +311,7 @@ def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config,
                    " - " + get_colored_text(cve_scores[cve]['level'], cve_scores[cve]['level'] + " [" + str(
         int(cve_scores[cve]['value'] * 1000)) + "] ") + \
                    "</br>"
-    report_html += "<p><b>Description:</b> " + combined_cve_data_all[cve]['description'] + "</p>"
+    report_html += "<p><b>Description:</b> " + html.escape(combined_cve_data_all[cve]['description'])  + "</p>"
 
     report_html += "<table class=\"vvs_table\">" \
                    "<tr class=\"vvs_table\">" \
@@ -676,7 +678,8 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
     # html_content += get_comments_for_cves(source, report_data['processed_cves'])["report_html"]
     current_cve_data = get_vulns_filtered_not_in_list(report_data['processed_cves'], current_cve_data)
 
-    html_content = re.sub("##Content##", html_content, template)
+    new_html_full = copy.copy(template)
+    html_content = new_html_full.replace("##Content##", html_content)
 
     report_file_path = "reports/" + profile_data['file_name_prefix'] + "_" + report_config['file_name_suffix'] + ".html"
     f = open(report_file_path, "w",  encoding="utf-8")
@@ -710,6 +713,8 @@ def get_all_cves(profile, source_id, cves_to_exclude):
         if re.findall("^CVE", line.upper()):
             if line.upper() not in cves_to_exclude:
                 all_cves.add(line.upper())
+    all_cves = list(all_cves)
+    all_cves.sort()
     functions_tools.print_debug_message("All CVEs: " + str(len(all_cves)))
     return all_cves
 
