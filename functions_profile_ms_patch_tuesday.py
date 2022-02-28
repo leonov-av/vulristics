@@ -3,6 +3,7 @@ import functions_source_analytic_sites
 import functions_tools
 import functions_profile
 import datetime
+import time
 import re
 
 
@@ -13,7 +14,7 @@ def get_ms_date(normal_date):
     return ms_date
 
 
-def get_second_tuesday(year, long_month_name):
+def get_patch_tuesday_date_by_year_and_month(year, long_month_name):
     # Getting second tuesday of a month for MS Patch Tuesday date
     # year = "2020"
     # long_month_name = "October"
@@ -35,7 +36,28 @@ def get_second_tuesday(year, long_month_name):
         day_of_the_week = date_time_obj.strftime("%A")
         if day_of_the_week == "Tuesday":
             tuesdays.append(day_str)
-    return tuesdays[1]
+    patch_tuesday = tuesdays[1]
+    return patch_tuesday
+
+
+def get_patch_tuesday_related_dates(year, long_month_name):
+    patch_tuesday = get_patch_tuesday_date_by_year_and_month(year, long_month_name)
+    patch_tuesday_ts = int(time.mktime(datetime.datetime.strptime(patch_tuesday, "%Y-%m-%d").timetuple()))
+    patch_tuesday_ext_last_date = datetime.datetime.fromtimestamp(patch_tuesday_ts - 24*60*60).strftime('%Y-%m-%d')
+    patch_tuesday_ext_first_date_year = datetime.datetime.fromtimestamp(patch_tuesday_ts - 30*24*60*60).strftime('%Y')
+    patch_tuesday_ext_first_date_month = datetime.datetime.fromtimestamp(patch_tuesday_ts - 30*24*60*60).strftime('%B')
+    previous_patch_tuesday = get_patch_tuesday_date_by_year_and_month(patch_tuesday_ext_first_date_year,
+                                                                      patch_tuesday_ext_first_date_month)
+    previous_patch_tuesday_ts = int(time.mktime(datetime.datetime.strptime(previous_patch_tuesday,
+                                                                           "%Y-%m-%d").timetuple()))
+    patch_tuesday_ext_first_date = datetime.datetime.fromtimestamp(previous_patch_tuesday_ts +
+                                                                   24*60*60).strftime('%Y-%m-%d')
+    return {
+                "patch_tuesday": patch_tuesday,
+                "patch_tuesday_ext_first_date": patch_tuesday_ext_first_date,
+                "patch_tuesday_ext_last_date": patch_tuesday_ext_last_date,
+                "previous_patch_tuesday": previous_patch_tuesday
+           }
 
 
 def get_other_ms_cves(from_date, to_date, patch_tuesdays):
@@ -43,7 +65,9 @@ def get_other_ms_cves(from_date, to_date, patch_tuesdays):
     print(len(all_cves))
     for patch_tuesday in patch_tuesdays:
         print(patch_tuesday)
-        patch_tuesday_date = get_second_tuesday(year=patch_tuesday[0],  long_month_name=patch_tuesday[1])
+        pt_related_dates = get_patch_tuesday_related_dates(year=patch_tuesday[0],
+                                                           long_month_name=patch_tuesday[1])
+        patch_tuesday_date = pt_related_dates["patch_tuesday"]
         patch_tuesday_cves = functions_source_ms_cve.get_ms_cves_for_date_range(patch_tuesday_date, patch_tuesday_date)
         all_cves = all_cves - patch_tuesday_cves
         print(len(all_cves))
@@ -51,22 +75,45 @@ def get_other_ms_cves(from_date, to_date, patch_tuesdays):
     return all_cves_txt
 
 
-def create_profile(month, year, patch_tuesday_date, comments_links, file_name):
+def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_name):
     # This profile (json file) will describe Microsoft Patch Tuesday reports
     # month = "October"
     # year = "2020"
-    # patch_tuesday_date = "10/13/2020"
+    # pt_related_dates = {'patch_tuesday': '2022-02-08', 'patch_tuesday_ext_first_date': '2022-01-12',
+    #   'patch_tuesday_ext_last_date': '2022-02-07', 'previous_patch_tuesday': '2022-01-11'}
+    comments = dict()
 
-    functions_tools.print_debug_message("Year: " + year)
-    functions_tools.print_debug_message("Month: " + month)
-    functions_tools.print_debug_message("Date: " + patch_tuesday_date)
-    ms_cves_for_date_range = functions_source_ms_cve.get_ms_cves_for_date_range(patch_tuesday_date,
-                                                                                patch_tuesday_date)
-    functions_tools.print_debug_message("MS CVEs found: " + str(len(ms_cves_for_date_range)))
-    ms_cves_for_date_range = "\n".join(ms_cves_for_date_range)
+    functions_tools.print_debug_message("MS PT Year: " + year)
+    functions_tools.print_debug_message("MS PT Month: " + month)
+    functions_tools.print_debug_message("MS PT Date: " + pt_related_dates['patch_tuesday'])
+    ms_cves = functions_source_ms_cve.get_ms_cves_for_date_range(pt_related_dates['patch_tuesday'],
+                                                                                pt_related_dates['patch_tuesday'])
+    functions_tools.print_debug_message("MS PT CVEs found: " + str(len(ms_cves)))
+
+    ext_ms_cves = set()
+    if pt_type == "Extended":
+        functions_tools.print_debug_message("Ext MS PT Date from: " + pt_related_dates['patch_tuesday_ext_first_date'])
+        functions_tools.print_debug_message("Ext MS PT Date to: " + pt_related_dates['patch_tuesday_ext_last_date'])
+
+        ext_ms_cves = functions_source_ms_cve.get_ms_cves_for_date_range(
+                                                                        pt_related_dates['patch_tuesday_ext_first_date'],
+                                                                        pt_related_dates['patch_tuesday_ext_last_date']
+                                                                    )
+        functions_tools.print_debug_message("Ext MS PT CVEs found: " + str(len(ext_ms_cves)))
+        ext_ms_comments = list()
+        for cve in ext_ms_cves:
+            ext_ms_comments.append(cve + " was published before "  + month + " " + str(year) + " Patch Tuesday from " + \
+                                   pt_related_dates['patch_tuesday_ext_first_date'] + " to " + \
+                                   pt_related_dates['patch_tuesday_ext_last_date'])
+
+        comments["MS PT Extended"] = "\n".join(ext_ms_comments)
+
+    all_ms_cves = ms_cves.union(ext_ms_cves)
+    functions_tools.print_debug_message("ALL MS PT CVEs: " + str(len(all_ms_cves)))
+
+    ms_cves = "\n".join(all_ms_cves)
 
     query = month + " " + year + " " + "Patch Tuesday"
-    comments = dict()
 
     if "Qualys" in comments_links:
         qualys_link = comments_links["Qualys"]
@@ -132,7 +179,7 @@ def create_profile(month, year, patch_tuesday_date, comments_links, file_name):
     report_id = month + " " + year
     report_name = 'Microsoft Patch Tuesday, ' + month + " " + year
     file_name_prefix = "ms_patch_tuesday_" + month.lower() + year
-    cves_text = ms_cves_for_date_range
+    cves_text = ms_cves
 
     data_sources = None  # Use all data sources
     file_path = "data/profiles/" + file_name

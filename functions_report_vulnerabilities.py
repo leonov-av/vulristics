@@ -6,7 +6,6 @@ import functions_combined_vulnerability_data
 import re
 import json
 import copy
-import html
 from datetime import datetime
 
 
@@ -311,7 +310,8 @@ def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config,
                    " - " + get_colored_text(cve_scores[cve]['level'], cve_scores[cve]['level'] + " [" + str(
         int(cve_scores[cve]['value'] * 1000)) + "] ") + \
                    "</br>"
-    report_html += "<p><b>Description:</b> " + html.escape(combined_cve_data_all[cve]['description'])  + "</p>"
+
+    report_html += "<p><b>Description:</b> " + combined_cve_data_all[cve]['description']  + "</p>"
 
     report_html += "<table class=\"vvs_table\">" \
                    "<tr class=\"vvs_table\">" \

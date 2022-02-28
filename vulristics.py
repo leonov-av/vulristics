@@ -16,20 +16,22 @@ parser.add_argument('--cve-comments-path', help='Path to the CVE comments file')
 parser.add_argument('--cve-data-sources', help='Data sources for analysis, e.g. "ms,nvd,vulners,attackerkb"')
 
 
-parser.add_argument('--rewrite-flag', help='Rewrite Flag')
+parser.add_argument('--rewrite-flag', help='Rewrite Flag (True/False)')
 
 args = parser.parse_args()
-
-print('''                      /$$           /$$             /$$     /$$                    
+banner = '''
+                      /$$           /$$             /$$     /$$                    
                      | $$          |__/            | $$    |__/                    
  /$$    /$$ /$$   /$$| $$  /$$$$$$  /$$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$$  /$$$$$$$
 |  $$  /$$/| $$  | $$| $$ /$$__  $$| $$ /$$_____/|_  $$_/  | $$ /$$_____/ /$$_____/
  \  $$/$$/ | $$  | $$| $$| $$  \__/| $$|  $$$$$$   | $$    | $$| $$      |  $$$$$$ 
   \  $$$/  | $$  | $$| $$| $$      | $$ \____  $$  | $$ /$$| $$| $$       \____  $$
    \  $/   |  $$$$$$/| $$| $$      | $$ /$$$$$$$/  |  $$$$/| $$|  $$$$$$$ /$$$$$$$/
-    \_/     \______/ |__/|__/      |__/|_______/    \___/  |__/ \_______/|_______/ ''')
+    \_/     \______/ |__/|__/      |__/|_______/    \___/  |__/ \_______/|_______/ '''
 
-if args.report_type == "ms_patch_tuesday":
+print(re.sub("^\n","",banner))
+
+if args.report_type == "ms_patch_tuesday" or args.report_type == "ms_patch_tuesday_extended":
     year = str(args.mspt_year) # 2021
     month = args.mspt_month # September
 
@@ -42,7 +44,13 @@ if args.report_type == "ms_patch_tuesday":
     if args.mspt_comments_links_path:
         comments_links_path = args.mspt_comments_links_path
 
-    functions_report_ms_patch_tuesday.make_ms_patch_tuesday_report(year=year,
+    if args.report_type == "ms_patch_tuesday":
+        pt_type = "Normal"
+    elif args.report_type == "ms_patch_tuesday_extended":
+        pt_type = "Extended"
+
+    functions_report_ms_patch_tuesday.make_ms_patch_tuesday_report(pt_type=pt_type,
+                                                                   year=year,
                                                                    month=month,
                                                                    comments_links_path = comments_links_path,
                                                                    rewrite_flag=rewrite_flag)

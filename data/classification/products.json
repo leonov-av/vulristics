@@ -69,6 +69,11 @@
         "description": "Windows component",
         "additional_detection_strings": []
     },
+    "Named Pipe File System": {
+        "prevalence": 0.9,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
     "Windows IKE Extension": {
         "prevalence": 0.7,
         "description": "Internet Key Exchange (IKE, sometimes IKEv1 or IKEv2, depending on version) is the protocol used to set up a security association (SA) in the IPsec protocol suite",
@@ -621,7 +626,22 @@
             "description": "",
             "additional_detection_strings": []
         },
+    "SQL Server for Linux Containers": {
+            "prevalence": 0.6,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Microsoft OneDrive for Android": {
+            "prevalence": 0.4,
+            "description": "",
+            "additional_detection_strings": []
+        },
     "Windows Media Foundation": {
+            "prevalence": 0.8,
+            "description": "",
+            "additional_detection_strings": []
+        },
+    "Roaming Security Rights Management Services": {
             "prevalence": 0.8,
             "description": "",
             "additional_detection_strings": []
@@ -769,6 +789,11 @@
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": ["ReFS"]
+    },
+    "Microsoft Dynamics GP": {
+        "prevalence": 0.6,
+        "description": "Microsoft Dynamics GP is a mid-market business accounting software or ERP software package",
+        "additional_detection_strings": []
     },
     "Windows Defender Application Control": {
         "prevalence": 0.8,
@@ -1422,6 +1447,11 @@
         "additional_detection_strings": []
     },
     ".NET and Visual Studio": {
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": []
+    },
+    ".NET": {
         "prevalence": 0.7,
         "description": "",
         "additional_detection_strings": []

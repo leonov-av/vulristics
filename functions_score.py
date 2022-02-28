@@ -1,5 +1,6 @@
 import data_classification_vulnerability_types
 import data_classification_products
+import data_exclusions
 import functions_tools
 import re
 
@@ -98,6 +99,19 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
         if cve in cve_data_all['vulners_cve_data_all']:
             if 'public_exploit' in cve_data_all['vulners_cve_data_all'][cve]:
                 is_public_exploit = cve_data_all['vulners_cve_data_all'][cve]['public_exploit']
+
+    # Exclusions
+    new_public_exploit_sources = list()
+    if is_public_exploit:
+        for exploit_source in cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources']:
+            exploit_id = exploit_source['id'] + "_" + exploit_source['type']
+            if not exploit_id.lower() in data_exclusions.exclusions['not_an_exploit']:
+                new_public_exploit_sources.append(exploit_source)
+                is_public_exploit = True
+    cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources'] = new_public_exploit_sources
+    if new_public_exploit_sources == list():
+        is_public_exploit = False
+
     if is_public_exploit:
         public_exploit_exists_n = 1.0
         links_str = list()

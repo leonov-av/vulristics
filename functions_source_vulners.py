@@ -128,8 +128,9 @@ def collect_vulners_data(vulners_id, rewrite_flag):
                         wild_exploited = False
                         wild_exploited_sources = list()
                         if vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']:
-                            wild_exploited = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
-                            wild_exploited_sources = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploitedSources']
+                            if 'wildExploited' in vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']:
+                                wild_exploited = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
+                                wild_exploited_sources = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploitedSources']
 
                         new_wild_exploited_sources = list()
                         if wild_exploited: # Additional check
@@ -155,7 +156,8 @@ def collect_vulners_data(vulners_id, rewrite_flag):
                 description = vulners_data['data']['documents'][vulners_id]['description']
                 cvss_base_score = ""
                 if 'cvss' in  vulners_data['data']['documents'][vulners_id]:
-                    cvss_base_score = vulners_data['data']['documents'][vulners_id]['cvss']['score']
+                    if 'score' in vulners_data['data']['documents'][vulners_id]['cvss']:
+                        cvss_base_score = vulners_data['data']['documents'][vulners_id]['cvss']['score']
 
                 vulners_data['description'] = description
                 vulners_data['cvss_base_score'] = cvss_base_score
