@@ -185,6 +185,11 @@
         "description": "MS Internet Browser",
         "additional_detection_strings": []
     },
+    "HEIF Image Extensions": {
+        "prevalence": 0.6,
+        "description": "The HEIF Image Extension enables Windows 10 devices to read and write files that use the High Efficiency Image File (HEIF) format.",
+        "additional_detection_strings": []
+    },
     "Microsoft Scripting Engine": {
         "prevalence": 0.6,
         "description": "",
@@ -357,6 +362,11 @@
         "description": "Workstation Service Remote Protocol remotely queries and configures certain aspects of a Server Message Block network redirector on a remote computer",
         "additional_detection_strings": ["MS-WKST"]
     },
+     "Point-to-Point Tunneling Protocol": {
+        "prevalence": 0.7,
+        "description": "The Point to Point Tunneling Protocol (PPTP) is a network protocol used to create VPN tunnels between public networks",
+        "additional_detection_strings": ["PPTP"]
+    },
     "Secure Boot": {
         "prevalence": 0.8,
         "description": "Secure boot is a security standard developed by members of the PC industry to help make sure that a device boots using only software that is trusted by the Original Equipment Manufacturer (OEM)",
@@ -395,6 +405,11 @@
     "Skype for Business and Lync": {
         "prevalence": 0.6,
         "description": "",
+        "additional_detection_strings": []
+    },
+    "Skype Extension for Chrome": {
+        "prevalence": 0.6,
+        "description": " This extension enables Skype integration across various online services, including calendars, email, and even social media",
         "additional_detection_strings": []
     },
     "Sysinternals PsExec": {
@@ -1571,9 +1586,19 @@
         "description": "Optional agent for Microsoft Intune",
         "additional_detection_strings": []
     },
+    "Microsoft Intune Portal for iOS": {
+        "prevalence": 0.3,
+        "description": "iOS store app for Microsoft Intune",
+        "additional_detection_strings": []
+    },
     "Intune Management Extension": {
         "prevalence": 0.3,
         "description": "Optional agent for Microsoft Intune",
+        "additional_detection_strings": []
+    },
+    "Brotli Library": {
+        "prevalence": 0.4,
+        "description": "Brotli is a compression algorithm developed by Google and works best for text compression",
         "additional_detection_strings": []
     },
     "ASP.NET Core": {

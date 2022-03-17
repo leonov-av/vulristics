@@ -132,13 +132,49 @@ def add_ms_cve_severity(ms_cve_data):
 
 def add_ms_cve_cvss_base_score(ms_cve_data):
     all_base_score = list()
+    all_exploit = list()
     cvss_base_score = ""
+    exploit_value = 0
     if 'value' in ms_cve_data['vuln_products']:
         for data in ms_cve_data['vuln_products']['value']:
             if 'baseScore' in data:
                 all_base_score.append(data['baseScore'])
+                if "E:" in data['vectorString']:
+                    exploit_value_product = re.findall("E:([^/]*)",data['vectorString'])[0]
+                    if exploit_value_product == "P":
+                        exploit_value_product = 1
+                    elif exploit_value_product == "F":
+                        exploit_value_product = 2
+                    elif exploit_value_product == "H":
+                        exploit_value_product = 3
+                    else:
+                        exploit_value_product = 0
+                    all_exploit.append(exploit_value_product)
+
     if all_base_score != list():
         cvss_base_score = max(all_base_score)
+    if all_exploit != list():
+        exploit_value = max(all_exploit)
+
+    exploit_value_name = ""
+    exploit_value_name_c = 0
+    if exploit_value == 1:
+        exploit_value_name = "Proof-of-Concept Exploit"
+        exploit_value_name_c = 0.4
+    elif exploit_value == 2:
+        exploit_value_name = "Functional Exploit"
+        exploit_value_name_c = 0.6
+    elif exploit_value == 3:
+        exploit_value_name = "Autonomous Exploit"
+        exploit_value_name_c = 0.8
+    
+    if exploit_value != 0:
+        ms_cve_data['public_exploit'] = True
+    else:
+        ms_cve_data['public_exploit'] = False
+    ms_cve_data['public_exploit_level_name'] = exploit_value_name
+    ms_cve_data['public_exploit_level'] = exploit_value_name_c
+
     ms_cve_data['cvss_base_score'] = cvss_base_score
     return ms_cve_data
 
@@ -160,5 +196,7 @@ def get_ms_cve_data(cve_id, rewrite_flag):
 
 
 # def debug_get_ms_cve_data():
-#     ms_cve_data = get_ms_cve_data(cve_id="CVE-2021-31955", rewrite_flag=True)
+#     ms_cve_data = get_ms_cve_data(cve_id="CVE-2022-22006", rewrite_flag=True)
 #     print(json.dumps(ms_cve_data, indent=4))
+# 
+# debug_get_ms_cve_data()

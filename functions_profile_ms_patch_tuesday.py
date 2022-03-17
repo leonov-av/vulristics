@@ -75,6 +75,7 @@ def get_other_ms_cves(from_date, to_date, patch_tuesdays):
     return all_cves_txt
 
 
+
 def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_name):
     # This profile (json file) will describe Microsoft Patch Tuesday reports
     # month = "October"
@@ -186,3 +187,19 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
     products_text = ""
     functions_profile.save_profile(file_path, report_id, report_name, file_name_prefix,
                                    cves_text, products_text, data_sources, comments)
+
+# month = "March"
+# year = "2022"
+# query = month + " " + year + " " + "Patch Tuesday"
+# print(query)
+# qualys_link = functions_source_analytic_sites.get_qualys_link(query)
+# print(qualys_link
+
+# month = "March"
+# year = "2022"
+# queries = [
+#     "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW",
+#     "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year
+# ]
+# zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
+# print(zdi_link)

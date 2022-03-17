@@ -21,7 +21,8 @@ def make_ms_patch_tuesday_report(pt_type, year, month, comments_links_path=False
     if comments_links_path:
         f = open(comments_links_path, "r")
         for line in f.read().split("\n"):
-            comments_links[line.split("|")[0]] = {'title':line.split("|")[1], 'url':line.split("|")[2]}
+            if "|" in line:
+                comments_links[line.split("|")[0]] = {'title':line.split("|")[1], 'url':line.split("|")[2]}
         f.close()
 
     if rewrite_flag or not os.path.isfile("data/profiles/" + file_name):

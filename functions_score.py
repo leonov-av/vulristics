@@ -111,17 +111,31 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
     cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources'] = new_public_exploit_sources
     if new_public_exploit_sources == list():
         is_public_exploit = False
+        cve_data_all['vulners_cve_data_all'][cve]['public_exploit'] = False
+    if 'ms_cve_data_all' in cve_data_all:
+        if cve_data_all['ms_cve_data_all'][cve]['public_exploit']:
+            is_public_exploit = True
 
     if is_public_exploit:
         public_exploit_exists_n = 1.0
         links_str = list()
-        for exploit_data in cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources']:
-            links_str.append("<a href=\"https://vulners.com/" + exploit_data['type'] + "/"
-                             + exploit_data['id'].lower() + "\">" + exploit_data['title'] + "</a>")
-        public_exploit_exists_c = "Public exploit is found at Vulners (" + ", ".join(links_str) + ")"
+        comment_exists = False
+        if 'vulners_cve_data_all' in cve_data_all:
+            if cve_data_all['vulners_cve_data_all'][cve]['public_exploit'] and not comment_exists:
+                for exploit_data in cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources']:
+                    links_str.append("<a href=\"https://vulners.com/" + exploit_data['type'] + "/"
+                                     + exploit_data['id'].lower() + "\">" + exploit_data['title'] + "</a>")
+                public_exploit_exists_c = "Public exploit is found at Vulners (" + ", ".join(links_str) + ")"
+                comment_exists = True
+        if 'ms_cve_data_all' in cve_data_all:
+            if cve_data_all['ms_cve_data_all'][cve]['public_exploit'] and not comment_exists:
+                public_exploit_exists_n = cve_data_all['ms_cve_data_all'][cve]['public_exploit_level']
+                public_exploit_exists_c = "Public exploit is mentioned by Microsoft in CVSS Temporal Score (" +\
+                                          cve_data_all['ms_cve_data_all'][cve]['public_exploit_level_name'] + ")"
+                comment_exists = Truvue
     else:
         public_exploit_exists_n = 0
-        public_exploit_exists_c = "Public exploit is NOT found at Vulners website"
+        public_exploit_exists_c = "Public exploit is NOT found at Vulners or Microsoft website"
     public_exploit_exists_k = 17
 
     ######## Wild Exploit
