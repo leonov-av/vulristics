@@ -1,6 +1,13 @@
 import requests
 import trafilatura
 import re
+import functions_tools
+
+
+#### Common
+def get_text_from_url(url):
+    response = requests.get(url)
+    return (trafilatura.extract(response.text))
 
 
 #### Qualys
@@ -82,19 +89,21 @@ def get_qualys_text_from_url(url):
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
     response = requests.get(url, headers=headers)
-    return (trafilatura.extract(response.text))
+    qualys_html = response.text
+    qualys_html = re.sub("<h","###DELIM###<h",qualys_html)
+    return (re.sub("<[^>]*>","",qualys_html))
+
 
 def process_qualys_text(qualys_text):
-    new_qualys_text = ""
-    for line in qualys_text.split("\n"):
-        if re.findall("^CVE",line) and not(re.findall("\.$",line)): # Eg: CVE-2021-40444 – Microsoft MSHTML Remote Code Execution Vulnerability
-            new_qualys_text += line + ". " # Header
-        else:
-            new_qualys_text += line + "\n"
-    return new_qualys_text
+    qualys_text_new = list()
+    for line in qualys_text.split("###DELIM###"):
+        if "CVE" in line:
+            qualys_text_new.append(line)
+    qualys_text_new = "\n".join(qualys_text_new)
+    return qualys_text_new
+
 
 #### Tenable
-
 def get_tenable_link(query):
     headers = {
         'Connection': 'keep-alive',
@@ -108,7 +117,9 @@ def get_tenable_link(query):
         'Referer': 'https://community.qualys.com/',
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
-    response = requests.get("https://www.tenable.com/blog/search?field_blog_section_tid=All&combine=" + query, headers=headers)
+    url = "https://www.tenable.com/blog/search?field_blog_section_tid=All&combine=" + query
+    response = functions_tools.make_request(type="get", url=url, headers=headers)
+
     a_tags = re.findall(' <h2><a href="/blog/.*?</a>', response.text)
     for a_tag in a_tags:
         # print(a_tag)
@@ -135,12 +146,11 @@ def get_tenable_text_from_url(url):
         'Sec-Fetch-Dest': 'empty',
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
-    response = requests.get(url, headers=headers)
+    response = functions_tools.make_request(type="get", url=url, headers=headers)
     return (trafilatura.extract(response.text))
 
 
 ### Rapid7
-
 def get_rapid7_link(query):
     headers = {
         'Connection': 'keep-alive',
@@ -200,7 +210,6 @@ def get_rapid7_text_from_url(url):
 
 
 ### DuckDuckGo
-
 def get_duckduckgo_search_results(query):
     headers = {
         'Connection': 'keep-alive',
@@ -241,7 +250,6 @@ def get_duckduckgo_search_results_multiple_queries(queries):
 
 
 ### ZDI
-
 def get_zdi_text_from_url(url):
     headers = {
         'Connection': 'keep-alive',
@@ -268,6 +276,4 @@ def get_zdi_text_from_url(url):
             else:
                 new_text += re.sub("\.$", ". ", line) + "\n"  # normal line
 
-    return (new_text)
-
-    # return(new_text)
+    return new_text

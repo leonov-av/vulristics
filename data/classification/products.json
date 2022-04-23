@@ -402,7 +402,7 @@
         "description": "",
         "additional_detection_strings": []
     },
-    "Skype for Business and Lync": {
+    "Skype for Business": {
         "prevalence": 0.6,
         "description": "",
         "additional_detection_strings": []
@@ -789,12 +789,42 @@
         "description": "",
         "additional_detection_strings": []
     },
-
+    "Win32 Stream Enumeration": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Cluster Client Failover": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Win32 File Enumeration": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "Connected User Experiences and Telemetry": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
+    "YARP": {
+        "prevalence": 0.5,
+        "description": "Yet Another Reverse Proxy. YARP is a library to help create reverse proxy servers that are high-performance, production-ready, and highly customizable",
+        "additional_detection_strings": []
+    },
+    "DiskUsage.exe": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": []
+    },
     "Windows Geolocation Service": {
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": []
     },
+
     "Windows Modern Execution Server": {
         "prevalence": 0.8,
         "description": "Windows component",

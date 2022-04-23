@@ -132,7 +132,7 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
                 public_exploit_exists_n = cve_data_all['ms_cve_data_all'][cve]['public_exploit_level']
                 public_exploit_exists_c = "Public exploit is mentioned by Microsoft in CVSS Temporal Score (" +\
                                           cve_data_all['ms_cve_data_all'][cve]['public_exploit_level_name'] + ")"
-                comment_exists = Truvue
+                comment_exists = True
     else:
         public_exploit_exists_n = 0
         public_exploit_exists_c = "Public exploit is NOT found at Vulners or Microsoft website"

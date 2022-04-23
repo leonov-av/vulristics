@@ -120,8 +120,6 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
         qualys_link = comments_links["Qualys"]
     else:
         qualys_link = functions_source_analytic_sites.get_qualys_link(query)
-    # qualys_link = {'title':'Microsoft & Adobe Patch Tuesday (October 2021) – Microsoft 74 Vulnerabilities with 3 Critical, 4 Zero-Days. Adobe 10 Vulnerabilities',
-    #                'url':'https://blog.qualys.com/product-tech/2021/10/13/microsoft-adobe-patch-tuesday-october-2021-microsoft-74-vulnerabilities-with-3-critical-4-zero-days-adobe-10-vulnerabilities'}
     if qualys_link:
         qualys_text = functions_source_analytic_sites.get_qualys_text_from_url(qualys_link['url'])
         qualys_text = functions_source_analytic_sites.process_qualys_text(qualys_text)
@@ -177,6 +175,15 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
         functions_tools.print_debug_message("=== End of ZDI text ===")
         comments['zdi'] = zdi_text
 
+    for source in comments_links.keys():
+        if source not in ['Qualys', 'Rapid7', 'Tenable', 'ZDI']:
+            text = functions_source_analytic_sites.get_text_from_url(comments_links[source]['url'])
+            functions_tools.print_debug_message(source + " url found: " + comments_links[source]['url'])
+            functions_tools.print_debug_message("=== " + source + " text ===")
+            functions_tools.print_debug_message(text)
+            functions_tools.print_debug_message("=== End of " + source + " text ===")
+            comments[source.lower()] = text
+
     report_id = month + " " + year
     report_name = 'Microsoft Patch Tuesday, ' + month + " " + year
     file_name_prefix = "ms_patch_tuesday_" + month.lower() + year
@@ -188,14 +195,21 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
     functions_profile.save_profile(file_path, report_id, report_name, file_name_prefix,
                                    cves_text, products_text, data_sources, comments)
 
-# month = "March"
+# month = "April"
+# year = "2022"
+# query = month + " " + year + " " + "Patch Tuesday"
+# print(query)
+# tenable_link = functions_source_analytic_sites.get_tenable_link(query)
+# print(tenable_link)
+
+# month = "April"
 # year = "2022"
 # query = month + " " + year + " " + "Patch Tuesday"
 # print(query)
 # qualys_link = functions_source_analytic_sites.get_qualys_link(query)
-# print(qualys_link
+# print(qualys_link)
 
-# month = "March"
+# month = "April"
 # year = "2022"
 # queries = [
 #     "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW",
@@ -203,3 +217,8 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
 # ]
 # zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
 # print(zdi_link)
+
+url = "https://blog.qualys.com/vulnerabilities-threat-research/2022/04/12/april-2022-patch-tuesday"
+qualys_text = functions_source_analytic_sites.get_qualys_text_from_url(url)
+qualys_text = functions_source_analytic_sites.process_qualys_text(qualys_text)
+print(qualys_text)

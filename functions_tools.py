@@ -1,3 +1,7 @@
+import requests
+import credentials
+
+
 def get_sorted_list_from_weighted_dict(dictionary, combined_cve_data_all=None):
     weight_to_item = dict()
     all_weights = set()
@@ -27,6 +31,7 @@ def get_sorted_list_from_weighted_dict(dictionary, combined_cve_data_all=None):
                 results.append(item)
     return (results)
 
+
 def get_rating_from_cvss_base_score(cvss_base_score):
     # Rating CVSS Score
     # Low 0.1 - 3.9
@@ -49,3 +54,13 @@ def get_rating_from_cvss_base_score(cvss_base_score):
 
 def print_debug_message(message):
     print(message)
+
+
+def make_request(type, url, headers):
+    response = None
+    if type == "get":
+        if credentials.proxies == {}:
+            response = requests.get(url, headers=headers)
+        else:
+            response = requests.get(url, headers=headers, proxies=credentials.proxies)
+    return response
