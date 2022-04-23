@@ -1,1 +1,2 @@
 vulners_key = ""
+proxies = {}
