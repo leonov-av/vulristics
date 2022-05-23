@@ -218,7 +218,7 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
 # zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
 # print(zdi_link)
 
-url = "https://blog.qualys.com/vulnerabilities-threat-research/2022/04/12/april-2022-patch-tuesday"
-qualys_text = functions_source_analytic_sites.get_qualys_text_from_url(url)
-qualys_text = functions_source_analytic_sites.process_qualys_text(qualys_text)
-print(qualys_text)
+# url = "https://blog.qualys.com/vulnerabilities-threat-research/2022/04/12/april-2022-patch-tuesday"
+# qualys_text = functions_source_analytic_sites.get_qualys_text_from_url(url)
+# qualys_text = functions_source_analytic_sites.process_qualys_text(qualys_text)
+# print(qualys_text)

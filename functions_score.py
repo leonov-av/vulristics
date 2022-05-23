@@ -1,6 +1,7 @@
 import data_classification_vulnerability_types
 import data_classification_products
 import data_exclusions
+import data_redefinitions
 import functions_tools
 import re
 
@@ -32,6 +33,10 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
         cvss_base_score = cve_data_all['combined_cve_data_all'][cve]['cvss_base_score']
         cvss_base_score_c = "Vulnerability Severity Rating based on CVSS Base Score is " + str(cvss_base_score) + ". " \
                             + cve_data_all['combined_cve_data_all'][cve]['cvss_base_score_detection_comment']
+    if cve in data_redefinitions.cvss:
+        cvss_base_score = data_redefinitions.cvss[cve]['cvss_base_score']
+        cvss_base_score_c = "Vulnerability Severity Rating based on CVSS Base Score is " + str(cvss_base_score) + ". " \
+                            + data_redefinitions.cvss[cve]['cvss_base_score_detection_comment']
     cvss_base_score_n = round(float(cvss_base_score) / 10, 1)
     cvss_base_score_k = 10
 

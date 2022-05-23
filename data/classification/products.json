@@ -7,7 +7,10 @@
     "Sudo": {
         "prevalence": 0.9,
         "description": "Sudo is a program for Unix-like computer operating systems that allows users to run programs with the security privileges of another user",
-        "additional_detection_strings":[ "visudo", "sudoers" ]
+        "additional_detection_strings": [
+            "visudo",
+            "sudoers"
+        ]
     },
     "vSphere Client": {
         "prevalence": 0.7,
@@ -32,12 +35,16 @@
     "Windows Remote Desktop Client": {
         "prevalence": 0.8,
         "description": "Remote Desktop Protocol Client",
-        "additional_detection_strings": ["Remote Desktop Protocol Client", "Remote Desktop Client"]
+        "additional_detection_strings": [
+            "Remote Desktop Protocol Client",
+            "Remote Desktop Client"
+        ]
     },
     "Windows SMB": {
         "prevalence": 1,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Confluence Server": {
         "prevalence": 0.7,
@@ -52,58 +59,73 @@
     "Windows Win32k": {
         "prevalence": 0.9,
         "description": "Windows kernel-mode driver",
-        "additional_detection_strings": ["Win32k"]
+        "additional_detection_strings": [
+            "Win32k"
+        ],
+        "vendor": "Microsoft"
     },
     "Windows AppX Installer": {
         "prevalence": 0.9,
         "description": "Windows AppX Installer is a utility for side-loading Windows 10 apps, available on the App Store",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Encrypting File System": {
         "prevalence": 0.9,
         "description": "Encrypting File System (EFS) on Microsoft Windows is a feature introduced in version 3.0 of NTFS that provides filesystem-level encryption",
-        "additional_detection_strings": ["EFS"]
+        "additional_detection_strings": [
+            "EFS"
+        ]
     },
     "Windows TCP/IP": {
         "prevalence": 0.9,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Named Pipe File System": {
         "prevalence": 0.9,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows IKE Extension": {
         "prevalence": 0.7,
         "description": "Internet Key Exchange (IKE, sometimes IKEv1 or IKEv2, depending on version) is the protocol used to set up a security association (SA) in the IPsec protocol suite",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Security Center": {
         "prevalence": 0.7,
         "description": "Windows Security Center (WSC) is a comprehensive reporting tool that helps users establish and maintain a protective security layer around their computer systems",
-        "additional_detection_strings": ["WSC"]
+        "additional_detection_strings": [
+            "WSC"
+        ]
     },
     "Windows Portmapping": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Kerberos": {
         "prevalence": 1,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Defender": {
         "prevalence": 0.8,
         "detection_priority": -0.3,
         "description": "Anti-malware component of Microsoft Windows",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Defender for IoT": {
         "prevalence": 0.8,
         "description": "Microsoft Defender for IoT provides comprehensive threat detection for IoT/OT environments",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "RPC": {
         "prevalence": 0.8,
@@ -111,9 +133,10 @@
         "additional_detection_strings": []
     },
     "RPC Endpoint Mapper Service": {
-        "prevalence":  0.7,
+        "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "splwow64": {
         "prevalence": 0.8,
@@ -123,32 +146,38 @@
     "Microsoft Exchange Server": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Office": {
         "prevalence": 0.6,
         "description": "MS Office product",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Office Access Connectivity Engine": {
         "prevalence": 0.6,
         "description": "MS Office product",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Word": {
         "prevalence": 0.6,
         "description": "MS Office product",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Excel": {
         "prevalence": 0.6,
         "description": "MS Office product",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Access": {
         "prevalence": 0.6,
         "description": "MS Office product",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Adobe Illustrator": {
         "prevalence": 0.5,
@@ -163,7 +192,8 @@
     "Microsoft Outlook": {
         "prevalence": 0.6,
         "description": "MS Office product",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Teams": {
         "prevalence": 0.6,
@@ -178,45 +208,55 @@
     "Internet Explorer": {
         "prevalence": 0.6,
         "description": "Internet Explorer is a discontinued series of graphical web browsers developed by Microsoft",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Browser": {
         "prevalence": 0.6,
         "description": "MS Internet Browser",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "HEIF Image Extensions": {
         "prevalence": 0.6,
         "description": "The HEIF Image Extension enables Windows 10 devices to read and write files that use the High Efficiency Image File (HEIF) format.",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Scripting Engine": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "DirectX": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft SharePoint": {
         "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": ["SharePoint"]
+        "additional_detection_strings": [
+            "SharePoint"
+        ],
+        "vendor": "Microsoft"
     },
     "Visual Studio": {
         "prevalence": 0.3,
         "description": "Integrated development environment",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Visual Studio Code .NET Runtime": {
         "prevalence": 0.3,
         "description": "Integrated development environment",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Azure": {
-        "prevalence": 0.3,
+        "prevalence": 0.4,
         "description": "",
         "additional_detection_strings": []
     },
@@ -224,111 +264,158 @@
         "prevalence": 0.3,
         "detection_priority": 1,
         "description": "Azure RTOS is a small, fast, reliable, and easy-to-use real-time operating system (RTOS) for connecting deeply embedded IoT devices",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "CredSSP": {
         "prevalence": 0.8,
         "detection_priority": 1,
         "description": "CredSSP is a Security Support Provider that lets an application delegate the user's credentials from the client to the target server for remote authentication",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "FSLogix": {
         "prevalence": 0.8,
         "detection_priority": 1,
         "description": "FSLogix enhances and enables user profiles in Windows remote computing environments",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     ".NET Core": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": ["NET Core"]
+        "additional_detection_strings": [
+            "NET Core"
+        ],
+        "vendor": "Microsoft"
     },
     ".NET Core and Visual Studio": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     ".NET Framework": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Libarchive": {
         "prevalence": 0.5,
         "description": "Multi-format archive and compression library",
-        "additional_detection_strings": ["libarchive"]
+        "additional_detection_strings": [
+            "libarchive"
+        ],
+        "vendor": "Microsoft"
     },
     "ASP.NET": {
         "prevalence": 0.8,
         "description": "An open-source, server-side web-application framework designed for web development",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Azure IoT CLI extension": {
         "prevalence": 0.3,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Azure Kubernetes Service": {
         "prevalence": 0.3,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Dataverse": {
         "prevalence": 0.2,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Dynamics Business Central": {
         "prevalence": 0.3,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Teams iOS": {
         "prevalence": 0.3,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows LDAP": {
+        "prevalence": 0.9,
+        "description": "Windows LDAP",
+        "detection_priority_comment": "LDAP (Lightweight Directory Access Protocol) is an open and cross platform protocol used for directory services authentication",
+        "additional_detection_strings": [
+            "LDAP"
+        ],
+        "vendor": "Microsoft"
     },
     "Windows Kernel": {
         "prevalence": 0.9,
         "description": "Windows Kernel",
         "detection_priority": -1,
         "detection_priority_comment": "OS name, it is better to choose a specific name of the software",
-        "additional_detection_strings": ["Windows Kernel", "Windows"]
+        "additional_detection_strings": [
+            "Windows Kernel",
+            "Windows"
+        ],
+        "vendor": "Microsoft"
     },
-     "Microsoft Message Queuing": {
+    "Microsoft Message Queuing": {
         "prevalence": 0.9,
         "description": "Microsoft Message Queuing or MSMQ is a message queue implementation developed by Microsoft and deployed in its Windows Server operating systems since Windows NT 4 and Windows 95",
-        "additional_detection_strings": ["MSMQ"]
+        "additional_detection_strings": [
+            "MSMQ"
+        ],
+        "vendor": "Microsoft"
     },
-     "SymCrypt": {
+    "SymCrypt": {
         "prevalence": 0.9,
         "description": "SymCrypt is the core cryptographic function library currently used by Windows",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "CShell": {
         "prevalence": 0.8,
         "description": "CShell is a universal Windows Shell for Windows 10 that scales across PC, Mobile, and Xbox",
-        "additional_detection_strings": ["Composable Shell"]
+        "additional_detection_strings": [
+            "Composable Shell"
+        ]
     },
     "Microsoft COM": {
         "prevalence": 0.8,
         "description": "COM is a platform-independent, distributed, object-oriented system for creating binary software components that can interact",
-        "additional_detection_strings": ["Microsoft COM for Windows"]
+        "additional_detection_strings": [
+            "Microsoft COM for Windows"
+        ]
     },
     "Windows Feedback Hub": {
         "prevalence": 0.7,
         "description": "Feedback Hub is a universal app designed to allow users to provide feedback, feature suggestions, and bug reports for the operating system",
-        "additional_detection_strings": ["Feedback Hub"]
+        "additional_detection_strings": [
+            "Feedback Hub"
+        ],
+        "vendor": "Microsoft"
     },
     "iSNS Server": {
         "prevalence": 0.8,
         "description": "An iSNS server uses the Internet Storage Name Service protocol to maintain information about active iSCSI devices on the network, including their IP addresses, iSCSI node names, and portal groups",
-        "additional_detection_strings": ["iSNS"]
+        "additional_detection_strings": [
+            "iSNS"
+        ],
+        "vendor": "Microsoft"
     },
     "Microsoft 4K Wireless Display Adapter": {
         "prevalence": 0.3,
         "description": "Microsoft device that can display wirelessly to a 4K TV or monitor over Miracast",
-        "additional_detection_strings": ["iSNS"]
+        "additional_detection_strings": [
+            "iSNS"
+        ],
+        "vendor": "Microsoft"
     },
     "Windows Codecs Library": {
         "prevalence": 0.8,
@@ -343,114 +430,162 @@
     "Microsoft.PowerShell.Utility Module WDAC": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft PowerShell": {
         "prevalence": 0.8,
         "detection_priority": -0.1,
         "detection_comment": "pessimize for PowerShell modules",
         "description": "PowerShell or Microsoft PowerShell (formerly Windows PowerShell) is a task automation and configuration management program from Microsoft, consisting of a command-line shell and the associated scripting language",
-        "additional_detection_strings": ["PowerShell"]
+        "additional_detection_strings": [
+            "PowerShell"
+        ],
+        "vendor": "Microsoft"
     },
     "Microsoft Local Security Authority Server": {
         "prevalence": 0.8,
         "description": "LSASS, the Windows Local Security Authority Server process, handles Windows security mechanisms",
-        "additional_detection_strings": ["lsasrv", "Local Security Authority", "LSASS"]
+        "additional_detection_strings": [
+            "lsasrv",
+            "Local Security Authority",
+            "LSASS"
+        ]
     },
     "Workstation Service Remote Protocol": {
         "prevalence": 0.7,
         "description": "Workstation Service Remote Protocol remotely queries and configures certain aspects of a Server Message Block network redirector on a remote computer",
-        "additional_detection_strings": ["MS-WKST"]
+        "additional_detection_strings": [
+            "MS-WKST"
+        ],
+        "vendor": "Microsoft"
     },
-     "Point-to-Point Tunneling Protocol": {
+    "Point-to-Point Tunneling Protocol": {
         "prevalence": 0.7,
         "description": "The Point to Point Tunneling Protocol (PPTP) is a network protocol used to create VPN tunnels between public networks",
-        "additional_detection_strings": ["PPTP"]
+        "additional_detection_strings": [
+            "PPTP"
+        ],
+        "vendor": "Microsoft"
     },
     "Secure Boot": {
         "prevalence": 0.8,
         "description": "Secure boot is a security standard developed by members of the PC industry to help make sure that a device boots using only software that is trusted by the Original Equipment Manufacturer (OEM)",
-        "additional_detection_strings": ["Secure boot"]
+        "additional_detection_strings": [
+            "Secure boot"
+        ],
+        "vendor": "Microsoft"
     },
     "Microsoft BizTalk ESB Toolkit": {
         "prevalence": 0.8,
         "description": "The Microsoft BizTalk ESB Toolkit uses BizTalk Server to support a loosely coupled messaging architectur",
-        "additional_detection_strings": ["BizTalk ESB Toolkit"]
+        "additional_detection_strings": [
+            "BizTalk ESB Toolkit"
+        ],
+        "vendor": "Microsoft"
     },
     "Visual Basic for Applications": {
         "prevalence": 0.8,
         "description": "Visual Basic for Applications is a computer programming language developed and owned by Microsoft",
-        "additional_detection_strings": ["VBA"]
+        "additional_detection_strings": [
+            "VBA"
+        ],
+        "vendor": "Microsoft"
     },
     "PFX Encryption": {
         "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Raw Image Extension": {
         "prevalence": 0.7,
         "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Magnitude Simba Amazon Redshift ODBC Driver": {
+        "prevalence": 0.6,
+        "description": "",
         "additional_detection_strings": []
+    },
+    "Storage Spaces Direct": {
+        "prevalence": 0.7,
+        "description": "Storage Spaces Direct is a feature of Azure Stack HCI and Windows Server that enables you to cluster servers with internal storage into a software-defined storage solution",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "VP9 Video Extensions": {
         "prevalence": 0.7,
         "description": "VP9 is an open and royalty-free video coding format developed by Google",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Package Managers Configurations": {
         "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Skype for Business": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Skype Extension for Chrome": {
         "prevalence": 0.6,
         "description": " This extension enables Skype integration across various online services, including calendars, email, and even social media",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Sysinternals PsExec": {
         "prevalence": 0.8,
         "description": "0.9",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "System Center Operations Manager": {
         "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Visual Studio Code": {
         "prevalence": 0.3,
         "description": "Integrated development environment",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Visual Studio Installer": {
         "prevalence": 0.3,
         "description": "Integrated development environment",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Visual Studio Code npm-script Extension": {
         "prevalence": 0.2,
         "description": "Extension for Visual Studio Code IDE",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Remote Development Extension for Visual Studio Code": {
         "prevalence": 0.2,
         "description": "Extension for Visual Studio Code IDE",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Visual Studio Code GitHub Pull Requests and Issues Extension": {
         "prevalence": 0.2,
         "description": "Extension for Visual Studio Code IDE",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Visual Studio Code Kubernetes Tools": {
         "prevalence": 0.2,
         "description": "Extension for Visual Studio Code IDE",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Visual Studio Code Kubernetes Tools Extension": {
         "prevalence": 0.2,
@@ -460,242 +595,284 @@
     "Visual Studio Code Maven for Java Extension": {
         "prevalence": 0.2,
         "description": "Extension for Visual Studio Code IDE",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Visual Studio Code Remote Containers Extension": {
         "prevalence": 0.2,
         "description": "Extension for Visual Studio Code IDE",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Address Book": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Backup Engine": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Camera Codec Pack": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Console Driver": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows DNS Server": {
         "prevalence": 0.9,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "SCOM": {
         "prevalence": 0.9,
         "description": "System Center Operations Manager",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Active Directory": {
         "prevalence": 0.9,
         "description": "Active Directory is a directory service developed by Microsoft for Windows domain networks",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Active Directory Federation Server": {
         "prevalence": 0.9,
         "description": "Active Directory is a directory service developed by Microsoft for Windows domain networks",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows NTFS": {
         "prevalence": 0.8,
         "description": "The default file system of the Windows NT family",
-        "additional_detection_strings": ["NTFS"]
+        "additional_detection_strings": [
+            "NTFS"
+        ],
+        "vendor": "Microsoft"
     },
     "Windows DirectX": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "DirectX Graphics Kernel": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Event Tracing": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Fax Service": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Graphics Component": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Installer": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Local Spooler": {
         "prevalence": 0.7,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Mobile Device Management": {
         "prevalence": 0.7,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Network File System": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows PKU2U": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Remote Procedure Call": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows TCP/IP Driver": {
         "prevalence": 0.9,
         "description": "A kernel mode driver",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Trust Verification API": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Active Template Library": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Azure Active Directory Pod Identity": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Microsoft Internet Messaging API": {
-            "prevalence": 0.6,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Bot Framework SDK": {
-            "prevalence": 0.4,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.4,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Diagnostics Hub Standard Collector": {
-            "prevalence": 0.8,
-            "description": "Diagnostics Hub Standard Collector is part of Windows diagnostics tools and it collects real time ETW (Event Tracing for Windows) events and processes them",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.8,
+        "description": "Diagnostics Hub Standard Collector is part of Windows diagnostics tools and it collects real time ETW (Event Tracing for Windows) events and processes them",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "GDI+": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "HEVC Video Extensions": {
-            "prevalence": 0.7,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.7,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Microsoft DTV-DVD Video Decoder": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Microsoft Edge": {
-            "prevalence": 0.8,
-            "detection_priority": 0.3,
-            "detection_priority_comment": "For the vulnerabilities in Chrome, Chromium and Edge, it's better to choose Edge",
-            "description": "Web browser",
-            "additional_detection_strings": ["Microsoft Edge (HTML-based)",
-                                             "Microsoft Edge for Android",
-                                             "Microsoft Edge (Chromium-based)"]
-        },
+        "prevalence": 0.8,
+        "detection_priority": 0.3,
+        "detection_priority_comment": "For the vulnerabilities in Chrome, Chromium and Edge, it's better to choose Edge",
+        "description": "Web browser",
+        "additional_detection_strings": [
+            "Microsoft Edge (HTML-based)",
+            "Microsoft Edge for Android",
+            "Microsoft Edge (Chromium-based)"
+        ],
+        "vendor": "Microsoft"
+    },
     "Google Chrome": {
         "prevalence": 0.8,
         "description": "Web browser",
         "additional_detection_strings": []
     },
     "Microsoft Office": {
-            "prevalence": 0.6,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Microsoft SQL": {
-            "prevalence": 0.6,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "SQL Server for Linux Containers": {
-            "prevalence": 0.6,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.6,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Microsoft OneDrive for Android": {
-            "prevalence": 0.4,
-            "description": "",
-            "additional_detection_strings": []
-        },
+        "prevalence": 0.4,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Windows Media Foundation": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Roaming Security Rights Management Services": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "Windows NTLM": {
-            "prevalence": 0.9,
-            "description": "A suite of security protocols to authenticate users' identity and protect the integrity and confidentiality of their activity",
-            "additional_detection_strings": []
-        },
-    "Remote Procedure Call Runtime": {
-            "prevalence": 0.9,
-            "description": "",
-            "additional_detection_strings": []
-        },
-    "TPM Device Driver": {
-            "prevalence": 0.8,
-            "description": "",
-            "additional_detection_strings": []
-        },
-
-    "Application Virtualization": {
         "prevalence": 0.8,
         "description": "",
         "additional_detection_strings": []
     },
+    "Roaming Security Rights Management Services": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows NTLM": {
+        "prevalence": 0.9,
+        "description": "A suite of security protocols to authenticate users' identity and protect the integrity and confidentiality of their activity",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Remote Procedure Call Runtime": {
+        "prevalence": 0.9,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "TPM Device Driver": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Application Virtualization": {
+        "prevalence": 0.8,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Azure Sphere": {
         "prevalence": 0.4,
         "description": "Microsoft Azure Sphere is a solution for creating highly-secured, connected, MCU-powered devices",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Azure Virtual Machine": {
         "prevalence": 0.4,
         "description": "",
-        "additional_detection_strings": []
-    },
-    "Azure": {
-        "prevalence": 0.4,
-        "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Git": {
         "prevalence": 0.4,
@@ -707,92 +884,110 @@
     "Git for Visual Studio": {
         "prevalence": 0.4,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "3D Viewer": {
         "prevalence": 0.7,
         "description": "Standard Windows Application",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Paint 3D": {
         "prevalence": 0.7,
         "description": "Standard Windows Application",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Office ClickToRun": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft PowerPoint": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Visio": {
         "prevalence": 0.6,
         "description": "Microsoft Visio",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Office Visio": {
         "prevalence": 0.6,
         "description": "Microsoft Visio",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Office Graphics Component": {
         "prevalence": 0.6,
         "description": "Microsoft Office",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Accessibility Insights for Android": {
         "prevalence": 0.2,
         "description": "Accessibility Insights for Android is a free, open source tool that helps developers find and fix accessibility issues in Android apps",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "OpenType Font Parsing": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Open Management Infrastructure": {
         "prevalence": 0.8,
         "description": "An open source project to further the development of a production quality implementation of the DMTF CIM/WBEM standards",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Quantum Development Kit for Visual Studio Code": {
         "prevalence": 0.5,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Remote Access API": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Storage Spaces Controller": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "User Profile Service": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Visual Studio Code ESLint Extension": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Visual Studio Code Java Extension Pack": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Win32 Stream Enumeration": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Cluster Client Failover": {
         "prevalence": 0.8,
@@ -802,138 +997,166 @@
     "Win32 File Enumeration": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Connected User Experiences and Telemetry": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "YARP": {
         "prevalence": 0.5,
         "description": "Yet Another Reverse Proxy. YARP is a library to help create reverse proxy servers that are high-performance, production-ready, and highly customizable",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "DiskUsage.exe": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Geolocation Service": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
-
     "Windows Modern Execution Server": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Resilient File System (ReFS)": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": ["ReFS"]
+        "additional_detection_strings": [
+            "ReFS"
+        ],
+        "vendor": "Microsoft"
     },
     "Microsoft Dynamics GP": {
         "prevalence": 0.6,
         "description": "Microsoft Dynamics GP is a mid-market business accounting software or ERP software package",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Defender Application Control": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows BackupKey Remote Protocol": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Defender Credential Guard": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows DWM Core Library": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows User-mode Driver Framework Reflector Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Accounts Control": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows AppContracts API Server": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Application Model Core API": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows StateRepository API Server file": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows UI Immersive Server API": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows System Launcher": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
-   "Windows Push Notifications Apps": {
+    "Windows Push Notifications Apps": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
-   "Windows Devices Human Interface": {
+    "Windows Devices Human Interface": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
-   "Tablet Windows User Interface Application Core": {
+    "Tablet Windows User Interface Application Core": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
-   "Windows Cleanup Manager": {
+    "Windows Cleanup Manager": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows (modem.sys)": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows AppX Deployment Extensions": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Bluetooth": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows CSC Service": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "OpenSSL": {
         "prevalence": 0.8,
@@ -948,114 +1171,141 @@
     "Windows CryptoAPI": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows DNS Query": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Docker": {
         "prevalence": 0.7,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Event Logging Service": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Fax Compose Form": {
         "prevalence": 0.7,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows GDI+": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Virtual Machine Bus": {
         "prevalence": 0.6,
         "description": "Hyper-V Virtual Machine Bus (VMBus)",
-        "additional_detection_strings": ["VMBus"]
+        "additional_detection_strings": [
+            "VMBus"
+        ]
     },
     "Virtual Machine IDE Drive": {
         "prevalence": 0.6,
         "description": "Hyper-V Virtual Machine IDE Drive",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Hyper-V": {
         "prevalence": 0.6,
         "description": "Hardware virtualization component of the client editions of Windows NT",
-        "additional_detection_strings": ["Hyper-V"]
+        "additional_detection_strings": [
+            "Hyper-V"
+        ],
+        "vendor": "Microsoft"
     },
     "Windows InstallService": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows LUAFV": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Multipoint Management": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows NT Lan Manager Datagram Receiver Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Print Spooler": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Projected File System FS Filter Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Remote Desktop Services": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Remote Desktop Protocol": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": ["Remote Desktop Protocol"]
+        "additional_detection_strings": [
+            "Remote Desktop Protocol",
+            "Windows Remote Desktop Protocol (RDP)",
+            "Windows Remote Desktop Protocol Core"
+        ]
     },
     "Windows Remote Procedure Call Runtime": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Runtime C++ Template Library": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Update Stack": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows WLAN Service": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows WalletService": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
-
     "Windows Folder Redirection": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -1064,32 +1314,38 @@
     "Windows 10 Update Assistant": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows ActiveX Installer Service": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Admin Center": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Bind Filter Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Cloud Files Mini Filter Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Common Log File System Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows DCOM Server": {
         "prevalence": 0.8,
@@ -1099,12 +1355,14 @@
     "Windows Filter Manager": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows GPSVC": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows HTML Platform": {
         "prevalence": 0.8,
@@ -1114,137 +1372,158 @@
     "Windows Kernel-Mode Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows MSHTML Platform": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Server for NFS": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft DWM Core Library": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Event Tracing for Windows": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Kerberos AppContainer": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
-    },
-    "Kerberos AppContainer": {
-        "prevalence": 0.8,
-        "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Enhanced Cryptographic Provider": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Cluster Port Driver": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Connected Devices Platform Service": {
         "prevalence": 0.3,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Clipboard User Service": {
         "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Tile Data Repository": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Remote Desktop Licensing Diagnoser": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Task Flow Data Engine": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Cryptographic Services": {
         "prevalence": 0.8,
         "description": "he Cryptographic Services is a Microsoft Windows feature that encrypts and decrypts data on storage devices when they are accessed",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows App-V Overlay Filter": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Container Execution Agent": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Error Reporting": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Extensible Firmware Interface": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Media Photo Codec": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows NAT": {
         "prevalence": 0.9,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Overlay Filter": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Projected File System": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows UPnP Device Host": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Update Service": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Update Stack Setup": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows User Profile Service": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows ADFS": {
         "prevalence": 0.8,
@@ -1254,82 +1533,98 @@
     "Windows AF_UNIX Socket Provider": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Authenticode": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Certificate": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows DNS Snap-in": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows File History Service": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Font Driver Host": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows GDI": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows HTML Platforms": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Hello": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Kernel Memory": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Key Distribution Center": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows LSA": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Media": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Partition Management Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Remote Access Connection Manager": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Remote Assistance": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Curl": {
         "prevalence": 0.7,
@@ -1339,107 +1634,128 @@
     "Windows Security Account Manager Remote Protocol": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Virtual Registry Provider": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows AppX Deployment Server": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Application Compatibility Cache": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Early Launch Antimalware Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Media Video Decoder": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Resource Manager PSM Service Extension": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Secure Kernel Mode": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Services and Controller App": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Speech Runtime": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows WLAN AutoConfig Service": {
         "prevalence": 0.8,
-        "description": "Windows сomponent",
-        "additional_detection_strings": []
+        "description": "Windows \u0441omponent",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Bowser.sys": {
         "prevalence": 0.8,
-        "description": "Windows сomponent",
-        "additional_detection_strings": []
+        "description": "Windows \u0441omponent",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "DirectWrite": {
         "prevalence": 0.8,
-        "description": "Windows сomponent",
-        "additional_detection_strings": []
+        "description": "Windows \u0441omponent",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Dynamics Business Central": {
         "prevalence": 0.4,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Media Foundation": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Bing Search": {
         "prevalence": 0.2,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Exchange": {
         "prevalence": 0.8,
         "description": "Exchange",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Office Online Server": {
         "prevalence": 0.3,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Visual Studio": {
         "prevalence": 0.3,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Open Enclave SDK": {
         "prevalence": 0.3,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Power BI": {
         "prevalence": 0.3,
         "description": "Power BI is a business analytics service by Microsoft",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Fortinet FortiOS": {
         "prevalence": 0.9,
@@ -1454,7 +1770,9 @@
     "Cisco Small Business Router": {
         "prevalence": 0.7,
         "description": "Network Device",
-        "additional_detection_strings": ["Cisco Small Business"]
+        "additional_detection_strings": [
+            "Cisco Small Business"
+        ]
     },
     "BIG-IP": {
         "prevalence": 0.9,
@@ -1469,7 +1787,9 @@
     "VMware vRealize Operations Manager": {
         "prevalence": 0.9,
         "description": "Virtualization",
-        "additional_detection_strings": ["vRealize Operations Manager"]
+        "additional_detection_strings": [
+            "vRealize Operations Manager"
+        ]
     },
     "Kibana": {
         "prevalence": 0.9,
@@ -1484,7 +1804,10 @@
     "Oracle Java SE": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": ["Java SE","JRE"]
+        "additional_detection_strings": [
+            "Java SE",
+            "JRE"
+        ]
     },
     "SonicWall Email Security": {
         "prevalence": 0.7,
@@ -1494,72 +1817,86 @@
     ".NET and Visual Studio": {
         "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     ".NET": {
         "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Common Utilities": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Dynamics Finance and Operations": {
         "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "HTTP Protocol Stack": {
         "prevalence": 0.9,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Accessibility Insights for Web": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Bluetooth Driver": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Jet Red Database Engine and Access Connectivity Engine": {
         "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Office Graphics": {
         "prevalence": 0.6,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "OLE Automation": {
         "prevalence": 0.8,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Web Media Extensions": {
         "prevalence": 0.7,
         "description": "",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Container Isolation FS Filter Driver": {
         "prevalence": 0.9,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Container Manager Service": {
         "prevalence": 0.9,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Desktop Bridge": {
         "prevalence": 0.7,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Infrared Data Association (IrDA)": {
         "prevalence": 0.7,
@@ -1568,23 +1905,27 @@
     },
     "Windows Media Foundation Core": {
         "prevalence": 0.9,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows SMB Client": {
         "prevalence": 0.9,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows SSDP Service": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Wireless Networking": {
         "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "MyBB": {
         "prevalence": 0.6,
@@ -1614,191 +1955,3231 @@
     "Microsoft Intune Management Extension": {
         "prevalence": 0.3,
         "description": "Optional agent for Microsoft Intune",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Intune Portal for iOS": {
         "prevalence": 0.3,
         "description": "iOS store app for Microsoft Intune",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Intune Management Extension": {
         "prevalence": 0.3,
         "description": "Optional agent for Microsoft Intune",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Brotli Library": {
         "prevalence": 0.4,
         "description": "Brotli is a compression algorithm developed by Google and works best for text compression",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "ASP.NET Core": {
         "prevalence": 0.8,
         "description": "An open-source, server-side web-application framework designed for web development",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft Dynamics 365": {
         "prevalence": 0.5,
         "description": "Microsoft Dynamics 365 is a product line of enterprise resource planning (ERP) and customer relationship management (CRM) intelligent business applications",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Bluetooth Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Cryptographic Primitives Library": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Digital TV Tuner device registration application": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Graphics Component Font Parsing": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Media MPEG-4 Video Decoder": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Microsoft MPEG-2 Video Extension": {
         "prevalence": 0.4,
         "description": "This extension helps video apps installed on Windows 10, such as Microsoft Movies & TV, to play MPEG-1 and MPEG-2 videos.",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Recovery Environment Agent": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Services for NFS ONCRPC XDR Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Update Medic Service": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows User Account Profile Picture": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Ancillary Function Driver for WinSock": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Key Storage Provider": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Redirected Drive Buffering SubSystem Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Redirected Drive Buffering System": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Scripting Engine": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Storage": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Subsystem for Linux": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Update Client": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "BitLocker": {
         "prevalence": 0.8,
         "description": "A full volume encryption feature included with Microsoft Windows versions starting with Windows Vista",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows AD FS": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows AppContainer": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows AppContainer Firewall Rules": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows AppX Deployment Service": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Fast FAT File System Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows HTTP.sys": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Media Audio Decoder": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Media Foundation Dolby Digital Atmos Decoders": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Nearby Sharing": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows Text Shaping": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Windows exFAT File System": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Console Window Host": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     },
     "Rich Text Edit Control": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": []
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Dynamics 365 (on-premises) version 8": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Backup Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows NTFS Global Reparse Point": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure DevOps Server and Team Foundation Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    ".NET Core & .NET Framework": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Local Security Authority (LSA) Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Site Recovery": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows CNG Key Isolation Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "StructuredQuery": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Digital Media Receiver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows EOT Font Engine": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft VsCode Kubernetes Tools Extension": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Graphics": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Internet Connection Sharing Service": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Background Intelligent Transfer Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "WebP Image Extensions": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows DHCP Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Active Directory Domain Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Office XSS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Core Shell SI Host Extension Framework for Composable Shell": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "ADFS MFA": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "VHD Driver": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows Store Installer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Local Security Authority Server (lsasrv)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "RPC Network Data Representation Engine": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Dxgkrnl.sys": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Surface Hub": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "NuGetGallery": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Update Orchestrator Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows VBScript Engine": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows File Explorer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Hyper-V vSMB": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft splwow64": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Internet Explorer Browser Helper Object (BHO)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "ADFS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Defender Antimalware Platform Hard Link": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft ASP.NET Core": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Edge based on Edge HTML": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows SMB Client Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Graphics Component": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Theme API": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Data Sharing Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "HTTP/2 Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Remote Desktop Gateway (RD Gateway)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft YourPhone Application for Android": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Explorer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "DLL Loading": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "HID": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft SQL Server Analysis Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "OneDrive for Windows": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Printer Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "OpenSSH for Windows": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "MSXML 3.0": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft DirectX Graphics Kernel Subsystem": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Secure Boot": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Video Control": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Skype for Android": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Firewall": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Digital TV Tuner": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Guidance on Scripting Engine": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Token": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Azure AD Connect": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Compatibility Appraiser": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Yammer": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Universal Outlook": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft SQL Server Agent": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Work Folder Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Clustered Shared Volume": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [
+            "Windows Cluster Shared Volume (CSV)"
+        ],
+        "vendor": "Microsoft"
+    },
+    "Windows Remote Access Common Dialog": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Malicious Software Removal Tool": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Dynamics On-Premise": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure SDK for Java": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows Folder Redirection": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "WPAD": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Credential Picker": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "NetLogon": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Media Center Update": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows ARM": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows NT OS Kernel": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Diagnostics & feedback": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Camera Codec": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Network Connections Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Type 1 Font Parsing": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Active Directory": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Authentication": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows ActiveX": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Print Workflow Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Xamarin.iOS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows State Repository Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows AppX Package Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Defender for Endpoint": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows WPAD Proxy Discovery": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows Media Foundation": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Virtual PCI": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Component Object Model": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Skype for Business via Microsoft Edge (EdgeHTML-based)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Graphics Components": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Project": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Hyper-V vSMB": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Outlook iOS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Outlook for Mac": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Font Library": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Journal": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "SMB Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure AD": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Remote Desktop Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows VAD Cloning": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Kernel Local": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Secure Boot": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Adobe Font Manager Library": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure IoT Device Client SDK": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Inking COM": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Network List Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Setup": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows CloudExperienceHost": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Cortana": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft unistore.dll": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows DLL Loading": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Hyper-V Discrete Device Assignment (DDA)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Speech Shell Components": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Speech API": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure App Service": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Power BI Report Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows MSCTF Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure IoT SDK": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Connected User Experiences and Telemetry Service": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure DevOps Server and Team Foundation Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Performance Monitor": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Skype for Business and Lync Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Remote Desktop Protocol Drive Redirection": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Event System": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Rome SDK": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Remote Desktop Web Access": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows DHCP Client": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "VBScript": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Raw Image Extension": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows IOleCvt Interface": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Kerberos KDC": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Outlook on the web": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "ASP.NET and .NET": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Stack": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Volume Manager Extension Driver": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Defender Firewall": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Now Playing Session Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Visual Studio Code JSHint Extension": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Lync 2013": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft JET Database Engine": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Skype for Business via Internet Explorer": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Skype for Business and Lync": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Projected Filesystem": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Power BI": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Visual Studio Extension Installer Service": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Animation Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Secure Channel": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows 10 Mobile": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Lync for Mac 2011": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Skype for Business": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Guidance for \"PrivExchange\"": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Canonical Display Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft ActiveX": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Sharepoint": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    ".NET Framework and Visual Studio": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Hard Link": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Imaging Component": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Jet Database Engine": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Outlook for Android": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows RRAS Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows WaasMedic Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows DNS": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows SNMP Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows COM": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Enterprise App Management Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Office SharePoint": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Telephony Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Remote Desktop Virtual Host": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Apache Log4j": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Diagnostics Hub Standard Collector Service": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows DNSAPI": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Visual Studio Code WSL Extension": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Graphics Component Font Parsing": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft XmlDocument": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Runtime": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure DevOps Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Azure Active Directory Connect": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Store Runtime": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Live Accounts": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Functions": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows Defender": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Client License Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "MS XML": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Spatial Data Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "OpenSSL Remote": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Network Watcher Agent Virtual Machine Extension for Linux": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Team Foundation Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows IPSec": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "PowerShell Editor Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows COM Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Diagnostics Hub Standard Collector Runtime": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure IoT Java SDK": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    ".Net Framework and .Net Core": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows NetBIOS": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Docker": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Print Configuration": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Group Policy Services Policy Processing": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows ALPC": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Task Scheduler": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows System Events Broker": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "OpenType Font Driver": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Virtual Machine Bus (VMBus)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows NDIS": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Function Discovery SSDP Provider": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Credential Enrollment Manager Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows CDP User Components": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows RSoP Service Application": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft SharePoint Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows PowerShell": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Event Viewer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Winlogon": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows File System": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Authentication Library for Android": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Visual Studio Code Live Share": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows CloudStore": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "PowerShellGet Module WDAC": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Surface Pro 3": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "XmlLite Runtime": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Remote Desktop Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Update Delivery Optimization": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows PlayToManager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows - User Profile Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "SQL RDBMS Engine": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Defender Security Center": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Identity Manager XSS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Custom Protocol Engine": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Code Integrity Module": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Linux Kernel TCP SACK": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Local Security Authority Subsystem Service": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Picker Platform": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Dynamics 365 (On-Premise)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows USO Core Worker": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Deployment Services TFTP Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows COM Session": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Silverlight": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Start-Up Application": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Function Discovery Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft OneNote": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Text Services Framework": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "HIDParser": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Encrypting File System (EFS)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Kerberos": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Port Class Library": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Yammer Desktop Application": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Agent Activation Runtime": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft RemoteFX Virtual GPU miniport driver": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Modules Installer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "WEBDAV": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "NTFS Set Short Name": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft ActiveX Installer Service": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Sync Host Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Provisioning Runtime": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure ms-rest-nodeauth Library": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Edge for iOS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsft Browser": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft (MAU) Office": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Xamarin.Forms": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Desktop Bridge VFS": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Audio Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Active Directory Federation Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "CNG": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Defender for IOT": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Bowser.sys": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Profile Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Wireless Display Adapter": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Local Security Authority (LSA)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows SharedStream Library": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Application Compatibility Client Library": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft SQL Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft SharePoint Reflective": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Open Source Curl": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure CycleCloud": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft XML Core Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Uniscribe": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure AD Web Sign-in": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Office Online": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Media Player": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Bond": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Language Pack Installer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Storage VSP Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "TRIE": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Scripting Engine": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Diagnostics Hub": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows UPnP Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "WordPad": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Express Compressed Fonts": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Visual Studio Live Share": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Visual Studio JSON": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Registry": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Transaction Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Office Web Apps": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft OneDrive": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Host Guardian Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows SSH": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Power Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Diagnostic Hub Standard Collector, Visual Studio Standard Collector": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Fax and Scan Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "SQL Server Reporting Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Http.sys": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Cluster Client Failover (CCF)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Device Guard Code Integrity Policy": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Upgrade Assistant": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    ".NET CORE": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Cortana": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Group Policy": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Cryptographic Catalog Services": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Broadcom BCM43xx": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Network Connection Broker": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Remote Desktop": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "HTTP.sys": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Mail Client": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "MSHTML Engine": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Hyper-V RemoteFX vGPU": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows PDF": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft InfoPath": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Dynamics 365 (on-premises)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure SDK for C": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Wireless Keyboard 850": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Key Isolation Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Client Side Rendering Print Provider": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    ".NET and .NET Core": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure DevOps and Team Foundation Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "TLS/SSL": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Unified Write Filter": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Event Tracing Discretionary Access Control List": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Malware Protection Engine": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure SDK for .NET": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Dynamics NAV": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Color Management": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Wireless Network Profile": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Direct Show -": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Modules Installer Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "ASP.NET Core and Visual Studio": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows IME": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Imaging API": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Script Runtime": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Data Explorer": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Visual Studio Code Python Extension": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Open Type Font": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Certificate Dialog": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Search": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    ".NET Framework and .NET Core": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "OData": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Edge PDF": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows KernelStream": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows System Information Console": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Server Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Visual Studio and Visual Studio Code": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows VMSwitch": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Local Security Authority (LSA)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    ".NET Framework Device Guard": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Text Service Module": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Skype for Business Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Text Service Framework": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Scheduled Task": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Mobile Device Management Diagnostics": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Dynamics 365 Customer Engagement": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Remote Access": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows NetLogon Memory Corruption": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft RMS Sharing App for Mac": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Credential Security Support Provider Protocol (CredSSP)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Active Directory Authentication Library": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Browsers": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "NuGet Package Manager": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft SQL Server Management Studio": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows OLE": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Storage Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Automation": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Project Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Tile Object Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Publisher": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Open Source Customization for Active Directory Federation Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows RPCSS": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Security Center API": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Netlogon": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Secure Boot Component": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Session Object": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Default Folder": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows SMB Authenticated": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "WinINet API": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Endpoint Configuration Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Office Word": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows Update Client": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Server Resource Management Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Resource Policy": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Xbox Live Auth Manager for Windows": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft IIS Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Network Connectivity Assistant": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "NetBT": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "MDS API": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Linux Agent": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Remote Desktop Connection Manager": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Win32k Graphics": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Chakra Scripting Engine": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Diagnostic Hub Standard Collector": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows SMBv3 Client/Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Wireless Network Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows iSCSI Target Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows CSRSS": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Active Directory Federation Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Media Center": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Image Acquisition Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows CryptoAPI ": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "TLS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Delivery Optimization": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Word PDF": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows Infrared Data Association (IrDA)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Azure Pack": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Image": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "PerformancePoint Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Dynamics 365 Commerce": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows CD-ROM Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "WCF/WIF SAML Token": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Device Setup Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Search": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows Codecs Library": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Shell": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows Transport Layer Security": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Hyper-V Shared Virtual Hard Disks": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Host Compute Service Shim": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Dynamics CRM Webclient": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Power BI Report Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows Setup": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Comctl32": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft JScript": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows TDX": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Shell infrastructure component": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Kerberos SNAME": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Edge (Chromium-based) in IE Mode": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Network Driver Interface Specification (NDIS)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "ActiveX Data Objects (ADO)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft APP-V": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Remote Desktop App for Mac": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Radio Manager API": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Office Click-to-Run": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Office app": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Text-To-Speech": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Update Notification Manager": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft IIS Server XSS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Crypto Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Storage Services": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Permissions Enforcement": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "LNK": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Security Support Provider Interface": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Search Indexer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Hyper-V Shared Virtual Disk": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Failover Cluster": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Device Guard": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Lock Screen": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows PDEV": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows File Server Resource Management Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Error Reporting Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Network Location Awareness Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "SQL Server Management Studio": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "MSR JavaScript Cryptography Library": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Remote Desktop Protocol Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Linux On Windows": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Base3D": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "libjpeg": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Dynamics 365 for Finance and Operations (on-premises)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "DirectX Graphics Kernel File": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Macro Assembler": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Push Notification Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Word for Android": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft MSHTML": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Office Trust Center": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "NetBIOS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Task Scheduler": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft SQL Server Reporting Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows File Signature": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Clipboard Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "AV1 Video Extension": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    ".NET Framework, SharePoint Server, and Visual Studio": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows dnsrslvr.dll": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Hypervisor Code Integrity": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Work Folders Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Bluetooth Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Lockscreen": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Exchange Validation Key": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Imaging Library": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Secondary Logon": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows SMB Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Virtual Secure Mode": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Filter Manager": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows DirectShow": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows p2pimsvc": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Tablet Windows User Interface Application": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Teams": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Shell Infrastructure Component": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Visual Studio Code Remote Development Extension": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure SSH Keypairs": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     }
 }
