@@ -130,17 +130,17 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
                 for exploit_data in cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources']:
                     links_str.append("<a href=\"https://vulners.com/" + exploit_data['type'] + "/"
                                      + exploit_data['id'].lower() + "\">" + exploit_data['title'] + "</a>")
-                public_exploit_exists_c = "Public exploit is found at Vulners (" + ", ".join(links_str) + ")"
+                public_exploit_exists_c = "The existence of a public exploit is mentioned on Vulners website (" + ", ".join(links_str) + ")"
                 comment_exists = True
         if 'ms_cve_data_all' in cve_data_all:
             if cve_data_all['ms_cve_data_all'][cve]['public_exploit'] and not comment_exists:
                 public_exploit_exists_n = cve_data_all['ms_cve_data_all'][cve]['public_exploit_level']
-                public_exploit_exists_c = "Public exploit is mentioned by Microsoft in CVSS Temporal Score (" +\
+                public_exploit_exists_c = "The existence of a public exploit is mentioned in Microsoft CVSS Temporal Score (" +\
                                           cve_data_all['ms_cve_data_all'][cve]['public_exploit_level_name'] + ")"
                 comment_exists = True
     else:
         public_exploit_exists_n = 0
-        public_exploit_exists_c = "Public exploit is NOT found at Vulners or Microsoft website"
+        public_exploit_exists_c = "The existence of a public exploit is NOT mentioned on Vulners and Microsoft websites"
     public_exploit_exists_k = 17
 
     ######## Wild Exploit
@@ -223,9 +223,12 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
 
     if not wild_exploited:
         wild_exploited_n = 0
-        wild_exploited_c = "Exploitation in the wild is NOT found at Vulners, Microsoft and AttackerKB websites"
+        wild_exploited_c = "Exploitation in the wild is NOT mentioned on Vulners, Microsoft and AttackerKB websites"
     else:
-        wild_exploited_c = "Exploitation in the wild is mentioned at " + ", ".join(mentioned)
+        if len(mentioned) == 1:
+            wild_exploited_c = "Exploitation in the wild is mentioned on " + ", ".join(mentioned) + " website"
+        else:
+            wild_exploited_c = "Exploitation in the wild is mentioned on " + ", ".join(mentioned) + " websites"
     wild_exploited_k = 18
 
     ######## Product
