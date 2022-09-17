@@ -89,12 +89,20 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-     "Intel(R) Processor": {
+    "Intel(R) Processor": {
         "prevalence": 0.9,
         "description": "Processor",
         "vendor": "Intel",
         "additional_detection_strings": [
             "Intel(R) Processors"
+        ]
+    },
+    "AMD Processor": {
+        "prevalence": 0.9,
+        "description": "Processor",
+        "vendor": "AMD",
+        "additional_detection_strings": [
+            "AMD CPU"
         ]
     },
     "Windows IKE Extension": {
@@ -5273,5 +5281,173 @@
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
+    },
+    "Windows Portable Device Enumerator Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Credential Guard Domain-joined Public Key": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows.Devices.Picker.dll": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Internet Information Services Dynamic Compression Module": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Security Account Manager (SAM)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Boot Manager": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Storage Library": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Internet Information Services Cachuri Module": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Media Player Network Sharing Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Xbox Live Save Service": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Layer 2 Tunneling Protocol (L2TP)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Connected Devices Platform Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Performance Counters for Windows": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows IIS Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Group Policy": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows BitLocker": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows WebBrowser Control": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "SMB Client and Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Error Reporting Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft ATA Port Driver": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Secure Socket Tunneling Protocol (SSTP)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Batch Node Agent": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Point-to-Point Protocol (PPP)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "System Center Operations Manager: Open Management Infrastructure (OMI)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Arc Jumpstart": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Eurosoft": {
+        "prevalence": 0.3,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Eurosoft"
+    },
+    "Crypto Pro": {
+        "prevalence": 0.3,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Eurosoft"
+    },
+    "New Horizon Data Systems Inc": {
+        "prevalence": 0.3,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "New Horizon Data Systems Inc"
     }
 }

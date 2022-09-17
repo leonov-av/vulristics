@@ -118,8 +118,9 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
         is_public_exploit = False
         cve_data_all['vulners_cve_data_all'][cve]['public_exploit'] = False
     if 'ms_cve_data_all' in cve_data_all:
-        if cve_data_all['ms_cve_data_all'][cve]['public_exploit']:
-            is_public_exploit = True
+        if cve in cve_data_all['ms_cve_data_all']:
+            if cve_data_all['ms_cve_data_all'][cve]['public_exploit']:
+                is_public_exploit = True
 
     if is_public_exploit:
         public_exploit_exists_n = 1.0
@@ -133,11 +134,12 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
                 public_exploit_exists_c = "The existence of a public exploit is mentioned on Vulners website (" + ", ".join(links_str) + ")"
                 comment_exists = True
         if 'ms_cve_data_all' in cve_data_all:
-            if cve_data_all['ms_cve_data_all'][cve]['public_exploit'] and not comment_exists:
-                public_exploit_exists_n = cve_data_all['ms_cve_data_all'][cve]['public_exploit_level']
-                public_exploit_exists_c = "The existence of a public exploit is mentioned in Microsoft CVSS Temporal Score (" +\
-                                          cve_data_all['ms_cve_data_all'][cve]['public_exploit_level_name'] + ")"
-                comment_exists = True
+            if cve in cve_data_all['ms_cve_data_all']:
+                if cve_data_all['ms_cve_data_all'][cve]['public_exploit'] and not comment_exists:
+                    public_exploit_exists_n = cve_data_all['ms_cve_data_all'][cve]['public_exploit_level']
+                    public_exploit_exists_c = "The existence of a public exploit is mentioned in Microsoft CVSS Temporal Score (" +\
+                                              cve_data_all['ms_cve_data_all'][cve]['public_exploit_level_name'] + ")"
+                    comment_exists = True
     else:
         public_exploit_exists_n = 0
         public_exploit_exists_c = "The existence of a public exploit is NOT mentioned on Vulners and Microsoft websites"

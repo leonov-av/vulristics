@@ -110,4 +110,4 @@ def update_products_file_from_vulners_ms_cves():
 
     update_product_data(product_objects)
 
-# update_products_file_from_vulners_ms_cves()
+update_products_file_from_vulners_ms_cves()
