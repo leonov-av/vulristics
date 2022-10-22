@@ -24,8 +24,9 @@
     },
     "Pulse Connect Secure": {
         "prevalence": 0.7,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "Pulse Connect Secure provides a seamless, cost-effective, SSL VPN solution for remote and mobile users from any web- enabled device to corporate resources",
+        "vendor": "Ivanti",
+        "additional_detection_strings": ["Ivanti Connect Secure"]
     },
     "Zimbra Collaboration Suite": {
         "prevalence": 0.7,
@@ -48,7 +49,8 @@
     },
     "Confluence Server": {
         "prevalence": 0.7,
-        "description": "",
+        "description": "Confluence is a web-based corporate wiki",
+        "vendor": "Atlassian",
         "additional_detection_strings": []
     },
     "macOS": {
@@ -363,10 +365,11 @@
     },
     "Windows LDAP": {
         "prevalence": 0.9,
-        "description": "Windows LDAP",
-        "detection_priority_comment": "LDAP (Lightweight Directory Access Protocol) is an open and cross platform protocol used for directory services authentication",
+        "description": "Windows LDAP (Lightweight Directory Access Protocol) is an open and cross platform protocol used for directory services authentication",
+        "detection_priority": -0.3,
+        "detection_priority_comment": "Conflict with Log4j2 detection",
         "additional_detection_strings": [
-            "LDAP"
+            "LDAP", "Windows Lightweight Directory Access Protocol"
         ],
         "vendor": "Microsoft"
     },
@@ -894,7 +897,7 @@
         "prevalence": 0.4,
         "description": "",
         "detection_priority": -0.3,
-        "detection_priority_comment": "False detections. E.g.: legitimate",
+        "detection_priority_comment": "False detections. E.g.: legitimate; Conflict with GitLab",
         "additional_detection_strings": []
     },
     "Git for Visual Studio": {
@@ -1745,8 +1748,8 @@
     },
     "Microsoft Exchange": {
         "prevalence": 0.8,
-        "description": "Exchange",
-        "additional_detection_strings": [],
+        "description": "Microsoft Exchange Server is a mail server and calendaring server developed by Microsoft",
+        "additional_detection_strings": ["Exchange Server"],
         "vendor": "Microsoft"
     },
     "Microsoft Office Online Server": {
@@ -1779,9 +1782,10 @@
         "additional_detection_strings": []
     },
     "Citrix Application Delivery Controller": {
-        "prevalence": 0.9,
-        "description": "Network Device",
-        "additional_detection_strings": []
+        "prevalence": 0.7,
+        "description": "Citrix Application Delivery Controller (ADC) is an advanced load balancer with features that enhance the performance of applications",
+        "vendor": "Citrix",
+        "additional_detection_strings": ["Citrix ADC"]
     },
     "Cisco Small Business Router": {
         "prevalence": 0.7,
@@ -1791,8 +1795,9 @@
         ]
     },
     "BIG-IP": {
-        "prevalence": 0.9,
-        "description": "Network Device",
+        "prevalence": 0.7,
+        "description": "BIG-IP platform is a smart evolution of Application Delivery Controller (ADC) technology; solutions built on this platform are load balancers",
+        "vendor": "F5",
         "additional_detection_strings": []
     },
     "VMware Workspace One": {
@@ -5240,12 +5245,6 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "Windows Lightweight Directory Access Protocol (LDAP)": {
-        "prevalence": 0.8,
-        "description": "Windows component",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
     "Windows Desired State Configuration (DSC)": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -5449,5 +5448,155 @@
         "description": "",
         "additional_detection_strings": [],
         "vendor": "New Horizon Data Systems Inc"
+    },
+    "Microsoft ODBC Driver": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Network Device Enrollment Service (NDES)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "HTTP V3": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Guest Configuration and Azure Arc-enabled servers": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows DPAPI (Data Protection Application Programming Interface)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Distributed File System (DFS)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "SPNEGO Extended Negotiation (NEGOEX) Security Mechanism": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Defender for Endpoint for Mac": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft OLE DB Provider for SQL Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Dynamics CRM (on-premises)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Internet Key Exchange (IKE) Protocol Extensions": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Photo Import API": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Internet Key Exchange (IKE) Extension": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Credential Roaming Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "ARM processor": {
+        "prevalence": 0.5,
+        "description": "Processor",
+        "additional_detection_strings": ["Arm Cortex", "Neoverse"],
+        "vendor": "ARM"
+    },
+    "Apache Log4j2": {
+        "prevalence": 0.9,
+        "description": "Log4j2 is revamped version of Apache Logging framework",
+        "additional_detection_strings": ["Log4j2"],
+        "vendor": "Apache"
+    },
+    "GitLab": {
+        "prevalence": 0.9,
+        "description": "GitLab is a DevOps software package that combines the ability to develop, secure, and operate software in a single application",
+        "additional_detection_strings": [],
+        "vendor": "GitLab"
+    },
+    "Cisco HyperFlex HX": {
+        "prevalence": 0.6,
+        "description": "Cisco HyperFlex HX Data Platform is a purpose-built, high-performance, scale-out file system with a wide array of enterprise-class data management services",
+        "additional_detection_strings": [],
+        "vendor": "Cisco"
+    },
+    "Sitecore Experience Platform (XP)": {
+        "prevalence": 0.6,
+        "description": "Sitecore Experience Platform provides you with tools for content management, digital marketing, and analyzing and reporting",
+        "additional_detection_strings": ["Sitecore XP", "Sitecore Experience Platform"],
+        "vendor": "Sitecore"
+    },
+    "Hikvision Web Server": {
+        "prevalence": 0.5,
+        "description": "Hikvision provides top-of-the-line IoT solutions and video security systems for a broad range of verticals",
+        "additional_detection_strings": ["web server of some Hikvision product"],
+        "vendor": "Hikvision"
+    },
+    "Zoho ManageEngine ADSelfService Plus": {
+        "prevalence": 0.7,
+        "description": "Zoho ManageEngine ADSelfService Plus is an integrated self-service password management and single sign-on solution for Active Directory and cloud apps",
+        "additional_detection_strings": [],
+        "vendor": "Zoho"
+    },
+    "Apache APISIX": {
+        "prevalence": 0.4,
+        "description": "Apache APISIX is a dynamic, real-time, high-performance API Gateway",
+        "additional_detection_strings": ["Apache Apisix"],
+        "vendor": "Apache"
+    },
+    "Apache HTTP Server": {
+        "prevalence": 0.9,
+        "description": "Apache HTTP Server is a free and open-source web server that delivers web content through the internet",
+        "additional_detection_strings": [],
+        "vendor": "Apache"
+    },
+    "Buffalo WSR": {
+        "prevalence": 0.3,
+        "description": "Buffalo WSR is a product line of wireless routers",
+        "additional_detection_strings": [],
+        "vendor": "Buffalo Americas"
+    },
+    "VMware vCenter": {
+        "prevalence": 0.7,
+        "description": "VMware vCenter Server is an advanced server management software that provides a centralized platform for controlling vSphere environments for visibility across hybrid clouds",
+        "additional_detection_strings": ["vCenter"],
+        "vendor": "VMware"
     }
 }

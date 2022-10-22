@@ -140,8 +140,10 @@ def collect_vulners_data(vulners_id, rewrite_flag):
                                     new_id_list = list()
                                     for attackerkb_id in wild_exploited_source['idList']:
                                         # print(attackerkb_id)
-                                        if vulners_id in bul_dict[attackerkb_id]['title']:
-                                            new_id_list.append(attackerkb_id)
+                                        if attackerkb_id in bul_dict:
+                                            if 'title' in bul_dict[attackerkb_id]:
+                                                if vulners_id in bul_dict[attackerkb_id]['title']:
+                                                    new_id_list.append(attackerkb_id)
                                     if new_id_list != list():
                                         new_wild_exploited_sources.append({'type': 'attackerkb', 'idList': new_id_list})
                                 else:
@@ -158,6 +160,14 @@ def collect_vulners_data(vulners_id, rewrite_flag):
                 if 'cvss' in  vulners_data['data']['documents'][vulners_id]:
                     if 'score' in vulners_data['data']['documents'][vulners_id]['cvss']:
                         cvss_base_score = vulners_data['data']['documents'][vulners_id]['cvss']['score']
+                if 'cvss2' in  vulners_data['data']['documents'][vulners_id]:
+                    if 'cvssV2' in vulners_data['data']['documents'][vulners_id]['cvss2']:
+                        if 'baseScore' in vulners_data['data']['documents'][vulners_id]['cvss2']['cvssV2']:
+                            cvss_base_score = vulners_data['data']['documents'][vulners_id]['cvss2']['cvssV2']['baseScore']
+                if 'cvss3' in  vulners_data['data']['documents'][vulners_id]:
+                    if 'cvssV3' in vulners_data['data']['documents'][vulners_id]['cvss3']:
+                        if 'baseScore' in vulners_data['data']['documents'][vulners_id]['cvss3']['cvssV3']:
+                            cvss_base_score = vulners_data['data']['documents'][vulners_id]['cvss3']['cvssV3']['baseScore']
 
                 vulners_data['description'] = description
                 vulners_data['cvss_base_score'] = cvss_base_score
