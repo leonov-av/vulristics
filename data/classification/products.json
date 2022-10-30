@@ -26,7 +26,9 @@
         "prevalence": 0.7,
         "description": "Pulse Connect Secure provides a seamless, cost-effective, SSL VPN solution for remote and mobile users from any web- enabled device to corporate resources",
         "vendor": "Ivanti",
-        "additional_detection_strings": ["Ivanti Connect Secure"]
+        "additional_detection_strings": [
+            "Ivanti Connect Secure"
+        ]
     },
     "Zimbra Collaboration Suite": {
         "prevalence": 0.7,
@@ -369,7 +371,8 @@
         "detection_priority": -0.3,
         "detection_priority_comment": "Conflict with Log4j2 detection",
         "additional_detection_strings": [
-            "LDAP", "Windows Lightweight Directory Access Protocol"
+            "LDAP",
+            "Windows Lightweight Directory Access Protocol"
         ],
         "vendor": "Microsoft"
     },
@@ -1749,7 +1752,9 @@
     "Microsoft Exchange": {
         "prevalence": 0.8,
         "description": "Microsoft Exchange Server is a mail server and calendaring server developed by Microsoft",
-        "additional_detection_strings": ["Exchange Server"],
+        "additional_detection_strings": [
+            "Exchange Server"
+        ],
         "vendor": "Microsoft"
     },
     "Microsoft Office Online Server": {
@@ -1785,7 +1790,9 @@
         "prevalence": 0.7,
         "description": "Citrix Application Delivery Controller (ADC) is an advanced load balancer with features that enhance the performance of applications",
         "vendor": "Citrix",
-        "additional_detection_strings": ["Citrix ADC"]
+        "additional_detection_strings": [
+            "Citrix ADC"
+        ]
     },
     "Cisco Small Business Router": {
         "prevalence": 0.7,
@@ -5536,13 +5543,18 @@
     "ARM processor": {
         "prevalence": 0.5,
         "description": "Processor",
-        "additional_detection_strings": ["Arm Cortex", "Neoverse"],
+        "additional_detection_strings": [
+            "Arm Cortex",
+            "Neoverse"
+        ],
         "vendor": "ARM"
     },
     "Apache Log4j2": {
         "prevalence": 0.9,
         "description": "Log4j2 is revamped version of Apache Logging framework",
-        "additional_detection_strings": ["Log4j2"],
+        "additional_detection_strings": [
+            "Log4j2"
+        ],
         "vendor": "Apache"
     },
     "GitLab": {
@@ -5560,13 +5572,18 @@
     "Sitecore Experience Platform (XP)": {
         "prevalence": 0.6,
         "description": "Sitecore Experience Platform provides you with tools for content management, digital marketing, and analyzing and reporting",
-        "additional_detection_strings": ["Sitecore XP", "Sitecore Experience Platform"],
+        "additional_detection_strings": [
+            "Sitecore XP",
+            "Sitecore Experience Platform"
+        ],
         "vendor": "Sitecore"
     },
     "Hikvision Web Server": {
         "prevalence": 0.5,
         "description": "Hikvision provides top-of-the-line IoT solutions and video security systems for a broad range of verticals",
-        "additional_detection_strings": ["web server of some Hikvision product"],
+        "additional_detection_strings": [
+            "web server of some Hikvision product"
+        ],
         "vendor": "Hikvision"
     },
     "Zoho ManageEngine ADSelfService Plus": {
@@ -5578,7 +5595,9 @@
     "Apache APISIX": {
         "prevalence": 0.4,
         "description": "Apache APISIX is a dynamic, real-time, high-performance API Gateway",
-        "additional_detection_strings": ["Apache Apisix"],
+        "additional_detection_strings": [
+            "Apache Apisix"
+        ],
         "vendor": "Apache"
     },
     "Apache HTTP Server": {
@@ -5596,7 +5615,141 @@
     "VMware vCenter": {
         "prevalence": 0.7,
         "description": "VMware vCenter Server is an advanced server management software that provides a centralized platform for controlling vSphere environments for visibility across hybrid clouds",
-        "additional_detection_strings": ["vCenter"],
+        "additional_detection_strings": [
+            "vCenter"
+        ],
         "vendor": "VMware"
+    },
+    "Windows COM+ Event System Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Endpoint Configuration Manager": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Local Security Authority Subsystem Service (LSASS)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Workstation Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Server Service Remote Protocol": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows CD-ROM File System Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Local Session Manager (LSM)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "NuGet Client": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Client Server Run-time Subsystem (CSRSS)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Point-to-Point Tunneling Protocol": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows USB Serial Driver": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Group Policy Preference Client": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Lightweight Directory Access Protocol (LDAP)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft WDAC OLE DB provider for SQL Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Active Directory Certificate Services": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Web Account Manager": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Internet Key Exchange (IKE) Protocol": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Server Remotely Accessible Registry Keys": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Arc-enabled Kubernetes cluster Connect": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "StorSimple 8000 Series": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Service Fabric Explorer": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Mixed Reality Developer Tools": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
     }
 }

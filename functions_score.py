@@ -113,14 +113,16 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
             if not exploit_id.lower() in data_exclusions.exclusions['not_an_exploit']:
                 new_public_exploit_sources.append(exploit_source)
                 is_public_exploit = True
-    cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources'] = new_public_exploit_sources
-    if new_public_exploit_sources == list():
-        is_public_exploit = False
-        cve_data_all['vulners_cve_data_all'][cve]['public_exploit'] = False
-    if 'ms_cve_data_all' in cve_data_all:
-        if cve in cve_data_all['ms_cve_data_all']:
-            if cve_data_all['ms_cve_data_all'][cve]['public_exploit']:
-                is_public_exploit = True
+
+    if 'vulners_cve_data_all' in cve_data_all:
+        cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources'] = new_public_exploit_sources
+        if new_public_exploit_sources == list():
+            is_public_exploit = False
+            cve_data_all['vulners_cve_data_all'][cve]['public_exploit'] = False
+        if 'ms_cve_data_all' in cve_data_all:
+            if cve in cve_data_all['ms_cve_data_all']:
+                if cve_data_all['ms_cve_data_all'][cve]['public_exploit']:
+                    is_public_exploit = True
 
     if is_public_exploit:
         public_exploit_exists_n = 1.0
