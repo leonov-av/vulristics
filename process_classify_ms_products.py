@@ -52,8 +52,9 @@ def get_ms_software_names_candidates():
             for vuln_type in vuln_types:
                 if re.findall(" " + vuln_type + "$", title):
                     software_name = re.sub(" " + vuln_type + "$", "", title)
-                    software_names.add(software_name)
-                    matched = True
+                    if not software_name in ["GitHub: CVE-2022-41953 Git GUI Clone"]:
+                        software_names.add(software_name)
+                        matched = True
             # if not matched:
             #     print(title)
             #     print(vuln_types)

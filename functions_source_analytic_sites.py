@@ -91,7 +91,10 @@ def get_qualys_text_from_url(url):
     response = requests.get(url, headers=headers)
     qualys_html = response.text
     qualys_html = re.sub("<h","###DELIM###<h",qualys_html)
-    return (re.sub("<[^>]*>","",qualys_html))
+    qualys_html = re.sub("\n"," ",qualys_html)
+    qualys_html = re.sub("  *"," ",qualys_html)
+    qualys_html = re.sub("<[^>]*>", "", qualys_html)
+    return qualys_html
 
 
 def process_qualys_text(qualys_text):

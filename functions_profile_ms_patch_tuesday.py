@@ -195,30 +195,4 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
     functions_profile.save_profile(file_path, report_id, report_name, file_name_prefix,
                                    cves_text, products_text, data_sources, comments)
 
-# month = "April"
-# year = "2022"
-# query = month + " " + year + " " + "Patch Tuesday"
-# print(query)
-# tenable_link = functions_source_analytic_sites.get_tenable_link(query)
-# print(tenable_link)
 
-# month = "April"
-# year = "2022"
-# query = month + " " + year + " " + "Patch Tuesday"
-# print(query)
-# qualys_link = functions_source_analytic_sites.get_qualys_link(query)
-# print(qualys_link)
-
-# month = "April"
-# year = "2022"
-# queries = [
-#     "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW",
-#     "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year
-# ]
-# zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
-# print(zdi_link)
-
-# url = "https://blog.qualys.com/vulnerabilities-threat-research/2022/04/12/april-2022-patch-tuesday"
-# qualys_text = functions_source_analytic_sites.get_qualys_text_from_url(url)
-# qualys_text = functions_source_analytic_sites.process_qualys_text(qualys_text)
-# print(qualys_text)

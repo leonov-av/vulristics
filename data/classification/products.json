@@ -106,7 +106,8 @@
         "description": "Processor",
         "vendor": "AMD",
         "additional_detection_strings": [
-            "AMD CPU", "AMD:"
+            "AMD CPU",
+            "AMD:"
         ]
     },
     "Windows IKE Extension": {
@@ -600,6 +601,13 @@
     "Visual Studio Code GitHub Pull Requests and Issues Extension": {
         "prevalence": 0.2,
         "description": "Extension for Visual Studio Code IDE",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "GitHub": {
+        "prevalence": 0.2,
+        "detection_priority": -1,
+        "description": "GitHub, Inc. is an Internet hosting service for software development and version control using Git",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -1773,6 +1781,14 @@
         "prevalence": 0.3,
         "description": "",
         "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft HoloLens 1": {
+        "prevalence": 0.2,
+        "description": "Microsoft HoloLens Gen 1 is a fully untethered holographic computer",
+        "additional_detection_strings": [
+            "HoloLens 1"
+        ],
         "vendor": "Microsoft"
     },
     "Power BI": {
@@ -5821,6 +5837,180 @@
     "Windows Human Interface Device": {
         "prevalence": 0.8,
         "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows SmartScreen": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Edge (Chromium-based) Update": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Contacts": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Dynamics NAV and Microsoft Dynamics 365 Business Central (On Premises)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Network Watcher Agent": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Office OneNote": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Terminal": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Client Server Run-Time Subsystem (CSRSS)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows iSCSI Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "3D Builder": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Message Queuing (MSMQ)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows SMB Witness Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Smart Card Resource Management Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Cryptographic": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Credential Manager User Interface": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Netlogon": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Protected Extensible Authentication Protocol (PEAP)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Dynamics Unified Service Desk": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Internet Storage Name Service (iSNS) Server": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Machine Learning Compute Instance": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft SQL Server Integration Service (VS extension)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure App Service on Azure Stack Hub": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft SQL ODBC Driver": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Active Directory Domain Services API": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Data Box Gateway": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft ODBC Driver for SQL Server": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft PostScript Printer Driver": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Print 3D": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "NT OS Kernel": {
+        "prevalence": 0.5,
+        "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     }

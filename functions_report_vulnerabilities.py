@@ -553,15 +553,16 @@ def get_comments_for_cves(source, processed_cves):
     if 'comments' in source:
         comments = source['comments']
         for comment_id in comments:
-            for line in comments[comment_id].split("\n"):
-                print_line = False
-                for cve in processed_cves:
-                    if cve in line:
-                        print_line = True
-                if print_line:
+            if comments[comment_id]:
+                for line in comments[comment_id].split("\n"):
+                    print_line = False
                     for cve in processed_cves:
-                        line = re.sub(cve, "<b>" + cve + "</b>", line)
-                    report_html += "<p>" + comment_id + ": " + line + "</p>" + "\n"
+                        if cve in line:
+                            print_line = True
+                    if print_line:
+                        for cve in processed_cves:
+                            line = re.sub(cve, "<b>" + cve + "</b>", line)
+                        report_html += "<p>" + comment_id + ": " + line + "</p>" + "\n"
 
     return {"report_html": report_html}
 

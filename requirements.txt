@@ -1,3 +1,4 @@
 vulners
 openpyxl
 trafilatura
+pysocks

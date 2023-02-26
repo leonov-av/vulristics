@@ -10,15 +10,20 @@ You can generate the report for the following entities:
 
 * Arbitrary CVE list
 ```buildoutcfg
-python3.8 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,vulners,attackerkb" --rewrite-flag "True"
+python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,vulners,attackerkb" --rewrite-flag "True"
 ```
 * Microsoft Patch Tuesday ([HTML report example](https://avleonov.com/vulristics_reports/ms_patch_tuesday_november2021_report_with_comments_ext_img.html))
 ```buildoutcfg
-python3.8 vulristics.py --report-type "ms_patch_tuesday" --mspt-year 2021 --mspt-month "November" --rewrite-flag "True"
+python3 vulristics.py --report-type "ms_patch_tuesday" --mspt-year 2021 --mspt-month "November" --rewrite-flag "True"
 ```
+### Installation
+```buildoutcfg
+pip3 install -r requirements.txt
+```
+
 ### Example of output
 ```buildoutcfg
-$ python3.8 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,vulners,attackerkb"  --rewrite-flag "True"
+$ python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,vulners,attackerkb"  --rewrite-flag "True"
                       /$$           /$$             /$$     /$$                    
                      | $$          |__/            | $$    |__/                    
  /$$    /$$ /$$   /$$| $$  /$$$$$$  /$$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$$  /$$$$$$$
