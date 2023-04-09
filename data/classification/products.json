@@ -606,11 +606,38 @@
     },
     "GitHub": {
         "prevalence": 0.2,
-        "detection_priority": -1,
+        "detection_priority": 1,
         "description": "GitHub, Inc. is an Internet hosting service for software development and version control using Git",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "CSRSS": {
+        "prevalence": 0.8,
+        "detection_priority": 1,
+        "description": "Client Server Runtime Subsystem, or csrss.exe , is a component of the Windows NT family of operating systems that provides the user mode side of the Win32 subsystem and is included in Windows NT 3.1 and later",
+        "additional_detection_strings": ["Client Server Runtime Subsystem"],
+        "vendor": "Microsoft"
+    },
+    "TPM2.0 Module Library": {
+        "prevalence": 0.8,
+        "detection_priority": 1,
+        "description": "",
+        "additional_detection_strings": ["TPM is a low-cost, but powerful and flexible, crypto-processor"],
+        "vendor": "Microsoft"
+    },       
+    "Microsoft PostScript and PCL6 Class Printer Driver": {
+        "prevalence": 0.8,
+        "description": "Microsoft standard printer driver for PostScript printers",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "ICMP": {
+        "prevalence": 0.8,
+        "detection_priority": -1,
+        "description": "The Internet Control Message Protocol (ICMP) is a network layer protocol used by network devices to diagnose network communication issues",
+        "additional_detection_strings": ["Internet Control Message Protocol "],
+        "vendor": "Microsoft"
+    },         
     "Visual Studio Code Kubernetes Tools": {
         "prevalence": 0.2,
         "description": "Extension for Visual Studio Code IDE",
@@ -5437,6 +5464,24 @@
         "vendor": "Microsoft"
     },
     "Windows Point-to-Point Protocol (PPP)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Point-to-Point Protocol over Ethernet (PPPoE)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Accounts Picture": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows BrokerInfrastructure Service": {
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": [],

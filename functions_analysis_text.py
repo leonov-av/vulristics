@@ -14,6 +14,7 @@ def get_ranges(value_string, search_string):
     last_end = 0
     ranges = list()
     while continue_processing:
+        # print("search_string: " + search_string)
         match = re.search(r"\b" + re.escape(str(search_string)) + r"\b", value_string)
         match2 = re.search(re.escape(str(search_string)), value_string)
         if match:
