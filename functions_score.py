@@ -28,14 +28,14 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
         cve_data_all['combined_cve_data_all'][cve]['cvss_base_score'] = "Unknown CVSS Base Score"
     if cve_data_all['combined_cve_data_all'][cve]['cvss_base_score'] == "Unknown CVSS Base Score":
         cvss_base_score = 0
-        cvss_base_score_c = "Vulnerability Severity Rating based on CVSS Base Score is NA. No data."
+        cvss_base_score_c = "CVSS Base Score is NA. No data."
     else:
         cvss_base_score = cve_data_all['combined_cve_data_all'][cve]['cvss_base_score']
-        cvss_base_score_c = "Vulnerability Severity Rating based on CVSS Base Score is " + str(cvss_base_score) + ". " \
+        cvss_base_score_c = "CVSS Base Score is " + str(cvss_base_score) + ". " \
                             + cve_data_all['combined_cve_data_all'][cve]['cvss_base_score_detection_comment']
     if cve in data_redefinitions.cvss:
         cvss_base_score = data_redefinitions.cvss[cve]['cvss_base_score']
-        cvss_base_score_c = "Vulnerability Severity Rating based on CVSS Base Score is " + str(cvss_base_score) + ". " \
+        cvss_base_score_c = "CVSS Base Score is " + str(cvss_base_score) + ". " \
                             + data_redefinitions.cvss[cve]['cvss_base_score_detection_comment']
     cvss_base_score_n = round(float(cvss_base_score) / 10, 1)
     cvss_base_score_k = 10
@@ -84,6 +84,13 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
     cvss_impact_score_n = int(cvss_impact_score) / 10
     cvss_impact_score_k = 3
     cvss_impact_score_c = "CVSS impactScore"
+
+    ######## EPSS Score
+    epss_percentile = cve_data_all['epss_cve_data_all'][cve]['epss_percentile']
+    epss_probability = cve_data_all['epss_cve_data_all'][cve]['epss']
+    epss_score_n = round(epss_percentile, 1)
+    epss_score_k = 10
+    epss_score_c = "EPSS Probability is " + str(epss_probability) + ", EPSS Percentile is " + str(epss_percentile)
 
     ######## Mentioned by vendors
     if use_comments:
@@ -265,6 +272,8 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
     criticality_of_vulnerability_type_k = 15
     criticality_of_vulnerability_type_c = vuln_type
 
+    ########
+
     vvs_struct['components'] = dict()
 
     if use_comments:
@@ -298,6 +307,11 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
     #     'weight': cvss_impact_score_k,
     #     'comment': cvss_impact_score_c
     # }
+    vvs_struct['components']['EPSS Percentile'] = {
+        'value': epss_score_n,
+        'weight': epss_score_k,
+        'comment': epss_score_c
+    }
     vvs_struct['components']['Criticality of Vulnerability Type'] = {
         'value': criticality_of_vulnerability_type_n,
         'weight': criticality_of_vulnerability_type_k,

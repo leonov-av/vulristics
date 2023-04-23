@@ -766,7 +766,7 @@ def make_html_vulnerability_reports_for_all_report_configs(profile, source_id, c
 
 
 def get_eanbled_data_sources(profile, source_id):
-    all_data_sources = ['ms', 'nvd', 'vulners', 'attackerkb']
+    all_data_sources = ['ms', 'nvd', 'epss', 'vulners', 'attackerkb']
     if 'data_sources' in profile[source_id]:
         enabled_data_sources = profile[source_id]['data_sources']
     else:
