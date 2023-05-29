@@ -1,8 +1,5 @@
-import data_report_configs
-import data_classification_vulnerability_types
-import functions_tools
-import functions_score
-import functions_combined_vulnerability_data
+from vulristics_code import functions_combined_vulnerability_data, data_classification_products, functions_score, functions_tools, \
+    data_report_configs, data_classification_vulnerability_types
 import re
 import json
 import copy
@@ -773,7 +770,6 @@ def get_eanbled_data_sources(profile, source_id):
         enabled_data_sources = all_data_sources
     return enabled_data_sources
 
-import data_classification_products
 
 def make_vulnerability_report_for_profile(profile_file_path, rewrite_flag):
     profile = get_profile(profile_file_path)
@@ -797,12 +793,12 @@ def make_vulnerability_report_for_profile(profile_file_path, rewrite_flag):
             functions_tools.print_debug_message("filtering " + selected_cve + " for one of products_to_analyze")
             b_product_found = False
             for list_type_str in cve_related_data_tmp: 
-                functions_tools.print_debug_message("    checking in "+ list_type_str)
+                functions_tools.print_debug_message("    checking in " + list_type_str)
                 if not selected_cve in cve_related_data_tmp[list_type_str]:
-                    functions_tools.print_debug_message("      no data for "+ selected_cve + " in " + list_type_str)
+                    functions_tools.print_debug_message("      no data for " + selected_cve + " in " + list_type_str)
                     continue
                 if not 'vuln_product' in cve_related_data_tmp[list_type_str][selected_cve]:
-                    functions_tools.print_debug_message("      no vuln_product for "+ selected_cve + " in " + list_type_str)
+                    functions_tools.print_debug_message("      no vuln_product for " + selected_cve + " in " + list_type_str)
                     continue
                 product_name = (cve_related_data_tmp[list_type_str][selected_cve]['vuln_product']).upper()
                 for product_name_from_list in all_products_to_analyze:

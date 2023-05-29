@@ -1,12 +1,10 @@
-import functions_profile
-import functions_report_vulnerabilities
-import functions_report_ms_patch_tuesday
+from vulristics_code import functions_report_vulnerabilities, functions_report_ms_patch_tuesday, functions_profile
 import argparse
 import re
 
 parser = argparse.ArgumentParser(description='An extensible framework for analyzing publicly available information about vulnerabilities')
 const = ""
-parser.add_argument('--report-type', help='Report type')
+parser.add_argument('--report-type', help='Report type (ms_patch_tuesday, ms_patch_tuesday_extended or cve_list)')
 parser.add_argument('--mspt-year', help='Microsoft Patch Tuesday year')
 parser.add_argument('--mspt-month', help='Microsoft Patch Tuesday month')
 parser.add_argument('--mspt-comments-links-path', help='Microsoft Patch Tuesday comments links file')

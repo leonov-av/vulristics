@@ -615,16 +615,20 @@
         "prevalence": 0.8,
         "detection_priority": 1,
         "description": "Client Server Runtime Subsystem, or csrss.exe , is a component of the Windows NT family of operating systems that provides the user mode side of the Win32 subsystem and is included in Windows NT 3.1 and later",
-        "additional_detection_strings": ["Client Server Runtime Subsystem"],
+        "additional_detection_strings": [
+            "Client Server Runtime Subsystem"
+        ],
         "vendor": "Microsoft"
     },
     "TPM2.0 Module Library": {
         "prevalence": 0.8,
         "detection_priority": 1,
         "description": "",
-        "additional_detection_strings": ["TPM is a low-cost, but powerful and flexible, crypto-processor"],
+        "additional_detection_strings": [
+            "TPM is a low-cost, but powerful and flexible, crypto-processor"
+        ],
         "vendor": "Microsoft"
-    },       
+    },
     "Microsoft PostScript and PCL6 Class Printer Driver": {
         "prevalence": 0.8,
         "description": "Microsoft standard printer driver for PostScript printers",
@@ -635,9 +639,11 @@
         "prevalence": 0.8,
         "detection_priority": -1,
         "description": "The Internet Control Message Protocol (ICMP) is a network layer protocol used by network devices to diagnose network communication issues",
-        "additional_detection_strings": ["Internet Control Message Protocol "],
+        "additional_detection_strings": [
+            "Internet Control Message Protocol "
+        ],
         "vendor": "Microsoft"
-    },         
+    },
     "Visual Studio Code Kubernetes Tools": {
         "prevalence": 0.2,
         "description": "Extension for Visual Studio Code IDE",
@@ -6056,6 +6062,210 @@
     "NT OS Kernel": {
         "prevalence": 0.5,
         "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft ODBC and OLE DB": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Internet Control Message Protocol (ICMP)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "CERT/CC: CVE-2023-1018 TPM2.0 Module Library": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "CERT/CC: CVE-2023-1017 TPM2.0 Module Library": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    ".NET DLL Hijacking": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Apache Ambari": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "GitHub: CVE-2023-22490 mingit": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Snipping Tool": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "GitHub: CVE-2023-23618 Git for Windows": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Enroll Engine": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Clip Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Service Connector": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft OneDrive for MacOS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Network Load Balancing": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Azure Machine Learning": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Office for Android": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Layer 2 Tunneling Protocol": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Windows System Monitor (Sysmon)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft OneDrive for iOS": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Dynamics 365 Customer Voice": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows  Domain Name Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "DHCP Server Service": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Client Server Run-Time Subsystem (CSRSS)": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "GitHub: CVE-2023-22743 Git for Windows Installer": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "GitHub: CVE-2023-23946 mingit": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Cryptographic Services": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Remote Procedure Call Service (RPCSS)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Pragmatic General Multicast (PGM)": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Edge (Chromium-based) Webview2": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows NTLM Security Support Provider": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "SysInternals Sysmon for Windows": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows NFS Portmapper": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Driver Revocation List": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Remote Desktop app for Windows": {
+        "prevalence": 0.8,
+        "description": "Windows component",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     }

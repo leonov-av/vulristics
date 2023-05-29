@@ -1,8 +1,7 @@
+from vulristics_code import data_classification_products, data_classification_vulnerability_types
 import requests
 import credentials
 import zipfile
-import data_classification_vulnerability_types
-import data_classification_products
 import re
 import json
 

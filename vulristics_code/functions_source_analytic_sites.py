@@ -1,7 +1,7 @@
 import requests
 import trafilatura
 import re
-import functions_tools
+from vulristics_code import functions_tools
 
 
 #### Common

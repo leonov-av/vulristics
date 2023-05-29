@@ -14,7 +14,10 @@ exclusions = {
             },
         "2383d169-17d2-5a63-9a18-bf2ef5f6364a_githubexploit": {
                 "reason": "Fake Project"
-            },            
+            },   
+        "62866977-84ef-5442-a56b-514de01f599f_githubexploit": {
+                "reason": "Fake Project"
+            },                      
         "src-2022-0004_srcincite": {
             "reason": "Not an Exploit"
         }

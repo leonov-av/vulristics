@@ -19,7 +19,7 @@ def get_direct_links_for_cve(cve_id):
     }
 
     r = requests.get("https://attackerkb.com/search?q=" + cve_id, headers=headers)
-    urls = re.findall("(/topics/[^/]*/[^\"\?]*)", r.text)
+    urls = re.findall(r'(/topics/[^/]*/[^\"\?]*)', r.text)
     urls = set(urls)
     urls_with_cve_id = set()
     for url in urls:
@@ -120,7 +120,7 @@ def get_attackerkb_cve_data(cve_id, rewrite_flag):
     return(attackerkb_cve_data)
 
 def check_attackerkb_cve():
-    path = "data/attackerkb_cve"
+    path = "../data/attackerkb_cve"
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
     for file in files:
         if ".json" in file:

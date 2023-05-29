@@ -1,7 +1,4 @@
-import functions_source_ms_cve
-import functions_source_analytic_sites
-import functions_tools
-import functions_profile
+from vulristics_code import functions_source_analytic_sites, functions_source_ms_cve, functions_tools, functions_profile
 import datetime
 import time
 import re
@@ -88,7 +85,7 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
     functions_tools.print_debug_message("MS PT Month: " + month)
     functions_tools.print_debug_message("MS PT Date: " + pt_related_dates['patch_tuesday'])
     ms_cves = functions_source_ms_cve.get_ms_cves_for_date_range(pt_related_dates['patch_tuesday'],
-                                                                                pt_related_dates['patch_tuesday'])
+                                                                 pt_related_dates['patch_tuesday'])
     functions_tools.print_debug_message("MS PT CVEs found: " + str(len(ms_cves)))
 
     ext_ms_cves = set()

@@ -1,5 +1,3 @@
-import data_classification_products
-import data_classification_vulnerability_types
 import copy
 import re
 

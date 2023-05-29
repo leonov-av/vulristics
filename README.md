@@ -16,10 +16,6 @@ python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" 
 ```buildoutcfg
 python3 vulristics.py --report-type "ms_patch_tuesday" --mspt-year 2021 --mspt-month "November" --rewrite-flag "True"
 ```
-### Installation
-```buildoutcfg
-pip3 install -r requirements.txt
-```
 
 ### Example of output
 ```buildoutcfg
@@ -49,6 +45,42 @@ Counting CVE scores...
 Making vulnerability reports for each reports config...
 Report config: with_comments_ext_img
 Report generated: reports/new_project_report_with_comments_ext_img.html
+```
+
+### Options
+```buildoutcfg
+$ python3 vulristics.py -h
+usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR] [--mspt-month MSPT_MONTH] [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH]
+                     [--cve-project-name CVE_PROJECT_NAME] [--cve-list-path CVE_LIST_PATH] [--cve-comments-path CVE_COMMENTS_PATH] [--cve-data-sources CVE_DATA_SOURCES]
+                     [--rewrite-flag REWRITE_FLAG]
+
+An extensible framework for analyzing publicly available information about vulnerabilities
+
+options:
+  -h, --help            show this help message and exit
+  --report-type REPORT_TYPE
+                        Report type (ms_patch_tuesday, ms_patch_tuesday_extended or cve_list)
+  --mspt-year MSPT_YEAR
+                        Microsoft Patch Tuesday year
+  --mspt-month MSPT_MONTH
+                        Microsoft Patch Tuesday month
+  --mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH
+                        Microsoft Patch Tuesday comments links file
+  --cve-project-name CVE_PROJECT_NAME
+                        Name of the CVE Project
+  --cve-list-path CVE_LIST_PATH
+                        Path to the list of CVE IDs
+  --cve-comments-path CVE_COMMENTS_PATH
+                        Path to the CVE comments file
+  --cve-data-sources CVE_DATA_SOURCES
+                        Data sources for analysis, e.g. "ms,nvd,epss,vulners,attackerkb"
+  --rewrite-flag REWRITE_FLAG
+                        Rewrite Flag (True/False)
+```
+
+### Installation
+```buildoutcfg
+pip3 install -r requirements.txt
 ```
 
 ## Where to read more?

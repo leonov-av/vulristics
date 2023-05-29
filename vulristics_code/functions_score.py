@@ -1,9 +1,5 @@
-import data_classification_vulnerability_types
-import data_classification_products
-import data_exclusions
-import data_redefinitions
-import functions_tools
-import re
+from vulristics_code import data_exclusions, data_redefinitions, functions_tools, data_classification_vulnerability_types
+
 
 def get_level(score_value):
     if score_value >= 0 and score_value < 0.2:

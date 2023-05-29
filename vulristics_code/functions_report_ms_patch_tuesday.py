@@ -1,6 +1,4 @@
-import functions_profile_ms_patch_tuesday
-import functions_tools
-import functions_report_vulnerabilities
+from vulristics_code import functions_report_vulnerabilities, functions_tools, functions_profile_ms_patch_tuesday
 import os
 
 def make_ms_patch_tuesday_report(pt_type, year, month, comments_links_path=False, patch_tuesday_date=False,

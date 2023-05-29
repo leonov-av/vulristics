@@ -21,7 +21,7 @@
 # zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
 # print(zdi_link)
 
-import functions_source_analytic_sites
+from vulristics_code import functions_source_analytic_sites
 
 url = "https://blog.qualys.com/vulnerabilities-threat-research/patch-tuesday/2023/02/14/the-february-2023-patch-tuesday-security-update-review"
 qualys_text = functions_source_analytic_sites.get_qualys_text_from_url(url)

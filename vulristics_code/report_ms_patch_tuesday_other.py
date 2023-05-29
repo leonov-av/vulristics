@@ -1,6 +1,4 @@
-import functions_profile_ms_patch_tuesday
-import functions_profile
-import functions_report_vulnerabilities
+from vulristics_code import functions_report_vulnerabilities, functions_profile_ms_patch_tuesday, functions_profile
 
 file_name = "ms_patch_tuesday_other_Q1_2021.json"
 report_id = "ms_patch_tuesday_other_Q1_2021"

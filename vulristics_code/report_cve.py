@@ -1,14 +1,13 @@
-import functions_profile
-import functions_report_vulnerabilities
+from vulristics_code import functions_report_vulnerabilities, functions_profile
 
 name = "test"
 report_name = name + ' report'
 file_name_prefix = name.lower()
 
-with open('analyze_cve_list.txt', 'r') as file:
+with open('../analyze_cve_list.txt', 'r') as file:
     cves_text = file.read()
 
-with open('analyze_product_list.txt', 'r') as file:
+with open('../analyze_product_list.txt', 'r') as file:
     products_text = file.read()
 file_name = name + "_profile.json"
 report_id = name + "_report"

@@ -1,4 +1,3 @@
-import functions_analysis_text
 import requests
 import os
 import json
