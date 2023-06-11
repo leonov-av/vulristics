@@ -19,7 +19,7 @@ python3 vulristics.py --report-type "ms_patch_tuesday" --mspt-year 2021 --mspt-m
 
 ### Example of output
 ```buildoutcfg
-$ python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,epss,vulners,attackerkb"  --rewrite-flag "True"
+$ python3 vulristics.py --report-type "cve_list" --cve-project-name "CVE-2023-29336" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,epss,vulners,attackerkb" --rewrite-flag "True"
                       /$$           /$$             /$$     /$$                    
                      | $$          |__/            | $$    |__/                    
  /$$    /$$ /$$   /$$| $$  /$$$$$$  /$$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$$  /$$$$$$$
@@ -34,17 +34,26 @@ No specified products to analyze set in profile, reporting everything
 All CVEs: 1
 Counting CVE scores...
 Collecting MS CVE data...
-Requesting CVE-2021-42284 from Microsoft website
+1/1 - CVE-2023-29336
+Requesting CVE-2023-29336 from Microsoft website
 Collecting NVD CVE data...
-Requesting CVE-2021-42284 from NVD website
+1/1 - CVE-2023-29336
+Requesting CVE-2023-29336 from NVD website
+Collecting EPSS CVE data...
+1/1 - CVE-2023-29336
+Requesting CVE-2023-29336 from epss website
 Collecting AttackerKB CVE data...
-Requesting CVE-2021-42284 from AttackerKB website WITHOUT authorization key
+1/1 - CVE-2023-29336
+Requesting CVE-2023-29336 from AttackerKB website WITHOUT authorization key
 Collecting Vulners CVE data...
-Requesting CVE-2021-42284 from Vulners website WITH authorization key
+1/1 - CVE-2023-29336
+Requesting CVE-2023-29336 from Vulners website WITH authorization key
+Combining CVE data...
+1/1 CVE-2023-29336
 Counting CVE scores...
 Making vulnerability reports for each reports config...
 Report config: with_comments_ext_img
-Report generated: reports/new_project_report_with_comments_ext_img.html
+Report generated: reports/cve-2023-29336_report_with_comments_ext_img.html
 ```
 
 ### Options
