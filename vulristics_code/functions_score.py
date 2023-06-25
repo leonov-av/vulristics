@@ -142,7 +142,7 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
             if cve in cve_data_all['ms_cve_data_all']:
                 if cve_data_all['ms_cve_data_all'][cve]['public_exploit'] and not comment_exists:
                     public_exploit_exists_n = cve_data_all['ms_cve_data_all'][cve]['public_exploit_level']
-                    public_exploit_exists_c = "The exploit's existence is mentioned in Microsoft CVSS Temporal Score (" +\
+                    public_exploit_exists_c = "The exploit's existence is mentioned in Microsoft CVSS Temporal Metrics (" +\
                                               cve_data_all['ms_cve_data_all'][cve]['public_exploit_level_name'] + ")"
                     comment_exists = True
     else:
