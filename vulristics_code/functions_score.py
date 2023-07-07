@@ -82,11 +82,19 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
     cvss_impact_score_c = "CVSS impactScore"
 
     ######## EPSS Score
-    epss_percentile = cve_data_all['epss_cve_data_all'][cve]['epss_percentile']
-    epss_probability = cve_data_all['epss_cve_data_all'][cve]['epss']
-    epss_score_n = round(epss_percentile, 1)
-    epss_score_k = 10
-    epss_score_c = "EPSS Probability is " + str(epss_probability) + ", EPSS Percentile is " + str(epss_percentile)
+    if 'epss_cve_data_all' in cve_data_all:
+        epss_percentile = cve_data_all['epss_cve_data_all'][cve]['epss_percentile']
+        epss_probability = cve_data_all['epss_cve_data_all'][cve]['epss']
+        epss_score_n = round(epss_percentile, 1)
+        epss_score_k = 10
+        epss_score_c = "EPSS Probability is " + str(epss_probability) + ", EPSS Percentile is " + str(epss_percentile)
+    else:
+        epss_percentile = 0
+        epss_probability = 0
+        epss_score_n = round(epss_percentile, 1)
+        epss_score_k = 10
+        epss_score_c = "EPSS data is not available"
+
 
     ######## Mentioned by vendors
     if use_comments:
