@@ -1,13 +1,19 @@
 import requests
 import trafilatura
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 import re
 from vulristics_code import functions_tools
+
 
 
 #### Common
 def get_text_from_url(url):
     response = requests.get(url)
-    return (trafilatura.extract(response.text))
+    text = response.text
+    if text:
+        text = trafilatura.extract()
+    return text
 
 
 #### Qualys
@@ -135,7 +141,7 @@ def get_tenable_link(query):
                 result_status = False
 
         if result_status:
-            return ({'title': title, 'url': url})
+            return {'title': title, 'url': url}
 
 
 def get_tenable_text_from_url(url):
@@ -150,7 +156,10 @@ def get_tenable_text_from_url(url):
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
     response = functions_tools.make_request(type="get", url=url, headers=headers)
-    return (trafilatura.extract(response.text))
+    text = response.text
+    if text:
+        text = trafilatura.extract(text)
+    return text
 
 
 ### Rapid7
@@ -169,7 +178,7 @@ def get_rapid7_link(query):
     js_with_key = requests.get("https://blog.rapid7.com/assets/js/all.js", headers=headers).text
     # print(js_with_key)
     ghost_content_api_key = \
-    re.findall('''GhostContentAPI\({url:"https://blog.rapid7.com",key:"([^"]*)",version:"[^"]*"}\)''', js_with_key)[0]
+    re.findall('''GhostContentAPI\\({url:"https://blog.rapid7.com",key:"([^"]*)",version:"[^"]*"}\\)''', js_with_key)[0]
 
     response = requests.get(
         "https://blog.rapid7.com/ghost/api/v3/content/posts/?key=" + ghost_content_api_key + "&limit=all&fields=url%2Ctitle",
@@ -180,7 +189,7 @@ def get_rapid7_link(query):
             if not keyword in post['title']:
                 result_status = False
         if result_status:
-            return ({'title': post['title'], 'url': post['url']})
+            return {'title': post['title'], 'url': post['url']}
 
 
 def get_rapid7_text_from_url(url):
@@ -194,20 +203,22 @@ def get_rapid7_text_from_url(url):
         'Sec-Fetch-Dest': 'empty',
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
-    text = trafilatura.extract(requests.get(url, headers=headers).text)
+    text = requests.get(url, headers=headers).text
+    if text:
+        text = trafilatura.extract(text)
 
     new_text = ""
     for line in text.split("\n"):
         skip = False
-        if re.findall("^\|", line):  # remove tables
+        if re.findall("^\\|", line):  # remove tables
             skip = True
         if re.findall("^- ", line):
             line = re.sub("^- ", "", line)
         if not skip:
-            if not re.findall("\.$", line) and "CVE-" in line:  # looks like a header; don't add new line
+            if not re.findall("\\.$", line) and "CVE-" in line:  # looks like a header; don't add new line
                 new_text += line + ". "
             else:
-                new_text += re.sub("\.$", ". ", line) + "\n"  # normal line
+                new_text += re.sub("\\.$", ". ", line) + "\n"  # normal line
 
     return (new_text)
 
@@ -264,19 +275,21 @@ def get_zdi_text_from_url(url):
         'Sec-Fetch-Dest': 'empty',
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
-    text = trafilatura.extract(requests.get(url, headers=headers).text)
+    text = requests.get(url, headers=headers).text
+    if text:
+        text = trafilatura.extract(text)
 
     new_text = ""
     for line in text.split("\n"):
         skip = False
-        if re.findall("^\|", line):  # remove tables
+        if re.findall("^\\|", line):  # remove tables
             skip = True
         if re.findall("^- ", line):
             line = re.sub("^- ", "", line)
         if not skip:
-            if not re.findall("\.$", line) and "CVE-" in line:  # looks like a header; don't add new line
+            if not re.findall("\\.$", line) and "CVE-" in line:  # looks like a header; don't add new line
                 new_text += line + ". "
             else:
-                new_text += re.sub("\.$", ". ", line) + "\n"  # normal line
+                new_text += re.sub("\\.$", ". ", line) + "\n"  # normal line
 
     return new_text
