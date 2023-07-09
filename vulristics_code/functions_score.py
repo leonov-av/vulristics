@@ -256,14 +256,11 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
         if vuln_product != "Unknown Product":
             vulnerable_product_is_common_n = 0
             vulnerable_product_is_common_c = "Unclassified Product"
-
-    product_data = profile['product_data']
-    if vuln_product in product_data:
-        vulnerable_product_is_common_n = product_data[vuln_product]['prevalence']
-        vulnerable_product_is_common_c = vuln_product
-        if "description" in product_data[vuln_product]:
-            if product_data[vuln_product]["description"] != "":
-                vulnerable_product_is_common_c = product_data[vuln_product]["description"]
+    if cve_data_all['combined_cve_data_all'][cve]['product_data'] != {}:
+        vulnerable_product_is_common_n = cve_data_all['combined_cve_data_all'][cve]['product_data']['prevalence']
+        vulnerable_product_is_common_c = cve_data_all['combined_cve_data_all'][cve]['product_data']['description']
+        if vulnerable_product_is_common_c == "":
+            vulnerable_product_is_common_c = vuln_product
     vulnerable_product_is_common_k = 14
 
     ######## Vulnerability type

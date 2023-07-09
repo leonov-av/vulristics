@@ -151,7 +151,7 @@
     "RPC": {
         "prevalence": 0.8,
         "description": "Remote Procedure Call Runtime",
-        "additional_detection_strings": []
+        "additional_detection_strings": ["Remote Procedure Call Runtime"]
     },
     "RPC Endpoint Mapper Service": {
         "prevalence": 0.7,
@@ -904,12 +904,6 @@
     "Windows NTLM": {
         "prevalence": 0.9,
         "description": "A suite of security protocols to authenticate users' identity and protect the integrity and confidentiality of their activity",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "Remote Procedure Call Runtime": {
-        "prevalence": 0.9,
-        "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -3348,12 +3342,6 @@
     "Windows Runtime": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "Azure DevOps Server": {
-        "prevalence": 0.5,
-        "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -5933,6 +5921,18 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "DEFAULT_Microsoft_Windows_Component": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "DEFAULT_Microsoft_Product": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Windows Client Server Run-Time Subsystem (CSRSS)": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -6340,5 +6340,11 @@
         "description": "Windows component",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
+    },
+    "Autodesk® FBX® SDK": {
+        "prevalence": 0.3,
+        "description": "The Autodesk® FBX® SDK is a free, easy-to-use, C++ software development platform and API toolkit that allows application and content vendors to transfer existing content into the FBX format with minimal effort.",
+        "additional_detection_strings": [],
+        "vendor": "Autodesk"
     }
 }
