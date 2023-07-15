@@ -58,14 +58,14 @@ def get_patch_tuesday_related_dates(year, long_month_name):
 
 
 def get_other_ms_cves(from_date, to_date, patch_tuesdays):
-    all_cves = functions_source_ms_cve.get_ms_cves_for_date_range(from_date, to_date)
-    print(len(all_cves))
+    all_cves, all_other_vulns = functions_source_ms_cve.get_ms_vulns_for_date_range(from_date, to_date)
+
     for patch_tuesday in patch_tuesdays:
         print(patch_tuesday)
         pt_related_dates = get_patch_tuesday_related_dates(year=patch_tuesday[0],
                                                            long_month_name=patch_tuesday[1])
         patch_tuesday_date = pt_related_dates["patch_tuesday"]
-        patch_tuesday_cves = functions_source_ms_cve.get_ms_cves_for_date_range(patch_tuesday_date, patch_tuesday_date)
+        patch_tuesday_cves, patch_tuesday_other_vulns = functions_source_ms_cve.get_ms_vulns_for_date_range(patch_tuesday_date, patch_tuesday_date)
         all_cves = all_cves - patch_tuesday_cves
         print(len(all_cves))
     all_cves_txt = re.sub(" ", "", "\n".join(all_cves))
@@ -84,20 +84,27 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
     functions_tools.print_debug_message("MS PT Year: " + year)
     functions_tools.print_debug_message("MS PT Month: " + month)
     functions_tools.print_debug_message("MS PT Date: " + pt_related_dates['patch_tuesday'])
-    ms_cves = functions_source_ms_cve.get_ms_cves_for_date_range(pt_related_dates['patch_tuesday'],
-                                                                 pt_related_dates['patch_tuesday'])
+    ms_cves, ms_other_vulns = functions_source_ms_cve.get_ms_vulns_for_date_range(pt_related_dates['patch_tuesday'],
+                                                                  pt_related_dates['patch_tuesday'])
     functions_tools.print_debug_message("MS PT CVEs found: " + str(len(ms_cves)))
+    if ms_other_vulns != set():
+        print("MS PT OTHER VULNS found: " + str(len(ms_other_vulns)))
+        print(ms_other_vulns)
 
     ext_ms_cves = set()
     if pt_type == "Extended":
         functions_tools.print_debug_message("Ext MS PT Date from: " + pt_related_dates['patch_tuesday_ext_first_date'])
         functions_tools.print_debug_message("Ext MS PT Date to: " + pt_related_dates['patch_tuesday_ext_last_date'])
 
-        ext_ms_cves = functions_source_ms_cve.get_ms_cves_for_date_range(
+        ext_ms_cves, ext_ms_other_vulns = functions_source_ms_cve.get_ms_vulns_for_date_range(
                                                                         pt_related_dates['patch_tuesday_ext_first_date'],
                                                                         pt_related_dates['patch_tuesday_ext_last_date']
                                                                     )
         functions_tools.print_debug_message("Ext MS PT CVEs found: " + str(len(ext_ms_cves)))
+        if ext_ms_other_vulns != set():
+            print("Ext MS PT OTHER VULNS found: " + str(len(ms_other_vulns)))
+            print(ms_other_vulns)
+
         ext_ms_comments = list()
         for cve in ext_ms_cves:
             ext_ms_comments.append(cve + " was published before "  + month + " " + str(year) + " Patch Tuesday from " + \

@@ -30,22 +30,27 @@ def get_ms_cve_search_data(from_date, to_date, skip):
     return response.json()
 
 
-def get_ms_cves_for_date_range(from_date, to_date):
+def get_ms_vulns_for_date_range(from_date, to_date):
     # Interface for service https://msrc.microsoft.com/update-guide/en-us
     # from_date = "2021-03-09"
     # to_date = "2021-03-09"
     all_cves = list()
+    other_vulns = list()
     continue_processing = True
     skip = 0
     while continue_processing:
         data = get_ms_cve_search_data(from_date, to_date, skip)
         if len(data['value']) != 0:
             for value in data['value']:
-                all_cves.append(value['cveNumber'])
+                if "CVE" in value['cveNumber']:
+                    all_cves.append(value['cveNumber'])
+                else:
+                    other_vulns.append(value['cveNumber'])
         else:
             continue_processing = False
         skip += 500
-    return set(all_cves)
+
+    return set(all_cves), set(other_vulns)
 
 
 def get_ms_cve_data_from_ms_site(cve_id):
