@@ -5675,6 +5675,14 @@
         ],
         "vendor": "VMware"
     },
+    "VMware SD-WAN": {
+        "prevalence": 0.7,
+        "description": "VMware SD-WAN is the application of software based network technologies that virtualize WAN connections",
+        "additional_detection_strings": [
+            "SD-WAN"
+        ],
+        "vendor": "VMware"
+    },
     "Windows COM+ Event System Service": {
         "prevalence": 0.8,
         "description": "Windows component",
