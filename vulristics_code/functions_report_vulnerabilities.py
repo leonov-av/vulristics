@@ -174,7 +174,7 @@ def get_vuln_type_html(type, config):
 
 
 ### Reports
-def get_product_based_repot(current_cve_data, min_cve_number, report_config, source, cve_scores):
+def get_product_based_report(current_cve_data, min_cve_number, report_config, source, cve_scores):
     processed_cves = set()
     report_txt = ""
     report_html = ""
@@ -405,11 +405,18 @@ def get_cves_count_value_products_table(criticality, product_data, product_name)
     else:
         return get_colored_text(color=criticality, text=str(n), c_type="text", params=None)
 
+def get_cves_count_value_comments_table(criticality, vulnerability_comment_data, comment_source):
+    n = len(vulnerability_comment_data[comment_source]['cves'][criticality])
+    if n == 0:
+        return ""
+    else:
+        return get_colored_text(color=criticality, text=str(n), c_type="text", params=None)
+
 
 def get_products_report(combined_cve_data_all, cve_scores, config, source):
     report_txt = ""
     report_html = ""
-    criticalities = ["Urgent", "Critical", "High", "Medium", "Low"]
+    criticalities = ["Urgent", "Critical", "High", "Medium", "Low", "All"]
     product_data = dict()
     for cve in combined_cve_data_all:
         product_name = combined_cve_data_all[cve]['vuln_product']
@@ -424,40 +431,41 @@ def get_products_report(combined_cve_data_all, cve_scores, config, source):
             for crit in criticalities:
                 product_data[product_name]['cves'][crit] = list()
         product_data[product_name]['cves'][cve_level].append(cve)
+        product_data[product_name]['cves']['All'].append(cve)
 
-    html_report = "<p><table class=\"product_table\">"
-    html_report += "<tr class=\"product_table\">"
-    html_report += "<th class=\"product_table\">" + "Product Name" + "</th>"
-    html_report += "<th class=\"product_table\">" + "Prevalence" + "</th>"
-    for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low']:
+    report_html = "<p><table class=\"product_table\">"
+    report_html += "<tr class=\"product_table\">"
+    report_html += "<th class=\"product_table\">" + "Product Name" + "</th>"
+    report_html += "<th class=\"product_table\">" + "Prevalence" + "</th>"
+    for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low', 'All']:
         text = get_colored_text(color=criticality, text= criticality[0][0], c_type="text", params=None)
-        html_report += "<th class=\"product_table\">" + text + "</th>"
-    html_report += "<th class=\"product_table\">" + "Comment" + "</th>"
-    html_report += "</tr>\n"
+        report_html += "<th class=\"product_table\">" + text + "</th>"
+    report_html += "<th class=\"product_table\">" + "Comment" + "</th>"
+    report_html += "</tr>\n"
     sorted_product_name_list = get_sorted_product_name_list(product_data)
     for product_name in sorted_product_name_list:
-        html_report += "<tr class=\"product_table\">"
-        html_report += "<td class=\"product_table\">" + product_name + "</td>"
+        report_html += "<tr class=\"product_table\">"
+        report_html += "<td class=\"product_table\">" + product_name + "</td>"
         text = str(product_data[product_name]['value'])
         if text == "0":
             text = get_colored_text(color="Error", text=text, c_type="text", params=None)
-        html_report += "<td class=\"product_table\">" + text + "</td>"
-        for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low']:
+        report_html += "<td class=\"product_table\">" + text + "</td>"
+        for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low', 'All']:
             text = get_cves_count_value_products_table(criticality, product_data, product_name)
-            html_report += "<td class=\"product_table\">" + text + "</td>"
+            report_html += "<td class=\"product_table\">" + text + "</td>"
         text = product_data[product_name]['comment']
         if text == "Unclassified Product" or text == "Unknown Product":
             text = get_colored_text(color="Error", text=text, c_type="text", params=None)
-        html_report += "<td class=\"product_table\">" + text + "</td>"
-        html_report += "</tr>\n"
-    html_report += "</table></p>"
+        report_html += "<td class=\"product_table\">" + text + "</td>"
+        report_html += "</tr>\n"
+    report_html += "</table></p>"
 
-    return {"report_txt": report_txt, "report_html": html_report}
+    return {"report_txt": report_txt, "report_html": report_html}
 
 def get_vulnerability_types_report(combined_cve_data_all, cve_scores, config, source):
     report_txt = ""
     report_html = ""
-    criticalities = ["Urgent", "Critical", "High", "Medium", "Low"]
+    criticalities = ["Urgent", "Critical", "High", "Medium", "Low", "All"]
     vulnerability_type_data = dict()
     for cve in combined_cve_data_all:
         vulnerability_type = combined_cve_data_all[cve]['vuln_type']
@@ -472,37 +480,71 @@ def get_vulnerability_types_report(combined_cve_data_all, cve_scores, config, so
             for crit in criticalities:
                 vulnerability_type_data[vulnerability_type]['cves'][crit] = list()
         vulnerability_type_data[vulnerability_type]['cves'][cve_level].append(cve)
+        vulnerability_type_data[vulnerability_type]['cves']['All'].append(cve)
 
-    html_report = "<p><table class=\"vulnerability_type_table\">"
-    html_report += "<tr class=\"vulnerability_type_table\">"
-    html_report += "<th class=\"vulnerability_type_table\">" + "Vulnerability Type" + "</th>"
-    html_report += "<th class=\"vulnerability_type_table\">" + "Criticality" + "</th>"
-    for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low']:
+    report_html = "<p><table class=\"vulnerability_type_table\">"
+    report_html += "<tr class=\"vulnerability_type_table\">"
+    report_html += "<th class=\"vulnerability_type_table\">" + "Vulnerability Type" + "</th>"
+    report_html += "<th class=\"vulnerability_type_table\">" + "Criticality" + "</th>"
+    for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low', 'All']:
         text = get_colored_text(color=criticality, text= criticality[0][0], c_type="text", params=None)
-        html_report += "<th class=\"vulnerability_type_table\">" + text + "</th>"
-    html_report += "<th class=\"vulnerability_type_table\">" + "Comment" + "</th>"
-    html_report += "</tr>\n"
+        report_html += "<th class=\"vulnerability_type_table\">" + text + "</th>"
+    # report_html += "<th class=\"vulnerability_type_table\">" + "Comment" + "</th>"
+    report_html += "</tr>\n"
     sorted_product_name_list = get_sorted_product_name_list(vulnerability_type_data)
     for vulnerability_type in sorted_product_name_list:
-        html_report += "<tr class=\"vulnerability_type_table\">"
-        html_report += "<td class=\"vulnerability_type_table\">" + vulnerability_type + "</td>"
+        report_html += "<tr class=\"vulnerability_type_table\">"
+        report_html += "<td class=\"vulnerability_type_table\">" + vulnerability_type + "</td>"
         text = str(vulnerability_type_data[vulnerability_type]['value'])
         if text == "0":
             text = get_colored_text(color="Error", text=text, c_type="text", params=None)
-        html_report += "<td class=\"vulnerability_type_table\">" + text + "</td>"
-        for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low']:
+        report_html += "<td class=\"vulnerability_type_table\">" + text + "</td>"
+        for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low', 'All']:
             text = get_cves_count_value_products_table(criticality, vulnerability_type_data, vulnerability_type)
-            html_report += "<td class=\"vulnerability_type_table\">" + text + "</td>"
+            report_html += "<td class=\"vulnerability_type_table\">" + text + "</td>"
         text = vulnerability_type_data[vulnerability_type]['comment']
-        if text == "Unknown Vulnerability Type":
-            text = get_colored_text(color="Error", text=text, c_type="text", params=None)
-        html_report += "<td class=\"vulnerability_type_table\">" + text + "</td>"
-        html_report += "</tr>\n"
-    html_report += "</table></p>"
+        # if text == "Unknown Vulnerability Type":
+        #     text = get_colored_text(color="Error", text=text, c_type="text", params=None)
+        # report_html += "<td class=\"vulnerability_type_table\">" + text + "</td>"
+        report_html += "</tr>\n"
+    report_html += "</table></p>"
 
-    return {"report_txt": report_txt, "report_html": html_report}
+    return {"report_txt": report_txt, "report_html": report_html}
 
+def get_comments_report(combined_cve_data, cve_scores, profile_data):
+    report_txt = ""
+    report_html = ""
+    criticalities = ["Urgent", "Critical", "High", "Medium", "Low", "All"]
+    vulnerability_comment_data = dict()
+    for comment_source in profile_data['comments'].keys():
+        if not comment_source in vulnerability_comment_data:
+            vulnerability_comment_data[comment_source] = dict()
+            vulnerability_comment_data[comment_source]['cves'] = dict()
+            for crit in criticalities:
+                vulnerability_comment_data[comment_source]['cves'][crit] = list()
+        for cve in combined_cve_data:
+            cve_level = cve_scores[cve]['level']
+            if cve in profile_data['comments'][comment_source]:
+                vulnerability_comment_data[comment_source]['cves'][cve_level].append(cve)
+                vulnerability_comment_data[comment_source]['cves']["All"].append(cve)
 
+    report_html = "<p><table class=\"vulnerability_type_table\">"
+    report_html += "<tr class=\"vulnerability_type_table\">"
+    report_html += "<th class=\"vulnerability_type_table\">" + "Source" + "</th>"
+    for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low', 'All']:
+        text = get_colored_text(color=criticality, text= criticality[0][0], c_type="text", params=None)
+        report_html += "<th class=\"vulnerability_type_table\">" + text + "</th>"
+    report_html += "</tr>\n"
+    for comment_source in profile_data['comments'].keys():
+        report_html += "<tr class=\"vulnerability_type_table\">"
+        report_html += "<td class=\"vulnerability_type_table\">" + comment_source + "</td>"
+        for criticality in ['Urgent', 'Critical', 'High', 'Medium', 'Low', 'All']:
+            text = get_cves_count_value_comments_table(criticality, vulnerability_comment_data, comment_source)
+            report_html += "<td class=\"vulnerability_type_table\">" + text + "</td>"
+        report_html += "</tr>\n"
+
+    report_html += "</table></p>"
+    return {"report_txt": report_txt, "report_html": report_html}
 
 def get_basic_severity_statistics_report(combined_cve_data_all):
     report_txt = ""
@@ -615,6 +657,15 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
     # print(report_data['report_txt'])
     html_content += report_data['report_html']
     html_content += "</br>"
+
+    if 'comments' in profile_data:
+        report_data = get_comments_report(combined_cve_data, cve_scores, profile_data)
+        name = "Comments"
+        # print("== " + name + " ==")
+        html_content += "<b>" + name + "</b>" + "\n"
+        # print(report_data['report_txt'])
+        html_content += report_data['report_html']
+        html_content += "</br>"
 
     report_data = get_vulristics_score_report(combined_cve_data, cve_scores, report_config, profile_data)
     name = "Vulnerabilities"

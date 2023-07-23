@@ -132,7 +132,7 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
         functions_tools.print_debug_message("=== Qualys text ===")
         functions_tools.print_debug_message(qualys_text)
         functions_tools.print_debug_message("=== End of Qualys text ===")
-        comments['qualys'] = qualys_text
+        comments['Qualys'] = qualys_text
 
     if "Tenable" in comments_links:
         tenable_link = comments_links["Tenable"]
@@ -145,7 +145,7 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
         functions_tools.print_debug_message("=== Tenable text ===")
         functions_tools.print_debug_message(tenable_text)
         functions_tools.print_debug_message("=== End of Tenable text ===")
-        comments['tenable'] = tenable_text
+        comments['Tenable'] = tenable_text
 
     if "Rapid7" in comments_links:
         rapid7_link = comments_links["Rapid7"]
@@ -158,7 +158,7 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
         functions_tools.print_debug_message("=== Rapid7 text ===")
         functions_tools.print_debug_message(rapid7_text)
         functions_tools.print_debug_message("=== End of Rapid7 text ===")
-        comments['rapid7'] = rapid7_text
+        comments['Rapid7'] = rapid7_text
 
     if "ZDI" in comments_links:
         zdi_link = comments_links["ZDI"]
@@ -177,7 +177,7 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
         functions_tools.print_debug_message("=== ZDI text ===")
         functions_tools.print_debug_message(zdi_text)
         functions_tools.print_debug_message("=== End of ZDI text ===")
-        comments['zdi'] = zdi_text
+        comments['ZDI'] = zdi_text
 
     for source in comments_links.keys():
         if source not in ['Qualys', 'Rapid7', 'Tenable', 'ZDI']:
@@ -186,7 +186,10 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
             functions_tools.print_debug_message("=== " + source + " text ===")
             functions_tools.print_debug_message(text)
             functions_tools.print_debug_message("=== End of " + source + " text ===")
-            comments[source.lower()] = text
+            comments[source] = text
+
+    for source in comments:
+        comments[source] = re.sub("(Russia|RUSSIA|Ukrain|UKRAIN)","***",comments[source])
 
     report_id = month + " " + year
     report_name = 'Microsoft Patch Tuesday, ' + month + " " + year

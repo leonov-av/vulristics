@@ -70,15 +70,16 @@ elif args.report_type == "cve_list":
     if args.cve_comments_path:
         with open(args.cve_comments_path, 'r') as file:
             cve_comments_text = file.read()
-            for line in cve_comments_text.split("\n"):
-                if "|" in line:
-                    group = line.split("|")[0]
-                    line = re.sub("[^\|]*\|","",line)
-                else:
-                    group = "Comment"
-                if not group in comments:
-                    comments[group] = ""
-                comments[group] += line + "\n"
+            if cve_comments_text != "":
+                for line in cve_comments_text.split("\n"):
+                    if "|" in line:
+                        group = line.split("|")[0]
+                        line = re.sub("[^\|]*\|","",line)
+                    else:
+                        group = "Comment"
+                    if not group in comments:
+                        comments[group] = ""
+                    comments[group] += line + "\n"
 
     # with open('analyze_product_list.txt', 'r') as file:
     #     products_text = file.read()

@@ -12,7 +12,7 @@ def get_text_from_url(url):
     response = requests.get(url)
     text = response.text
     if text:
-        text = trafilatura.extract()
+        text = trafilatura.extract(text)
     return text
 
 
