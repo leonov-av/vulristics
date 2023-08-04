@@ -322,6 +322,56 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "7-Zip": {
+        "prevalence": 0.5,
+        "description": "KeePass is a free open source password manager, which helps you to manage your passwords in a secure way",
+        "additional_detection_strings": [],
+        "vendor": "KeePass"
+    },
+    "KeePass": {
+        "prevalence": 0.5,
+        "description": "7-Zip is a file archiver with a high compression ratio",
+        "additional_detection_strings": [
+            "7z.dll"
+        ],
+        "vendor": "7-Zip"
+    },
+    "Flask": {
+        "prevalence": 0.5,
+        "description": "Flask is a lightweight WSGI web application framework",
+        "additional_detection_strings": [
+        ],
+        "vendor": "Flask"
+    },
+    "Werkzeug": {
+        "prevalence": 0.5,
+        "description": "Werkzeug is a comprehensive WSGI web application library",
+        "additional_detection_strings": [
+        ],
+        "vendor": "Werkzeug"
+    },    
+    "NumPy": {
+        "prevalence": 0.5,
+        "description": "NumPy is a library for the Python programming language, adding support for large, multi-dimensional arrays and matrices, along with a large collection of high-level mathematical functions",
+        "additional_detection_strings": [
+        ],
+        "vendor": "NumPy"
+    },    
+    "Apache log4net": {
+        "prevalence": 0.5,
+        "description": "log4net is a port of the Apache log4j™ framework to the Microsoft® .NET runtime",
+        "additional_detection_strings": [
+            "log4net"
+        ],
+        "vendor": "Apache"
+    },
+    "Simultaneous Multi-threading": {
+        "prevalence": 0.5,
+        "description": "Simultaneous multithreading is a technique for improving the overall efficiency of superscalar CPUs with hardware multithreading",
+        "additional_detection_strings": [
+        ],
+        "vendor": ""
+    },        
     "Libarchive": {
         "prevalence": 0.5,
         "description": "Multi-format archive and compression library",
@@ -1878,6 +1928,24 @@
         "additional_detection_strings": [
             "Java SE",
             "JRE"
+        ]
+    },
+    "Python": {
+        "prevalence": 0.6,
+        "description": "Python is a high-level, general-purpose programming language",
+        "additional_detection_strings": [
+        ]
+    },
+    "Perl": {
+        "prevalence": 0.6,
+        "description": "Perl is a family of two high-level, general-purpose, interpreted, dynamic programming languages",
+        "additional_detection_strings": [
+        ]
+    },
+    "wpa_supplicant": {
+        "prevalence": 0.6,
+        "description": "wpa_supplicant is a free software implementation of an IEEE 802.11i supplicant for Linux, FreeBSD, NetBSD, QNX, AROS, Microsoft Windows, Solaris, OS/2 (including ArcaOS and eComStation) and Haiku",
+        "additional_detection_strings": [
         ]
     },
     "SonicWall Email Security": {
