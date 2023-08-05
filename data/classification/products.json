@@ -148,8 +148,17 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "Netlogon Remote Protocol": {
+        "prevalence": 0.8,
+        "detection_priority": 0,
+        "comment": "MS-NRPC",
+        "description": "The Netlogon Remote Protocol is a remote procedure call (RPC) interface that is used for user and machine authentication on domain-based networks",
+        "additional_detection_strings": ["MS-NRPC", "Netlogon"]
+    },
     "RPC": {
         "prevalence": 0.8,
+        "detection_priority": -0.1,
+        "comment": "MS-NRPC",
         "description": "Remote Procedure Call Runtime",
         "additional_detection_strings": ["Remote Procedure Call Runtime"]
     },
@@ -164,18 +173,6 @@
         "description": "splwow64 (printer driver host for 32-bit applications)",
         "additional_detection_strings": []
     },
-    "Microsoft Exchange Server": {
-        "prevalence": 0.8,
-        "description": "",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "Office": {
-        "prevalence": 0.6,
-        "description": "MS Office product",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
     "Microsoft Office Access Connectivity Engine": {
         "prevalence": 0.6,
         "description": "MS Office product",
@@ -184,6 +181,8 @@
     },
     "Microsoft Word": {
         "prevalence": 0.6,
+        "detection_priority": -0.2,
+        "detection_comment": "WordPad",
         "description": "MS Office product",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -917,9 +916,10 @@
         "additional_detection_strings": []
     },
     "Microsoft Office": {
-        "prevalence": 0.6,
-        "description": "",
-        "additional_detection_strings": [],
+        "prevalence": 0.8,
+        "detection_priority": 0,
+        "description": "Microsoft Office is a suite of applications designed to help with productivity and completing common tasks on a computer",
+        "additional_detection_strings": ["MS Office"],
         "vendor": "Microsoft"
     },
     "Microsoft SQL": {
@@ -1370,8 +1370,8 @@
     },
     "Windows Remote Desktop Services": {
         "prevalence": 0.8,
-        "description": "Windows component",
-        "additional_detection_strings": [],
+        "description": "Remote Desktop Services, known as Terminal Services in Windows Server 2008 and earlier, is one of the components of Microsoft Windows that allow a user to initiate and control an interactive session on a remote computer or virtual machine over a network connection",
+        "additional_detection_strings": ["Remote Desktop Services"],
         "vendor": "Microsoft"
     },
     "Windows Remote Desktop Protocol": {
@@ -1874,9 +1874,28 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "Fortinet FortiOS": {
-        "prevalence": 0.9,
-        "description": "Network Device",
+    "SonicWall SMA100": {
+        "prevalence": 0.5,
+        "description": "SonicWall Secure Mobile Access (SMA) 100 Series solution simplifies end-to-end secure remote access to corporate resources hosted across on-prem, cloud and hybrid data centers, empowering your workforce without increasing the risk to your enterprise",
+        "vendor": "SonicWall",
+        "additional_detection_strings": ["SMA100"]
+    },
+    "SAP NetWeaver": {
+        "prevalence": 0.5,
+        "description": "SAP NetWeaver is a software stack for many of SAP SE's applications",
+        "vendor": "SAP",
+        "additional_detection_strings": []
+    },
+    "FortiOS": {
+        "prevalence": 0.5,
+        "description": "FortiOS is Fortinet's operating system used in their hardware, such as the Fortigate firewall and switches",
+        "vendor": "Fortinet",
+        "additional_detection_strings": []
+    },
+    "QNAP NAS": {
+        "prevalence": 0.5,
+        "description": "A QNAP NAS is a powerful device that allows you to store and share files and access them from anywhere in the world",
+        "vendor": "QNAP",
         "additional_detection_strings": []
     },
     "Citrix Application Delivery Controller": {
@@ -1901,13 +1920,17 @@
         "additional_detection_strings": []
     },
     "VMware Workspace One": {
-        "prevalence": 0.9,
-        "description": "Virtualization",
-        "additional_detection_strings": []
+        "prevalence": 0.5,
+        "description": "VMware Workspace ONE is a management platform that allows IT administrators to centrally control end users' mobile devices and cloud-hosted virtual desktops and applications from the cloud or from an on-premises deployment",
+        "vendor": "VMware",
+        "additional_detection_strings": [
+            "Workspace One", "Workspace ONE"
+        ]
     },
     "VMware vRealize Operations Manager": {
         "prevalence": 0.9,
         "description": "Virtualization",
+        "vendor": "VMware",
         "additional_detection_strings": [
             "vRealize Operations Manager"
         ]
@@ -1917,8 +1940,20 @@
         "description": "Data visualization dashboard software",
         "additional_detection_strings": []
     },
+    "Spring Cloud Function": {
+        "prevalence": 0.4,
+        "description": "Spring Cloud Function abstracts away all of the transport details and infrastructure, allowing the developer to keep all the familiar tools and processes, and focus firmly on business logic",
+        "vendor": "VMware",
+        "additional_detection_strings": []
+    },
+    "WSO2 Identity Server": {
+        "prevalence": 0.4,
+        "description": "WSO2 Identity Server is an API-driven open source identity and access management (IAM) product designed to help you build effective customer IAM (CIAM) solutions",
+        "vendor": "WSO2",
+        "additional_detection_strings": []
+    },
     "Oracle WebLogic Server": {
-        "prevalence": 0.9,
+        "prevalence": 0.4,
         "description": "Unified and extensible platform for developing, deploying and running enterprise applications",
         "additional_detection_strings": []
     },
@@ -1938,6 +1973,8 @@
     },
     "Perl": {
         "prevalence": 0.6,
+        "detection_priority": -0.3,
+        "detection_priority_comment": "properly",
         "description": "Perl is a family of two high-level, general-purpose, interpreted, dynamic programming languages",
         "additional_detection_strings": [
         ]
@@ -1949,8 +1986,8 @@
         ]
     },
     "SonicWall Email Security": {
-        "prevalence": 0.7,
-        "description": "Email Security Appliance",
+        "prevalence": 0.4,
+        "description": "SonicWall Email Security appliances and software provide multi-layered protection from inbound and outbound email threats and compliance violations",
         "additional_detection_strings": []
     },
     ".NET and Visual Studio": {
@@ -2771,12 +2808,6 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "NetLogon": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
     "Windows Media Center Update": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -2946,12 +2977,6 @@
         "vendor": "Microsoft"
     },
     "Azure AD": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "Remote Desktop Services": {
         "prevalence": 0.5,
         "description": "",
         "additional_detection_strings": [],
@@ -3366,12 +3391,6 @@
         "vendor": "Microsoft"
     },
     "Remote Desktop Virtual Host": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "Apache Log4j": {
         "prevalence": 0.5,
         "description": "",
         "additional_detection_strings": [],
@@ -4039,6 +4058,7 @@
     },
     "TRIE": {
         "prevalence": 0.5,
+         "detection_priority": -1,
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -4065,6 +4085,12 @@
         "prevalence": 0.5,
         "description": "",
         "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Zimbra Collaboration": {
+        "prevalence": 0.3,
+        "description": "Zimbra Collaboration is a collaborative software suite that includes an email server and a web client",
+        "additional_detection_strings": ["Zimbra Collaboration Suite"],
         "vendor": "Microsoft"
     },
     "Express Compressed Fonts": {
@@ -4505,12 +4531,6 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "Windows NetLogon Memory Corruption": {
-        "prevalence": 0.8,
-        "description": "Windows component",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
     "Microsoft RMS Sharing App for Mac": {
         "prevalence": 0.5,
         "description": "",
@@ -4598,12 +4618,6 @@
     "Windows Security Center API": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "Netlogon": {
-        "prevalence": 0.5,
-        "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -4945,6 +4959,7 @@
     },
     "Microsoft Windows": {
         "prevalence": 0.8,
+        "detection_priority": -1,
         "description": "Windows component",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -5353,7 +5368,7 @@
     },
     "Microsoft Windows Support Diagnostic Tool (MSDT)": {
         "prevalence": 0.8,
-        "description": "Windows component",
+        "description": "The Microsoft Support Diagnostic Tool is a legacy service in Microsoft Windows that allows Microsoft technical support agents to analyze diagnostic data remotely for troubleshooting purposes",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -5676,7 +5691,7 @@
         "prevalence": 0.9,
         "description": "Log4j2 is revamped version of Apache Logging framework",
         "additional_detection_strings": [
-            "Log4j2"
+            "Log4j2", "Log4j 2"
         ],
         "vendor": "Apache"
     },
@@ -5710,7 +5725,7 @@
         "vendor": "Hikvision"
     },
     "Zoho ManageEngine ADSelfService Plus": {
-        "prevalence": 0.7,
+        "prevalence": 0.5,
         "description": "Zoho ManageEngine ADSelfService Plus is an integrated self-service password management and single sign-on solution for Active Directory and cloud apps",
         "additional_detection_strings": [],
         "vendor": "Zoho"
@@ -5801,7 +5816,7 @@
     },
     "Windows Client Server Run-time Subsystem (CSRSS)": {
         "prevalence": 0.8,
-        "description": "Windows component",
+        "description": "Client Server Runtime Subsystem, or csrss.exe, is a component of the Windows NT family of operating systems that provides the user mode side of the Win32 subsystem and is included in Windows NT 3.1 and later",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -5886,12 +5901,6 @@
     "Windows Win32 Kernel Subsystem": {
         "prevalence": 0.8,
         "description": "Windows component",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "Netlogon RPC": {
-        "prevalence": 0.5,
-        "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -6052,12 +6061,6 @@
         "vendor": "Microsoft"
     },
     "Windows Credential Manager User Interface": {
-        "prevalence": 0.8,
-        "description": "Windows component",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "Windows Netlogon": {
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": [],

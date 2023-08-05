@@ -175,8 +175,13 @@ def get_vulnerability_type_and_product_from_description_ms_generated(source, ful
     product_name = ""
     results = dict()
 
+    exception = False
+    for stop_word in ['Exchange']:
+        if stop_word in full_description:
+            exception = True
+
     for vuln_type in vulnerability_type_data:
-        if vuln_type + " Vulnerability" in full_description:
+        if vuln_type + " Vulnerability" in full_description and not exception:
             vulnerability_type = vuln_type
             product_name = re.sub(" " + vuln_type + " Vulnerability$", "", full_description)
 
