@@ -822,7 +822,7 @@ def get_eanbled_data_sources(profile, source_id):
     return enabled_data_sources
 
 
-def make_vulnerability_report_for_profile(profile_file_path, rewrite_flag):
+def make_vulnerability_report_for_profile(profile_file_path, source_config):
     profile = get_profile(profile_file_path)
     source_id = list(profile.keys())[0]
     profile[source_id]['product_data'] = data_classification_products.get_product_data()
@@ -837,7 +837,7 @@ def make_vulnerability_report_for_profile(profile_file_path, rewrite_flag):
         enabled_data_sources = get_eanbled_data_sources(profile, source_id)
         cve_related_data_tmp, cves_to_exclude = functions_combined_vulnerability_data.collect_cve_related_data(
                                                 enabled_data_sources, all_cves_tmp, cves_to_exclude,
-                                                profile[source_id]['product_data'], rewrite_flag)
+                                                profile[source_id]['product_data'], source_config)
         selected_cves_to_exclude = cves_to_exclude
         
         for selected_cve in all_cves_tmp:
@@ -869,7 +869,7 @@ def make_vulnerability_report_for_profile(profile_file_path, rewrite_flag):
     enabled_data_sources = get_eanbled_data_sources(profile, source_id)
     cve_related_data, selected_cves_to_exclude = functions_combined_vulnerability_data.collect_cve_related_data(
                                                     enabled_data_sources, all_cves, selected_cves_to_exclude,
-                                                    profile[source_id]['product_data'], rewrite_flag)
+                                                    profile[source_id]['product_data'], source_config)
     cve_scores = functions_score.get_cve_scores(all_cves, cve_related_data, profile[source_id])
 
     print_unclassified_products_templates(cve_scores, cve_related_data)

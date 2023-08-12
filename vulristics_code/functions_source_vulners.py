@@ -178,14 +178,28 @@ def collect_vulners_data(vulners_id, rewrite_flag):
     f.close()
     return vulners_data
 
-def get_vulners_data(vulners_id, rewrite_flag):
+def get_vulners_data(vulners_id, source_config):
     file_path_processed = "data/vulners_processed/" + vulners_id + ".json"
+    rewrite_flag = source_config['rewrite_flag']
+
     if rewrite_flag or not os.path.exists(file_path_processed) or not reuse_vulners_processed:
         vulners_data = collect_vulners_data(vulners_id, rewrite_flag)
     else:
         f = open(file_path_processed, "r")
         vulners_data = json.loads(f.read())
         f.close()
-    return (vulners_data)
+
+    vulners_use_github_exploits = source_config['vulners_use_github_exploits_flag']
+    if vulners_use_github_exploits == False:
+        new_public_exploit_sources = list()
+        for source in vulners_data['public_exploit_sources']:
+            if source['type'] != 'githubexploit':
+                new_public_exploit_sources.append(source)
+        if new_public_exploit_sources == list():
+            vulners_data['public_exploit'] = False
+        vulners_data['public_exploit_sources'] = new_public_exploit_sources
+
+
+    return vulners_data
 
 # print(get_vulners_data(vulners_id="CVE-2021-40450", rewrite_flag=False))

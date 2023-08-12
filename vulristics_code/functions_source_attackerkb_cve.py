@@ -114,7 +114,8 @@ def get_attackerkb_cve_data_raw(cve_id):
     return(attackerkb_cve_data)
 
 
-def get_attackerkb_cve_data(cve_id, rewrite_flag):
+def get_attackerkb_cve_data(cve_id, source_config):
+    rewrite_flag = source_config['rewrite_flag']
     download_attackerkb_cve_data_raw(cve_id, rewrite_flag)
     attackerkb_cve_data = get_attackerkb_cve_data_raw(cve_id)
     return(attackerkb_cve_data)

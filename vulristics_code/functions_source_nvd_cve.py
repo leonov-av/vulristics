@@ -48,7 +48,8 @@ def get_nvd_cve_data_raw(cve_id):
     return nvd_cve_data
 
 
-def get_nvd_cve_data(cve_id, rewrite_flag):
+def get_nvd_cve_data(cve_id, source_config):
+    rewrite_flag = source_config['rewrite_flag']
     download_nvd_cve_data_raw(cve_id, rewrite_flag)
     nvd_cve_data = get_nvd_cve_data_raw(cve_id)
     description = ""

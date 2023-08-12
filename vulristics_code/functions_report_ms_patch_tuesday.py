@@ -2,7 +2,7 @@ from vulristics_code import functions_report_vulnerabilities, functions_tools, f
 import os
 
 def make_ms_patch_tuesday_report(pt_type, year, month, comments_links_path=False, patch_tuesday_date=False,
-                                 rewrite_flag=False):
+                                 source_config=dict()):
     # month = "October"
     # year = "2020"
     pt_related_dates = dict()
@@ -23,10 +23,10 @@ def make_ms_patch_tuesday_report(pt_type, year, month, comments_links_path=False
                 comments_links[line.split("|")[0]] = {'title':line.split("|")[1], 'url':line.split("|")[2]}
         f.close()
 
-    if rewrite_flag or not os.path.isfile("data/profiles/" + file_name):
+    if source_config['rewrite_flag'] or not os.path.isfile("data/profiles/" + file_name):
         functions_tools.print_debug_message("Creating Patch Tuesday profile...")
         functions_profile_ms_patch_tuesday.create_profile(pt_type, month, year, pt_related_dates,
                                                           comments_links, file_name)
 
     profile_file_path = "data/profiles/" + file_name
-    functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path, rewrite_flag)
+    functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path, source_config)

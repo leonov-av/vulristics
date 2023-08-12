@@ -14,7 +14,8 @@ parser.add_argument('--cve-comments-path', help='Path to the CVE comments file')
 parser.add_argument('--cve-data-sources', help='Data sources for analysis, e.g. "ms,nvd,epss,vulners,attackerkb"')
 
 
-parser.add_argument('--rewrite-flag', help='Rewrite Flag (True/False)')
+parser.add_argument('--rewrite-flag', help='Rewrite Flag (True/False, Default - False)')
+parser.add_argument('--vulners-use-github-exploits-flag', help='Use Vulners Github exploits data Flag (True/False, Default - True)')
 
 args = parser.parse_args()
 banner = '''
@@ -29,14 +30,23 @@ banner = '''
 
 print(re.sub("^\n","",banner))
 
+source_config = dict()
+
+source_config['rewrite_flag'] = False
+if args.rewrite_flag == "True" or args.rewrite_flag == "true":
+    source_config['rewrite_flag'] = True
+
+source_config['vulners_use_github_exploits_flag'] = True
+if args.vulners_use_github_exploits_flag == "False" or args.vulners_use_github_exploits_flag == "false":
+    source_config['vulners_use_github_exploits_flag'] = False
+
+
+print(source_config)
+
 if args.report_type == "ms_patch_tuesday" or args.report_type == "ms_patch_tuesday_extended":
     year = str(args.mspt_year) # 2021
     month = args.mspt_month # September
 
-    if args.rewrite_flag == "True" or args.rewrite_flag == "true":
-        rewrite_flag = True
-    else:
-        rewrite_flag = False
 
     comments_links_path = False
     if args.mspt_comments_links_path:
@@ -51,12 +61,8 @@ if args.report_type == "ms_patch_tuesday" or args.report_type == "ms_patch_tuesd
                                                                    year=year,
                                                                    month=month,
                                                                    comments_links_path = comments_links_path,
-                                                                   rewrite_flag=rewrite_flag)
+                                                                   source_config=source_config)
 elif args.report_type == "cve_list":
-    if args.rewrite_flag == "True" or args.rewrite_flag == "true":
-        rewrite_flag = True
-    else:
-        rewrite_flag = False
 
     name = args.cve_project_name
     report_name = name + ' report'
@@ -91,8 +97,14 @@ elif args.report_type == "cve_list":
 
 
     profile_file_path = "data/profiles/" + file_name
-    functions_profile.save_profile(profile_file_path, report_id, report_name, file_name_prefix, cve_list_text,
-                                   products_text,
-                                   data_sources, comments)
-    functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path, rewrite_flag)
+    functions_profile.save_profile(profile_file_path=profile_file_path,
+                                   report_id=report_id,
+                                   report_name=report_name,
+                                   file_name_prefix=file_name_prefix,
+                                   cve_list_text=cve_list_text,
+                                   products_text=products_text,
+                                   data_sources=data_sources,
+                                   comments=comments)
+    functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path=profile_file_path,
+                                                                           source_config=source_config)
 

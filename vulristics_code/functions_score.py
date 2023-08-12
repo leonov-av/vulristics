@@ -143,7 +143,7 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
             if cve_data_all['vulners_cve_data_all'][cve]['public_exploit'] and not comment_exists:
                 for exploit_data in cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources']:
                     links_str.append("<a href=\"https://vulners.com/" + exploit_data['type'] + "/"
-                                     + exploit_data['id'] + "\">" + exploit_data['title'] + "</a>")
+                                     + exploit_data['id'] + "\">" + "[" + exploit_data['type'] + "] " + exploit_data['title'] + "</a>")
                 public_exploit_exists_c = "The existence of a publicly available exploit is mentioned on Vulners website (" + ", ".join(links_str) + ")"
                 comment_exists = True
         if 'ms_cve_data_all' in cve_data_all:

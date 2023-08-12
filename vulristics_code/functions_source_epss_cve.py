@@ -47,7 +47,8 @@ def get_epss_cve_data_raw(cve_id):
     return epss_cve_data
 
 
-def get_epss_cve_data(cve_id, rewrite_flag):
+def get_epss_cve_data(cve_id, source_config):
+    rewrite_flag = source_config['rewrite_flag']
     download_epss_cve_data_raw(cve_id, rewrite_flag)
     epss_cve_data = get_epss_cve_data_raw(cve_id)
     epss = 0

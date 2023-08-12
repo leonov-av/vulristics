@@ -183,7 +183,8 @@ def add_ms_cve_cvss_base_score(ms_cve_data):
     ms_cve_data['cvss_base_score'] = cvss_base_score
     return ms_cve_data
 
-def get_ms_cve_data(cve_id, rewrite_flag):
+def get_ms_cve_data(cve_id, source_config):
+    rewrite_flag = source_config['rewrite_flag']
     download_ms_cve_data_raw(cve_id, rewrite_flag)
     ms_cve_data = get_ms_cve_data_raw(cve_id)
     if not ms_cve_data['not_found_error']:

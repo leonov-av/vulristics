@@ -59,9 +59,8 @@ Report generated: reports/cve-2023-29336_report_with_comments_ext_img.html
 ### Options
 ```buildoutcfg
 $ python3 vulristics.py -h
-usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR] [--mspt-month MSPT_MONTH] [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH]
-                     [--cve-project-name CVE_PROJECT_NAME] [--cve-list-path CVE_LIST_PATH] [--cve-comments-path CVE_COMMENTS_PATH] [--cve-data-sources CVE_DATA_SOURCES]
-                     [--rewrite-flag REWRITE_FLAG]
+usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR] [--mspt-month MSPT_MONTH] [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH] [--cve-project-name CVE_PROJECT_NAME] [--cve-list-path CVE_LIST_PATH]
+                     [--cve-comments-path CVE_COMMENTS_PATH] [--cve-data-sources CVE_DATA_SOURCES] [--rewrite-flag REWRITE_FLAG] [--vulners-use-github-exploits-flag VULNERS_USE_GITHUB_EXPLOITS_FLAG]
 
 An extensible framework for analyzing publicly available information about vulnerabilities
 
@@ -84,7 +83,9 @@ options:
   --cve-data-sources CVE_DATA_SOURCES
                         Data sources for analysis, e.g. "ms,nvd,epss,vulners,attackerkb"
   --rewrite-flag REWRITE_FLAG
-                        Rewrite Flag (True/False)
+                        Rewrite Flag (True/False, Default - False)
+  --vulners-use-github-exploits-flag VULNERS_USE_GITHUB_EXPLOITS_FLAG
+                        Use Vulners Github exploits data Flag (True/False, Default - True)
 ```
 
 ### Installation
