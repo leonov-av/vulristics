@@ -1,18 +1,30 @@
 import requests
 import os
 import json
-
+import time
+import credentials
 
 # CVE Data
 def get_nvd_cve_data_from_nvd_site(cve_id):
-    # https://nvd.nist.gov/General/News/New-NVD-CVE-CPE-API-and-SOAP-Retirement
-    # https://csrc.nist.gov/CSRC/media/Projects/National-Vulnerability-Database/documents/web%20service%20documentation/Automation%20Support%20for%20CVE%20Retrieval.pdf
+    # https://nvd.nist.gov/developers/start-here#divBestPractices
     # https://services.nvd.nist.gov/rest/json/cve/1.0/CVE-2015-5611
     # cve_id = "CVE-2020-1003"
     nvd_cve_data = dict()
-    try:
-        print("Requesting " + cve_id + " from NVD website")
+    if credentials.nvd_key == "":
+        print("Requesting " + cve_id + " from NVD website WITHOUT authorization key")
         r = requests.get("https://services.nvd.nist.gov/rest/json/cve/1.0/" + cve_id)
+        time.sleep(6)
+    else:
+        print("Requesting " + cve_id + " from NVD website WITH authorization key")
+        headers = {
+            'apiKey': credentials.nvd_key,
+        }
+        r = requests.get("https://services.nvd.nist.gov/rest/json/cve/1.0/" + cve_id, headers=headers)
+        time.sleep(0.6)
+    if "Request forbidden by administrative rules" in r.text:
+        print("Rate limit error")
+        exit()
+    try:
         nvd_cve_data = r.json()
         nvd_cve_data['error'] = False
         nvd_cve_data['status'] = "CVE ID was found on nvd.nist.gov portal"

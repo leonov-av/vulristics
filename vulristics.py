@@ -40,9 +40,6 @@ source_config['vulners_use_github_exploits_flag'] = True
 if args.vulners_use_github_exploits_flag == "False" or args.vulners_use_github_exploits_flag == "false":
     source_config['vulners_use_github_exploits_flag'] = False
 
-
-print(source_config)
-
 if args.report_type == "ms_patch_tuesday" or args.report_type == "ms_patch_tuesday_extended":
     year = str(args.mspt_year) # 2021
     month = args.mspt_month # September
