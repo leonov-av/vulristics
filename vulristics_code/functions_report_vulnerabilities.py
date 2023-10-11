@@ -822,7 +822,7 @@ def get_eanbled_data_sources(profile, source_id):
     return enabled_data_sources
 
 
-def make_vulnerability_report_for_profile(profile_file_path, source_config):
+def make_vulnerability_report_for_profile(profile_file_path, source_config, result_json_path):
     profile = get_profile(profile_file_path)
     source_id = list(profile.keys())[0]
     profile[source_id]['product_data'] = data_classification_products.get_product_data()
@@ -874,3 +874,15 @@ def make_vulnerability_report_for_profile(profile_file_path, source_config):
 
     print_unclassified_products_templates(cve_scores, cve_related_data)
     make_html_vulnerability_reports_for_all_report_configs(profile, source_id, cve_related_data, cve_scores)
+
+    if result_json_path:
+        json_report_data = {
+            "profile": profile,
+            "source_id": source_id,
+            "cve_related_data": cve_related_data,
+            "cve_scores": cve_scores
+        }
+
+        f = open(result_json_path, "w")
+        f.write(json.dumps(json_report_data, indent=4))
+        f.close()

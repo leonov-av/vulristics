@@ -4,7 +4,8 @@ import re
 
 parser = argparse.ArgumentParser(description='An extensible framework for analyzing publicly available information about vulnerabilities')
 const = ""
-parser.add_argument('--report-type', help='Report type (ms_patch_tuesday, ms_patch_tuesday_extended or cve_list)')
+
+parser.add_argument('--report-type', help='Report type (ms_patch_tuesday, ms_patch_tuesday_extended, cve_list or custom_profile)')
 parser.add_argument('--mspt-year', help='Microsoft Patch Tuesday year')
 parser.add_argument('--mspt-month', help='Microsoft Patch Tuesday month')
 parser.add_argument('--mspt-comments-links-path', help='Microsoft Patch Tuesday comments links file')
@@ -12,7 +13,8 @@ parser.add_argument('--cve-project-name', help='Name of the CVE Project')
 parser.add_argument('--cve-list-path', help='Path to the list of CVE IDs')
 parser.add_argument('--cve-comments-path', help='Path to the CVE comments file')
 parser.add_argument('--cve-data-sources', help='Data sources for analysis, e.g. "ms,nvd,epss,vulners,attackerkb"')
-
+parser.add_argument('--profile-json-path', help='Custom profile for analysis')
+parser.add_argument('--result-json-path', help='Export data in JSON')
 
 parser.add_argument('--rewrite-flag', help='Rewrite Flag (True/False, Default - False)')
 parser.add_argument('--vulners-use-github-exploits-flag', help='Use Vulners Github exploits data Flag (True/False, Default - True)')
@@ -40,6 +42,11 @@ source_config['vulners_use_github_exploits_flag'] = True
 if args.vulners_use_github_exploits_flag == "False" or args.vulners_use_github_exploits_flag == "false":
     source_config['vulners_use_github_exploits_flag'] = False
 
+if args.result_json_path:
+    result_json_path = args.result_json_path
+else:
+    result_json_path = False
+
 if args.report_type == "ms_patch_tuesday" or args.report_type == "ms_patch_tuesday_extended":
     year = str(args.mspt_year) # 2021
     month = args.mspt_month # September
@@ -58,7 +65,8 @@ if args.report_type == "ms_patch_tuesday" or args.report_type == "ms_patch_tuesd
                                                                    year=year,
                                                                    month=month,
                                                                    comments_links_path = comments_links_path,
-                                                                   source_config=source_config)
+                                                                   source_config=source_config,
+                                                                   result_json_path=result_json_path)
 elif args.report_type == "cve_list":
 
     name = args.cve_project_name
@@ -103,5 +111,10 @@ elif args.report_type == "cve_list":
                                    data_sources=data_sources,
                                    comments=comments)
     functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path=profile_file_path,
-                                                                           source_config=source_config)
+                                                                           source_config=source_config,
+                                                                           result_json_path=result_json_path)
 
+elif args.report_type == "custom_profile":
+    functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path=args.profile_json_path,
+                                                                           source_config=source_config,
+                                                                           result_json_path=result_json_path)

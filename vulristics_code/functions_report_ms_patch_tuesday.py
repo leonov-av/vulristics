@@ -2,7 +2,7 @@ from vulristics_code import functions_report_vulnerabilities, functions_tools, f
 import os
 
 def make_ms_patch_tuesday_report(pt_type, year, month, comments_links_path=False, patch_tuesday_date=False,
-                                 source_config=dict()):
+                                 source_config=dict(), result_json_path=False):
     # month = "October"
     # year = "2020"
     pt_related_dates = dict()
@@ -29,4 +29,5 @@ def make_ms_patch_tuesday_report(pt_type, year, month, comments_links_path=False
                                                           comments_links, file_name)
 
     profile_file_path = "data/profiles/" + file_name
-    functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path, source_config)
+    functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path, source_config,
+                                                                           result_json_path)
