@@ -58,10 +58,12 @@ Report generated: reports/cve-2023-29336_report_with_comments_ext_img.html
 
 ### Options
 ```buildoutcfg
-usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR]
-                     [--mspt-month MSPT_MONTH] [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH]
+$ python3 vulristics.py -h
+usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR] [--mspt-month MSPT_MONTH]
+                     [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH]
                      [--cve-project-name CVE_PROJECT_NAME] [--cve-list-path CVE_LIST_PATH]
                      [--cve-comments-path CVE_COMMENTS_PATH] [--cve-data-sources CVE_DATA_SOURCES]
+                     [--profile-json-path PROFILE_JSON_PATH] [--result-json-path RESULT_JSON_PATH]
                      [--rewrite-flag REWRITE_FLAG]
                      [--vulners-use-github-exploits-flag VULNERS_USE_GITHUB_EXPLOITS_FLAG]
 
@@ -70,7 +72,8 @@ An extensible framework for analyzing publicly available information about vulne
 options:
   -h, --help            show this help message and exit
   --report-type REPORT_TYPE
-                        Report type (ms_patch_tuesday, ms_patch_tuesday_extended or cve_list)
+                        Report type (ms_patch_tuesday, ms_patch_tuesday_extended, cve_list or
+                        custom_profile)
   --mspt-year MSPT_YEAR
                         Microsoft Patch Tuesday year
   --mspt-month MSPT_MONTH
@@ -85,6 +88,10 @@ options:
                         Path to the CVE comments file
   --cve-data-sources CVE_DATA_SOURCES
                         Data sources for analysis, e.g. "ms,nvd,epss,vulners,attackerkb"
+  --profile-json-path PROFILE_JSON_PATH
+                        Custom profile for analysis
+  --result-json-path RESULT_JSON_PATH
+                        Export data in JSON
   --rewrite-flag REWRITE_FLAG
                         Rewrite Flag (True/False, Default - False)
   --vulners-use-github-exploits-flag VULNERS_USE_GITHUB_EXPLOITS_FLAG
