@@ -1,5 +1,8 @@
 exclusions = {
     "not_an_exploit": {
+        "c76dea7f-aa3f-56ed-ad93-ce2b4788e6fd_githubexploit": {
+                "reason": "Fake Project"
+            },
         "5de1b404-0368-5986-856a-306ea0fe0c09_githubexploit": {
                 "reason": "Fake Project"
             },
@@ -19,6 +22,12 @@ exclusions = {
                 "reason": "Fake Project"
             },                      
         "src-2022-0004_srcincite": {
+            "reason": "Not an Exploit"
+        },                      
+        "94f18a97-3540-523f-b6ef-c1de830f9e0d_githubexploit": {
+            "reason": "Not an Exploit"
+        },
+        "349bf110-6fd4-5620-b6d6-1434ff5c0284_githubexploit": {
             "reason": "Not an Exploit"
         }
     }

@@ -364,6 +364,12 @@
         ],
         "vendor": "Apache"
     },
+    "Apache Commons Text": {
+        "prevalence": 0.5,
+        "description": "The Commons Text library provides additions to the standard JDK text handling",
+        "additional_detection_strings": [],
+        "vendor": "Apache"
+    },
     "Simultaneous Multi-threading": {
         "prevalence": 0.5,
         "description": "Simultaneous multithreading is a technique for improving the overall efficiency of superscalar CPUs with hardware multithreading",
@@ -746,10 +752,20 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "SCOM": {
+    "GNU Bash": {
         "prevalence": 0.9,
+        "detection_priority": 0.3,
+        "detection_priority_comment": "",
+        "description": "Bash is the shell, or command language interpreter, for the GNU operating system",
+        "additional_detection_strings": ["ShellShock"],
+        "vendor": "Linux"
+    },
+    "Microsoft SCOM": {
+        "prevalence": 0.9,
+        "detection_priority": -0.1,
+        "detection_priority_comment": "May occur in words such as MSCOMCTL.OCX",
         "description": "System Center Operations Manager",
-        "additional_detection_strings": [],
+        "additional_detection_strings": ["SCOM"],
         "vendor": "Microsoft"
     },
     "Active Directory": {
@@ -2090,6 +2106,12 @@
         "description": "Windows component",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
+    },
+    "Samba": {
+        "prevalence": 0.8,
+        "description": "Samba is a free software re-implementation of the SMB networking protocol, and was originally developed by Andrew Tridgell",
+        "additional_detection_strings": [],
+        "vendor": "Samba"
     },
     "Windows SSDP Service": {
         "prevalence": 0.8,
@@ -3742,7 +3764,13 @@
         "prevalence": 0.5,
         "description": "",
         "additional_detection_strings": [],
-        "vendor": "Microsoft"
+        "vendor": "Linux Foundation"
+    },
+    "Linux Kernel": {
+        "prevalence": 0.5,
+        "description": "The Linux kernel is a free and open-source, monolithic, modular, multitasking, Unix-like operating system kernel",
+        "additional_detection_strings": ["Linux kernel"],
+        "vendor": "Linux Foundation"
     },
     "Local Security Authority Subsystem Service": {
         "prevalence": 0.5,
@@ -5707,6 +5735,13 @@
         "additional_detection_strings": [],
         "vendor": "Cisco"
     },
+    "Cisco IOS": {
+        "prevalence": 0.8,
+        "description": "The Internetworking Operating System is a family of proprietary network operating systems used on several router and network switch models manufactured by Cisco Systems",
+        "additional_detection_strings": [
+            "Cisco"
+        ]
+    },
     "Sitecore Experience Platform (XP)": {
         "prevalence": 0.6,
         "description": "Sitecore Experience Platform provides you with tools for content management, digital marketing, and analyzing and reporting",
@@ -6425,5 +6460,41 @@
         "description": "The Autodesk® FBX® SDK is a free, easy-to-use, C++ software development platform and API toolkit that allows application and content vendors to transfer existing content into the FBX format with minimal effort.",
         "additional_detection_strings": [],
         "vendor": "Autodesk"
+    },
+    "Junos OS": {
+        "prevalence": 0.8,
+        "description": "Junos OS is a FreeBSD-based network operating system used in Juniper Networks routing, switching and security devices",
+        "additional_detection_strings": [],
+        "vendor": "Juniper"
+    },
+    "Adobe Flash Player": {
+        "prevalence": 0.8,
+        "description": "Adobe Flash Player is computer software for viewing multimedia contents, executing rich Internet applications, and streaming audio and video content created on the Adobe Flash platform",
+        "additional_detection_strings": [],
+        "vendor": "Adobe"
+    },
+    "Adobe Reader": {
+        "prevalence": 0.8,
+        "description": "Adobe Acrobat is a family of application software and Web services developed by Adobe Inc. to view, create, manipulate, print and manage Portable Document Format files",
+        "additional_detection_strings": ["Adobe Acrobat", "Acrobat Reader"],
+        "vendor": "Adobe"
+    },
+    "HTTP/2 protocol": {
+        "prevalence": 0.9,
+        "description": "HTTP/2 is a major revision of the HTTP network protocol used by the World Wide Web",
+        "additional_detection_strings": [],
+        "vendor": "Internet Engineering Task Force"
+    },
+    "TeamCity": {
+        "prevalence": 0.7,
+        "description": "TeamCity is a build management and continuous integration server from JetBrains",
+        "additional_detection_strings": [],
+        "vendor": "JetBrains"
+    },
+    "WinRAR": {
+        "prevalence": 0.8,
+        "description": "WinRAR is a trialware file archiver utility for Windows, developed by Eugene Roshal of win.rar GmbH",
+        "additional_detection_strings": [],
+        "vendor": "RARLabs"
     }
 }
