@@ -57,8 +57,9 @@
     },
     "macOS": {
         "prevalence": 0.7,
-        "description": "",
-        "additional_detection_strings": []
+        "description": "macOS is an operating system developed and marketed by Apple Inc",
+        "additional_detection_strings": [],
+        "vendor": "Apple Inc"
     },
     "Windows Win32k": {
         "prevalence": 0.9,
@@ -661,7 +662,7 @@
     },
     "GitHub": {
         "prevalence": 0.2,
-        "detection_priority": 1,
+        "detection_priority": -1,
         "description": "GitHub, Inc. is an Internet hosting service for software development and version control using Git",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -916,8 +917,8 @@
     },
     "Microsoft Edge": {
         "prevalence": 0.8,
-        "detection_priority": 0.3,
-        "detection_priority_comment": "For the vulnerabilities in Chrome, Chromium and Edge, it's better to choose Edge",
+        "detection_priority": 0.2,
+        "detection_priority_comment": "For the vulnerabilities in Chrome, Chromium and Edge, it's better to Chromium",
         "description": "Web browser",
         "additional_detection_strings": [
             "Microsoft Edge (HTML-based)",
@@ -930,6 +931,14 @@
         "prevalence": 0.8,
         "description": "Web browser",
         "additional_detection_strings": []
+    },
+    "Chromium": {
+        "prevalence": 0.8,
+        "detection_priority": 0.3,
+        "detection_priority_comment": "For the vulnerabilities in Chrome, Chromium and Edge, it's better to choose Chromium",
+        "description": "Chromium is a free and open-source web browser project, mainly developed and maintained by Google",
+        "additional_detection_strings": [],
+        "vendor": "Google"
     },
     "Microsoft Office": {
         "prevalence": 0.8,
@@ -1288,6 +1297,8 @@
     },
     "APT": {
         "prevalence": 0.8,
+        "detection_priority": -0.1,
+        "detection_comment": "Matches in words like: capture",
         "description": "A free-software user interface that works with core libraries to handle the installation and removal of software on Debian",
         "additional_detection_strings": []
     },
@@ -3767,7 +3778,7 @@
         "vendor": "Linux Foundation"
     },
     "Linux Kernel": {
-        "prevalence": 0.5,
+        "prevalence": 0.9,
         "description": "The Linux kernel is a free and open-source, monolithic, modular, multitasking, Unix-like operating system kernel",
         "additional_detection_strings": ["Linux kernel"],
         "vendor": "Linux Foundation"
@@ -4819,9 +4830,11 @@
     },
     "TLS": {
         "prevalence": 0.5,
+        "detection_priority": -0.5,
+        "detection_priority_comment": "Logstash priority should be higher than TLS",
         "description": "",
         "additional_detection_strings": [],
-        "vendor": "Microsoft"
+        "vendor": "IETF"
     },
     "Windows Delivery Optimization": {
         "prevalence": 0.8,
@@ -5210,7 +5223,9 @@
     },
     "NetBIOS": {
         "prevalence": 0.5,
-        "description": "",
+        "detection_priority": -0.5,
+        "detection_priority_comment": "Should be less than Linux Kernel",
+        "description": "NetBIOS (Network Basic Input/Output System) is a network service that enables applications on different computers to communicate with each other across a local area network (LAN)",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -5715,9 +5730,9 @@
         ],
         "vendor": "ARM"
     },
-    "Apache Log4j2": {
+    "Apache Log4j": {
         "prevalence": 0.9,
-        "description": "Log4j2 is revamped version of Apache Logging framework",
+        "description": "Apache Log4j is a Java-based logging utility",
         "additional_detection_strings": [
             "Log4j2", "Log4j 2"
         ],
@@ -6496,5 +6511,243 @@
         "description": "WinRAR is a trialware file archiver utility for Windows, developed by Eugene Roshal of win.rar GmbH",
         "additional_detection_strings": [],
         "vendor": "RARLabs"
+    },
+    "Bouncy Castle": {
+        "prevalence": 0.6,
+        "description": "Bouncy Castle is a collection of APIs used in cryptography",
+        "additional_detection_strings": [],
+        "vendor": "Legion of the Bouncy Castle Inc"
+    },
+     "FreeRDP": {
+        "prevalence": 0.6,
+        "detection_priority": 0.3,
+        "detection_priority_comment": "More rare than MS RDP",
+        "description": "FreeRDP is a free implementation of the Remote Desktop Protocol (RDP), released under the Apache license",
+        "additional_detection_strings": [],
+        "vendor": "FreeRDP"
+    },
+     "Wireshark": {
+        "prevalence": 0.6,
+        "description": "Wireshark is a free and open-source packet analyzer. It is used for network troubleshooting, analysis, software and communications protocol development, and education",
+        "additional_detection_strings": [],
+        "vendor": "Wireshark Foundation"
+    },
+     "Mozilla Firefox": {
+        "prevalence": 0.8,
+        "description": "Mozilla Firefox, or simply Firefox, is a free and open-source web browser developed by the Mozilla Foundation and its subsidiary, the Mozilla Corporation",
+        "additional_detection_strings": ["Firefox"],
+        "vendor": "Mozilla Foundation"
+    },
+     "Jetty": {
+        "prevalence": 0.6,
+        "description": "Jetty is a Java based web server and servlet engine",
+        "additional_detection_strings": [],
+        "vendor": "Eclipse Foundation"
+    },
+     "FFmpeg": {
+        "prevalence": 0.7,
+        "description": "FFmpeg is a free and open-source software project consisting of a suite of libraries and programs for handling video, audio, and other multimedia files and streams",
+        "additional_detection_strings": [],
+        "vendor": "FFmpeg"
+    },
+     "GNU C Library": {
+        "prevalence": 0.8,
+        "description": "The GNU C Library, commonly known as glibc, is the GNU Project's implementation of the C standard library",
+        "additional_detection_strings": ["GLIBC"],
+        "vendor": "GNU Project"
+    },
+     "GNOME desktop": {
+        "prevalence": 0.8,
+        "description": "GNOME originally an acronym for GNU Network Object Model Environment, is a free and open-source desktop environment for Linux and other Unix-like[13] operating systems",
+        "additional_detection_strings": ["GNOME"],
+        "vendor": "GNOME Project"
+    },
+     "ReadyMedia": {
+        "prevalence": 0.6,
+        "description": "ReadyMedia (formerly known as MiniDLNA) is a simple media server software, with the aim of being fully compliant with DLNA/UPnP-AV clients",
+        "additional_detection_strings": ["MiniDLNA"],
+        "vendor": "ReadyMedia"
+    },
+     "libvpx": {
+        "prevalence": 0.8,
+        "description": "libvpx is a free software video codec library from Google and the Alliance for Open Media (AOMedia)",
+        "additional_detection_strings": [],
+        "vendor": "Google"
+    },
+     "vim": {
+        "prevalence": 0.7,
+        "description": "Vim is a free and open-source, screen-based text editor program",
+        "additional_detection_strings": [],
+        "vendor": "Vim"
+    },
+     "Apache Tomcat": {
+        "prevalence": 0.7,
+        "description": "Apache Tomcat is a free and open-source implementation of the Jakarta Servlet, Jakarta Expression Language, and WebSocket technologies",
+        "additional_detection_strings": ["Tomcat"],
+        "vendor": "Apache"
+    },
+     "Intel Ethernet Controller RDMA driver for linux": {
+        "prevalence": 0.7,
+        "description": "Remote Direct Memory Access (RDMA) is a computer networking technology usually implemented over high-speed, low-latency networks (aka fabrics) which allows for direct access to a remote host's memory, dramatically reducing latency and CPU overhead",
+        "additional_detection_strings": ["Ethernet Controller RDMA driver for linux"],
+        "vendor": "Intel"
+    },
+     "Logstash": {
+        "prevalence": 0.7,
+        "description": "Logstash is an open source data collection engine with real-time pipelining capabilities",
+        "additional_detection_strings": [],
+        "vendor": "Elasticsearch"
+    },
+     "Binutils": {
+        "prevalence": 0.8,
+        "description": "The GNU Binary Utilities, or binutils, are a set of programming tools for creating and managing binary programs, object files, libraries, profile data, and assembly source code",
+        "additional_detection_strings": [],
+        "vendor": "GNU Project"
+    },
+     "QEMU": {
+        "prevalence": 0.7,
+        "description": "QEMU is a generic and open source machine & userspace emulator and virtualizer",
+        "additional_detection_strings": [],
+        "vendor": "QEMU"
+    },
+     "MariaDB": {
+        "prevalence": 0.7,
+        "description": "MariaDB is a community-developed, commercially supported fork of the MySQL relational database management system, intended to remain free and open-source software under the GNU General Public License",
+        "additional_detection_strings": [],
+        "vendor": "MariaDB Foundation"
+    },
+     "MediaWiki": {
+        "prevalence": 0.7,
+        "description": "MediaWiki is a free server-based wiki software, licensed under the GNU General Public License (GPL)",
+        "additional_detection_strings": ["Mediawiki"],
+        "vendor": "Wikimedia Foundation"
+    },
+     "Webkit": {
+        "prevalence": 0.8,
+        "description": "WebKit is a browser engine developed by Apple and primarily used in its Safari web browser, as well as all web browsers on iOS and iPadOS",
+        "additional_detection_strings": [],
+        "vendor": "Apple"
+    },
+     "pgAdmin": {
+        "prevalence": 0.6,
+        "detection_priority": 0.3,
+        "detection_priority_comment": "More rare than Perl",
+        "description": "pgAdmin is the most popular and feature rich Open Source administration and development platform for PostgreSQL, the most advanced Open Source database in the world",
+        "additional_detection_strings": [],
+        "vendor": "Postgres"
+    },
+     "Artifex Ghostscript": {
+        "prevalence": 0.3,
+        "description": "Artifex Ghostscript is an interpreter for the PostScript® language and PDF files",
+        "additional_detection_strings": [],
+        "vendor": "Artifex"
+    },
+     "Puma": {
+        "prevalence": 0.6,
+        "description": "Puma is a Ruby/Rack web server built for parallelism",
+        "additional_detection_strings": [],
+        "vendor": "Puma"
+    },
+     "LibTomMath": {
+        "prevalence": 0.6,
+        "description": "LibTomMath is a free open source portable number theoretic multiple-precision integer library written entirely in C",
+        "additional_detection_strings": ["libtommath"],
+        "vendor": "LibTomMath"
+    },
+     "Nokogiri": {
+        "prevalence": 0.6,
+        "description": "Nokogiri is an open source XML and HTML library for the Ruby programming language",
+        "additional_detection_strings": [],
+        "vendor": "Nokogiri"
+    },
+     "Eclipse Mosquitto": {
+        "prevalence": 0.6,
+        "description": "Eclipse Mosquitto provides a lightweight server implementation of the MQTT protocol that is suitable for all situations from full power machines to embedded and low power machines",
+        "additional_detection_strings": ["Mosquitto"],
+        "vendor": "Eclipse Foundation"
+    },
+     "libxml2": {
+        "prevalence": 0.6,
+        "description": "libxml2 is an XML toolkit implemented in C, originally developed for the GNOME Project",
+        "additional_detection_strings": [],
+        "vendor": "GNOME Project"
+    },
+     "tiffcrop": {
+        "prevalence": 0.6,
+        "description": "Tiffcrop processes one or more files created according to the Tag Image File Format, Revision 6.0, specification into one or more TIFF file(s)",
+        "additional_detection_strings": [],
+        "vendor": "Simple Systems"
+    },
+     "Xlib": {
+        "prevalence": 0.8,
+        "description": "Xlib (also known as libX11) is an X Window System protocol client library written in the C programming language",
+        "additional_detection_strings": ["libXpm", "libX11"],
+        "vendor": "X.Org Foundation"
+    },
+     "Netty": {
+        "prevalence": 0.8,
+        "description": "Netty is a non-blocking I/O client-server framework for the development of Java network applications such as protocol servers and clients",
+        "additional_detection_strings": [],
+        "vendor": "Netty Project Community"
+    },
+     "Babel": {
+        "prevalence": 0.7,
+        "description": "Babel is a free and open-source JavaScript transcompiler that is mainly used to convert ECMAScript 2015+ code into backwards-compatible JavaScript code that can be run by older JavaScript engines",
+        "additional_detection_strings": [],
+        "vendor": "The Babel Team"
+    },
+     "Node.js": {
+        "prevalence": 0.8,
+        "description": "Node.js is a cross-platform, open-source server environment that can run on Windows, Linux, Unix, macOS, and more",
+        "additional_detection_strings": [],
+        "vendor": "Node.js"
+    },
+     "semver": {
+        "prevalence": 0.7,
+        "description": "The semantic version parser used by npm",
+        "additional_detection_strings": [],
+        "vendor": "npm, Inc"
+    },
+     "LLDP": {
+        "prevalence": 0.4,
+        "description": "LLDP is an industry standard protocol designed to supplant proprietary Link-Layer protocols such as Extreme's EDP (Extreme Discovery Protocol) and CDP (Cisco Discovery Protocol)",
+        "additional_detection_strings": ["lldpd"],
+        "vendor": "IEEE"
+    },
+     "GPAC": {
+        "prevalence": 0.4,
+        "description": "GPAC is an Open Source multimedia framework for research and academic purposes; the project covers different aspects of multimedia, with a focus on presentation technologies (graphics, animation and interactivity)",
+        "additional_detection_strings": [],
+        "vendor": "GPAC"
+    },
+     "tough-cookie": {
+        "prevalence": 0.4,
+        "description": "tough-cookie is a RFC6265 Cookies and CookieJar module for Node.js",
+        "additional_detection_strings": [],
+        "vendor": "tough-cookie"
+    },
+     "FRRouting": {
+        "prevalence": 0.5,
+        "description": "Free Range Routing or FRRouting or FRR is a network routing software suite running on Unix-like platforms, particularly Linux, Solaris, OpenBSD, FreeBSD and NetBSD",
+        "additional_detection_strings": [],
+        "vendor": "FRRouting"
+    },
+     "ImageMagick": {
+        "prevalence": 0.6,
+        "description": "ImageMagick, invoked from the command line as magick, is a free and open-source cross-platform software suite for displaying, creating, converting, modifying, and editing raster images",
+        "additional_detection_strings": [],
+        "vendor": "ImageMagick"
+    },
+     "Go Project": {
+        "prevalence": 0.5,
+        "description": "Go is an open source project developed by a team at Google and many contributors from the open source community",
+        "additional_detection_strings": ["golang.org/x/net/http2"],
+        "vendor": "Go Project"
+    },
+     "OpenPMIx": {
+        "prevalence": 0.3,
+        "description": "Reference Implementation of the Process Management Interface Exascale (PMIx) standard",
+        "additional_detection_strings": [],
+        "vendor": "OpenPMIx"
     }
 }

@@ -608,6 +608,8 @@ def get_comments_for_cves(source, processed_cves):
 
 def make_html_vulnerability_report_for_report_config(cve_related_data, cve_scores, report_config, profile_data):
     html_content = "<center><img class=\"logo\" src=\"" + report_config['vuln_icons_source'] + "/vulristics.png\"></center>"
+    # html_content += "<center><img class=\"logo2\" src=\"" + report_config['vuln_icons_source'] + "/lpw_avleonov.png\"></center>"
+
     combined_cve_data = cve_related_data['combined_cve_data_all']
 
     if report_config['ignore_comments']:
@@ -737,7 +739,7 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
     print("Report generated: " + report_file_path)
 
 def get_profile(file_path):
-    functions_tools.print_debug_message("Reading existing Patch Tuesday profile...")
+    functions_tools.print_debug_message("Reading existing profile " + file_path + "...")
     f = open(file_path, "r")
     profile = json.loads(f.read())
     f.close()
@@ -828,18 +830,21 @@ def make_vulnerability_report_for_profile(profile_file_path, source_config, resu
     profile[source_id]['product_data'] = data_classification_products.get_product_data()
     cves_to_exclude = get_cves_to_exclude(profile, source_id)
     all_products_to_analyze = get_products(profile, source_id)
-    
-    # making list of CVEs not about products in products_to_analyze to exclude it 
+
+    # making list of CVEs not about products in products_to_analyze to exclude it
     if len(all_products_to_analyze) == 0:
         selected_cves_to_exclude = cves_to_exclude
     else:
         all_cves_tmp= get_all_cves(profile, source_id, cves_to_exclude)
-        enabled_data_sources = get_eanbled_data_sources(profile, source_id)
+        if source_config['data_sources'] == []:
+            enabled_data_sources = get_eanbled_data_sources(profile, source_id) # Get data sources from profile
+        else:
+            enabled_data_sources = source_config['data_sources'] # Get command line
+        print("Enabled data sources: " + str(enabled_data_sources))
         cve_related_data_tmp, cves_to_exclude = functions_combined_vulnerability_data.collect_cve_related_data(
                                                 enabled_data_sources, all_cves_tmp, cves_to_exclude,
                                                 profile[source_id]['product_data'], source_config)
         selected_cves_to_exclude = cves_to_exclude
-        
         for selected_cve in all_cves_tmp:
             functions_tools.print_debug_message("filtering " + selected_cve + " for one of products_to_analyze")
             b_product_found = False
@@ -866,7 +871,11 @@ def make_vulnerability_report_for_profile(profile_file_path, source_config, resu
 
     # collecting data without filtered out CVEs
     all_cves = get_all_cves(profile, source_id, selected_cves_to_exclude)
-    enabled_data_sources = get_eanbled_data_sources(profile, source_id)
+    if source_config['data_sources'] == []:
+        enabled_data_sources = get_eanbled_data_sources(profile, source_id)  # Get data sources from profile
+    else:
+        enabled_data_sources = source_config['data_sources']  # Get command line
+    print("Enabled data sources: " + str(enabled_data_sources))
     cve_related_data, selected_cves_to_exclude = functions_combined_vulnerability_data.collect_cve_related_data(
                                                     enabled_data_sources, all_cves, selected_cves_to_exclude,
                                                     profile[source_id]['product_data'], source_config)
