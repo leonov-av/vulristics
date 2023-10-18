@@ -42,6 +42,10 @@ source_config['vulners_use_github_exploits_flag'] = True
 if args.vulners_use_github_exploits_flag == "False" or args.vulners_use_github_exploits_flag == "false":
     source_config['vulners_use_github_exploits_flag'] = False
 
+source_config['data_sources'] = []
+if args.cve_data_sources:
+    source_config['data_sources'] = args.cve_data_sources.split(",")
+
 if args.result_json_path:
     result_json_path = args.result_json_path
 else:
@@ -98,8 +102,6 @@ elif args.report_type == "cve_list":
 
     file_name = name + "_profile.json"
     report_id = name + "_report"
-    data_sources = args.cve_data_sources.split(",")
-
 
     profile_file_path = "data/profiles/" + file_name
     functions_profile.save_profile(profile_file_path=profile_file_path,
@@ -108,7 +110,7 @@ elif args.report_type == "cve_list":
                                    file_name_prefix=file_name_prefix,
                                    cve_list_text=cve_list_text,
                                    products_text=products_text,
-                                   data_sources=data_sources,
+                                   data_sources=source_config['data_sources'],
                                    comments=comments)
     functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path=profile_file_path,
                                                                            source_config=source_config,
