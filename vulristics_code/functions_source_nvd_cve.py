@@ -73,16 +73,29 @@ def get_nvd_cve_data(cve_id, source_config):
             if description['lang'] == "en":
                 nvd_cve_data['description'] = re.sub("\\n","",description['value'])
 
-        for metric_type in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['metrics']:
-            if metric_type == "cvssMetricV30":
-                for metric_value in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['metrics'][metric_type]:
-                    nvd_cve_data['cvss_base_score'] = metric_value['cvssData']['baseScore']
-        if nvd_cve_data['cvss_base_score'] == "":
+        cvss_priorities = ["cvssMetricV2", "cvssMetricV30", "cvssMetricV31"]
+        for cvss_type in cvss_priorities:
             for metric_type in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['metrics']:
-                if metric_type == "cvssMetricV2":
+                if metric_type == cvss_type:
                     for metric_value in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['metrics'][metric_type]:
                         nvd_cve_data['cvss_base_score'] = metric_value['cvssData']['baseScore']
         if "cisaExploitAdd" in nvd_cve_data['raw']['vulnerabilities'][0]['cve']:
+            cve_id = nvd_cve_data['raw']['vulnerabilities'][0]['cve']['id']
+            url = 'https://nvd.nist.gov/vuln/detail/' + cve_id
             nvd_cve_data['wild_exploited'] = True
-            nvd_cve_data['wild_exploited_sources'] = [{'type': 'cisakev'}]
-    return nvd_cve_data
+            nvd_cve_data['wild_exploited_sources'] = list()
+            nvd_cve_data['wild_exploited_sources'].append({'type': 'nvd_cisa_kev',
+                                                           'text': "NVD CISA KEV",
+                                                           'url': url})
+
+        for reference in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['references']:
+            if 'tags' in reference:
+                if 'Exploit' in reference['tags']:
+                    url = reference['url']
+                    text = re.sub("/.*","", re.sub("^https*://","", url))
+                    nvd_cve_data['public_exploit'] = True
+                    nvd_cve_data['public_exploit_sources'] = list()
+                    nvd_cve_data['public_exploit_sources'].append({'type': 'nvd_exploit_type_link',
+                                                                   'text': text,
+                                                                   'url': url})
+    return nvd_cve_data;

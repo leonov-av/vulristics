@@ -156,7 +156,27 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
                     comment_exists = True
     else:
         public_exploit_exists_n = 0
-        public_exploit_exists_c = "The exploit's existence is NOT mentioned on Vulners and Microsoft websites."
+        public_exploit_exists_c = "The exploit's existence is NOT mentioned in available Data Sources"
+
+
+    # I don't change previous method, because it requres the changes in connector.
+    # I just add the processing of other sources in case there are no links to exploits
+    # Unified method for public exploits
+    mentioned = list()
+    for data_source in cve_data_all:
+        if data_source not in ["vulners_cve_data_all",
+                               "ms_cve_data_all"]:  # For them separate code above
+            if cve in cve_data_all[data_source]:
+                if "public_exploit" in cve_data_all[data_source][cve]:
+                    public_exploit_exists_n = 1.0
+                    for mention in cve_data_all[data_source][cve]['public_exploit_sources']:
+                        mentioned.append("<a href=\"" + mention['url'] + "\">" +  mention['text'] + "</a>")
+    if mentioned != list():
+        if len(mentioned) == 1:
+            public_exploit_exists_c = "The existence of a publicly available exploit is mentioned on " + ", ".join(mentioned) + " website"
+        else:
+            public_exploit_exists_c = "The existence of a publicly available exploit is mentioned on " + ", ".join(mentioned) + " websites"
+
     public_exploit_exists_k = 17
 
     ######## Wild Exploit
@@ -169,6 +189,7 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
     flag_vulners_other = False
     flag_attackerkb = False
     flag_ms_cve_data_all = False
+    flag_unified_method = False
 
     if 'vulners_cve_data_all' in cve_data_all:
         if cve in cve_data_all['vulners_cve_data_all']:
@@ -212,6 +233,21 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
                     mentioned.append("<a href=\"https://msrc.microsoft.com/update-guide/vulnerability/" + cve +
                                      "\">Microsoft</a>")
 
+    # Unified method for wild exploited
+    for data_source in cve_data_all:
+        if data_source not in ["vulners_cve_data_all",
+                               "attackerkb_cve_data_all",
+                               "ms_cve_data_all"]:  # For them separate code
+            if cve in cve_data_all[data_source]:
+                if "wild_exploited" in cve_data_all[data_source][cve]:
+                    wild_exploited = True
+                    wild_exploited_n = 1.0
+                    flag_unified_method = True
+                    for mention in cve_data_all[data_source][cve]['wild_exploited_sources']:
+                        mentioned.append("<a href=\"" + mention['url'] + "\">" +  mention['text'] + "</a>")
+
+
+
     # Detecting false positives in wild exploitation
 
     if  flag_vulners_cisa == True and \
@@ -231,6 +267,9 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
         # an error at Vulners (CISA object link doesn't matter)
         wild_exploited = False
 
+    if flag_unified_method: # This method doesn't have false positives
+        wild_exploited = True
+
     # flag_vulners_attackerkb = False
     # flag_vulners_cisa = False
     # flag_vulners_other = False
@@ -239,7 +278,7 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
 
     if not wild_exploited:
         wild_exploited_n = 0
-        wild_exploited_c = "Exploitation in the wild is NOT mentioned on Vulners, Microsoft and AttackerKB websites"
+        wild_exploited_c = "Exploitation in the wild is NOT mentioned in available Data Sources"
     else:
         if len(mentioned) == 1:
             wild_exploited_c = "Exploitation in the wild is mentioned on " + ", ".join(mentioned) + " website"
