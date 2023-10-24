@@ -12,7 +12,7 @@ parser.add_argument('--mspt-comments-links-path', help='Microsoft Patch Tuesday 
 parser.add_argument('--cve-project-name', help='Name of the CVE Project')
 parser.add_argument('--cve-list-path', help='Path to the list of CVE IDs')
 parser.add_argument('--cve-comments-path', help='Path to the CVE comments file')
-parser.add_argument('--cve-data-sources', help='Data sources for analysis, e.g. "ms,nvd,epss,vulners,attackerkb"')
+parser.add_argument('--cve-data-sources', help='Data sources for analysis, e.g. "ms,nvd,epss,vulners,attackerkb,custom"')
 parser.add_argument('--profile-json-path', help='Custom profile for analysis')
 parser.add_argument('--result-json-path', help='Export data in JSON')
 
