@@ -94,9 +94,6 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
             epss_score_n = round(epss_percentile, 1)
             epss_score_k = 10
             epss_score_c = "EPSS Probability is " + str(epss_probability) + ", EPSS Percentile is " + str(epss_percentile)
-            print(epss_score_c)
-
-
 
     ######## Mentioned by vendors
     if use_comments:
