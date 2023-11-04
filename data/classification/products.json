@@ -53,7 +53,7 @@
         "prevalence": 0.7,
         "description": "Confluence is a web-based corporate wiki",
         "vendor": "Atlassian",
-        "additional_detection_strings": []
+        "additional_detection_strings": ["Confluence"]
     },
     "macOS": {
         "prevalence": 0.7,
@@ -2029,6 +2029,8 @@
     },
     ".NET": {
         "prevalence": 0.7,
+        "detection_priority": -0.2,
+        "detection_priority_commant": "Domains like atlassian.net",
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -5263,12 +5265,6 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    ".NET Framework, SharePoint Server, and Visual Studio": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
     "Windows dnsrslvr.dll": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -6205,24 +6201,6 @@
         "vendor": "Microsoft"
     },
     "Internet Control Message Protocol (ICMP)": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "CERT/CC: CVE-2023-1018 TPM2.0 Module Library": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "CERT/CC: CVE-2023-1017 TPM2.0 Module Library": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    ".NET DLL Hijacking": {
         "prevalence": 0.5,
         "description": "",
         "additional_detection_strings": [],
