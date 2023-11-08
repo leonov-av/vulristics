@@ -57,13 +57,15 @@
     },
     "macOS": {
         "prevalence": 0.7,
+        "detection_priority": -0.1,
+        "detection_comment": "Lower priority for third party software",
         "description": "macOS is an operating system developed and marketed by Apple Inc",
         "additional_detection_strings": [],
         "vendor": "Apple Inc", 
-	"type_of_product": "operating system", 
-	"directly_accessible_from_the_internet": "never",
-	"type_of_license": "commercial",
-	"сountry_of_origin": "USA"
+        "type_of_product": "operating system",
+        "directly_accessible_from_the_internet": "never",
+        "type_of_license": "commercial",
+        "сountry_of_origin": "USA"
     },
     "Windows Win32k": {
         "prevalence": 0.9,
@@ -6461,7 +6463,7 @@
     "Junos OS": {
         "prevalence": 0.8,
         "description": "Junos OS is a FreeBSD-based network operating system used in Juniper Networks routing, switching and security devices",
-        "additional_detection_strings": [],
+        "additional_detection_strings": ["Junos", "JunOS"],
         "vendor": "Juniper"
     },
     "Adobe Flash Player": {
@@ -6737,43 +6739,43 @@
         "description": "Adobe Commerce is an e-commerce platform written in PHP",
         "additional_detection_strings": [],
         "vendor": "Adobe",
-	"type_of_product": "web application", 
-	"directly_accessible_from_the_internet": "always",
-	"type_of_license": "commercial",
-	"language": "PHP",
-	"сountry_of_origin": "USA"
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "always",
+        "type_of_license": "commercial",
+        "language": "PHP",
+        "сountry_of_origin": "USA"
     },
     "Ivanti Endpoint Manager Mobile": {
         "prevalence": 0.5,
         "description": "Ivanti Endpoint Manager Mobile (Ivanti EPMM) is a mobile management software engine that enables IT to set policies for mobile devices, applications, and content",
         "additional_detection_strings": ["EPMM"],
         "vendor": "Ivanti",
-	"type_of_product": "server application", 
-	"directly_accessible_from_the_internet": "always",
-	"type_of_license": "commercial",
-	"сountry_of_origin": "USA"
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "always",
+        "type_of_license": "commercial",
+        "сountry_of_origin": "USA"
     },
     "Openfire": {
         "prevalence": 0.5,
         "description": "Openfire is a real time collaboration (RTC) server licensed under the Open Source Apache License",
         "additional_detection_strings": [],
         "vendor": "Igniterealtime",
-	"type_of_product": "server application", 
-	"directly_accessible_from_the_internet": "very often",
-	"type_of_license": "open source",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "very often",
+        "type_of_license": "open source",
         "license": "Apache License 2.0",
-	"language": "Java",
-	"сountry_of_origin": "USA"
+        "language": "Java",
+        "сountry_of_origin": "USA"
     },
     "ShareFile storage zones controller": {
         "prevalence": 0.4,
         "description": "ShareFile storage zones controller provides users with secure access to data (SharePoint sites and network file shares) residing behind your corporate firewall without the need to migrate data to the cloud",
         "additional_detection_strings": [],
         "vendor": "Citrix Systems",
-	"type_of_product": "server application", 
-	"directly_accessible_from_the_internet": "very often",
-	"type_of_license": "commercial",
-	"сountry_of_origin": "USA"
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "very often",
+        "type_of_license": "commercial",
+        "сountry_of_origin": "USA"
 
     },
     "WPDeveloper Essential Addons for Elementor": {
@@ -6781,10 +6783,10 @@
         "description": "Elementor website builder lets WordPress users create and edit websites with a responsive drag-and-drop technique. Essential Addons For Elementor – Elements Library For Elementor by WPDeveloper",
         "additional_detection_strings": [],
         "vendor": "WPDeveloper",
-	"type_of_product": "web application", 
-	"directly_accessible_from_the_internet": "always",
-	"type_of_license": "freeware",
-	"сountry_of_origin": "Bangladesh",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "always",
+        "type_of_license": "freeware",
+        "сountry_of_origin": "Bangladesh",
         "poduct_url": "https://wordpress.org/plugins/essential-addons-for-elementor-lite/"
     },
     "Aria Operations for Networks": {
@@ -6792,9 +6794,19 @@
         "description": "The VMware Aria Operations for Networks Platform appliance provides the analytics, user interface, and data management and connects to the controller appliance, which collects from the various data sources such as NSX Edges, vCenter",
         "additional_detection_strings": [],
         "vendor": "VMware",
-	"type_of_product": "server application", 
-	"directly_accessible_from_the_internet": "rarely",
-	"type_of_license": "commercial",
-	"сountry_of_origin": "USA"
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "rarely",
+        "type_of_license": "commercial",
+        "сountry_of_origin": "USA"
+    },
+    "3CX DesktopApp": {
+        "prevalence": 0.5,
+        "description": "The 3CX Phone System is the software-based private branch exchange (PBX) phone system developed and marketed by the company, 3CX",
+        "additional_detection_strings": [],
+        "vendor": "3CX",
+        "type_of_product": "desktop application",
+        "directly_accessible_from_the_internet": "never",
+        "type_of_license": "commercial",
+        "сountry_of_origin": "USA"
     }
 }
