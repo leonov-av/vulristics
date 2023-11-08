@@ -17,6 +17,4 @@ def get_custom_cve_data(cve_id, source_config):
                   'public_exploit', 'public_exploit_sources', 'epss', 'epss_percentile']:
         if param in custom_cve_data['raw']:
             custom_cve_data[param] = custom_cve_data['raw'][param]
-
-    print(custom_cve_data)
     return custom_cve_data
