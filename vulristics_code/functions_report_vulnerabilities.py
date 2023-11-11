@@ -298,6 +298,7 @@ def get_statistics(cve_scores):
 
 
 def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config, components, source, cve, n):
+
     report_html = ""
     report_html += "<p>" + get_colored_text("red", str(n) + ". ") + get_vuln_type_icon_html(
         combined_cve_data_all[cve]['vuln_type'], config) + \
@@ -329,9 +330,21 @@ def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config,
                        + "</td>" + \
                        "</tr>"
     report_html += "</table>"
-    report_html += get_comments_for_cves(source, [cve])['report_html']
+    comments = get_comments_for_cves(source, [cve])
+    report_html += comments['report_html']
     report_html += "</p>\n"
-    return report_html
+
+    report_dict = {
+        "vuln_type": str(combined_cve_data_all[cve]['vuln_type']),
+        "vuln_product": str(combined_cve_data_all[cve]['vuln_product']),
+        'level': cve_scores[cve]['level'],
+        'vvs': int(cve_scores[cve]['value'] * 1000),
+        'components': cve_scores[cve]['components'],
+        'description': combined_cve_data_all[cve]['description'],
+        'comments': comments['report_list']
+    }
+
+    return {"report_html": report_html, "report_dict":report_dict}
 
 
 def get_vvs_statistics_report(cve_scores):
@@ -358,7 +371,7 @@ def get_vvs_statistics_report(cve_scores):
 def get_vulristics_score_report(combined_cve_data_all, cve_scores, config, source):
     report_txt = ""
     report_html = ""
-
+    report_list = list()
     statistics = get_statistics(cve_scores)
 
     cve_score_dict = dict()
@@ -375,11 +388,14 @@ def get_vulristics_score_report(combined_cve_data_all, cve_scores, config, sourc
         report_html += "<h4>" + criticality + " (" + str(len(statistics[criticality])) + ")</h4>"
         for cve in sorted_cves:
             if cve in statistics[criticality] and cve in combined_cve_data_all:
-                report_html += get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config, components,
+                vulristics_score_vulner_block = get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config, components,
                                                                  source, cve, n)
+                report_html += vulristics_score_vulner_block['report_html']
+                report_list.append(vulristics_score_vulner_block['report_dict'])
+
                 n += 1
 
-    return {"report_txt": report_txt, "report_html": report_html}
+    return {"report_txt": report_txt, "report_html": report_html, 'report_list':report_list }
 
 
 def get_sorted_product_name_list(product_data):
@@ -413,9 +429,10 @@ def get_cves_count_value_comments_table(criticality, vulnerability_comment_data,
         return get_colored_text(color=criticality, text=str(n), c_type="text", params=None)
 
 
-def get_products_report(combined_cve_data_all, cve_scores, config, source):
+def get_products_report(combined_cve_data_all, cve_scores, report_config, profile_data):
     report_txt = ""
     report_html = ""
+    report_dict = dict()
     criticalities = ["Urgent", "Critical", "High", "Medium", "Low", "All"]
     product_data = dict()
     for cve in combined_cve_data_all:
@@ -432,6 +449,8 @@ def get_products_report(combined_cve_data_all, cve_scores, config, source):
                 product_data[product_name]['cves'][crit] = list()
         product_data[product_name]['cves'][cve_level].append(cve)
         product_data[product_name]['cves']['All'].append(cve)
+        product_data[product_name]['data'] = combined_cve_data_all[cve]['product_data']
+
 
     report_html = "<p><table class=\"product_table\">"
     report_html += "<tr class=\"product_table\">"
@@ -460,7 +479,7 @@ def get_products_report(combined_cve_data_all, cve_scores, config, source):
         report_html += "</tr>\n"
     report_html += "</table></p>"
 
-    return {"report_txt": report_txt, "report_html": report_html}
+    return {"report_txt": report_txt, "report_html": report_html, "report_dict": product_data}
 
 def get_vulnerability_types_report(combined_cve_data_all, cve_scores, config, source):
     report_txt = ""
@@ -589,6 +608,7 @@ def get_basic_severity_statistics_report(combined_cve_data_all):
 
 def get_comments_for_cves(source, processed_cves):
     report_html = ""
+    report_list = list()
     if 'comments' in source:
         comments = source['comments']
         for comment_id in comments:
@@ -602,11 +622,12 @@ def get_comments_for_cves(source, processed_cves):
                         for cve in processed_cves:
                             line = re.sub(cve, "<b>" + cve + "</b>", line)
                         report_html += "<p>" + comment_id + ": " + line + "</p>" + "\n"
+                        report_list.append({"comment_id":line})
 
-    return {"report_html": report_html}
+    return {"report_html": report_html, "report_list":report_list}
 
-
-def make_html_vulnerability_report_for_report_config(cve_related_data, cve_scores, report_config, profile_data):
+def get_vulnerability_report_for_report_config(cve_related_data, cve_scores, report_config, profile_data):
+    json_data = dict()
     html_content = "<center><img class=\"logo\" src=\"" + report_config['vuln_icons_source'] + "/vulristics.png\"></center>"
     # html_content += "<center><img class=\"logo2\" src=\"" + report_config['vuln_icons_source'] + "/lpw_avleonov.png\"></center>"
 
@@ -645,6 +666,7 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
     # list of all products
 
     report_data = get_products_report(combined_cve_data, cve_scores, report_config, profile_data)
+    json_data['products'] = report_data['report_dict']
     name = "Products"
     # print("== " + name + " ==")
     html_content += "<b>" + name + "</b>" + "\n"
@@ -670,6 +692,7 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
         html_content += "</br>"
 
     report_data = get_vulristics_score_report(combined_cve_data, cve_scores, report_config, profile_data)
+    json_data['vulnerabilities'] = report_data['report_list']
     name = "Vulnerabilities"
     # print("== " + name + " ==")
     html_content += "<b>" + name + "</b>" + "\n"
@@ -680,6 +703,7 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
     current_cve_data = combined_cve_data
     exploited_cves = get_vulns_filtered_by_wild_exploited("Yes", current_cve_data, cve_scores)
     report_data = get_type_based_report(exploited_cves, report_config, profile_data, cve_scores)
+
     name = "Exploitation in the wild detected"
     # print("== " + name + " (" + str(len(report_data['processed_cves'])) + ") ==")
     html_content += "<h3>" + name + " (" + str(len(report_data['processed_cves'])) + ")</h3>" + "\n"
@@ -732,11 +756,7 @@ def make_html_vulnerability_report_for_report_config(cve_related_data, cve_score
     new_html_full = copy.copy(template)
     html_content = new_html_full.replace("##Content##", html_content)
 
-    report_file_path = "reports/" + profile_data['file_name_prefix'] + "_" + report_config['file_name_suffix'] + ".html"
-    f = open(report_file_path, "w",  encoding="utf-8")
-    f.write(html_content)
-    f.close()
-    print("Report generated: " + report_file_path)
+    return {"html_content": html_content, 'json_data': json_data}
 
 def get_profile(file_path):
     functions_tools.print_debug_message("Reading existing profile " + file_path + "...")
@@ -804,15 +824,35 @@ def print_unclassified_products_templates(cve_scores, cve_related_data):
         },''')
 
 
-def make_html_vulnerability_reports_for_all_report_configs(profile, source_id, cve_related_data, cve_scores):
+def make_html_vulnerability_reports_for_all_report_configs(profile, source_id, cve_related_data, cve_scores,
+                                                           result_json_path):
     functions_tools.print_debug_message("Making vulnerability reports for each reports config...")
     for report_config_name in data_report_configs.patch_tuesday_report_configs:
         functions_tools.print_debug_message("Report config: " + report_config_name)
         report_config = data_report_configs.patch_tuesday_report_configs[report_config_name]
-        make_html_vulnerability_report_for_report_config(cve_related_data=cve_related_data,
-                                                         cve_scores=cve_scores,
-                                                         report_config=report_config,
-                                                         profile_data=profile[source_id])
+        profile_data = profile[source_id]
+        vulnerability_report = get_vulnerability_report_for_report_config(cve_related_data=cve_related_data,
+                                                                          cve_scores=cve_scores,
+                                                                          report_config=report_config,
+                                                                          profile_data=profile_data)
+
+        report_file_path = "reports/" + profile_data['file_name_prefix'] + "_" + report_config[
+            'file_name_suffix'] + ".html"
+        f = open(report_file_path, "w", encoding="utf-8")
+        f.write(vulnerability_report['html_content'])
+        f.close()
+        print("Report generated: " + report_file_path)
+
+        if result_json_path:
+            json_report_data = {
+                "source_id": source_id,
+                "data": vulnerability_report['json_data']
+            }
+
+            f = open(result_json_path, "w")
+            f.write(json.dumps(json_report_data, indent=4))
+            f.close()
+
 
 
 def get_eanbled_data_sources(profile, source_id):
@@ -882,16 +922,6 @@ def make_vulnerability_report_for_profile(profile_file_path, source_config, resu
     cve_scores = functions_score.get_cve_scores(all_cves, cve_related_data, profile[source_id])
 
     print_unclassified_products_templates(cve_scores, cve_related_data)
-    make_html_vulnerability_reports_for_all_report_configs(profile, source_id, cve_related_data, cve_scores)
+    make_html_vulnerability_reports_for_all_report_configs(profile, source_id, cve_related_data, cve_scores,
+                                                           result_json_path)
 
-    if result_json_path:
-        json_report_data = {
-            "profile": profile,
-            "source_id": source_id,
-            "cve_related_data": cve_related_data,
-            "cve_scores": cve_scores
-        }
-
-        f = open(result_json_path, "w")
-        f.write(json.dumps(json_report_data, indent=4))
-        f.close()
