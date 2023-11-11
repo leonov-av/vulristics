@@ -65,7 +65,7 @@
         "type_of_product": "operating system",
         "directly_accessible_from_the_internet": "never",
         "type_of_license": "commercial",
-        "сountry_of_origin": "USA"
+        "country_of_origin": "USA"
     },
     "Windows Win32k": {
         "prevalence": 0.9,
@@ -1916,6 +1916,12 @@
     "SAP NetWeaver": {
         "prevalence": 0.5,
         "description": "SAP NetWeaver is a software stack for many of SAP SE's applications",
+        "vendor": "SAP",
+        "additional_detection_strings": []
+    },
+    "SAP CommonCryptoLib": {
+        "prevalence": 0.5,
+        "description": "CommonCryptoLib is the technical successor of the well-known SAP Cryptographic Library (SAPCRYPTOLIB)",
         "vendor": "SAP",
         "additional_detection_strings": []
     },
@@ -6554,9 +6560,21 @@
     },
      "libvpx": {
         "prevalence": 0.8,
+        "detection_priority": 0.5,
+        "detection_priority_comment": "more than Chromium",
         "description": "libvpx is a free software video codec library from Google and the Alliance for Open Media (AOMedia)",
         "additional_detection_strings": [],
+         "type_of_license": "open source",
         "vendor": "Google"
+    },
+     "libwebp": {
+        "prevalence": 0.8,
+        "detection_priority": 0.5,
+        "detection_priority_comment": "more than Chromium",
+        "description": "libwebp is a code library used to render and display images in the WebP format",
+        "additional_detection_strings": [],
+         "type_of_license": "open source",
+        "vendor": "WebP team"
     },
      "vim": {
         "prevalence": 0.7,
@@ -6743,7 +6761,7 @@
         "directly_accessible_from_the_internet": "always",
         "type_of_license": "commercial",
         "language": "PHP",
-        "сountry_of_origin": "USA"
+        "country_of_origin": "USA"
     },
     "Ivanti Endpoint Manager Mobile": {
         "prevalence": 0.5,
@@ -6753,7 +6771,7 @@
         "type_of_product": "server application",
         "directly_accessible_from_the_internet": "always",
         "type_of_license": "commercial",
-        "сountry_of_origin": "USA"
+        "country_of_origin": "USA"
     },
     "Openfire": {
         "prevalence": 0.5,
@@ -6765,7 +6783,7 @@
         "type_of_license": "open source",
         "license": "Apache License 2.0",
         "language": "Java",
-        "сountry_of_origin": "USA"
+        "country_of_origin": "USA"
     },
     "ShareFile storage zones controller": {
         "prevalence": 0.4,
@@ -6775,18 +6793,18 @@
         "type_of_product": "server application",
         "directly_accessible_from_the_internet": "very often",
         "type_of_license": "commercial",
-        "сountry_of_origin": "USA"
+        "country_of_origin": "USA"
 
     },
-    "WPDeveloper Essential Addons for Elementor": {
+    "WPDeveloper Essential Elementor Plugin Addons for Wordpress": {
         "prevalence": 0.4,
         "description": "Elementor website builder lets WordPress users create and edit websites with a responsive drag-and-drop technique. Essential Addons For Elementor – Elements Library For Elementor by WPDeveloper",
-        "additional_detection_strings": [],
+        "additional_detection_strings": ["WPDeveloper Essential Addons for Elementor"],
         "vendor": "WPDeveloper",
         "type_of_product": "web application",
         "directly_accessible_from_the_internet": "always",
         "type_of_license": "freeware",
-        "сountry_of_origin": "Bangladesh",
+        "country_of_origin": "Bangladesh",
         "poduct_url": "https://wordpress.org/plugins/essential-addons-for-elementor-lite/"
     },
     "Aria Operations for Networks": {
@@ -6797,7 +6815,7 @@
         "type_of_product": "server application",
         "directly_accessible_from_the_internet": "rarely",
         "type_of_license": "commercial",
-        "сountry_of_origin": "USA"
+        "country_of_origin": "USA"
     },
     "3CX DesktopApp": {
         "prevalence": 0.5,
@@ -6807,6 +6825,160 @@
         "type_of_product": "desktop application",
         "directly_accessible_from_the_internet": "never",
         "type_of_license": "commercial",
-        "сountry_of_origin": "USA"
+        "country_of_origin": "USA"
+    },
+    "Redis": {
+        "prevalence": 0.6,
+        "description": "Redis is an open-source in-memory storage, used as a distributed, in-memory key–value database, cache and message broker, with optional durability",
+        "additional_detection_strings": [],
+        "vendor": "Redis",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "rarely",
+        "type_of_license": "open source",
+        "license": "BSD 3-clause",
+        "language": "C",
+        "country_of_origin": "USA"
+    },
+    "Apache ActiveMQ": {
+        "prevalence": 0.6,
+        "description": "Apache ActiveMQ is an open source message broker written in Java together with a full Java Message Service (JMS) client",
+        "additional_detection_strings": [],
+        "vendor": "Apache",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "rarely",
+        "type_of_license": "open source",
+        "license": "Apache License 2.0",
+        "language": "Java",
+        "country_of_origin": "USA"
+    },
+    "Veeam Backup & Replication": {
+        "prevalence": 0.5,
+        "description": "Veeam Backup & Replication is a proprietary backup app developed by Veeam for virtual environments built on VMware vSphere, Nutanix AHV, and Microsoft Hyper-V hypervisors",
+        "additional_detection_strings": ["Veeam Backup"],
+        "vendor": "Veeam Software",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "rarely",
+        "type_of_license": "commercial",
+        "country_of_origin": "USA"
+    },
+    "Oracle Web Applications Desktop Integrator": {
+        "prevalence": 0.5,
+        "description": "The Oracle Web Applications Desktop Integrator integration with Microsoft Excel enables you to bring your Oracle E-Business Suite data to a spreadsheet where familiar data entry and modeling techniques can be used to complete Oracle E-Business Suite tasks",
+        "additional_detection_strings": [],
+        "vendor": "Oracle",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "rarely",
+        "type_of_license": "commercial",
+        "country_of_origin": "USA"
+    },
+    "Ivanti MobileIron Sentry": {
+        "prevalence": 0.5,
+        "description": "Ivanti Sentry is an in-line gateway that manages, encrypts, and secures traffic between the mobile device and back-end enterprise systems",
+        "additional_detection_strings": ["Ivanti Sentry"],
+        "vendor": "Ivanti",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "always",
+        "type_of_license": "commercial",
+        "country_of_origin": "USA"
+    },
+    "WooCommerce Payments plugin for WordPress": {
+        "prevalence": 0.4,
+        "description": "WooCommerce Payments is a payment processor created by WooCommerce for eCommerce websites that are built with the WooCommerce WordPress plugin",
+        "additional_detection_strings": ["WooCommerce Payments"],
+        "vendor": "Automattic",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "always",
+        "type_of_license": "open source",
+        "license": "GPL",
+        "language": "PHP",
+        "country_of_origin": "USA",
+        "poduct_url": "https://wordpress.org/plugins/woocommerce-payments/"
+    },
+    "Ultimate Member plugin for WordPress": {
+        "prevalence": 0.4,
+        "description": "Ultimate Member is the profile & membership plugin for WordPress",
+        "additional_detection_strings": ["Ultimate Member WordPress"],
+        "vendor": "Ultimate Member",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "always",
+        "type_of_license": "open source",
+        "license": "GPL",
+        "language": "PHP",
+        "country_of_origin": "USA",
+        "poduct_url": "https://wordpress.org/plugins/ultimate-member/"
+    },
+    "Bitrix Site Manager": {
+        "prevalence": 0.4,
+        "description": "A universal platform for team and sales management",
+        "additional_detection_strings": [],
+        "vendor": "Bitrix",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "commercial",
+        "language": "PHP",
+        "country_of_origin": "Russia",
+        "poduct_url": "https://www.1c-bitrix.ru/products/cms/"
+    },
+    "Bitrix24": {
+        "prevalence": 0.4,
+        "description": "The Bitrix Site Manager is a web content management and digital marketing solution for SMBs offering content management, e-marketing and e-commerce capabilities",
+        "additional_detection_strings": [],
+        "vendor": "Bitrix",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "commercial",
+        "language": "PHP",
+        "country_of_origin": "Russia",
+        "poduct_url": "https://www.1c-bitrix.ru/products/cms/"
+    },
+    "vm2": {
+        "prevalence": 0.6,
+        "description": "vm2 is a sandbox that can run untrusted code with whitelisted Node's built-in modules",
+        "additional_detection_strings": ["WooCommerce Payments"],
+        "vendor": "MAKE",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "JavaScript",
+        "country_of_origin": "USA",
+        "poduct_url": "https://www.npmjs.com/package/vm2"
+    },
+    "Exim": {
+        "prevalence": 0.6,
+        "description": "Exim is a mail transfer agent (MTA) used on Unix-like operating systems",
+        "additional_detection_strings": [],
+        "vendor": "The Exim Maintainers",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "always",
+        "type_of_license": "open source",
+        "license": "GPL",
+        "language": "C",
+        "country_of_origin": "USA",
+        "poduct_url": "https://www.npmjs.com/package/vm2"
+    },
+    "Forminator plugin for WordPress": {
+        "prevalence": 0.4,
+        "description": "Forminator is a form builder plugin that provides you with all the functionality you need to create contact forms, quizzes, and polls",
+        "additional_detection_strings": ["Forminator"],
+        "vendor": "WPMU DEV",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "always",
+        "type_of_license": "commercial",
+        "language": "PHP",
+        "country_of_origin": "USA",
+        "poduct_url": "https://wordpress.org/plugins/forminator/"
+    },
+    "Winbiz Payment module for PrestaShop": {
+        "prevalence": 0.4,
+        "description": "This PrestaShop module allows you to import payments for orders from your store into Winbiz",
+        "additional_detection_strings": ["Prestashop winbizpayment"],
+        "vendor": "Webbax",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "always",
+        "type_of_license": "commercial",
+        "language": "PHP",
+        "country_of_origin": "Czech Republic",
+        "poduct_url": "https://shop.webbax.ch/modules-pour-winbiz/136-module-prestashop-winbiz-payment.html"
     }
 }
