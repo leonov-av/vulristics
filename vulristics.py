@@ -14,8 +14,9 @@ parser.add_argument('--cve-list-path', help='Path to the list of CVE IDs')
 parser.add_argument('--cve-comments-path', help='Path to the CVE comments file')
 parser.add_argument('--cve-data-sources', help='Data sources for analysis, e.g. "ms,nvd,epss,vulners,attackerkb,custom"')
 parser.add_argument('--profile-json-path', help='Custom profile for analysis')
-parser.add_argument('--result-json-path', help='Export data in JSON')
-
+parser.add_argument('--result-formats', help='Result formats, e.g. "html,json", Default - "html"')
+parser.add_argument('--result-html-path', help='Path to the results file in html format (Default - will be created in reports directory)')
+parser.add_argument('--result-json-path', help='Path to the results file in json format')
 parser.add_argument('--rewrite-flag', help='Rewrite Flag (True/False, Default - False)')
 parser.add_argument('--vulners-use-github-exploits-flag', help='Use Vulners Github exploits data Flag (True/False, Default - True)')
 
@@ -46,10 +47,24 @@ source_config['data_sources'] = []
 if args.cve_data_sources:
     source_config['data_sources'] = args.cve_data_sources.split(",")
 
-if args.result_json_path:
-    result_json_path = args.result_json_path
+result_config = dict()
+
+if args.result_formats:
+    result_config['result_formats'] = set(args.result_formats.split(","))
 else:
-    result_json_path = False
+    result_config['result_formats'] = {'html'}
+
+if args.result_json_path:
+    result_config['result_json_path'] = args.result_json_path
+    result_config['result_formats'].add('json')
+else:
+    result_config['result_json_path'] = False
+
+if args.result_html_path:
+    result_config['result_html_path'] = args.result_html_path
+    result_config['result_formats'].add('html')
+else:
+    result_config['result_html_path'] = False
 
 if args.report_type == "ms_patch_tuesday" or args.report_type == "ms_patch_tuesday_extended":
     year = str(args.mspt_year) # 2021
@@ -70,7 +85,7 @@ if args.report_type == "ms_patch_tuesday" or args.report_type == "ms_patch_tuesd
                                                                    month=month,
                                                                    comments_links_path = comments_links_path,
                                                                    source_config=source_config,
-                                                                   result_json_path=result_json_path)
+                                                                   result_config=result_config)
 elif args.report_type == "cve_list":
 
     name = args.cve_project_name
@@ -114,9 +129,9 @@ elif args.report_type == "cve_list":
                                    comments=comments)
     functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path=profile_file_path,
                                                                            source_config=source_config,
-                                                                           result_json_path=result_json_path)
+                                                                           result_config=result_config)
 
 elif args.report_type == "custom_profile":
     functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path=args.profile_json_path,
                                                                            source_config=source_config,
-                                                                           result_json_path=result_json_path)
+                                                                           result_config=result_config)

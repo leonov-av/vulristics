@@ -825,7 +825,7 @@ def print_unclassified_products_templates(cve_scores, cve_related_data):
 
 
 def make_html_vulnerability_reports_for_all_report_configs(profile, source_id, cve_related_data, cve_scores,
-                                                           result_json_path):
+                                                           result_config):
     functions_tools.print_debug_message("Making vulnerability reports for each reports config...")
     for report_config_name in data_report_configs.patch_tuesday_report_configs:
         functions_tools.print_debug_message("Report config: " + report_config_name)
@@ -836,23 +836,29 @@ def make_html_vulnerability_reports_for_all_report_configs(profile, source_id, c
                                                                           report_config=report_config,
                                                                           profile_data=profile_data)
 
-        report_file_path = "reports/" + profile_data['file_name_prefix'] + "_" + report_config[
-            'file_name_suffix'] + ".html"
-        f = open(report_file_path, "w", encoding="utf-8")
-        f.write(vulnerability_report['html_content'])
-        f.close()
-        print("Report generated: " + report_file_path)
+        if 'html' in result_config['result_formats']:
+            if not result_config['result_html_path']:
+                report_file_path = "reports/" + profile_data['file_name_prefix'] + "_" + report_config[
+                    'file_name_suffix'] + ".html"
+            else:
+                report_file_path = result_config['result_html_path']
+            f = open(report_file_path, "w", encoding="utf-8")
+            f.write(vulnerability_report['html_content'])
+            f.close()
+            print("HTML report generated: " + report_file_path)
 
-        if result_json_path:
+        if 'json' in result_config['result_formats'] and result_config['result_json_path']:
             json_report_data = {
                 "source_id": source_id,
                 "data": vulnerability_report['json_data']
             }
 
-            f = open(result_json_path, "w")
+            report_file_path = result_config['result_json_path']
+            f = open(result_config['result_json_path'], "w")
             f.write(json.dumps(json_report_data, indent=4))
             f.close()
 
+            print("JSON report generated: " + report_file_path)
 
 
 def get_eanbled_data_sources(profile, source_id):
@@ -864,7 +870,7 @@ def get_eanbled_data_sources(profile, source_id):
     return enabled_data_sources
 
 
-def make_vulnerability_report_for_profile(profile_file_path, source_config, result_json_path):
+def make_vulnerability_report_for_profile(profile_file_path, source_config, result_config):
     profile = get_profile(profile_file_path)
     source_id = list(profile.keys())[0]
     profile[source_id]['product_data'] = data_classification_products.get_product_data()
@@ -923,5 +929,5 @@ def make_vulnerability_report_for_profile(profile_file_path, source_config, resu
 
     print_unclassified_products_templates(cve_scores, cve_related_data)
     make_html_vulnerability_reports_for_all_report_configs(profile, source_id, cve_related_data, cve_scores,
-                                                           result_json_path)
+                                                           result_config)
 
