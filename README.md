@@ -58,7 +58,7 @@ Report generated: reports/cve-2023-29336_report_with_comments_ext_img.html
 
 ### Options
 ```buildoutcfg
-$ $ python3 vulristics.py -h
+$ python3 vulristics.py -h
 usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR]
                      [--mspt-month MSPT_MONTH]
                      [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH]
