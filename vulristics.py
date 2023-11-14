@@ -111,8 +111,6 @@ elif args.report_type == "cve_list":
                         comments[group] = ""
                     comments[group] += line + "\n"
 
-    # with open('analyze_product_list.txt', 'r') as file:
-    #     products_text = file.read()
     products_text = ""
 
     file_name = name + "_profile.json"
