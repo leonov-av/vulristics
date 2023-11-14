@@ -335,8 +335,9 @@ def get_vulristics_score_vulner_block(cve_scores, combined_cve_data_all, config,
     report_html += "</p>\n"
 
     report_dict = {
-        "vuln_type": str(combined_cve_data_all[cve]['vuln_type']),
-        "vuln_product": str(combined_cve_data_all[cve]['vuln_product']),
+        'vuln_id': cve,
+        'vuln_type': str(combined_cve_data_all[cve]['vuln_type']),
+        'vuln_product': str(combined_cve_data_all[cve]['vuln_product']),
         'level': cve_scores[cve]['level'],
         'vvs': int(cve_scores[cve]['value'] * 1000),
         'components': cve_scores[cve]['components'],
