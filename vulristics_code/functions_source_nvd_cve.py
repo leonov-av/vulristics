@@ -85,14 +85,14 @@ def get_nvd_cve_data(cve_id, source_config):
             nvd_cve_data['wild_exploited'] = True
             nvd_cve_data['wild_exploited_sources'] = list()
             nvd_cve_data['wild_exploited_sources'].append({'type': 'nvd_cisa_kev',
-                                                           'text': "NVD CISA KEV",
+                                                           'text': "NVD:CISAKEV",
                                                            'url': url})
 
         for reference in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['references']:
             if 'tags' in reference:
                 if 'Exploit' in reference['tags']:
                     url = reference['url']
-                    text = re.sub("/.*","", re.sub("^https*://","", url))
+                    text = "NVD:Exploit:" + re.sub("/.*","", re.sub("^https*://","", url))
                     nvd_cve_data['public_exploit'] = True
                     nvd_cve_data['public_exploit_sources'] = list()
                     nvd_cve_data['public_exploit_sources'].append({'type': 'nvd_exploit_type_link',
