@@ -6980,5 +6980,18 @@
         "language": "PHP",
         "country_of_origin": "Czech Republic",
         "poduct_url": "https://shop.webbax.ch/modules-pour-winbiz/136-module-prestashop-winbiz-payment.html"
+    },
+    "Roundcube": {
+        "prevalence": 0.6,
+        "description": "Roundcube is a web-based IMAP email client",
+        "additional_detection_strings": [],
+        "vendor": "The Roundcube Team",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "open source",
+        "license": "GPL-3.0-or-later with exceptions for skins and plugins",
+        "language": "PHP, JavaScript",
+        "country_of_origin": "USA",
+        "poduct_url": "https://roundcube.net/"
     }
 }
