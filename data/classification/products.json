@@ -6909,7 +6909,7 @@
     },
     "Bitrix Site Manager": {
         "prevalence": 0.4,
-        "description": "A universal platform for team and sales management",
+        "description": "Bitrix Site Manager is a content management, e-commerce and e-marketing solution",
         "additional_detection_strings": [],
         "vendor": "Bitrix",
         "type_of_product": "web application",
@@ -6934,7 +6934,7 @@
     "vm2": {
         "prevalence": 0.6,
         "description": "vm2 is a sandbox that can run untrusted code with whitelisted Node's built-in modules",
-        "additional_detection_strings": ["WooCommerce Payments"],
+        "additional_detection_strings": [],
         "vendor": "MAKE",
         "type_of_product": "server application",
         "directly_accessible_from_the_internet": "often",

@@ -142,7 +142,11 @@ def get_colored_text(color, text, c_type="text", params=None):
 
 def get_ms_cve_line_html_vss(cve, cve_scores):
     #params = {'url': 'https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/' + cve}
-    params = {'url': 'https://vulners.com/cve/' + cve}
+    if "BDU" in cve:
+        params = {'url': 'https://bdu.fstec.ru/vul/' + re.sub("BDU:","",cve)}
+    else:
+        params = {'url': 'https://vulners.com/cve/' + cve}
+
     return (get_colored_text(color=cve_scores[cve]['level'],
                              text=cve,
                              c_type="link",
@@ -774,6 +778,8 @@ def get_cves_to_exclude(profile, source_id):
         for line in cves_exclude_text.split("\n"):
             if re.findall("^CVE", line.upper()):
                 cves_to_exclude.add(line.upper())
+            if re.findall("^BDU", line.upper()):
+                cves_to_exclude.add(line.upper())
     functions_tools.print_debug_message("Exclude CVEs: " + str(len(cves_to_exclude)))
     return cves_to_exclude
 
@@ -783,6 +789,9 @@ def get_all_cves(profile, source_id, cves_to_exclude):
     all_cves = set()
     for line in cves_text.split("\n"):
         if re.findall("^CVE", line.upper()):
+            if line.upper() not in cves_to_exclude:
+                all_cves.add(line.upper())
+        if re.findall("^BDU", line.upper()):
             if line.upper() not in cves_to_exclude:
                 all_cves.add(line.upper())
     all_cves = list(all_cves)
