@@ -11,29 +11,66 @@ def get_nvd_cve_data_from_nvd_site(cve_id):
     # https://services.nvd.nist.gov/rest/json/cve/1.0/CVE-2015-5611
     # cve_id = "CVE-2020-1003"
     nvd_cve_data = dict()
+    if not "CVE" in cve_id:
+        nvd_cve_data['error'] = True
+        nvd_cve_data['status'] = cve_id + " doesn't look like a valied CVE ID"
+        nvd_cve_data['not_found_error'] = True
+        return nvd_cve_data
+
     if credentials.nvd_key == "":
         print("Requesting " + cve_id + " from NVD website WITHOUT authorization key")
-        r = requests.get("https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=" + cve_id)
+        status_not_200 = True
+        while status_not_200:
+            r = requests.get("https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=" + cve_id)
+            if r.status_code == 200:
+                status_not_200 = False
+            elif r.status_code == 503:
+                print("Status 503 Service Unavailable. Trying again after 5 seconds sleep...")
+                time.sleep(5)
+                status_not_200 = True
+            elif "Request forbidden by administrative rules" in r.text:
+                print("Rate limit error")
+                exit()
+            else:
+                print("Strange status:")
+                print(r.status_code)
+                print(r.text)
+                exit()
         time.sleep(6)
     else:
         print("Requesting " + cve_id + " from NVD website WITH authorization key")
         headers = {
             'apiKey': credentials.nvd_key,
         }
-        r = requests.get("https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=" + cve_id, headers=headers)
+        status_not_200 = True
+        while status_not_200:
+            r = requests.get("https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=" + cve_id, headers=headers)
+            if r.status_code == 200:
+                status_not_200 = False
+            elif r.status_code == 503:
+                print("Status 503 Service Unavailable. Trying again after 5 seconds sleep...")
+                time.sleep(5)
+                status_not_200 = True
+            elif "Request forbidden by administrative rules" in r.text:
+                print("Rate limit error")
+                exit()
+            else:
+                print("Strange status:")
+                print(r.status_code)
+                print(r.text)
+                exit()
         time.sleep(0.6)
-    if "Request forbidden by administrative rules" in r.text:
-        print("Rate limit error")
-        exit()
+
     try:
         nvd_cve_data = r.json()
         nvd_cve_data['error'] = False
-        nvd_cve_data['status'] = "CVE ID was found on nvd.nist.gov portal"
+        nvd_cve_data['status'] = "CVE ID " + cve_id + " was found on nvd.nist.gov portal"
         nvd_cve_data['not_found_error'] = False
     except:
         nvd_cve_data['error'] = True
-        nvd_cve_data['status'] = "CVE ID is NOT found on nvd.nist.gov portal"
+        nvd_cve_data['status'] = "CVE ID " + cve_id + " is NOT found on nvd.nist.gov portal"
         nvd_cve_data['not_found_error'] = True
+
     return nvd_cve_data
 
 
