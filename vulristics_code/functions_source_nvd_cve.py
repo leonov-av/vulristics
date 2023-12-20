@@ -112,6 +112,13 @@ def get_nvd_cve_data(cve_id, source_config):
                 if description['lang'] == "en":
                     nvd_cve_data['description'] = re.sub("\\n","",description['value'])
 
+            short_cpes = set()
+            if 'configurations' in nvd_cve_data['raw']['vulnerabilities'][0]['cve']:
+                for cpe in re.findall("cpe:[^']*", str(nvd_cve_data['raw']['vulnerabilities'][0]['cve']['configurations'])):
+                    if "2.3" in cpe:
+                        short_cpes.add(cpe.split(":")[2] + ":" + cpe.split(":")[3] + ":" + cpe.split(":")[4])
+            nvd_cve_data['short_cpes'] = list(short_cpes)
+
             cvss_priorities = ["cvssMetricV2", "cvssMetricV30", "cvssMetricV31"]
             for cvss_type in cvss_priorities:
                 for metric_type in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['metrics']:
@@ -138,4 +145,5 @@ def get_nvd_cve_data(cve_id, source_config):
                         nvd_cve_data['public_exploit_sources'].append({'type': 'nvd_exploit_type_link',
                                                                        'text': text,
                                                                        'url': url})
-    return nvd_cve_data;
+
+    return nvd_cve_data
