@@ -6957,6 +6957,19 @@
         "country_of_origin": "USA",
         "poduct_url": "https://www.npmjs.com/package/vm2"
     },
+    "Kubernetes": {
+        "prevalence": 0.7,
+        "description": "Kubernetes is an open-source container orchestration system for automating software deployment, scaling, and management",
+        "additional_detection_strings": [],
+        "vendor": "The Exim Maintainers",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "seldom",
+        "type_of_license": "open source",
+        "license": "Apache License 2.0",
+        "language": "Go",
+        "country_of_origin": "USA",
+        "poduct_url": "https://kubernetes.io/"
+    },
     "Forminator plugin for WordPress": {
         "prevalence": 0.4,
         "description": "Forminator is a form builder plugin that provides you with all the functionality you need to create contact forms, quizzes, and polls",
@@ -6993,5 +7006,17 @@
         "language": "PHP, JavaScript",
         "country_of_origin": "USA",
         "poduct_url": "https://roundcube.net/"
+    },
+    "ownCloud": {
+        "prevalence": 0.6,
+        "description": "ownCloud is an open-source software product for sharing and syncing of files in distributed and federated enterprise scenarios",
+        "additional_detection_strings": [],
+        "vendor": "ownCloud GmbH",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "commercial",
+        "language": "PHP, Javascript, Go",
+        "country_of_origin": "Germany",
+        "poduct_url": "https://owncloud.com/"
     }
 }
