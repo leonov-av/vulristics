@@ -275,7 +275,8 @@ def get_zdi_text_from_url(url):
         'Sec-Fetch-Dest': 'empty',
         'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
     }
-    text = requests.get(url, headers=headers).text
+    response = functions_tools.make_request(type="get", url=url, headers=headers)
+    text = response.text
     if text:
         text = trafilatura.extract(text)
 
