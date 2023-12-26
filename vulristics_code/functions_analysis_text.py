@@ -1,6 +1,14 @@
 import copy
 import re
 
+def get_alternative_name2product_name(product_data):
+    alternative_name2product_name = dict()
+    for product in product_data:
+        if 'alternative_names' in product_data[product]:
+            for alternative_name in product_data[product]['alternative_names']:
+                alternative_name2product_name[alternative_name] = product
+    return alternative_name2product_name
+
 def get_ranges(value_string, search_string):
     """
     Search for search_string in value_string and return the ranges for matches
@@ -75,8 +83,8 @@ def get_detected_vuln_types(full_description, vulnerability_type_data):
     return detected_entities
 
 
-def get_products_from_description_no_optimization(source, description, product_data,
-                                                  product_detection_string2product_name):
+def get_products_from_description(source, description, product_data,
+                                  product_detection_string2product_name):
     """
     Get product from the description
     """
@@ -95,7 +103,7 @@ def get_products_from_description_no_optimization(source, description, product_d
     return results
 
 
-def get_vulnerability_type_from_description_no_optimization(source, full_description, vulnerability_type_data):
+def get_vulnerability_type_from_description(source, full_description, vulnerability_type_data):
     """
     Get vulnerability type from the description
     """
@@ -122,21 +130,8 @@ def get_description_type(full_description):
         description_type = "ms_generated"
     return(description_type)
 
-def get_vulnerability_type_and_product_from_description_no_optimization(source, full_description, product_data,
-                                                        product_detection_string2product_name,
-                                                        vulnerability_type_data):
-    results = dict()
-    results['detected_products'] = get_products_from_description_no_optimization(source,
-                                                                                 full_description,
-                                                                                 product_data,
-                                                                                 product_detection_string2product_name)
-    results['detected_vuln_types'] = get_vulnerability_type_from_description_no_optimization(source,
-                                                                                 full_description,
-                                                                                 vulnerability_type_data)
-    return results
-
-
 def get_product_name_structure_ms_generated(product_name, source, full_description, product_data,
+                                            alternative_name2product_name,
                                             product_detection_string2product_name):
     product_result = dict()
     product_result['ranges'] = get_ranges(full_description, product_name)
@@ -153,6 +148,10 @@ def get_product_name_structure_ms_generated(product_name, source, full_descripti
     if 'detection_priority' not in product_result['product_data']:
         product_result['product_data']['detection_priority'] = 0
 
+    if product_name in alternative_name2product_name:
+        product_name = alternative_name2product_name[product_name]
+
+    product_result['detection_type'] = "heuristics_ms"
     product_result['product'] = product_name
     product_result['source'] = source
     product_result['description'] = full_description
@@ -164,24 +163,21 @@ def get_vulnerability_type_structure_ms_generated(vulnerability_type, source, fu
     vulnerability_type_result['source'] = source
     vulnerability_type_result['description'] = full_description
     vulnerability_type_result['ranges'] = get_ranges(full_description, vulnerability_type)
+    vulnerability_type_result['detection_type'] = "heuristics_ms"
     vulnerability_type_result['vuln_type_data'] = vulnerability_type_data[vulnerability_type]
     return vulnerability_type_result
 
 def get_vulnerability_type_and_product_from_description_ms_generated(source, full_description,
                                                                     product_data,
+                                                                    alternative_name2product_name,
                                                                     product_detection_string2product_name,
                                                                     vulnerability_type_data):
     vulnerability_type = ""
     product_name = ""
     results = dict()
 
-    exception = False
-    for stop_word in ['Exchange']:
-        if stop_word in full_description:
-            exception = True
-
     for vuln_type in vulnerability_type_data:
-        if vuln_type + " Vulnerability" in full_description and not exception:
+        if vuln_type + " Vulnerability" in full_description:
             vulnerability_type = vuln_type
             product_name = re.sub(" " + vuln_type + " Vulnerability$", "", full_description)
 
@@ -190,6 +186,7 @@ def get_vulnerability_type_and_product_from_description_ms_generated(source, ful
         results['detected_products'].append(get_product_name_structure_ms_generated(product_name, source,
                                                                                 full_description,
                                                                                 product_data,
+                                                                                alternative_name2product_name,
                                                                                 product_detection_string2product_name))
 
         results['detected_vuln_types'] = list()
@@ -198,33 +195,3 @@ def get_vulnerability_type_and_product_from_description_ms_generated(source, ful
                                                                                 vulnerability_type_data))
 
     return results
-
-def get_vulnerability_type_and_product_from_description(source,
-                                                        full_description, product_data,
-                                                        product_detection_string2product_name,
-                                                        vulnerability_type_data):
-    """
-    Detecting products and vulnerability type by full_description
-    :param source: data_source name, for example "nvd"
-    :param full_description: description for analysis
-    :param product_data: product description and detection rules
-    :param product_detection_string2product_name: dict for detecting product name based on keywords
-    :param vulnerability_type_data: vulnerability type description and detection rules
-    :return:
-    """
-
-    description_type = get_description_type(full_description)
-
-    result = dict()
-    if description_type == "ms_generated":
-        result = get_vulnerability_type_and_product_from_description_ms_generated(source, full_description,
-                                                                                product_data,
-                                                                                product_detection_string2product_name,
-                                                                                vulnerability_type_data)
-    if result == dict(): # Default slow detection if we can't make optimization
-                         # or there is an error in optimized detection
-        result = get_vulnerability_type_and_product_from_description_no_optimization(source, full_description,
-                                                                                 product_data,
-                                                                                 product_detection_string2product_name,
-                                                                                 vulnerability_type_data)
-    return result

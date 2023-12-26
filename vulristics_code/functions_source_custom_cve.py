@@ -14,7 +14,8 @@ def get_custom_cve_data_raw(cve_id):
 def get_custom_cve_data(cve_id, source_config):
     custom_cve_data = {"raw": get_custom_cve_data_raw(cve_id)}
     for param in ['description', 'cvss_base_score', 'wild_exploited', 'wild_exploited_sources',
-                  'public_exploit', 'public_exploit_sources', 'epss', 'epss_percentile']:
+                  'public_exploit', 'public_exploit_sources', 'epss', 'epss_percentile',
+                  'vulnerability_type', 'product_name']:
         if param in custom_cve_data['raw']:
             custom_cve_data[param] = custom_cve_data['raw'][param]
     return custom_cve_data

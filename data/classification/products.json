@@ -19,7 +19,7 @@
     },
     "ESXi": {
         "prevalence": 0.7,
-        "description": "",
+        "description": "VMware ESXi (formerly ESX) is an enterprise-class, type-1 hypervisor developed by VMware for deploying and serving virtual computers",
         "additional_detection_strings": []
     },
     "Pulse Connect Secure": {
@@ -49,11 +49,11 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "Confluence Server": {
+    "Confluence": {
         "prevalence": 0.7,
         "description": "Confluence is a web-based corporate wiki",
         "vendor": "Atlassian",
-        "additional_detection_strings": ["Confluence"]
+        "additional_detection_strings": []
     },
     "macOS": {
         "prevalence": 0.7,
@@ -69,9 +69,12 @@
     },
     "Windows Win32k": {
         "prevalence": 0.9,
-        "description": "Windows kernel-mode driver",
+        "description": "The Win32k.sys driver is the kernel side of some core parts of the Windows subsystem. Its main functionality is the GUI of Windows; it's responsible for window management.",
+        "alternative_names": [
+            "Win32k", "Win32k.sys"
+        ],
         "additional_detection_strings": [
-            "Win32k"
+            "Win32k", "Win32k.sys"
         ],
         "vendor": "Microsoft"
     },
@@ -935,8 +938,9 @@
     },
     "Google Chrome": {
         "prevalence": 0.8,
-        "description": "Web browser",
-        "additional_detection_strings": []
+        "description": "Google Chrome is a popular, free web browser developed by Google. It was first released in 2008 and is available for various operating systems, including Microsoft Windows, Apple macOS, Linux, Android, and iOS.",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:google:chrome"]
     },
     "Chromium": {
         "prevalence": 0.8,
@@ -1870,6 +1874,7 @@
     "Microsoft Exchange": {
         "prevalence": 0.8,
         "description": "Microsoft Exchange Server is a mail server and calendaring server developed by Microsoft",
+        "alternative_names": ["Microsoft Exchange Server"],
         "additional_detection_strings": [
             "Exchange Server"
         ],
@@ -5761,9 +5766,16 @@
     "Cisco IOS": {
         "prevalence": 0.8,
         "description": "The Internetworking Operating System is a family of proprietary network operating systems used on several router and network switch models manufactured by Cisco Systems",
-        "additional_detection_strings": [
-            "Cisco"
-        ]
+        "additional_detection_strings": [],
+        "vendor": "Cisco"
+    },
+    "Cisco IOS XE": {
+        "detection_priority": 0.3,
+        "detection_priority_comment": "more than Cisco IOS",
+        "prevalence": 0.8,
+        "description": "IOS XE is a release train of Cisco Systems built on Linux and that provides a distributed software architecture that moves many operating system responsibilities out of the IOS process and has a copy of IOS running as a separate process",
+        "additional_detection_strings": [],
+        "vendor": "Cisco"
     },
     "Sitecore Experience Platform (XP)": {
         "prevalence": 0.6,
@@ -5814,6 +5826,12 @@
         "additional_detection_strings": [
             "vCenter"
         ],
+        "vendor": "VMware"
+    },
+     "VMware Tools": {
+        "prevalence": 0.7,
+        "description": "VMware Tools is a set of services and modules that enable several features in VMware products for better management of, and seamless user interactions with, guests operating systems",
+        "additional_detection_strings": [],
         "vendor": "VMware"
     },
     "VMware SD-WAN": {
@@ -6075,6 +6093,12 @@
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
+    },
+    "DEFAULT_CPE_detected_product": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": ""
     },
     "Windows Client Server Run-Time Subsystem (CSRSS)": {
         "prevalence": 0.8,
@@ -6466,7 +6490,7 @@
         "additional_detection_strings": [],
         "vendor": "Autodesk"
     },
-    "Junos OS": {
+    "Juniper JunOS": {
         "prevalence": 0.8,
         "description": "Junos OS is a FreeBSD-based network operating system used in Juniper Networks routing, switching and security devices",
         "additional_detection_strings": ["Junos", "JunOS"],
@@ -6500,6 +6524,7 @@
         "prevalence": 0.8,
         "description": "WinRAR is a trialware file archiver utility for Windows, developed by Eugene Roshal of win.rar GmbH",
         "additional_detection_strings": [],
+        "short_cpes": ["a:rarlab:winrar"],
         "vendor": "RARLabs"
     },
     "Bouncy Castle": {
@@ -6825,7 +6850,8 @@
         "type_of_product": "desktop application",
         "directly_accessible_from_the_internet": "never",
         "type_of_license": "commercial",
-        "country_of_origin": "USA"
+        "country_of_origin": "USA",
+        "short_cpes": ["a:3cx:3cx"]
     },
     "Redis": {
         "prevalence": 0.6,
@@ -6859,7 +6885,8 @@
         "type_of_product": "server application",
         "directly_accessible_from_the_internet": "rarely",
         "type_of_license": "commercial",
-        "country_of_origin": "USA"
+        "country_of_origin": "USA",
+        "short_cves": ["a:veeam:backup_\\\\&_replication"]
     },
     "Oracle Web Applications Desktop Integrator": {
         "prevalence": 0.5,
@@ -6929,7 +6956,8 @@
         "type_of_license": "commercial",
         "language": "PHP",
         "country_of_origin": "Russia",
-        "poduct_url": "https://www.1c-bitrix.ru/products/cms/"
+        "poduct_url": "https://www.1c-bitrix.ru/products/cms/",
+        "short_cpes": ["a:bitrix24:bitrix24"]
     },
     "vm2": {
         "prevalence": 0.6,
@@ -6970,6 +6998,19 @@
         "country_of_origin": "USA",
         "poduct_url": "https://kubernetes.io/"
     },
+    "Struts": {
+        "prevalence": 0.7,
+        "description": "Apache Struts is a free, open-source, MVC framework for creating elegant, modern Java web applications. It favors convention over configuration, is extensible using a plugin architecture, and ships with plugins to support REST, AJAX and JSON",
+        "additional_detection_strings": ["Struts"],
+        "vendor": "The Apache Software Foundation",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "open source",
+        "license": "Apache License 2.0",
+        "language": "Java",
+        "country_of_origin": "USA",
+        "poduct_url": "https://struts.apache.org/"
+    },
     "Forminator plugin for WordPress": {
         "prevalence": 0.4,
         "description": "Forminator is a form builder plugin that provides you with all the functionality you need to create contact forms, quizzes, and polls",
@@ -6981,6 +7022,18 @@
         "language": "PHP",
         "country_of_origin": "USA",
         "poduct_url": "https://wordpress.org/plugins/forminator/"
+    },
+    "Backup Migration plugin for WordPress": {
+        "prevalence": 0.4,
+        "description": "This plugin is all in one solution if you need to migrate your site to another host or just restore the local backup",
+        "additional_detection_strings": [],
+        "vendor": "BackupBliss",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "always",
+        "type_of_license": "commercial",
+        "language": "PHP",
+        "country_of_origin": "USA",
+        "poduct_url": "https://wordpress.org/plugins/backup-backup/"
     },
     "Winbiz Payment module for PrestaShop": {
         "prevalence": 0.4,
@@ -7018,5 +7071,16 @@
         "language": "PHP, Javascript, Go",
         "country_of_origin": "Germany",
         "poduct_url": "https://owncloud.com/"
+    },
+    "Acronis Cyber Protect": {
+        "prevalence": 0.5,
+        "description": "Acronis Cyber Protect offers a variety of cybersecurity, data protection, and endpoint protection management features",
+        "additional_detection_strings": [],
+        "vendor": "Acronis",
+        "type_of_product": "desktop application",
+        "directly_accessible_from_the_internet": "never",
+        "type_of_license": "commercial",
+        "country_of_origin": "Singapore",
+        "poduct_url": "https://www.acronis.com/en-us/products/cyber-protect/"
     }
 }
