@@ -55,6 +55,20 @@
         "vendor": "Atlassian",
         "additional_detection_strings": []
     },
+    "Cacti": {
+        "prevalence": 0.5,
+        "description": "Cacti is an open source operational monitoring and fault management framework",
+        "vendor": "The Cacti Group, Inc",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:cacti:cacti"]
+    },
+    "Cobbler": {
+        "prevalence": 0.5,
+        "description": "Cobbler is a Linux provisioning server that facilitates and automates the network-based system installation of multiple computer operating systems from a central point using services such as DHCP, TFTP, and DNS",
+        "vendor": "Michael DeHaan",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:cobblerd:cobbler "]
+    },
     "macOS": {
         "prevalence": 0.7,
         "detection_priority": -0.1,
@@ -105,7 +119,7 @@
     },
     "Intel(R) Processor": {
         "prevalence": 0.9,
-        "description": "Processor",
+        "description": "Intel's processors from the pioneering 4-bit 4004 (1971) to the present high-end offerings",
         "vendor": "Intel",
         "additional_detection_strings": [
             "Intel(R) Processors"
@@ -141,9 +155,9 @@
     },
     "Kerberos": {
         "prevalence": 1,
-        "description": "",
+        "description": "Kerberos is a protocol for authenticating service requests between trusted hosts across an untrusted network, such as the internet",
         "additional_detection_strings": [],
-        "vendor": "Microsoft"
+        "vendor": "MIT"
     },
     "Microsoft Defender": {
         "prevalence": 0.8,
@@ -1413,6 +1427,8 @@
     },
     "Windows Remote Desktop Protocol": {
         "prevalence": 0.8,
+        "detection_priority": -0.1,
+        "detection_priority_comment": "xrdp is an open source remote desktop protocol server",
         "description": "Windows component",
         "additional_detection_strings": [
             "Remote Desktop Protocol",
@@ -1772,6 +1788,8 @@
     },
     "Curl": {
         "prevalence": 0.7,
+        "detection_priority": -0.1,
+        "detection_priority_comment": "...other major HTTP client implementations like curl and web browsers...",
         "description": "Curl is a command-line tool for transferring data specified with URL syntax",
         "additional_detection_strings": []
     },
@@ -2011,7 +2029,10 @@
     },
     "Python": {
         "prevalence": 0.6,
+        "detection_priority": -0.1,
+        "detection_comment": "...code to import Python modules...",
         "description": "Python is a high-level, general-purpose programming language",
+        "short_cpes": ["a:python:python"],
         "additional_detection_strings": [
         ]
     },
@@ -2713,6 +2734,14 @@
         "description": "Windows component",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
+    },
+    "OpenSSH": {
+        "detection_priority": 2,
+        "detection_priority_comment": "CVE-2023-48795 The SSH transport protocol with certain OpenSSH extensions...",
+        "prevalence": 0.8,
+        "description": "OpenSSH is a suite of secure networking utilities based on the Secure Shell protocol, which provides a secure channel over an unsecured network in a client–server architecture",
+        "additional_detection_strings": [],
+        "vendor": "OpenBSD Project"
     },
     "OpenSSH for Windows": {
         "prevalence": 0.8,
@@ -5174,8 +5203,16 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "Xrdp": {
+        "prevalence": 0.5,
+        "description": "xrdp is an open source remote desktop protocol server",
+        "additional_detection_strings": [],
+        "vendor": "neutrinolabs"
+    },
     "Remote Desktop Protocol Server": {
         "prevalence": 0.5,
+        "detection_priority": -0.1,
+        "detection_priority_comment": "xrdp is an open source remote desktop protocol server",
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -5749,6 +5786,7 @@
         "additional_detection_strings": [
             "Log4j2", "Log4j 2"
         ],
+        "short_cpes": ["a:apache:log4j"],
         "vendor": "Apache"
     },
     "GitLab": {
@@ -6648,6 +6686,12 @@
         "description": "MediaWiki is a free server-based wiki software, licensed under the GNU General Public License (GPL)",
         "additional_detection_strings": ["Mediawiki"],
         "vendor": "Wikimedia Foundation"
+    },
+     "Safari": {
+        "prevalence": 0.8,
+        "description": "Safari is a web browser developed by Apple. It is built into Apple's operating systems, including macOS, iOS, iPadOS and their upcoming VisionOS, and uses Apple's open-source browser engine WebKit, which was derived from KHTML.",
+        "additional_detection_strings": [],
+        "vendor": "Apple"
     },
      "Webkit": {
         "prevalence": 0.8,

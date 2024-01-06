@@ -110,14 +110,17 @@ def get_nvd_cve_data(cve_id, source_config):
         if len(nvd_cve_data['raw']['vulnerabilities']) > 0:
             for description in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['descriptions']:
                 if description['lang'] == "en":
-                    nvd_cve_data['description'] = re.sub("\\n","",description['value'])
+                    nvd_cve_data['description'] = re.sub("\\n"," ",description['value'])
 
-            short_cpes = set()
+            short_cpes = list()
             if 'configurations' in nvd_cve_data['raw']['vulnerabilities'][0]['cve']:
                 for cpe in re.findall("cpe:[^']*", str(nvd_cve_data['raw']['vulnerabilities'][0]['cve']['configurations'])):
                     if "2.3" in cpe:
-                        short_cpes.add(cpe.split(":")[2] + ":" + cpe.split(":")[3] + ":" + cpe.split(":")[4])
-            nvd_cve_data['short_cpes'] = list(short_cpes)
+                        cpe = cpe.replace("\\\\:", "<colon>")
+                        short_cpe = cpe.split(":")[2] + ":" + cpe.split(":")[3] + ":" + cpe.split(":")[4]
+                        if not short_cpe in short_cpes:
+                            short_cpes.append(short_cpe)
+            nvd_cve_data['short_cpes'] = short_cpes
 
             cvss_priorities = ["cvssMetricV2", "cvssMetricV30", "cvssMetricV31"]
             for cvss_type in cvss_priorities:
@@ -133,6 +136,11 @@ def get_nvd_cve_data(cve_id, source_config):
                 nvd_cve_data['wild_exploited_sources'].append({'type': 'nvd_cisa_kev',
                                                                'text': "NVD:CISAKEV",
                                                                'url': url})
+
+            nvd_cve_data['cwes'] = list()
+            if 'weaknesses' in nvd_cve_data['raw']['vulnerabilities'][0]['cve']:
+                for weaknesses in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['weaknesses']:
+                    nvd_cve_data['cwes'].append(weaknesses['description'][0]['value'])
 
 
             for reference in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['references']:
