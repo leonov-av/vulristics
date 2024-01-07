@@ -235,7 +235,7 @@
     },
     "Microsoft Outlook": {
         "prevalence": 0.6,
-        "description": "MS Office product",
+        "description": "Microsoft Outlook is a personal information manager software system from Microsoft, available as a part of the Microsoft 365 software suites",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -1503,7 +1503,7 @@
     },
     "Windows Common Log File System Driver": {
         "prevalence": 0.8,
-        "description": "Windows component",
+        "description": "Common Log File System is a general-purpose logging subsystem that is accessible to both kernel-mode as well as user-mode applications for building high-performance transaction logs",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -6080,7 +6080,7 @@
     },
     "Windows SmartScreen": {
         "prevalence": 0.8,
-        "description": "Windows component",
+        "description": "SmartScreen is a cloud-based anti-phishing and anti-malware component included in several Microsoft products, including operating systems Windows 8 and later, the applications Internet Explorer, Microsoft Edge",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -7126,5 +7126,67 @@
         "type_of_license": "commercial",
         "country_of_origin": "Singapore",
         "poduct_url": "https://www.acronis.com/en-us/products/cyber-protect/"
+    },
+    "Barracuda Email Security Gateway": {
+        "prevalence": 0.5,
+        "description": "The Barracuda Email Security Gateway is an email security gateway that manages and filters all inbound and outbound email traffic to protect organizations from email-borne threats and data leaks",
+        "additional_detection_strings": [],
+        "vendor": "Barracuda Networks",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "commercial",
+        "country_of_origin": "USA",
+        "poduct_url": "https://campus.barracuda.com/product/emailsecuritygateway/"
+    },
+    "GoAnywhere Managed File Transfery": {
+        "prevalence": 0.6,
+        "description": "GoAnywhere MFT is a secure managed file transfer software solution that streamlines the exchange of data between systems, employees, customers, and trading partners",
+        "additional_detection_strings": ["GoAnywhere MFT"],
+        "vendor": "Fortra, LLC",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "commercial",
+        "country_of_origin": "USA",
+        "short_cpes": ["a:fortra:goanywhere_managed_file_transfer"],
+        "poduct_url": "https://www.goanywhere.com/products/goanywhere-mft-vwo/"
+    },
+    "PaperCut NG": {
+        "prevalence": 0.6,
+        "description": "PaperCut NG is a comprehensive print management system designed to seamlessly monitor and control your resources with easy to use administrative and user tools that can be securely accessed from anywhere on the network though a web browser",
+        "additional_detection_strings": ["PaperCut NG"],
+        "vendor": "Info Technology Supply Ltd",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "seldom",
+        "type_of_license": "commercial",
+        "country_of_origin": "UK",
+        "short_cpes": ["a:papercut:papercut_ng"],
+        "poduct_url": "https://www.printandcopycontrol.com/en/products/papercut-mf"
+    },
+    "SugarCRM": {
+        "prevalence": 0.6,
+        "description": "SugarCRM is a comprehensive Customer Relationship Management (CRM) platform designed to connect your sales, marketing, and service teams",
+        "additional_detection_strings": [],
+        "vendor": "SugarCRM",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "seldom",
+        "type_of_license": "commercial",
+        "country_of_origin": "USA",
+        "short_cpes": ["a:sugarcrm:sugarcrm"],
+        "poduct_url": "https://www.sugarcrm.com"
+    },
+    "MOVEit Transfer": {
+        "prevalence": 0.6,
+        "detection_priority": 2,
+        "detection_priority_comment": "More than Microsoft SQL Server",
+        "description": "Progress MOVEit is a secure Managed File Transfer (MFT) software. MOVEit enables organizations to meet compliance standards, easily ensure the reliability of core business processes, and secure the transfer of sensitive data between partners, customers, users and systems.",
+        "additional_detection_strings": [
+            "Progress MOVEit Transfer"
+        ],
+        "vendor": "Progress Software",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "commercial",
+        "country_of_origin": "USA",
+        "poduct_url": "https://www.ipswitch.com/moveit-transfer"
     }
 }
