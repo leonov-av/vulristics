@@ -6228,7 +6228,26 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "Microsoft Identity": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "SQLite": {
+        "prevalence": 0.7,
+        "description": "SQLite is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:sqlite:sqlite"],
+        "vendor": "SQLite Consortium"
+    },
     "Windows Active Directory Domain Services API": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows CoreMessaging": {
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": [],
