@@ -71,15 +71,42 @@
     },
     "macOS": {
         "prevalence": 0.7,
-        "detection_priority": -0.1,
-        "detection_comment": "Lower priority for third party software",
+        "detection_priority": -1,
+        "detection_priority_comment": "Less than third-party",
         "description": "macOS is an operating system developed and marketed by Apple Inc",
         "additional_detection_strings": [],
         "vendor": "Apple Inc", 
         "type_of_product": "operating system",
         "directly_accessible_from_the_internet": "never",
         "type_of_license": "commercial",
-        "country_of_origin": "USA"
+        "country_of_origin": "USA",
+        "short_cpes":["o:apple:mac_os_x", "o:apple:macos"]
+    },
+    "iPadOS": {
+        "prevalence": 0.7,
+        "detection_priority": -1.5,
+        "detection_priority_comment": "Less than third-party and macOS",
+        "description": "iPadOS is an operating system developed and marketed by Apple Inc",
+        "additional_detection_strings": [],
+        "vendor": "Apple Inc",
+        "type_of_product": "operating system",
+        "directly_accessible_from_the_internet": "never",
+        "type_of_license": "commercial",
+        "country_of_origin": "USA",
+        "short_cpes":["o:apple:ipados"]
+    },
+    "iOS": {
+        "prevalence": 0.7,
+        "detection_priority": -10,
+        "detection_priority_comment": "Less than third-party and macOS; less than any products withi 'IOS' in name",
+        "description": "iOS is an operating system developed and marketed by Apple Inc",
+        "additional_detection_strings": [],
+        "vendor": "Apple Inc",
+        "type_of_product": "operating system",
+        "directly_accessible_from_the_internet": "never",
+        "type_of_license": "commercial",
+        "country_of_origin": "USA",
+        "short_cpes":["o:apple:iphone_os"]
     },
     "Windows Win32k": {
         "prevalence": 0.9,
@@ -205,9 +232,15 @@
     },
     "Microsoft Word": {
         "prevalence": 0.6,
-        "detection_priority": -0.2,
-        "detection_comment": "WordPad",
-        "description": "MS Office product",
+        "description": "Microsoft Word is a widely used commercial word processor developed by Microsoft. It is a component of the Microsoft Office suite of productivity software but can also be purchased as a standalone product.",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft WordPad": {
+        "prevalence": 0.6,
+        "detection_priority": 1,
+        "detection_comment": "More than Microsoft Word",
+        "description": "Microsoft WordPad is a basic word processing program that comes pre-installed with Microsoft Windows. It is a simpler alternative to Microsoft Word, offering basic functionality for creating and editing documents.",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -6228,26 +6261,7 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "Microsoft Identity": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "SQLite": {
-        "prevalence": 0.7,
-        "description": "SQLite is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine",
-        "additional_detection_strings": [],
-        "short_cpes": ["a:sqlite:sqlite"],
-        "vendor": "SQLite Consortium"
-    },
     "Windows Active Directory Domain Services API": {
-        "prevalence": 0.8,
-        "description": "Windows component",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
-    "Windows CoreMessaging": {
         "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": [],
@@ -6708,6 +6722,8 @@
     },
      "Safari": {
         "prevalence": 0.8,
+        "detection_priority": 0.3,
+        "detection_priority_comment": "More rare than macOS",
         "description": "Safari is a web browser developed by Apple. It is built into Apple's operating systems, including macOS, iOS, iPadOS and their upcoming VisionOS, and uses Apple's open-source browser engine WebKit, which was derived from KHTML.",
         "additional_detection_strings": [],
         "vendor": "Apple"
