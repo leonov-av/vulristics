@@ -6909,7 +6909,7 @@
         "directly_accessible_from_the_internet": "always",
         "type_of_license": "freeware",
         "country_of_origin": "Bangladesh",
-        "poduct_url": "https://wordpress.org/plugins/essential-addons-for-elementor-lite/"
+        "product_url": "https://wordpress.org/plugins/essential-addons-for-elementor-lite/"
     },
     "Aria Operations for Networks": {
         "prevalence": 0.5,
@@ -6998,7 +6998,7 @@
         "license": "GPL",
         "language": "PHP",
         "country_of_origin": "USA",
-        "poduct_url": "https://wordpress.org/plugins/woocommerce-payments/"
+        "product_url": "https://wordpress.org/plugins/woocommerce-payments/"
     },
     "Ultimate Member plugin for WordPress": {
         "prevalence": 0.4,
@@ -7011,7 +7011,7 @@
         "license": "GPL",
         "language": "PHP",
         "country_of_origin": "USA",
-        "poduct_url": "https://wordpress.org/plugins/ultimate-member/"
+        "product_url": "https://wordpress.org/plugins/ultimate-member/"
     },
     "Bitrix Site Manager": {
         "prevalence": 0.4,
@@ -7023,7 +7023,7 @@
         "type_of_license": "commercial",
         "language": "PHP",
         "country_of_origin": "Russia",
-        "poduct_url": "https://www.1c-bitrix.ru/products/cms/"
+        "product_url": "https://www.1c-bitrix.ru/products/cms/"
     },
     "Bitrix24": {
         "prevalence": 0.4,
@@ -7035,7 +7035,7 @@
         "type_of_license": "commercial",
         "language": "PHP",
         "country_of_origin": "Russia",
-        "poduct_url": "https://www.1c-bitrix.ru/products/cms/",
+        "product_url": "https://www.1c-bitrix.ru/products/cms/",
         "short_cpes": ["a:bitrix24:bitrix24"]
     },
     "vm2": {
@@ -7049,7 +7049,7 @@
         "license": "MIT",
         "language": "JavaScript",
         "country_of_origin": "USA",
-        "poduct_url": "https://www.npmjs.com/package/vm2"
+        "product_url": "https://www.npmjs.com/package/vm2"
     },
     "Exim": {
         "prevalence": 0.6,
@@ -7062,7 +7062,7 @@
         "license": "GPL",
         "language": "C",
         "country_of_origin": "USA",
-        "poduct_url": "https://www.npmjs.com/package/vm2"
+        "product_url": "https://www.npmjs.com/package/vm2"
     },
     "Kubernetes": {
         "prevalence": 0.7,
@@ -7075,7 +7075,7 @@
         "license": "Apache License 2.0",
         "language": "Go",
         "country_of_origin": "USA",
-        "poduct_url": "https://kubernetes.io/"
+        "product_url": "https://kubernetes.io/"
     },
     "Struts": {
         "prevalence": 0.7,
@@ -7088,7 +7088,7 @@
         "license": "Apache License 2.0",
         "language": "Java",
         "country_of_origin": "USA",
-        "poduct_url": "https://struts.apache.org/"
+        "product_url": "https://struts.apache.org/"
     },
     "Forminator plugin for WordPress": {
         "prevalence": 0.4,
@@ -7100,7 +7100,7 @@
         "type_of_license": "commercial",
         "language": "PHP",
         "country_of_origin": "USA",
-        "poduct_url": "https://wordpress.org/plugins/forminator/"
+        "product_url": "https://wordpress.org/plugins/forminator/"
     },
     "Backup Migration plugin for WordPress": {
         "prevalence": 0.4,
@@ -7112,7 +7112,7 @@
         "type_of_license": "commercial",
         "language": "PHP",
         "country_of_origin": "USA",
-        "poduct_url": "https://wordpress.org/plugins/backup-backup/"
+        "product_url": "https://wordpress.org/plugins/backup-backup/"
     },
     "Winbiz Payment module for PrestaShop": {
         "prevalence": 0.4,
@@ -7124,7 +7124,7 @@
         "type_of_license": "commercial",
         "language": "PHP",
         "country_of_origin": "Czech Republic",
-        "poduct_url": "https://shop.webbax.ch/modules-pour-winbiz/136-module-prestashop-winbiz-payment.html"
+        "product_url": "https://shop.webbax.ch/modules-pour-winbiz/136-module-prestashop-winbiz-payment.html"
     },
     "Roundcube": {
         "prevalence": 0.6,
@@ -7137,7 +7137,7 @@
         "license": "GPL-3.0-or-later with exceptions for skins and plugins",
         "language": "PHP, JavaScript",
         "country_of_origin": "USA",
-        "poduct_url": "https://roundcube.net/"
+        "product_url": "https://roundcube.net/"
     },
     "ownCloud": {
         "prevalence": 0.6,
@@ -7149,7 +7149,7 @@
         "type_of_license": "commercial",
         "language": "PHP, Javascript, Go",
         "country_of_origin": "Germany",
-        "poduct_url": "https://owncloud.com/"
+        "product_url": "https://owncloud.com/"
     },
     "Acronis Cyber Protect": {
         "prevalence": 0.5,
@@ -7160,7 +7160,7 @@
         "directly_accessible_from_the_internet": "never",
         "type_of_license": "commercial",
         "country_of_origin": "Singapore",
-        "poduct_url": "https://www.acronis.com/en-us/products/cyber-protect/"
+        "product_url": "https://www.acronis.com/en-us/products/cyber-protect/"
     },
     "Barracuda Email Security Gateway": {
         "prevalence": 0.5,
@@ -7171,7 +7171,7 @@
         "directly_accessible_from_the_internet": "often",
         "type_of_license": "commercial",
         "country_of_origin": "USA",
-        "poduct_url": "https://campus.barracuda.com/product/emailsecuritygateway/"
+        "product_url": "https://campus.barracuda.com/product/emailsecuritygateway/"
     },
     "GoAnywhere Managed File Transfery": {
         "prevalence": 0.6,
@@ -7183,7 +7183,7 @@
         "type_of_license": "commercial",
         "country_of_origin": "USA",
         "short_cpes": ["a:fortra:goanywhere_managed_file_transfer"],
-        "poduct_url": "https://www.goanywhere.com/products/goanywhere-mft-vwo/"
+        "product_url": "https://www.goanywhere.com/products/goanywhere-mft-vwo/"
     },
     "PaperCut NG": {
         "prevalence": 0.6,
@@ -7195,7 +7195,7 @@
         "type_of_license": "commercial",
         "country_of_origin": "UK",
         "short_cpes": ["a:papercut:papercut_ng"],
-        "poduct_url": "https://www.printandcopycontrol.com/en/products/papercut-mf"
+        "product_url": "https://www.printandcopycontrol.com/en/products/papercut-mf"
     },
     "SugarCRM": {
         "prevalence": 0.6,
@@ -7207,7 +7207,7 @@
         "type_of_license": "commercial",
         "country_of_origin": "USA",
         "short_cpes": ["a:sugarcrm:sugarcrm"],
-        "poduct_url": "https://www.sugarcrm.com"
+        "product_url": "https://www.sugarcrm.com"
     },
     "MOVEit Transfer": {
         "prevalence": 0.6,
@@ -7222,6 +7222,6 @@
         "directly_accessible_from_the_internet": "often",
         "type_of_license": "commercial",
         "country_of_origin": "USA",
-        "poduct_url": "https://www.ipswitch.com/moveit-transfer"
+        "product_url": "https://www.ipswitch.com/moveit-transfer"
     }
 }
