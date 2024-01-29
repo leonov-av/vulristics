@@ -6714,6 +6714,13 @@
         "additional_detection_strings": [],
         "vendor": "MariaDB Foundation"
     },
+     "SQLite": {
+        "prevalence": 0.7,
+        "description": "SQLite is a database engine written in the C programming language",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:sqlite:sqlite"],
+        "vendor": "D. Richard Hipp"
+    },
      "MediaWiki": {
         "prevalence": 0.7,
         "description": "MediaWiki is a free server-based wiki software, licensed under the GNU General Public License (GPL)",
@@ -7062,6 +7069,7 @@
         "license": "GPL",
         "language": "C",
         "country_of_origin": "USA",
+        "short_cpes": ["a:exim:exim"],
         "product_url": "https://www.npmjs.com/package/vm2"
     },
     "Kubernetes": {
