@@ -264,6 +264,35 @@ def get_duckduckgo_search_results_multiple_queries(queries):
 
 
 ### ZDI
+
+def get_zdi_search_results(query):
+    headers = {
+        'Connection': 'keep-alive',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Accept': '*/*',
+        'Sec-Fetch-Site': 'cross-site',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Dest': 'empty',
+        'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
+    }
+    url = "https://www.zerodayinitiative.com/search?q=" + query
+    response = functions_tools.make_request(type="get", url=url, headers=headers)
+    for line in response.text.split("\n"):
+        if "data-url=" in line:
+           url = "https://www.zerodayinitiative.com/" + line.split("\"")[1]
+           return  {'title': query, 'url': url}
+    return None
+
+
+def get_zdi_search_results_multiple_queries(queries):
+    for query in queries:
+        print(query)
+        result = get_zdi_search_results(query)
+        if result is not None:
+            return result
+    return None
+
 def get_zdi_text_from_url(url):
     headers = {
         'Connection': 'keep-alive',

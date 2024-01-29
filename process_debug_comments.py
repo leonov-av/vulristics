@@ -1,3 +1,5 @@
+# import vulristics_code.functions_source_analytic_sites
+
 # month = "April"
 # year = "2022"
 # query = month + " " + year + " " + "Patch Tuesday"
@@ -12,13 +14,13 @@
 # qualys_link = functions_source_analytic_sites.get_qualys_link(query)
 # print(qualys_link)
 
-# month = "April"
-# year = "2022"
+# month = "November"
+# year = "2023"
 # queries = [
-#     "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW",
-#     "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year
+#     "THE " + month + " " + year + " SECURITY UPDATE REVIEW",
+#     "Microsoft Patches for " + month + " " + year
 # ]
-# zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
+# zdi_link = vulristics_code.functions_source_analytic_sites.get_zdi_search_results_multiple_queries(queries)
 # print(zdi_link)
 
 # from vulristics_code import functions_source_analytic_sites

@@ -164,10 +164,10 @@ def create_profile(pt_type, month, year, pt_related_dates, comments_links, file_
         zdi_link = comments_links["ZDI"]
     else:
         queries = [
-            "site:https://www.zerodayinitiative.com/blog THE " + month + " " + year + " SECURITY UPDATE REVIEW",
-            "site:https://www.thezdi.com/blog Microsoft Patches for " + month + " " + year
+            "THE " + month + " " + year + " SECURITY UPDATE REVIEW",
+            "Microsoft Patches for " + month + " " + year
         ]
-        zdi_link = functions_source_analytic_sites.get_duckduckgo_search_results_multiple_queries(queries)
+        zdi_link = functions_source_analytic_sites.get_zdi_search_results_multiple_queries(queries)
     # zdi_link = {'title':'THE SEPTEMBER 2021 SECURITY UPDATE REVIEW',
     #             'url':'https://www.zerodayinitiative.com/blog/2021/9/14/the-september-2021-security-update-review-kpgpb'}
     if zdi_link:
