@@ -22,13 +22,14 @@
         "description": "VMware ESXi (formerly ESX) is an enterprise-class, type-1 hypervisor developed by VMware for deploying and serving virtual computers",
         "additional_detection_strings": []
     },
-    "Pulse Connect Secure": {
+    "Ivanti Connect Secure": {
         "prevalence": 0.7,
-        "description": "Pulse Connect Secure provides a seamless, cost-effective, SSL VPN solution for remote and mobile users from any web- enabled device to corporate resources",
+        "description": "Ivanti Connect Secure (Pulse Connect Secure) provides a seamless, cost-effective, SSL VPN solution for remote and mobile users from any web- enabled device to corporate resources",
         "vendor": "Ivanti",
         "additional_detection_strings": [
-            "Ivanti Connect Secure"
-        ]
+            "Pulse Connect Secure", "Ivanti ICS"
+        ],
+        "short_cpes": ["a:ivanti:connect_secure"]
     },
     "Zimbra Collaboration Suite": {
         "prevalence": 0.7,
@@ -7231,5 +7232,24 @@
         "type_of_license": "commercial",
         "country_of_origin": "USA",
         "product_url": "https://www.ipswitch.com/moveit-transfer"
+    },
+    "Jenkins": {
+        "prevalence": 0.6,
+        "description": "Jenkins is an open source automation server. It helps automate the parts of software development related to building, testing, and deploying, facilitating continuous integration, and continuous delivery.",
+        "additional_detection_strings": [],
+        "vendor": "Jenkins Community",
+        "type_of_product": "web application",
+        "type_of_license": "open source",
+        "license": "MIT License",
+        "language": "Java",
+        "country_of_origin": "USA",
+        "short_cpes": ["a:jenkins:jenkins"],
+        "product_url": "www.jenkins.io"
+    },
+    "Cisco ASA": {
+        "prevalence": 0.8,
+        "description": "A family of network security devices from Cisco that provide firewall, intrusion prevention (IPS) and virtual private network (VPN) capabilities",
+        "additional_detection_strings": [],
+        "vendor": "Cisco"
     }
 }
