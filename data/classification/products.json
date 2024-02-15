@@ -2265,6 +2265,13 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "DNSSEC": {
+        "detection_priority": -1,
+        "prevalence": 0.5,
+        "description": "The Domain Name System Security Extensions (DNSSEC) is a feature of the Domain Name System (DNS) that authenticates responses to domain name lookups",
+        "additional_detection_strings": [],
+        "vendor": "IETF"
+    },
     "Microsoft Dynamics 365": {
         "prevalence": 0.5,
         "description": "Microsoft Dynamics 365 is a product line of enterprise resource planning (ERP) and customer relationship management (CRM) intelligent business applications",

@@ -1,5 +1,6 @@
 import copy
 import re
+from vulristics_code import (data_classification_vulnerability_types)
 
 def get_alternative_name2product_name(product_data):
     alternative_name2product_name = dict()
@@ -180,6 +181,12 @@ def get_vulnerability_type_and_product_from_description_ms_generated(source, ful
         if vuln_type + " Vulnerability" in full_description:
             vulnerability_type = vuln_type
             product_name = re.sub(" " + vuln_type + " Vulnerability$", "", full_description)
+
+    if vulnerability_type == "" and product_name == "":
+        for vuln_string in data_classification_vulnerability_types.vulnerability_type_detection_patterns:
+            if vuln_string in full_description:
+                vulnerability_type = data_classification_vulnerability_types.vulnerability_type_detection_patterns[vuln_string]
+                product_name = full_description.split(vuln_string)[0]
 
     if vulnerability_type != "" and product_name != "":
         results['detected_products'] = list()
