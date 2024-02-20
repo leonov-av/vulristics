@@ -6793,6 +6793,15 @@
         "additional_detection_strings": [],
         "vendor": "GNOME Project"
     },
+     "PHP": {
+        "prevalence": 0.8,
+        "detection_priority": -1,
+        "detection_priority_comment": "it's better to detect a product rather than a programming language",
+        "description": "PHP is a general-purpose scripting language geared towards web development. It was originally created by Danish-Canadian programmer Rasmus Lerdorf in 1993 and released in 1995.",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:php:php"],
+        "vendor": "Rasmus Lerdorf"
+    },
      "tiffcrop": {
         "prevalence": 0.6,
         "description": "Tiffcrop processes one or more files created according to the Tag Image File Format, Revision 6.0, specification into one or more TIFF file(s)",
@@ -7256,7 +7265,7 @@
     "Cisco ASA": {
         "prevalence": 0.8,
         "description": "A family of network security devices from Cisco that provide firewall, intrusion prevention (IPS) and virtual private network (VPN) capabilities",
-        "additional_detection_strings": [],
+        "additional_detection_strings": ["Cisco Adaptive Security Appliance"],
         "vendor": "Cisco"
     }
 }
