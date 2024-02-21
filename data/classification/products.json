@@ -6722,6 +6722,18 @@
         "additional_detection_strings": [],
         "vendor": "MariaDB Foundation"
     },
+    "Oracle MySQL": {
+        "prevalence": 0.7,
+        "description": "MySQL is an open-source relational database management system",
+        "additional_detection_strings": [],
+        "vendor": "Oracle"
+    },
+    "BIND": {
+        "prevalence": 0.7,
+        "description": "BIND is a suite of software for interacting with the Domain Name System",
+        "additional_detection_strings": [],
+        "vendor": "Internet Systems Consortium"
+    },
      "SQLite": {
         "prevalence": 0.7,
         "description": "SQLite is a database engine written in the C programming language",
