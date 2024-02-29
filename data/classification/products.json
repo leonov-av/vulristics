@@ -6716,6 +6716,13 @@
         "additional_detection_strings": [],
         "vendor": "QEMU"
     },
+     "ScreenConnect": {
+        "prevalence": 0.7,
+        "description": "Screenconnect, is a self-hosted remote desktop software application that permits the primary user to host the software on their own servers, PC, virtual machine (VM), or virtual private server (VPS)",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:connectwise:screenconnect"],
+        "vendor": "ConnectWise"
+    },
      "MariaDB": {
         "prevalence": 0.7,
         "description": "MariaDB is a community-developed, commercially supported fork of the MySQL relational database management system, intended to remain free and open-source software under the GNU General Public License",

@@ -51,6 +51,9 @@ def get_nvd_cve_data_from_nvd_site(cve_id):
                 print("Status 503 Service Unavailable. Trying again after 5 seconds sleep...")
                 time.sleep(5)
                 status_not_200 = True
+            elif r.status_code == 404:
+                print("Status 404 Not Found")
+                status_not_200 = False
             elif "Request forbidden by administrative rules" in r.text:
                 print("Rate limit error")
                 exit()
