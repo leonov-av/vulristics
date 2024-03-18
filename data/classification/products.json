@@ -1988,6 +1988,12 @@
         "vendor": "Fortinet",
         "additional_detection_strings": []
     },
+    "FortiClientEMS": {
+        "prevalence": 0.5,
+        "description": "FortiClient EMS provides efficient and effective administration of endpoints running FortiClient (a Fabric Agent that delivers protection, compliance, and secure access in a single, modular lightweight client)",
+        "vendor": "Fortinet",
+        "additional_detection_strings": []
+    },
     "QNAP NAS": {
         "prevalence": 0.5,
         "description": "A QNAP NAS is a powerful device that allows you to store and share files and access them from anywhere in the world",
