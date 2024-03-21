@@ -6,6 +6,8 @@
     },
     "Sudo": {
         "prevalence": 0.9,
+        "detection_priority": -1,
+        "detection_priority_comment": "Composer being run with sudo, Pipelines which may execute Composer on untrusted projects",
         "description": "Sudo is a program for Unix-like computer operating systems that allows users to run programs with the security privileges of another user",
         "additional_detection_strings": [
             "visudo",
@@ -5747,6 +5749,8 @@
         "vendor": "Microsoft"
     },
     "HTTP V3": {
+        "detection_priority": -1,
+        "detection_priority_comment": "aiohttp v3.8.4 ",
         "prevalence": 0.5,
         "description": "",
         "additional_detection_strings": [],
