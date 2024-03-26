@@ -6,12 +6,13 @@ import os
 import zipfile
 import shutil
 import xml.etree.ElementTree as ET
+import sys
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
 def download_bdu_file():
     # Remove the file
-    file_path = "data/vulxml.zip"
+    file_path = "data/bdu/vulxml/vulxml.zip"
     if os.path.exists(file_path):
         os.remove(file_path)
 
@@ -23,8 +24,8 @@ def download_bdu_file():
                                filename=file_path)
 
 def unzip_bdu_file():
-    zip_file = "data/vulxml.zip"
-    directory_to_extract_to = "data/vulxml"
+    zip_file = "data/bdu/vulxml/vulxml.zip"
+    directory_to_extract_to = "data/bdu/vulxml/bdu_extracted/"
     if os.path.exists(directory_to_extract_to):
         shutil.rmtree(directory_to_extract_to)
 
@@ -32,8 +33,7 @@ def unzip_bdu_file():
         zip_ref.extractall(directory_to_extract_to)
 
 def parse_bdu_file():
-
-    tree = ET.parse('data/vulxml/export/export.xml')
+    tree = ET.parse('data/bdu/vulxml/bdu_extracted/export/export.xml')
     root = tree.getroot()
 
     bdu_data = dict()
@@ -140,8 +140,29 @@ def parse_bdu_file():
                 exit()
         # print("----")
 
+    for bdu_id in bdu_data:
+        bdu_entity = bdu_data[bdu_id]
+        bdu_data[bdu_id]['processed'] = {}
+        cve_ids = list()
+        if 'identifiers' in bdu_entity:
+            for identifier in bdu_entity['identifiers']:
+                if identifier['type'] == 'CVE':
+                    cve_ids.append(identifier['value'])
+        bdu_data[bdu_id]['processed']['cve_ids'] = cve_ids
     return bdu_data
 
+def make_bdu_vuln_files():
+    bdu_data = parse_bdu_file()
+    for item_id in bdu_data:
+        f = open("data/bdu/" + item_id + ".json", "w")
+        # print(bdu_data[item_id])
+        f.write(json.dumps(bdu_data[item_id], indent=4))
+        f.close()
+        for cve_id in bdu_data[item_id]['processed']['cve_ids']:
+            bdu_data[item_id]['processed']['from_bdu'] = item_id
+            f = open("data/bdu/" + cve_id + ".json", "w")
+            f.write(json.dumps(bdu_data[item_id], indent=4))
+            f.close()
 
 def get_bdu_data_raw(cve_id):
     f = open("data/bdu/" + cve_id + ".json", "r")
@@ -153,7 +174,28 @@ def get_bdu_data_raw(cve_id):
 def get_bdu_data(cve_id):
     bdu_data = {"raw": get_bdu_data_raw(cve_id)}
     bdu_data['description'] = ""
-    bdu_data['cvss_base_score'] = ""
+    if 'cvss' in bdu_data["raw"]:
+        bdu_data['cvss_base_score'] = bdu_data["raw"]['cvss']['score']
+    if 'cvss3' in bdu_data["raw"]:
+        bdu_data['cvss_base_score'] = bdu_data["raw"]['cvss3']['score']
+
+    '''
+    "cwe": [
+        "CWE-125"
+    ],
+    "identify_date": "16.11.2023",
+    "cvss": {
+        "vector": "AV:L/AC:L/Au:N/C:C/I:C/A:C",
+        "score": "7.2"
+    },
+    "cvss3": {
+        "vector": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+        "score": "7.8"
+    },
+    '''
+
+    bdu_data['description'] = bdu_data["raw"]['description']
+    bdu_data['cwes'] = bdu_data["raw"]['cwe']
 
     return bdu_data
 #
