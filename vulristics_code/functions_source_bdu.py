@@ -7,6 +7,7 @@ import zipfile
 import shutil
 import xml.etree.ElementTree as ET
 import sys
+import re
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -160,6 +161,9 @@ def make_bdu_vuln_files():
         f.close()
         for cve_id in bdu_data[item_id]['processed']['cve_ids']:
             bdu_data[item_id]['processed']['from_bdu'] = item_id
+            cve_id = re.sub('\u2011', "-", cve_id)
+            cve_id = re.sub('\u2013', "-", cve_id)
+            cve_id = re.sub('\u200b', "-", cve_id)
             f = open("data/bdu/" + cve_id + ".json", "w")
             f.write(json.dumps(bdu_data[item_id], indent=4))
             f.close()
@@ -195,7 +199,8 @@ def get_bdu_data(cve_id):
     '''
 
     bdu_data['description'] = bdu_data["raw"]['description']
-    bdu_data['cwes'] = bdu_data["raw"]['cwe']
+    if 'cwe' in bdu_data["raw"]:
+        bdu_data['cwes'] = bdu_data["raw"]['cwe']
 
     return bdu_data
 #
