@@ -1,6 +1,8 @@
 import requests
 import os
 import json
+import datetime
+
 
 
 # CVE Data
@@ -13,6 +15,14 @@ def get_epss_cve_data_from_epss_site(cve_id):
         print("Requesting " + cve_id + " from epss website")
         r = requests.get("https://api.first.org/data/v1/epss?cve=" + cve_id)
         epss_cve_data = r.json()
+
+        #https://api.first.org/data/v1/epss?cve=CVE-2023-24955&date=2024-03-27
+        if epss_cve_data['data'] == []:
+            yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
+            yesterday_date = yesterday.strftime("%y-%m-%d")
+            r = requests.get("https://api.first.org/data/v1/epss?cve=" + cve_id + "&date=" + yesterday_date)
+            epss_cve_data = r.json()
+
         epss_cve_data['error'] = False
         epss_cve_data['status'] = "CVE ID was found on api.first.org portal"
         epss_cve_data['not_found_error'] = False
@@ -22,6 +32,8 @@ def get_epss_cve_data_from_epss_site(cve_id):
         epss_cve_data['not_found_error'] = True
     return epss_cve_data
 
+# cve_id = "CVE-2023-24955"
+# print(get_epss_cve_data_from_epss_site(cve_id))
 
 def download_epss_cve_data_raw(cve_id, rewrite_flag=True):
     file_path = "data/epss_cve/" + cve_id + ".json"
