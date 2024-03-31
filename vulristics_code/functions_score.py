@@ -163,6 +163,7 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
     # I just add the processing of other sources in case there are no links to exploits
     # Unified method for public exploits
     mentioned = list()
+
     for data_source in cve_data_all:
         if data_source not in ["vulners_cve_data_all",
                                "ms_cve_data_all"]:  # For them separate code above
@@ -176,6 +177,21 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
             public_exploit_exists_c = "The existence of a publicly available exploit is mentioned on " + ", ".join(mentioned) + " website"
         else:
             public_exploit_exists_c = "The existence of a publicly available exploit is mentioned on " + ", ".join(mentioned) + " websites"
+
+    if public_exploit_exists_n == 0:
+        for data_source in cve_data_all:
+            if cve in cve_data_all[data_source]:
+                public_exploit_exists_n = 0.5
+                if "private_exploit" in cve_data_all[data_source][cve]:
+                    for mention in cve_data_all[data_source][cve]['private_exploit_sources']:
+                        mentioned.append("<a href=\"" + mention['url'] + "\">" + mention['text'] + "</a>")
+        if mentioned != list():
+            if len(mentioned) == 1:
+                public_exploit_exists_c = "The existence of a private exploit is mentioned on " + ", ".join(
+                    mentioned) + " website"
+            else:
+                public_exploit_exists_c = "The existence of a private exploits is mentioned on " + ", ".join(
+                    mentioned) + " websites"
 
     public_exploit_exists_k = 17
 

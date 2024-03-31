@@ -6189,6 +6189,12 @@
         "additional_detection_strings": [],
         "vendor": ""
     },
+    "DEFAULT_Directly_Set_product": {
+        "prevalence": 0.5,
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": ""
+    },
     "Windows Client Server Run-Time Subsystem (CSRSS)": {
         "prevalence": 0.8,
         "description": "Windows component",

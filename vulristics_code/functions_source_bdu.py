@@ -86,7 +86,7 @@ def parse_bdu_file():
                         if soft_param.tag == "vendor":
                             soft_dict["vendor"] = soft_param.text
                         elif soft_param.tag == "name":
-                            soft_dict["vendor"] = soft_param.text
+                            soft_dict["name"] = soft_param.text
                         elif soft_param.tag == "platform":
                             soft_dict["platform"] = soft_param.text
                         elif soft_param.tag == "version":
@@ -183,25 +183,43 @@ def get_bdu_data(cve_id):
     if 'cvss3' in bdu_data["raw"]:
         bdu_data['cvss_base_score'] = bdu_data["raw"]['cvss3']['score']
 
-    '''
-    "cwe": [
-        "CWE-125"
-    ],
-    "identify_date": "16.11.2023",
-    "cvss": {
-        "vector": "AV:L/AC:L/Au:N/C:C/I:C/A:C",
-        "score": "7.2"
-    },
-    "cvss3": {
-        "vector": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-        "score": "7.8"
-    },
-    '''
-
     bdu_data['description'] = bdu_data["raw"]['description']
     if 'cwe' in bdu_data["raw"]:
         bdu_data['cwes'] = bdu_data["raw"]['cwe']
 
+    if  bdu_data["raw"]['vul_incident'] == "1":
+        bdu_data['wild_exploited'] = True
+        bdu_data['wild_exploited_sources'] = [
+            {
+              "type": "bdu",
+              "text": "BDU",
+              "url": "https://bdu.fstec.ru/vul/" + bdu_data["raw"]['identifier'].split(":")[1]
+            }
+        ]
+
+    if bdu_data["raw"]['exploit_status'] == "Существует":
+        bdu_data['private_exploit'] = True
+        bdu_data['private_exploit_sources'] = [
+            {
+              "type": "bdu",
+              "text": "BDU:PrivateExploit",
+              "url": "https://bdu.fstec.ru/vul/" + bdu_data["raw"]['identifier'].split(":")[1]
+            }
+        ]
+
+    if bdu_data["raw"]['exploit_status'] == "Существует в открытом доступе":
+        bdu_data['public_exploit'] = True
+        bdu_data['public_exploit_sources'] = [
+            {
+              "type": "bdu",
+              "text": "BDU:PublicExploit",
+              "url": "https://bdu.fstec.ru/vul/" + bdu_data["raw"]['identifier'].split(":")[1]
+            }
+        ]
+
+    if bdu_data["raw"]['soft'] != []:
+        bdu_data['product_name'] = bdu_data["raw"]['soft'][0]['name']
+
     return bdu_data
-#
+
 # # print(get_vulners_data(vulners_id="CVE-2021-40450", rewrite_flag=False))
