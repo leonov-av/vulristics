@@ -3,14 +3,14 @@
 ![vulristics logo](https://github.com/leonov-av/vulristics/blob/master/logo/vulristics_line.png)
 
 ## Why is this needed?
-Let's say we have a vulnerability ID (CVE ID) and we need to decide whether it is really critical or not. We will probably go to some vulnerability databases (NVD, CVE page on the Microsoft website, Vulners.com, etc.) and somehow analyze the descriptions and parameters. Right? Such analysis can be quite complex and not so obvious. My idea is to formalize it and make it shareable. It may not be the most efficient way to process data, but it should reflect real human experience, the things that real vulnerability analysts do. This is the main goal.
+Let's say we have a vulnerability ID (CVE ID) and we need to decide whether it is really critical or not. We will probably go to some vulnerability databases (NVD, BDU, CVE page on the Microsoft website, Vulners.com, etc.) and somehow analyze the descriptions and parameters. Right? Such analysis can be quite complex and not so obvious. My idea is to formalize it and make it shareable. It may not be the most efficient way to process data, but it should reflect real human experience, the things that real vulnerability analysts do. This is the main goal.
 
 ## What's ready right now?
 You can generate the report for the following entities:
 
 * Arbitrary CVE list
 ```buildoutcfg
-python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,epss,vulners,attackerkb" --rewrite-flag "True"
+python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,bdu,epss,vulners,attackerkb" --rewrite-flag "True"
 ```
 * Microsoft Patch Tuesday ([HTML report example](https://avleonov.com/vulristics_reports/ms_patch_tuesday_november2021_report_with_comments_ext_img.html))
 ```buildoutcfg
@@ -19,7 +19,7 @@ python3 vulristics.py --report-type "ms_patch_tuesday" --mspt-year 2021 --mspt-m
 
 ### Example of output
 ```buildoutcfg
-$ python3 vulristics.py --report-type "cve_list" --cve-project-name "CVE-2023-29336" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,epss,vulners,attackerkb" --rewrite-flag "True"
+$ python3 vulristics.py --report-type "cve_list" --cve-project-name "CVE-2024-20723" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,bdu,epss,vulners,attackerkb" --rewrite-flag "True"
                       /$$           /$$             /$$     /$$                    
                      | $$          |__/            | $$    |__/                    
  /$$    /$$ /$$   /$$| $$  /$$$$$$  /$$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$$  /$$$$$$$
@@ -28,44 +28,45 @@ $ python3 vulristics.py --report-type "cve_list" --cve-project-name "CVE-2023-29
   \  $$$/  | $$  | $$| $$| $$      | $$ \____  $$  | $$ /$$| $$| $$       \____  $$
    \  $/   |  $$$$$$/| $$| $$      | $$ /$$$$$$$/  |  $$$$/| $$|  $$$$$$$ /$$$$$$$/
     \_/     \______/ |__/|__/      |__/|_______/    \___/  |__/ \_______/|_______/ 
-Reading existing Patch Tuesday profile...
+Reading existing profile data/profiles/CVE-2024-20723_profile.json...
 Exclude CVEs: 0
 No specified products to analyze set in profile, reporting everything
 All CVEs: 1
+Enabled data sources: ['ms', 'nvd', 'bdu', 'epss', 'vulners', 'attackerkb']
 Counting CVE scores...
 Collecting MS CVE data...
-1/1 - CVE-2023-29336
-Requesting CVE-2023-29336 from Microsoft website
+1/1 - CVE-2024-20723
+Requesting CVE-2024-20723 from Microsoft website
 Collecting NVD CVE data...
-1/1 - CVE-2023-29336
-Requesting CVE-2023-29336 from NVD website
+1/1 - CVE-2024-20723
+Requesting CVE-2024-20723 from NVD website WITH authorization key
 Collecting EPSS CVE data...
-1/1 - CVE-2023-29336
-Requesting CVE-2023-29336 from epss website
+1/1 - CVE-2024-20723
+Requesting CVE-2024-20723 from epss website
 Collecting AttackerKB CVE data...
-1/1 - CVE-2023-29336
-Requesting CVE-2023-29336 from AttackerKB website WITHOUT authorization key
+1/1 - CVE-2024-20723
+Requesting CVE-2024-20723 from AttackerKB website WITHOUT authorization key
 Collecting Vulners CVE data...
-1/1 - CVE-2023-29336
-Requesting CVE-2023-29336 from Vulners website WITH authorization key
+1/1 - CVE-2024-20723
+Requesting CVE-2024-20723 from Vulners website WITH authorization key
+Collecting BDU CVE data...
+Updating BDU FSTEC data...
+1/1 - CVE-2024-20723
 Combining CVE data...
-1/1 CVE-2023-29336
+1/1 CVE-2024-20723
 Counting CVE scores...
 Making vulnerability reports for each reports config...
 Report config: with_comments_ext_img
-Report generated: reports/cve-2023-29336_report_with_comments_ext_img.html
+HTML report generated: reports/cve-2024-20723_report_with_comments_ext_img.html
 ```
 
 ### Options
 ```buildoutcfg
 $ python3 vulristics.py -h
-usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR]
-                     [--mspt-month MSPT_MONTH]
-                     [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH]
-                     [--cve-project-name CVE_PROJECT_NAME] [--cve-list-path CVE_LIST_PATH]
-                     [--cve-comments-path CVE_COMMENTS_PATH]
-                     [--cve-data-sources CVE_DATA_SOURCES]
-                     [--profile-json-path PROFILE_JSON_PATH]
+usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR] [--mspt-month MSPT_MONTH]
+                     [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH] [--cve-project-name CVE_PROJECT_NAME]
+                     [--cve-list-path CVE_LIST_PATH] [--cve-comments-path CVE_COMMENTS_PATH]
+                     [--cve-data-sources CVE_DATA_SOURCES] [--profile-json-path PROFILE_JSON_PATH]
                      [--result-formats RESULT_FORMATS] [--result-html-path RESULT_HTML_PATH]
                      [--result-json-path RESULT_JSON_PATH] [--rewrite-flag REWRITE_FLAG]
                      [--vulners-use-github-exploits-flag VULNERS_USE_GITHUB_EXPLOITS_FLAG]
@@ -75,8 +76,7 @@ An extensible framework for analyzing publicly available information about vulne
 options:
   -h, --help            show this help message and exit
   --report-type REPORT_TYPE
-                        Report type (ms_patch_tuesday, ms_patch_tuesday_extended, cve_list
-                        or custom_profile)
+                        Report type (ms_patch_tuesday, ms_patch_tuesday_extended, cve_list or custom_profile)
   --mspt-year MSPT_YEAR
                         Microsoft Patch Tuesday year
   --mspt-month MSPT_MONTH
@@ -90,15 +90,13 @@ options:
   --cve-comments-path CVE_COMMENTS_PATH
                         Path to the CVE comments file
   --cve-data-sources CVE_DATA_SOURCES
-                        Data sources for analysis, e.g.
-                        "ms,nvd,epss,vulners,attackerkb,custom"
+                        Data sources for analysis, e.g. "ms,nvd,bdu,epss,vulners,attackerkb,bdu,custom"
   --profile-json-path PROFILE_JSON_PATH
                         Custom profile for analysis
   --result-formats RESULT_FORMATS
                         Result formats, e.g. "html,json", Default - "html"
   --result-html-path RESULT_HTML_PATH
-                        Path to the results file in html format (Default - will be created
-                        in reports directory)
+                        Path to the results file in html format (Default - will be created in reports directory)
   --result-json-path RESULT_JSON_PATH
                         Path to the results file in json format
   --rewrite-flag REWRITE_FLAG

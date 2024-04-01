@@ -7084,6 +7084,18 @@
         "country_of_origin": "Russia",
         "product_url": "https://www.1c-bitrix.ru/products/cms/"
     },
+    "1С-Битрикс: Управление сайтом": {
+        "prevalence": 0.7,
+        "description": "Система управления контентом веб-проекта (CMS) для сайтов и интернет-магазинов",
+        "additional_detection_strings": [],
+        "vendor": "Bitrix",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "commercial",
+        "language": "PHP",
+        "country_of_origin": "Russia",
+        "product_url": "https://www.1c-bitrix.ru/products/cms/"
+    },
     "Bitrix24": {
         "prevalence": 0.4,
         "description": "The Bitrix Site Manager is a web content management and digital marketing solution for SMBs offering content management, e-marketing and e-commerce capabilities",
