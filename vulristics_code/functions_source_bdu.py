@@ -169,56 +169,63 @@ def make_bdu_vuln_files():
             f.close()
 
 def get_bdu_data_raw(cve_id):
-    f = open("data/bdu/" + cve_id + ".json", "r")
-    bdu_data = json.loads(f.read())
-    f.close()
+
+    if os.path.isfile("data/bdu/" + cve_id + ".json"):
+        f = open("data/bdu/" + cve_id + ".json", "r")
+        bdu_data = json.loads(f.read())
+        f.close()
+    else:
+        bdu_data = {}
     return bdu_data
 
 
 def get_bdu_data(cve_id):
-    bdu_data = {"raw": get_bdu_data_raw(cve_id)}
-    bdu_data['description'] = ""
-    if 'cvss' in bdu_data["raw"]:
-        bdu_data['cvss_base_score'] = bdu_data["raw"]['cvss']['score']
-    if 'cvss3' in bdu_data["raw"]:
-        bdu_data['cvss_base_score'] = bdu_data["raw"]['cvss3']['score']
+    raw_data = get_bdu_data_raw(cve_id)
+    bdu_data = {"raw": raw_data}
 
-    bdu_data['description'] = bdu_data["raw"]['description']
-    if 'cwe' in bdu_data["raw"]:
-        bdu_data['cwes'] = bdu_data["raw"]['cwe']
+    if raw_data != {}:
+        bdu_data['description'] = ""
+        if 'cvss' in bdu_data["raw"]:
+            bdu_data['cvss_base_score'] = bdu_data["raw"]['cvss']['score']
+        if 'cvss3' in bdu_data["raw"]:
+            bdu_data['cvss_base_score'] = bdu_data["raw"]['cvss3']['score']
 
-    if  bdu_data["raw"]['vul_incident'] == "1":
-        bdu_data['wild_exploited'] = True
-        bdu_data['wild_exploited_sources'] = [
-            {
-              "type": "bdu",
-              "text": "BDU",
-              "url": "https://bdu.fstec.ru/vul/" + bdu_data["raw"]['identifier'].split(":")[1]
-            }
-        ]
+        bdu_data['description'] = bdu_data["raw"]['description']
+        if 'cwe' in bdu_data["raw"]:
+            bdu_data['cwes'] = bdu_data["raw"]['cwe']
 
-    if bdu_data["raw"]['exploit_status'] == "Существует":
-        bdu_data['private_exploit'] = True
-        bdu_data['private_exploit_sources'] = [
-            {
-              "type": "bdu",
-              "text": "BDU:PrivateExploit",
-              "url": "https://bdu.fstec.ru/vul/" + bdu_data["raw"]['identifier'].split(":")[1]
-            }
-        ]
+        if  bdu_data["raw"]['vul_incident'] == "1":
+            bdu_data['wild_exploited'] = True
+            bdu_data['wild_exploited_sources'] = [
+                {
+                  "type": "bdu",
+                  "text": "BDU",
+                  "url": "https://bdu.fstec.ru/vul/" + bdu_data["raw"]['identifier'].split(":")[1]
+                }
+            ]
 
-    if bdu_data["raw"]['exploit_status'] == "Существует в открытом доступе":
-        bdu_data['public_exploit'] = True
-        bdu_data['public_exploit_sources'] = [
-            {
-              "type": "bdu",
-              "text": "BDU:PublicExploit",
-              "url": "https://bdu.fstec.ru/vul/" + bdu_data["raw"]['identifier'].split(":")[1]
-            }
-        ]
+        if bdu_data["raw"]['exploit_status'] == "Существует":
+            bdu_data['private_exploit'] = True
+            bdu_data['private_exploit_sources'] = [
+                {
+                  "type": "bdu",
+                  "text": "BDU:PrivateExploit",
+                  "url": "https://bdu.fstec.ru/vul/" + bdu_data["raw"]['identifier'].split(":")[1]
+                }
+            ]
 
-    if bdu_data["raw"]['soft'] != []:
-        bdu_data['product_name'] = bdu_data["raw"]['soft'][0]['name']
+        if bdu_data["raw"]['exploit_status'] == "Существует в открытом доступе":
+            bdu_data['public_exploit'] = True
+            bdu_data['public_exploit_sources'] = [
+                {
+                  "type": "bdu",
+                  "text": "BDU:PublicExploit",
+                  "url": "https://bdu.fstec.ru/vul/" + bdu_data["raw"]['identifier'].split(":")[1]
+                }
+            ]
+
+        if bdu_data["raw"]['soft'] != []:
+            bdu_data['product_name'] = bdu_data["raw"]['soft'][0]['name']
 
     return bdu_data
 

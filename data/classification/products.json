@@ -990,7 +990,107 @@
         "prevalence": 0.8,
         "description": "Google Chrome is a popular, free web browser developed by Google. It was first released in 2008 and is available for various operating systems, including Microsoft Windows, Apple macOS, Linux, Android, and iOS.",
         "additional_detection_strings": [],
-        "short_cpes": ["a:google:chrome"]
+        "short_cpes": ["a:google:chrome"],
+        "vendor": "Google",
+        "country_of_origin": "USA"
+    },
+    "Autodesk 3ds Max": {
+        "prevalence": 0.6,
+        "description": "Autodesk 3ds Max, formerly 3D Studio and 3D Studio Max, is a professional 3D computer graphics program for making 3D animations, models, games and images",
+        "additional_detection_strings": [],
+        "vendor": "Autodesk",
+        "country_of_origin": "USA"
+    },
+    "Apache Dubbo": {
+        "prevalence": 0.5,
+        "description": "Apache Dubbo is an easy-to-use, high-performance WEB and RPC framework with builtin service discovery, traffic management, observability, security features, tools and best practices for building enterprise-level microservices",
+        "additional_detection_strings": [],
+        "vendor": "Apache",
+        "country_of_origin": "USA"
+    },
+    "Casdoor": {
+        "prevalence": 0.5,
+        "description": "Casdoor is an open-source UI-first Identity Access Management (IAM) / Single-Sign-On (SSO) platform with web UI supporting OAuth 2.0, OIDC, SAML, CAS, LDAP, SCIM, WebAuthn, TOTP, MFA, RADIUS, Google Workspace, Active Directory and Kerberos",
+        "additional_detection_strings": [],
+        "vendor": "Casdoor contributors",
+        "country_of_origin": "USA"
+    },
+    "Centreon": {
+        "prevalence": 0.5,
+        "description": "Centreon is an open-source network, system and application monitoring tool",
+        "additional_detection_strings": [],
+        "vendor": "Centreon",
+        "country_of_origin": "France"
+    },
+    "Google Web Toolkit (GWT)": {
+        "prevalence": 0.5,
+        "description": "Google Web Toolkit, or GWT Web Toolkit, is an open-source set of tools that allows web developers to create and maintain JavaScript front-end applications in Java",
+        "additional_detection_strings": [],
+        "vendor": "Google",
+        "country_of_origin": "USA"
+    },
+    "ManageEngine ServiceDesk Plus": {
+        "prevalence": 0.5,
+        "description": "Zoho ManageEngine ServiceDesk Plus is a unified service management platform for the digital enterprise",
+        "additional_detection_strings": [],
+        "vendor": "Zoho Corporation",
+        "country_of_origin": "India"
+    },
+    "Online-Exam-System": {
+        "prevalence": 0.3,
+        "description": "An open-source online examination system is a PHP app for setup online quiz with so many functionality",
+        "additional_detection_strings": [],
+        "vendor": "Sunny Prakash Tiwari",
+        "country_of_origin": "India"
+    },
+    "PySyft": {
+        "prevalence": 0.6,
+        "description": "PySyft is an open-source Python library for secure and private Deep Learning",
+        "additional_detection_strings": [],
+        "vendor": "OpenMined",
+        "country_of_origin": "USA"
+    },
+    "Visa Tokenisation Service (VTS)": {
+        "prevalence": 0.4,
+        "description": "The Visa Token Service (VTS) is a Visa-powered security technology that substitutes sensitive account data, such as the 16-digit account number, with a unique token that safeguards the underlying card details from being compromised",
+        "additional_detection_strings": [],
+        "vendor": "OpenMined",
+        "country_of_origin": "USA"
+    },
+    "Zulip Server": {
+        "prevalence": 0.4,
+        "description": "Zulip is an open-source team collaboration tool with unique topic-based threading that combines the best of email and chat to make remote work productive and delightful",
+        "additional_detection_strings": [],
+        "vendor": "Zulip",
+        "country_of_origin": "USA"
+    },
+    "iMind": {
+        "prevalence": 0.5,
+        "description": "iMind — браузерный сервис для проведения вебинаров и видеконференций",
+        "additional_detection_strings": [],
+        "vendor": "iMind",
+        "country_of_origin": "Russia"
+    },
+    "nginx": {
+        "prevalence": 0.5,
+        "description": "Nginx is an open-source web server that can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache",
+        "additional_detection_strings": [],
+        "vendor": "F5",
+        "country_of_origin": "USA"
+    },
+    "ntopng": {
+        "prevalence": 0.5,
+        "description": "ntopng is an open-source computer software for monitoring traffic on a computer network",
+        "additional_detection_strings": [],
+        "vendor": "ntopng",
+        "country_of_origin": "USA"
+    },
+    "spip": {
+        "prevalence": 0.5,
+        "description": "SPIP is an open-source software content management system designed for web site publishing, oriented towards online collaborative editing",
+        "additional_detection_strings": [],
+        "vendor": "SPIP",
+        "country_of_origin": "France"
     },
     "Chromium": {
         "prevalence": 0.8,
