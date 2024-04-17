@@ -5995,13 +5995,25 @@
         "additional_detection_strings": [
             "Apache Apisix"
         ],
-        "vendor": "Apache"
+        "vendor": "nghttp2.org"
     },
     "Apache HTTP Server": {
         "prevalence": 0.9,
         "description": "Apache HTTP Server is a free and open-source web server that delivers web content through the internet",
         "additional_detection_strings": [],
         "vendor": "Apache"
+    },
+    "Apache Traffic Server": {
+        "prevalence": 0.7,
+        "description": "The Apache Traffic Server is a modular, high-performance reverse proxy and forward proxy server, generally comparable to Nginx and Squid",
+        "additional_detection_strings": [],
+        "vendor": "Apache"
+    },
+    "nghttp2": {
+        "prevalence": 0.9,
+        "description": "nghttp2 is an implementation of HTTP/2 and its header compression algorithm HPACK in C",
+        "additional_detection_strings": [],
+        "vendor": "Tatsuhiro Tsujikawa"
     },
     "Buffalo WSR": {
         "prevalence": 0.3,

@@ -179,9 +179,10 @@ def get_bdu_data_raw(cve_id):
     return bdu_data
 
 
-def get_bdu_data(cve_id):
+def get_bdu_data(cve_id, source_config):
     raw_data = get_bdu_data_raw(cve_id)
     bdu_data = {"raw": raw_data}
+
 
     if raw_data != {}:
         bdu_data['description'] = ""
@@ -190,7 +191,9 @@ def get_bdu_data(cve_id):
         if 'cvss3' in bdu_data["raw"]:
             bdu_data['cvss_base_score'] = bdu_data["raw"]['cvss3']['score']
 
-        bdu_data['description'] = bdu_data["raw"]['description']
+        if source_config['bdu_use_vulnerability_descriptions_flag']:
+            bdu_data['description'] = bdu_data["raw"]['description']
+
         if 'cwe' in bdu_data["raw"]:
             bdu_data['cwes'] = bdu_data["raw"]['cwe']
 
@@ -224,8 +227,9 @@ def get_bdu_data(cve_id):
                 }
             ]
 
-        if bdu_data["raw"]['soft'] != []:
-            bdu_data['product_name'] = bdu_data["raw"]['soft'][0]['name']
+        if source_config['bdu_use_product_names_flag']:
+            if bdu_data["raw"]['soft'] != []:
+                bdu_data['product_name'] = bdu_data["raw"]['soft'][0]['name']
 
     return bdu_data
 

@@ -19,6 +19,8 @@ parser.add_argument('--result-html-path', help='Path to the results file in html
 parser.add_argument('--result-json-path', help='Path to the results file in json format')
 parser.add_argument('--rewrite-flag', help='Rewrite Flag (True/False, Default - False)')
 parser.add_argument('--vulners-use-github-exploits-flag', help='Use Vulners Github exploits data Flag (True/False, Default - True)')
+parser.add_argument('--bdu-use-product-names-flag', help='Use BDU product names Flag (True/False, Default - True)')
+parser.add_argument('--bdu-use-vulnerability-descriptions-flag', help='Use BDU vulnerability descriptions data Flag (True/False, Default - True)')
 
 args = parser.parse_args()
 banner = '''
@@ -42,6 +44,14 @@ if args.rewrite_flag == "True" or args.rewrite_flag == "true":
 source_config['vulners_use_github_exploits_flag'] = True
 if args.vulners_use_github_exploits_flag == "False" or args.vulners_use_github_exploits_flag == "false":
     source_config['vulners_use_github_exploits_flag'] = False
+
+source_config['bdu_use_product_names_flag'] = True
+if args.bdu_use_product_names_flag == "False" or args.bdu_use_product_names_flag == "false":
+    source_config['bdu_use_product_names_flag'] = False
+
+source_config['bdu_use_vulnerability_descriptions_flag'] = True
+if args.bdu_use_vulnerability_descriptions_flag == "False" or args.bdu_use_vulnerability_descriptions_flag == "false":
+    source_config['bdu_use_vulnerability_descriptions_flag'] = False
 
 source_config['data_sources'] = []
 if args.cve_data_sources:

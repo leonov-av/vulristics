@@ -634,7 +634,7 @@ def get_comments_for_cves(source, processed_cves):
 def get_vulnerability_report_for_report_config(cve_related_data, cve_scores, report_config, profile_data):
     json_data = dict()
     html_content = "<center><img class=\"logo\" src=\"" + report_config['vuln_icons_source'] + "/vulristics.png\"></center>"
-    # html_content += "<center><img class=\"logo2\" src=\"" + report_config['vuln_icons_source'] + "/lpw_avleonov.png\"></center>"
+    html_content += "<center><img class=\"logo2\" src=\"" + report_config['vuln_icons_source'] + "/lpw_avleonov.png\"></center>"
 
     combined_cve_data = cve_related_data['combined_cve_data_all']
 
