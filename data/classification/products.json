@@ -2830,12 +2830,6 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "HTTP/2 Server": {
-        "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": [],
-        "vendor": "Microsoft"
-    },
     "Windows Remote Desktop Gateway (RD Gateway)": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -6715,10 +6709,12 @@
         "additional_detection_strings": ["Adobe Acrobat", "Acrobat Reader"],
         "vendor": "Adobe"
     },
-    "HTTP/2 protocol": {
+    "HTTP/2": {
+        "detection_priority": -0.3,
+        "detection_priority_comment": "Protocol",
         "prevalence": 0.9,
         "description": "HTTP/2 is a major revision of the HTTP network protocol used by the World Wide Web",
-        "additional_detection_strings": [],
+        "additional_detection_strings": ["HTTP/2"],
         "vendor": "Internet Engineering Task Force"
     },
     "TeamCity": {
@@ -6864,6 +6860,8 @@
         "vendor": "Oracle"
     },
     "BIND": {
+        "detection_priority": -0.1,
+        "detection_priority_comment": "--bind",
         "prevalence": 0.7,
         "description": "BIND is a suite of software for interacting with the Domain Name System",
         "additional_detection_strings": [],
@@ -7426,5 +7424,23 @@
         "description": "A family of network security devices from Cisco that provide firewall, intrusion prevention (IPS) and virtual private network (VPN) capabilities",
         "additional_detection_strings": ["Cisco Adaptive Security Appliance"],
         "vendor": "Cisco"
+    },
+    "ArubaOS": {
+        "prevalence": 0.4,
+        "description": "ArubaOS is a network operating system for Aruba networking equipment, including switches, access points, and gateways",
+        "additional_detection_strings": ["Aruba"],
+        "vendor": "HPE Aruba Networking"
+    },
+    "Flatpak": {
+        "prevalence": 0.4,
+        "description": "Flatpak is a utility for software deployment and package management for Linux",
+        "additional_detection_strings": [],
+        "vendor": "Flatpak Team"
+    },
+    "FreeIPA": {
+        "prevalence": 0.8,
+        "description": "FreeIPA is a free and open source identity management system",
+        "additional_detection_strings": [],
+        "vendor": "Red Hat"
     }
 }
