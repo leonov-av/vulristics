@@ -73,7 +73,7 @@ def get_vulns_filtered_by_public_exploit_exists(public_exploit_exists, current_c
     vulnerabilities = dict()
     for cve_id in current_cve_data:
         exploit_found = False
-        if cve_scores[cve_id]['components']['Public Exploit Exists']['value'] == 1:
+        if cve_scores[cve_id]['components']['Exploit Exists']['value'] == 1:
             exploit_found = True
         if exploit_found == True and public_exploit_exists == "Yes":
             vulnerabilities[cve_id] = current_cve_data[cve_id]

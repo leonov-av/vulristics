@@ -2,6 +2,8 @@ from vulristics_code import functions_report_vulnerabilities, functions_report_m
 import argparse
 import re
 
+current_version = "1.0.5"
+
 parser = argparse.ArgumentParser(description='An extensible framework for analyzing publicly available information about vulnerabilities')
 const = ""
 
@@ -21,6 +23,7 @@ parser.add_argument('--rewrite-flag', help='Rewrite Flag (True/False, Default - 
 parser.add_argument('--vulners-use-github-exploits-flag', help='Use Vulners Github exploits data Flag (True/False, Default - True)')
 parser.add_argument('--bdu-use-product-names-flag', help='Use BDU product names Flag (True/False, Default - True)')
 parser.add_argument('--bdu-use-vulnerability-descriptions-flag', help='Use BDU vulnerability descriptions data Flag (True/False, Default - True)')
+parser.add_argument('-v', '--version', action='version', version=current_version)
 
 args = parser.parse_args()
 banner = '''

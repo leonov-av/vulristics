@@ -137,7 +137,7 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
                         is_public_exploit = True
 
     if is_public_exploit:
-        public_exploit_exists_n = 1.0
+        exploit_exists_n = 1.0
         links_str = list()
         comment_exists = False
         if 'vulners_cve_data_all' in cve_data_all:
@@ -145,18 +145,18 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
                 for exploit_data in cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources']:
                     links_str.append("<a href=\"https://vulners.com/" + exploit_data['type'] + "/"
                                      + exploit_data['id'] + "\">" + "[" + exploit_data['type'] + "] " + exploit_data['title'] + "</a>")
-                public_exploit_exists_c = "The existence of a publicly available exploit is mentioned on Vulners website (" + ", ".join(links_str) + ")"
+                exploit_exists_c = "The existence of a publicly available exploit is mentioned on Vulners website (" + ", ".join(links_str) + ")"
                 comment_exists = True
         if 'ms_cve_data_all' in cve_data_all:
             if cve in cve_data_all['ms_cve_data_all']:
                 if cve_data_all['ms_cve_data_all'][cve]['public_exploit'] and not comment_exists:
-                    public_exploit_exists_n = cve_data_all['ms_cve_data_all'][cve]['public_exploit_level']
-                    public_exploit_exists_c = "The exploit's existence is mentioned in Microsoft CVSS Temporal Metrics (" +\
+                    exploit_exists_n = cve_data_all['ms_cve_data_all'][cve]['public_exploit_level']
+                    exploit_exists_c = "The exploit's existence is mentioned in Microsoft CVSS Temporal Metrics (" +\
                                               cve_data_all['ms_cve_data_all'][cve]['public_exploit_level_name'] + ")"
                     comment_exists = True
     else:
-        public_exploit_exists_n = 0
-        public_exploit_exists_c = "The exploit's existence is NOT mentioned in available Data Sources"
+        exploit_exists_n = 0
+        exploit_exists_c = "The exploit's existence is NOT mentioned in available Data Sources"
 
 
     # I don't change previous method, because it requres the changes in connector.
@@ -169,28 +169,28 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
                                "ms_cve_data_all"]:  # For them separate code above
             if cve in cve_data_all[data_source]:
                 if "public_exploit" in cve_data_all[data_source][cve]:
-                    public_exploit_exists_n = 1.0
+                    exploit_exists_n = 1.0
                     for mention in cve_data_all[data_source][cve]['public_exploit_sources']:
                         mentioned.append("<a href=\"" + mention['url'] + "\">" +  mention['text'] + "</a>")
     if mentioned != list():
         if len(mentioned) == 1:
-            public_exploit_exists_c = "The existence of a publicly available exploit is mentioned on " + ", ".join(mentioned) + " website"
+            exploit_exists_c = "The existence of a publicly available exploit is mentioned on " + ", ".join(mentioned) + " website"
         else:
-            public_exploit_exists_c = "The existence of a publicly available exploit is mentioned on " + ", ".join(mentioned) + " websites"
+            exploit_exists_c = "The existence of a publicly available exploit is mentioned on " + ", ".join(mentioned) + " websites"
 
-    if public_exploit_exists_n == 0:
+    if exploit_exists_n == 0:
         for data_source in cve_data_all:
             if cve in cve_data_all[data_source]:
-                public_exploit_exists_n = 0.5
                 if "private_exploit" in cve_data_all[data_source][cve]:
+                    exploit_exists_n = 0.5
                     for mention in cve_data_all[data_source][cve]['private_exploit_sources']:
                         mentioned.append("<a href=\"" + mention['url'] + "\">" + mention['text'] + "</a>")
         if mentioned != list():
             if len(mentioned) == 1:
-                public_exploit_exists_c = "The existence of a private exploit is mentioned on " + ", ".join(
+                exploit_exists_c = "The existence of a private exploit is mentioned on " + ", ".join(
                     mentioned) + " website"
             else:
-                public_exploit_exists_c = "The existence of a private exploits is mentioned on " + ", ".join(
+                exploit_exists_c = "The existence of a private exploits is mentioned on " + ", ".join(
                     mentioned) + " websites"
 
     public_exploit_exists_k = 17
@@ -379,10 +379,10 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
         'weight': vulnerable_product_is_common_k,
         'comment': vulnerable_product_is_common_c
     }
-    vvs_struct['components']['Public Exploit Exists'] = {
-        'value': public_exploit_exists_n,
+    vvs_struct['components']['Exploit Exists'] = {
+        'value': exploit_exists_n,
         'weight': public_exploit_exists_k,
-        'comment': public_exploit_exists_c
+        'comment': exploit_exists_c
     }
     vvs_struct['components']['Exploited in the Wild'] = {
         'value': wild_exploited_n,
