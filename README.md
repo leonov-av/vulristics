@@ -65,11 +65,12 @@ HTML report generated: reports/cve-2024-20723_report_with_comments_ext_img.html
 $ python3 vulristics.py -h
 usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR] [--mspt-month MSPT_MONTH]
                      [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH] [--cve-project-name CVE_PROJECT_NAME]
-                     [--cve-list-path CVE_LIST_PATH] [--cve-comments-path CVE_COMMENTS_PATH]
-                     [--cve-data-sources CVE_DATA_SOURCES] [--profile-json-path PROFILE_JSON_PATH]
-                     [--result-formats RESULT_FORMATS] [--result-html-path RESULT_HTML_PATH]
+                     [--cve-list-path CVE_LIST_PATH] [--cve-comments-path CVE_COMMENTS_PATH] [--cve-data-sources CVE_DATA_SOURCES]
+                     [--profile-json-path PROFILE_JSON_PATH] [--result-formats RESULT_FORMATS] [--result-html-path RESULT_HTML_PATH]
                      [--result-json-path RESULT_JSON_PATH] [--rewrite-flag REWRITE_FLAG]
                      [--vulners-use-github-exploits-flag VULNERS_USE_GITHUB_EXPLOITS_FLAG]
+                     [--bdu-use-product-names-flag BDU_USE_PRODUCT_NAMES_FLAG]
+                     [--bdu-use-vulnerability-descriptions-flag BDU_USE_VULNERABILITY_DESCRIPTIONS_FLAG] [-v]
 
 An extensible framework for analyzing publicly available information about vulnerabilities
 
@@ -103,6 +104,11 @@ options:
                         Rewrite Flag (True/False, Default - False)
   --vulners-use-github-exploits-flag VULNERS_USE_GITHUB_EXPLOITS_FLAG
                         Use Vulners Github exploits data Flag (True/False, Default - True)
+  --bdu-use-product-names-flag BDU_USE_PRODUCT_NAMES_FLAG
+                        Use BDU product names Flag (True/False, Default - True)
+  --bdu-use-vulnerability-descriptions-flag BDU_USE_VULNERABILITY_DESCRIPTIONS_FLAG
+                        Use BDU vulnerability descriptions data Flag (True/False, Default - True)
+  -v, --version         show program's version number and exit
 ```
 
 ### Installation
