@@ -7442,5 +7442,11 @@
         "description": "FreeIPA is a free and open source identity management system",
         "additional_detection_strings": [],
         "vendor": "Red Hat"
+    },
+    "Zabbix": {
+        "prevalence": 0.8,
+        "description": "Zabbix is an open-source software tool to monitor IT infrastructure such as networks, servers, virtual machines, and cloud services",
+        "additional_detection_strings": [],
+        "vendor": "Zabbix LLC"
     }
 }
