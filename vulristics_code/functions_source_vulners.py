@@ -3,6 +3,7 @@ import os
 import json
 import credentials
 import vulners
+import re
 
 reuse_vulners_processed = False
 
@@ -111,7 +112,26 @@ def collect_vulners_data(vulners_id, rewrite_flag):
                             {"id": bulletin['id'], "type": bulletin['type'], "title": bulletin['title'], "href": bulletin['href']})
         if 'exploit' in vulners_data['bulletins_types']:
             vulners_data['public_exploit'] = True
-            vulners_data['public_exploit_sources'] = vulners_data['bulletins_types']['exploit']
+            vulners_data['public_exploit_sources'] = list()
+            for exploit in vulners_data['bulletins_types']['exploit']:
+                if exploit['type'] == "githubexploit":
+                    part_github = re.sub("https://github.com/","",exploit['href']).upper()
+                    part_github = re.sub("/",":",part_github)
+                    text = "Vulners:PublicExploit:GitHub:" + part_github
+                    vulners_data['public_exploit'] = True
+                    vulners_data['public_exploit_sources'].append({'type': 'vulners_exploit_type_link',
+                                                                   'subtype': exploit['type'],
+                                                                   'vulners_id': exploit['id'],
+                                                                   'text': text,
+                                                                   'url':exploit['href']})
+                else:
+                    text = "Vulners:PublicExploit:" + exploit['id']
+                    vulners_data['public_exploit'] = True
+                    vulners_data['public_exploit_sources'].append({'type': 'vulners_exploit_type_link',
+                                                                   'subtype': exploit['type'],
+                                                                   'vulners_id': exploit['id'],
+                                                                   'text': text,
+                                                                   'url':exploit['href']})
         else:
             vulners_data['public_exploit'] = False
             vulners_data['public_exploit_sources'] = list()
@@ -193,7 +213,7 @@ def get_vulners_data(vulners_id, source_config):
     if vulners_use_github_exploits == False:
         new_public_exploit_sources = list()
         for source in vulners_data['public_exploit_sources']:
-            if source['type'] != 'githubexploit':
+            if source['subtype'] != 'githubexploit':
                 new_public_exploit_sources.append(source)
         if new_public_exploit_sources == list():
             vulners_data['public_exploit'] = False

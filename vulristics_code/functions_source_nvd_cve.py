@@ -150,7 +150,7 @@ def get_nvd_cve_data(cve_id, source_config):
                 if 'tags' in reference:
                     if 'Exploit' in reference['tags']:
                         url = reference['url']
-                        text = "NVD:Exploit:" + re.sub("/.*","", re.sub("^https*://","", url))
+                        text = "NVD:PublicExploit:" + re.sub("/.*","", re.sub("^https*://","", url))
                         nvd_cve_data['public_exploit'] = True
                         nvd_cve_data['public_exploit_sources'] = list()
                         nvd_cve_data['public_exploit_sources'].append({'type': 'nvd_exploit_type_link',

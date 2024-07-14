@@ -109,69 +109,27 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
             all_vendors_in_report) + " vendors"
 
     ######## Public Exploit
-    # Currently works only with Vulners data
-    is_public_exploit = False
-    if 'vulners_cve_data_all' in cve_data_all:
-        if cve in cve_data_all['vulners_cve_data_all']:
-            if 'public_exploit' in cve_data_all['vulners_cve_data_all'][cve]:
-                is_public_exploit = cve_data_all['vulners_cve_data_all'][cve]['public_exploit']
 
-    # Exclusions
-    new_public_exploit_sources = list()
-    if is_public_exploit:
-        for exploit_source in cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources']:
-            exploit_id = exploit_source['id'] + "_" + exploit_source['type']
-            if not exploit_id.lower() in data_exclusions.exclusions['not_an_exploit']:
-                new_public_exploit_sources.append(exploit_source)
-                is_public_exploit = True
-
-    if 'vulners_cve_data_all' in cve_data_all:
-        if cve in cve_data_all['vulners_cve_data_all']:
-            cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources'] = new_public_exploit_sources
-            if new_public_exploit_sources == list():
-                is_public_exploit = False
-                cve_data_all['vulners_cve_data_all'][cve]['public_exploit'] = False
-            if 'ms_cve_data_all' in cve_data_all:
-                if cve in cve_data_all['ms_cve_data_all']:
-                    if cve_data_all['ms_cve_data_all'][cve]['public_exploit']:
-                        is_public_exploit = True
-
-    if is_public_exploit:
-        exploit_exists_n = 1.0
-        links_str = list()
-        comment_exists = False
-        if 'vulners_cve_data_all' in cve_data_all:
-            if cve_data_all['vulners_cve_data_all'][cve]['public_exploit'] and not comment_exists:
-                for exploit_data in cve_data_all['vulners_cve_data_all'][cve]['public_exploit_sources']:
-                    links_str.append("<a href=\"https://vulners.com/" + exploit_data['type'] + "/"
-                                     + exploit_data['id'] + "\">" + "[" + exploit_data['type'] + "] " + exploit_data['title'] + "</a>")
-                exploit_exists_c = "The existence of a publicly available exploit is mentioned on Vulners website (" + ", ".join(links_str) + ")"
-                comment_exists = True
-        if 'ms_cve_data_all' in cve_data_all:
-            if cve in cve_data_all['ms_cve_data_all']:
-                if cve_data_all['ms_cve_data_all'][cve]['public_exploit'] and not comment_exists:
-                    exploit_exists_n = cve_data_all['ms_cve_data_all'][cve]['public_exploit_level']
-                    exploit_exists_c = "The exploit's existence is mentioned in Microsoft CVSS Temporal Metrics (" +\
-                                              cve_data_all['ms_cve_data_all'][cve]['public_exploit_level_name'] + ")"
-                    comment_exists = True
-    else:
-        exploit_exists_n = 0
-        exploit_exists_c = "The exploit's existence is NOT mentioned in available Data Sources"
-
-
-    # I don't change previous method, because it requres the changes in connector.
-    # I just add the processing of other sources in case there are no links to exploits
-    # Unified method for public exploits
     mentioned = list()
-
+    valid_mentions = list()
+    exploit_exists_n = 0
+    exploit_exists_c = "The existence of publicly available or private exploit is NOT mentioned in available Data Sources"
     for data_source in cve_data_all:
-        if data_source not in ["vulners_cve_data_all",
-                               "ms_cve_data_all"]:  # For them separate code above
+        if data_source not in ["ms_cve_data_all"]:  # For them separate code above
             if cve in cve_data_all[data_source]:
                 if "public_exploit" in cve_data_all[data_source][cve]:
-                    exploit_exists_n = 1.0
                     for mention in cve_data_all[data_source][cve]['public_exploit_sources']:
-                        mentioned.append("<a href=\"" + mention['url'] + "\">" +  mention['text'] + "</a>")
+                        if 'vulners_id' in mention: #Exlusions
+                            exploit_id = mention['vulners_id'] + "_" + mention['subtype']
+                            if not exploit_id.lower() in data_exclusions.exclusions['not_an_exploit']:
+                                exploit_exists_n = 1.0
+                                valid_mentions.append(mention)
+                        else:
+                            exploit_exists_n = 1.0
+                            valid_mentions.append(mention)
+    for mention in valid_mentions:
+        mentioned.append("<a href=\"" + mention['url'] + "\">" + mention['text'] + "</a>")
+
     if mentioned != list():
         if len(mentioned) == 1:
             exploit_exists_c = "The existence of a publicly available exploit is mentioned on " + ", ".join(mentioned) + " website"
@@ -179,12 +137,20 @@ def get_vvs_struct_for_cve(cve, cve_data_all, profile):
             exploit_exists_c = "The existence of a publicly available exploit is mentioned on " + ", ".join(mentioned) + " websites"
 
     if exploit_exists_n == 0:
+        mentioned = list()
         for data_source in cve_data_all:
             if cve in cve_data_all[data_source]:
                 if "private_exploit" in cve_data_all[data_source][cve]:
-                    exploit_exists_n = 0.5
-                    for mention in cve_data_all[data_source][cve]['private_exploit_sources']:
-                        mentioned.append("<a href=\"" + mention['url'] + "\">" + mention['text'] + "</a>")
+                    if cve_data_all[data_source][cve]["private_exploit"]:
+                        for mention in cve_data_all[data_source][cve]['private_exploit_sources']:
+                            if 'value' in mention:
+                                if exploit_exists_n == 0:
+                                    exploit_exists_n = mention['value']
+                                elif exploit_exists_n < mention['value']:
+                                    exploit_exists_n = mention['value']
+                            else:
+                                exploit_exists_n = 0.5
+                            mentioned.append("<a href=\"" + mention['url'] + "\">" + mention['text'] + "</a>")
         if mentioned != list():
             if len(mentioned) == 1:
                 exploit_exists_c = "The existence of a private exploit is mentioned on " + ", ".join(

@@ -2,7 +2,7 @@ from vulristics_code import functions_report_vulnerabilities, functions_report_m
 import argparse
 import re
 
-current_version = "1.0.5"
+current_version = "1.0.6"
 
 parser = argparse.ArgumentParser(description='An extensible framework for analyzing publicly available information about vulnerabilities')
 const = ""
@@ -10,7 +10,7 @@ const = ""
 parser.add_argument('--report-type', help='Report type (ms_patch_tuesday, ms_patch_tuesday_extended, cve_list or custom_profile)')
 parser.add_argument('--mspt-year', help='Microsoft Patch Tuesday year')
 parser.add_argument('--mspt-month', help='Microsoft Patch Tuesday month')
-parser.add_argument('--mspt-comments-links-path', help='Microsoft Patch Tuesday comments links file')
+parser.add_argument('--mspt-comments-links-path', help='Microsoft Patch Tuesday comments links file.\nFormat:\nQualys|Microsoft Patch Tuesday, July 2024 Security Update Review|https://blog.qualys.com/vulnerabilities-threat-research/2024/07/09/microsoft-patch-tuesday-july-2024-security-update-review')
 parser.add_argument('--cve-project-name', help='Name of the CVE Project')
 parser.add_argument('--cve-list-path', help='Path to the list of CVE IDs')
 parser.add_argument('--cve-comments-path', help='Path to the CVE comments file')

@@ -14,7 +14,7 @@ python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" 
 ```
 * Microsoft Patch Tuesday ([HTML report example](https://avleonov.com/vulristics_reports/ms_patch_tuesday_november2021_report_with_comments_ext_img.html))
 ```buildoutcfg
-python3 vulristics.py --report-type "ms_patch_tuesday" --mspt-year 2021 --mspt-month "November" --rewrite-flag "True"
+python3 vulristics.py --report-type "ms_patch_tuesday" --mspt-year 2024 --mspt-month "July" --rewrite-flag "True"
 ```
 
 ### Example of output
@@ -62,11 +62,12 @@ HTML report generated: reports/cve-2024-20723_report_with_comments_ext_img.html
 
 ### Options
 ```buildoutcfg
-$ python3 vulristics.py -h
+$ $ python3 vulristics.py --help
 usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR] [--mspt-month MSPT_MONTH]
                      [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH] [--cve-project-name CVE_PROJECT_NAME]
-                     [--cve-list-path CVE_LIST_PATH] [--cve-comments-path CVE_COMMENTS_PATH] [--cve-data-sources CVE_DATA_SOURCES]
-                     [--profile-json-path PROFILE_JSON_PATH] [--result-formats RESULT_FORMATS] [--result-html-path RESULT_HTML_PATH]
+                     [--cve-list-path CVE_LIST_PATH] [--cve-comments-path CVE_COMMENTS_PATH]
+                     [--cve-data-sources CVE_DATA_SOURCES] [--profile-json-path PROFILE_JSON_PATH]
+                     [--result-formats RESULT_FORMATS] [--result-html-path RESULT_HTML_PATH]
                      [--result-json-path RESULT_JSON_PATH] [--rewrite-flag REWRITE_FLAG]
                      [--vulners-use-github-exploits-flag VULNERS_USE_GITHUB_EXPLOITS_FLAG]
                      [--bdu-use-product-names-flag BDU_USE_PRODUCT_NAMES_FLAG]
@@ -83,7 +84,9 @@ options:
   --mspt-month MSPT_MONTH
                         Microsoft Patch Tuesday month
   --mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH
-                        Microsoft Patch Tuesday comments links file
+                        Microsoft Patch Tuesday comments links file. Format: Qualys|Microsoft Patch Tuesday, July 2024
+                        Security Update Review|https://blog.qualys.com/vulnerabilities-threat-research/2024/07/09/microsoft-
+                        patch-tuesday-july-2024-security-update-review
   --cve-project-name CVE_PROJECT_NAME
                         Name of the CVE Project
   --cve-list-path CVE_LIST_PATH

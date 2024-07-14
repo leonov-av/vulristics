@@ -135,7 +135,7 @@ def add_ms_cve_severity(ms_cve_data):
     return ms_cve_data
 
 
-def add_ms_cve_cvss_base_score(ms_cve_data):
+def add_ms_cve_cvss_base_score(ms_cve_data, cve_id):
     all_base_score = list()
     all_exploit = list()
     cvss_base_score = ""
@@ -164,21 +164,29 @@ def add_ms_cve_cvss_base_score(ms_cve_data):
     exploit_value_name = ""
     exploit_value_name_c = 0
     if exploit_value == 1:
-        exploit_value_name = "Proof-of-Concept Exploit"
+        exploit_value_name = "PoC"
         exploit_value_name_c = 0.4
     elif exploit_value == 2:
-        exploit_value_name = "Functional Exploit"
+        exploit_value_name = "Functional"
         exploit_value_name_c = 0.6
     elif exploit_value == 3:
-        exploit_value_name = "Autonomous Exploit"
+        exploit_value_name = "Autonomous"
         exploit_value_name_c = 0.8
     
     if exploit_value != 0:
-        ms_cve_data['public_exploit'] = True
+        ms_cve_data['private_exploit'] = True
     else:
-        ms_cve_data['public_exploit'] = False
-    ms_cve_data['public_exploit_level_name'] = exploit_value_name
-    ms_cve_data['public_exploit_level'] = exploit_value_name_c
+        ms_cve_data['private_exploit'] = False
+
+    if ms_cve_data['private_exploit']:
+        ms_cve_data['private_exploit_sources'] = [
+            {
+                "type": "microsoft",
+                "text": "Microsoft:PrivateExploit:" + exploit_value_name,
+                "url": "https://msrc.microsoft.com/update-guide/en-US/vulnerability/" + cve_id,
+                "value": exploit_value_name_c,
+            }
+        ]
 
     ms_cve_data['cvss_base_score'] = cvss_base_score
     return ms_cve_data
@@ -197,7 +205,7 @@ def get_ms_cve_data(cve_id, source_config):
         else:
             ms_cve_data['exploited'] = "No"
         ms_cve_data = add_ms_cve_severity(ms_cve_data)
-        ms_cve_data = add_ms_cve_cvss_base_score(ms_cve_data)
+        ms_cve_data = add_ms_cve_cvss_base_score(ms_cve_data, cve_id)
     return ms_cve_data
 
 

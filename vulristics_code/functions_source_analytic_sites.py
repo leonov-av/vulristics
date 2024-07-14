@@ -34,52 +34,54 @@ def get_qualys_link(query):
 
     html_with_coveo_key = requests.get("https://community.qualys.com/search/#q=Patch&t=Blog&sort=relevancy",
                                        headers=headers).text
-    coveo_key = re.findall('''"coveo":{"public":{"api":{"key":"([^"]*)"}}}''', html_with_coveo_key)[0]
+    if re.findall('''"coveo":{"public":{"api":{"key":"([^"]*)"}}}''', html_with_coveo_key):
+        coveo_key = re.findall('''"coveo":{"public":{"api":{"key":"([^"]*)"}}}''', html_with_coveo_key)[0]
 
-    headers = {
-        'Connection': 'keep-alive',
-        'Authorization': 'Bearer ' + coveo_key,
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36',
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'Accept': '*/*',
-        'Origin': 'https://community.qualys.com',
-        'Sec-Fetch-Site': 'cross-site',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Dest': 'empty',
-        'Referer': 'https://community.qualys.com/',
-        'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
-    }
+        headers = {
+            'Connection': 'keep-alive',
+            'Authorization': 'Bearer ' + coveo_key,
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'Accept': '*/*',
+            'Origin': 'https://community.qualys.com',
+            'Sec-Fetch-Site': 'cross-site',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Dest': 'empty',
+            'Referer': 'https://community.qualys.com/',
+            'Accept-Language': 'en-US,en;q=0.9,ru;q=0.8',
+        }
 
-    params = (
-        ('searchHub', 'CommunitySearch'),
-    )
+        params = (
+            ('searchHub', 'CommunitySearch'),
+        )
 
-    data = {
-        'q': query,
-        'cq': '@source=(Blog,Notifications)',
-        'searchHub': 'CommunitySearch',
-        'tab': 'Blog',
-        'locale': 'en',
-        'firstResult': '0',
-        'numberOfResults': '10',
-        'excerptLength': '200',
-        'filterField': '@foldingcollection',
-        'filterFieldRange': '2',
-        'enableDidYouMean': 'true',
-        'sortCriteria': 'relevancy'
-    }
+        data = {
+            'q': query,
+            'cq': '@source=(Blog,Notifications)',
+            'searchHub': 'CommunitySearch',
+            'tab': 'Blog',
+            'locale': 'en',
+            'firstResult': '0',
+            'numberOfResults': '10',
+            'excerptLength': '200',
+            'filterField': '@foldingcollection',
+            'filterFieldRange': '2',
+            'enableDidYouMean': 'true',
+            'sortCriteria': 'relevancy'
+        }
 
-    response = requests.post('https://platform.cloud.coveo.com/rest/search/v2', headers=headers, params=params,
-                             data=data)
-    for result in response.json()['results']:
-        # print(result['title'])
-        result_status = True
-        for keyword in query.split(" "):
-            if not keyword in result['title']:
-                result_status = False
-        if result_status:
-            return ({'title': result['title'], 'url': result['uri']})
-
+        response = requests.post('https://platform.cloud.coveo.com/rest/search/v2', headers=headers, params=params,
+                                 data=data)
+        for result in response.json()['results']:
+            # print(result['title'])
+            result_status = True
+            for keyword in query.split(" "):
+                if not keyword in result['title']:
+                    result_status = False
+            if result_status:
+                return ({'title': result['title'], 'url': result['uri']})
+    else:
+        result_status = False
 
 def get_qualys_text_from_url(url):
     headers = {

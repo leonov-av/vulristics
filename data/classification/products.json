@@ -2032,6 +2032,7 @@
         "additional_detection_strings": [
             "Exchange Server"
         ],
+        "short_cpes": ["a:microsoft:exchange_server"],
         "vendor": "Microsoft"
     },
     "Microsoft Office Online Server": {
@@ -7448,5 +7449,12 @@
         "description": "Zabbix is an open-source software tool to monitor IT infrastructure such as networks, servers, virtual machines, and cloud services",
         "additional_detection_strings": [],
         "vendor": "Zabbix LLC"
+    },
+    "Polkit": {
+        "prevalence": 0.9,
+        "description": "polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:polkit_project:polkit"],
+        "vendor": "polkit"
     }
 }
