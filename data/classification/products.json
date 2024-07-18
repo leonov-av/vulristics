@@ -128,13 +128,6 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "Windows Encrypting File System": {
-        "prevalence": 0.9,
-        "description": "Encrypting File System (EFS) on Microsoft Windows is a feature introduced in version 3.0 of NTFS that provides filesystem-level encryption",
-        "additional_detection_strings": [
-            "EFS"
-        ]
-    },
     "Windows TCP/IP": {
         "prevalence": 0.9,
         "description": "Windows component",
@@ -182,12 +175,6 @@
         "description": "Windows component",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
-    },
-    "Kerberos": {
-        "prevalence": 1,
-        "description": "Kerberos is a protocol for authenticating service requests between trusted hosts across an untrusted network, such as the internet",
-        "additional_detection_strings": [],
-        "vendor": "MIT"
     },
     "Microsoft Defender": {
         "prevalence": 0.8,
@@ -370,7 +357,7 @@
         "vendor": "Microsoft"
     },
     ".NET Core and Visual Studio": {
-        "prevalence": 0.8,
+        "prevalence": 0.7,
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -381,19 +368,30 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "7-Zip": {
+    "KeePass": {
         "prevalence": 0.5,
         "description": "KeePass is a free open source password manager, which helps you to manage your passwords in a secure way",
         "additional_detection_strings": [],
         "vendor": "KeePass"
     },
-    "KeePass": {
+    "Certifi collection": {
         "prevalence": 0.5,
-        "description": "7-Zip is a file archiver with a high compression ratio",
+        "detection_priority": -3,
+        "detection_priority_comment": "Certificates",
+        "description": "Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness of SSL certificates while verifying the identity of TLS hosts",
+        "additional_detection_strings": ["Certifi "],
+        "vendor": "Certifi"
+    },
+    "7-Zip": {
+        "prevalence": 0.5,
+        "description": "7-Zip is a free and open-source file archiver, a utility used to place groups of files within compressed containers known as \"archives\"",
+        "alternative_names": [],
         "additional_detection_strings": [
             "7z.dll"
         ],
-        "vendor": "7-Zip"
+        "short_cpes": [],
+        "vendor": "Igor Pavlov",
+        "product_url": "https://www.7-zip.org/"
     },
     "Flask": {
         "prevalence": 0.5,
@@ -481,13 +479,21 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "389 Directory Server": {
+        "prevalence": 0.5,
+        "description": "389 Directory Server is a highly usable, fully featured, reliable and secure LDAP server implementation",
+        "additional_detection_strings": [
+            "389-ds-base LDAP server"
+        ],
+        "product_url": "https://github.com/389ds/389-ds-base",
+        "vendor": "Red Hat, Inc."
+    },
     "Windows LDAP": {
         "prevalence": 0.9,
         "description": "Windows LDAP (Lightweight Directory Access Protocol) is an open and cross platform protocol used for directory services authentication",
         "detection_priority": -0.3,
         "detection_priority_comment": "Conflict with Log4j2 detection",
         "additional_detection_strings": [
-            "LDAP",
             "Windows Lightweight Directory Access Protocol"
         ],
         "vendor": "Microsoft"
@@ -843,6 +849,8 @@
     "Windows NTFS": {
         "prevalence": 0.8,
         "description": "The default file system of the Windows NT family",
+        "detection_priority": -0.1,
+        "detection_priority_comment": "CVE-2023-52168: The NtfsHandler.cpp NTFS handler in 7-Zip before...",
         "additional_detection_strings": [
             "NTFS"
         ],
@@ -2034,6 +2042,59 @@
         ],
         "short_cpes": ["a:microsoft:exchange_server"],
         "vendor": "Microsoft"
+    },
+    "OpenTelemetry": {
+        "prevalence": 0.5,
+        "description": "OpenTelemetry is a collection of APIs, SDKs, and tools. Use it to instrument, generate, collect, and export telemetry data (metrics, logs and traces) to help you analyze your software's performance and behavior",
+        "alternative_names": [],
+        "additional_detection_strings": [],
+        "short_cpes": ["a:opentelemetry:opentelemetry"],
+        "vendor": "OpenTelemetry",
+        "product_url": "https://opentelemetry.io/"
+    },
+    "ZNC": {
+        "prevalence": 0.5,
+        "description": "ZNC is an advanced IRC bouncer that is left connected so an IRC client can disconnect/reconnect without losing the chat session",
+        "alternative_names": [],
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "ZNC",
+        "product_url": "https://wiki.znc.in/ZNC"
+    },
+    "RADIUS Protocol": {
+        "prevalence": 0.8,
+        "description": "Remote Authentication Dial-In User Service is a networking protocol that provides centralized authentication, authorization, and accounting management for users who connect and use a network service",
+        "alternative_names": [],
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "IETF"
+    },
+    "youtube-dl": {
+        "prevalence": 0.5,
+        "description": "youtube-dl is a free and open source software tool for downloading video and audio from YouTube and over 1,000 other video hosting websites",
+        "alternative_names": ["yt-dlp"],
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "Ricardo García Gonzalez",
+        "product_url": "https://github.com/ytdl-org/youtube-dl"
+    },
+    "Setuptools": {
+        "prevalence": 0.5,
+        "description": "Setuptools is a fully-featured, actively-maintained, and stable library designed to facilitate packaging Python projects",
+        "alternative_names": [],
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "Tidelift",
+        "product_url": "https://github.com/pypa/setuptools"
+    },
+    "MIT Kerberos 5": {
+        "prevalence": 0.8,
+        "description": "Kerberos is a computer-network authentication protocol that works on the basis of tickets to allow nodes communicating over a non-secure network to prove their identity to one another in a secure manner",
+        "alternative_names": [],
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "MIT",
+        "product_url": "https://web.mit.edu/kerberos/"
     },
     "Microsoft Office Online Server": {
         "prevalence": 0.3,
@@ -4049,6 +4110,9 @@
     },
     "Windows Encrypting File System (EFS)": {
         "prevalence": 0.8,
+        "alternative_names": [
+            "Windows Encrypting File System"
+        ],
         "description": "Windows component",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -4289,7 +4353,8 @@
     },
     "TRIE": {
         "prevalence": 0.5,
-         "detection_priority": -1,
+        "detection_priority": -3,
+        "detection_priority_comment": "retrieved",
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -5022,7 +5087,7 @@
     },
     "TLS": {
         "prevalence": 0.5,
-        "detection_priority": -0.5,
+        "detection_priority": -5,
         "detection_priority_comment": "Logstash priority should be higher than TLS",
         "description": "",
         "additional_detection_strings": [],
@@ -7017,7 +7082,7 @@
      "Go Project": {
         "prevalence": 0.5,
         "description": "Go is an open source project developed by a team at Google and many contributors from the open source community",
-        "additional_detection_strings": ["golang.org/x/net/http2"],
+        "additional_detection_strings": ["golang.org/x/net/http2", "httpTokenCacheKey"],
         "vendor": "Go Project"
     },
      "OpenPMIx": {
@@ -7333,6 +7398,18 @@
         "language": "PHP, Javascript, Go",
         "country_of_origin": "Germany",
         "product_url": "https://owncloud.com/"
+    },
+    "Nextcloud": {
+        "prevalence": 0.6,
+        "description": "Nextcloud server is a self hosted personal cloud system",
+        "additional_detection_strings": [],
+        "vendor": "Nextcloud GmbH",
+        "type_of_product": "web application",
+        "directly_accessible_from_the_internet": "often",
+        "type_of_license": "commercial",
+        "language": "PHP, JavaScript",
+        "country_of_origin": "Germany",
+        "product_url": "https://nextcloud.com/"
     },
     "Acronis Cyber Protect": {
         "prevalence": 0.5,
