@@ -62,31 +62,32 @@ HTML report generated: reports/cve-2024-20723_report_with_comments_ext_img.html
 
 ### Options
 ```buildoutcfg
-$ $ python3 vulristics.py --help
+$ python3 vulristics.py -h
 usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR] [--mspt-month MSPT_MONTH]
-                     [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH] [--cve-project-name CVE_PROJECT_NAME]
-                     [--cve-list-path CVE_LIST_PATH] [--cve-comments-path CVE_COMMENTS_PATH]
-                     [--cve-data-sources CVE_DATA_SOURCES] [--profile-json-path PROFILE_JSON_PATH]
-                     [--result-formats RESULT_FORMATS] [--result-html-path RESULT_HTML_PATH]
+                     [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH]
+                     [--cve-project-name CVE_PROJECT_NAME] [--cve-list-path CVE_LIST_PATH]
+                     [--cve-comments-path CVE_COMMENTS_PATH] [--cve-data-sources CVE_DATA_SOURCES]
+                     [--profile-json-path PROFILE_JSON_PATH] [--result-formats RESULT_FORMATS]
+                     [--result-html-path RESULT_HTML_PATH] [--result-html-label RESULT_HTML_LABEL]
                      [--result-json-path RESULT_JSON_PATH] [--rewrite-flag REWRITE_FLAG]
                      [--vulners-use-github-exploits-flag VULNERS_USE_GITHUB_EXPLOITS_FLAG]
                      [--bdu-use-product-names-flag BDU_USE_PRODUCT_NAMES_FLAG]
-                     [--bdu-use-vulnerability-descriptions-flag BDU_USE_VULNERABILITY_DESCRIPTIONS_FLAG] [-v]
+                     [--bdu-use-vulnerability-descriptions-flag BDU_USE_VULNERABILITY_DESCRIPTIONS_FLAG]
+                     [-v]
 
 An extensible framework for analyzing publicly available information about vulnerabilities
 
 options:
   -h, --help            show this help message and exit
   --report-type REPORT_TYPE
-                        Report type (ms_patch_tuesday, ms_patch_tuesday_extended, cve_list or custom_profile)
+                        Report type (ms_patch_tuesday, ms_patch_tuesday_extended, cve_list or
+                        custom_profile)
   --mspt-year MSPT_YEAR
                         Microsoft Patch Tuesday year
   --mspt-month MSPT_MONTH
                         Microsoft Patch Tuesday month
   --mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH
-                        Microsoft Patch Tuesday comments links file. Format: Qualys|Microsoft Patch Tuesday, July 2024
-                        Security Update Review|https://blog.qualys.com/vulnerabilities-threat-research/2024/07/09/microsoft-
-                        patch-tuesday-july-2024-security-update-review
+                        Microsoft Patch Tuesday comments links file. Format: "Qualys|Description|URL"
   --cve-project-name CVE_PROJECT_NAME
                         Name of the CVE Project
   --cve-list-path CVE_LIST_PATH
@@ -100,7 +101,11 @@ options:
   --result-formats RESULT_FORMATS
                         Result formats, e.g. "html,json", Default - "html"
   --result-html-path RESULT_HTML_PATH
-                        Path to the results file in html format (Default - will be created in reports directory)
+                        Path to the results file in html format (Default - will be created in reports
+                        directory)
+  --result-html-label RESULT_HTML_LABEL
+                        Additional optional banner for HTML report ("lpw" for the Linux Patch Wednesday
+                        banner, "mspt" for the Microsoft Patch Tuesday banner or custom image URL)
   --result-json-path RESULT_JSON_PATH
                         Path to the results file in json format
   --rewrite-flag REWRITE_FLAG
@@ -115,6 +120,7 @@ options:
 ```
 
 ### Installation
+Vulristics is developed and tested on Ubuntu 24.04 LTS, Python 3.12.3
 ```buildoutcfg
 pip3 install -r requirements.txt
 ```

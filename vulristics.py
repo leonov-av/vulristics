@@ -2,7 +2,7 @@ from vulristics_code import functions_report_vulnerabilities, functions_report_m
 import argparse
 import re
 
-current_version = "1.0.6"
+current_version = "1.0.7"
 
 parser = argparse.ArgumentParser(description='An extensible framework for analyzing publicly available information about vulnerabilities')
 const = ""
@@ -10,7 +10,7 @@ const = ""
 parser.add_argument('--report-type', help='Report type (ms_patch_tuesday, ms_patch_tuesday_extended, cve_list or custom_profile)')
 parser.add_argument('--mspt-year', help='Microsoft Patch Tuesday year')
 parser.add_argument('--mspt-month', help='Microsoft Patch Tuesday month')
-parser.add_argument('--mspt-comments-links-path', help='Microsoft Patch Tuesday comments links file.\nFormat:\nQualys|Microsoft Patch Tuesday, July 2024 Security Update Review|https://blog.qualys.com/vulnerabilities-threat-research/2024/07/09/microsoft-patch-tuesday-july-2024-security-update-review')
+parser.add_argument('--mspt-comments-links-path', help='Microsoft Patch Tuesday comments links file. Format: "Qualys|Description|URL"')
 parser.add_argument('--cve-project-name', help='Name of the CVE Project')
 parser.add_argument('--cve-list-path', help='Path to the list of CVE IDs')
 parser.add_argument('--cve-comments-path', help='Path to the CVE comments file')
@@ -18,6 +18,7 @@ parser.add_argument('--cve-data-sources', help='Data sources for analysis, e.g. 
 parser.add_argument('--profile-json-path', help='Custom profile for analysis')
 parser.add_argument('--result-formats', help='Result formats, e.g. "html,json", Default - "html"')
 parser.add_argument('--result-html-path', help='Path to the results file in html format (Default - will be created in reports directory)')
+parser.add_argument('--result-html-label', help='Additional optional banner for HTML report ("lpw" for the Linux Patch Wednesday banner, "mspt" for the Microsoft Patch Tuesday banner or custom image URL)')
 parser.add_argument('--result-json-path', help='Path to the results file in json format')
 parser.add_argument('--rewrite-flag', help='Rewrite Flag (True/False, Default - False)')
 parser.add_argument('--vulners-use-github-exploits-flag', help='Use Vulners Github exploits data Flag (True/False, Default - True)')
@@ -26,7 +27,7 @@ parser.add_argument('--bdu-use-vulnerability-descriptions-flag', help='Use BDU v
 parser.add_argument('-v', '--version', action='version', version=current_version)
 
 args = parser.parse_args()
-banner = '''
+banner = r'''
                       /$$           /$$             /$$     /$$                    
                      | $$          |__/            | $$    |__/                    
  /$$    /$$ /$$   /$$| $$  /$$$$$$  /$$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$$  /$$$$$$$
@@ -79,10 +80,16 @@ if args.result_html_path:
 else:
     result_config['result_html_path'] = False
 
+if args.result_html_label:
+    result_config['result_html_label'] = args.result_html_label
+else:
+    result_config['result_html_label'] = False
+
 if args.report_type == "ms_patch_tuesday" or args.report_type == "ms_patch_tuesday_extended":
     year = str(args.mspt_year) # 2021
     month = args.mspt_month # September
-
+    if not result_config['result_html_label']:
+        result_config['result_html_label'] = "mspt"
 
     comments_links_path = False
     if args.mspt_comments_links_path:
@@ -117,7 +124,7 @@ elif args.report_type == "cve_list":
                 for line in cve_comments_text.split("\n"):
                     if "|" in line:
                         group = line.split("|")[0]
-                        line = re.sub("[^\|]*\|","",line)
+                        line = re.sub(r"[^\|]*\|","",line)
                     else:
                         group = "Comment"
                     if not group in comments:

@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - 2023-07-13
+
+- Now, if you see exploits in the report that are not actually exploits (but are, for example, detection scripts), you can exclude them. To do this, create a custom data source (json file) for the CVE identifier and add the identifiers of the exploits you want to exclude to the ignore_exploits tag.
+- I've added the ability to manage the html report banner via the --result-html-label key. You can specify a banner for Linux Patch Wednesday (lpw), a banner for Microsoft Patch Tuesday (mspt), or the URL of an arbitrary image.
+
 ## [1.0.6] - 2023-07-14
 
 - I've made it easier to work with exploit data. Now all Data Sources bring such data in a single format and it is processed uniformly. Including signs of the presence of an exploit in Microsoft CVSS Temporal Vector (I classify them as private exploits). First, I look for the presence of public exploits; if there are none, then private exploits.

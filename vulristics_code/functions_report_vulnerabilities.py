@@ -631,10 +631,23 @@ def get_comments_for_cves(source, processed_cves):
 
     return {"report_html": report_html, "report_list":report_list}
 
-def get_vulnerability_report_for_report_config(cve_related_data, cve_scores, report_config, profile_data):
+def get_vulnerability_report_for_report_config(cve_related_data, cve_scores, report_config, profile_data, result_config):
     json_data = dict()
     html_content = "<center><img class=\"logo\" src=\"" + report_config['vuln_icons_source'] + "/vulristics.png\"></center>"
-    # html_content += "<center><img class=\"logo2\" src=\"" + report_config['vuln_icons_source'] + "/lpw_avleonov.png\"></center>"
+    def remove_html_tags(text):
+        clean = re.compile('<.*?>')
+        return re.sub(clean, '', text)
+
+    if 'result_html_label' in result_config:
+        if result_config['result_html_label'] == "lpw":
+            html_content += ("<center><img class=\"logo2\" src=\"" + remove_html_tags(report_config['vuln_icons_source'])
+                             + "/lpw_avleonov.png\"></center>")
+        elif result_config['result_html_label'] == "mspt":
+            html_content += ("<center><img class=\"logo2\" src=\"" +  remove_html_tags(report_config['vuln_icons_source'])
+                             + "/mspt_avleonov.png\"></center>")
+        elif result_config['result_html_label']:
+            html_content += ("<center><img class=\"logo2\" src=\"" +  remove_html_tags(result_config['result_html_label'])
+                             + "\"></center>")
 
     combined_cve_data = cve_related_data['combined_cve_data_all']
 
@@ -844,7 +857,8 @@ def make_html_vulnerability_reports_for_all_report_configs(profile, source_id, c
         vulnerability_report = get_vulnerability_report_for_report_config(cve_related_data=cve_related_data,
                                                                           cve_scores=cve_scores,
                                                                           report_config=report_config,
-                                                                          profile_data=profile_data)
+                                                                          profile_data=profile_data,
+                                                                          result_config=result_config)
 
         if 'html' in result_config['result_formats']:
             if not result_config['result_html_path']:

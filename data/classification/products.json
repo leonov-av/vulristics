@@ -2096,6 +2096,42 @@
         "vendor": "MIT",
         "product_url": "https://web.mit.edu/kerberos/"
     },
+    "phpLDAPadmin": {
+        "prevalence": 0.6,
+        "description": "phpLDAPadmin is a web based LDAP data management tool for system administrators",
+        "alternative_names": [],
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "phpLDAPadmin",
+        "product_url": "https://github.com/leenooks/phpLDAPadmin"
+    },
+    "AdminerEvo": {
+        "prevalence": 0.6,
+        "description": "AdminerEvo is a web-based database management interface, with a focus on security, user experience, performance, functionality and size",
+        "alternative_names": [],
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "AdminerEvo",
+        "product_url": "https://adminerevo.org/"
+    },
+    "PHP Secure Communications Library": {
+        "prevalence": 0.6,
+        "description": "phpseclib provides pure-PHP implementations of SSH2, SFTP, RSA, DSA, Elliptic Curves, AES, ChaCha20, X. 509, CSR, CRL, SPKAC",
+        "alternative_names": ["phpseclib"],
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "phpseclib",
+        "product_url": "https://phpseclib.com"
+    },
+    "ReCAPTCHA": {
+        "prevalence": 0.6,
+        "description": "reCAPTCHA is a security service that protects your websites from fraud and abuse owned by Google",
+        "alternative_names": [],
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "Google",
+        "product_url": "https://www.google.com/recaptcha/about/"
+    },
     "Microsoft Office Online Server": {
         "prevalence": 0.3,
         "description": "",
