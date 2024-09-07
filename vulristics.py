@@ -12,7 +12,7 @@ parser.add_argument('--mspt-year', help='Microsoft Patch Tuesday year')
 parser.add_argument('--mspt-month', help='Microsoft Patch Tuesday month')
 parser.add_argument('--mspt-comments-links-path', help='Microsoft Patch Tuesday comments links file. Format: "Qualys|Description|URL"')
 parser.add_argument('--cve-project-name', help='Name of the CVE Project')
-parser.add_argument('--cve-list-path', help='Path to the list of CVE IDs')
+parser.add_argument('--cve-list-path', help='Path to the list of CVE IDs (each per line)')
 parser.add_argument('--cve-comments-path', help='Path to the CVE comments file')
 parser.add_argument('--cve-data-sources', help='Data sources for analysis, e.g. "ms,nvd,bdu,epss,vulners,attackerkb,bdu,custom"')
 parser.add_argument('--profile-json-path', help='Custom profile for analysis')
@@ -37,7 +37,7 @@ banner = r'''
    \  $/   |  $$$$$$/| $$| $$      | $$ /$$$$$$$/  |  $$$$/| $$|  $$$$$$$ /$$$$$$$/
     \_/     \______/ |__/|__/      |__/|_______/    \___/  |__/ \_______/|_______/ '''
 
-print(re.sub("^\n","",banner))
+print("\n", re.sub("^\n","",banner), "\n")
 
 source_config = dict()
 
@@ -153,3 +153,6 @@ elif args.report_type == "custom_profile":
     functions_report_vulnerabilities.make_vulnerability_report_for_profile(profile_file_path=args.profile_json_path,
                                                                            source_config=source_config,
                                                                            result_config=result_config)
+else:
+    parser.print_help()
+    print('\nExamples:\n$ python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "cves.txt"\n$ python3 vulristics.py --report-type "ms_patch_tuesday" --mspt-year 2024 --mspt-month "August" --rewrite-flag "True"')
