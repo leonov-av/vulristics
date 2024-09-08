@@ -2,7 +2,7 @@ from vulristics_code import functions_report_vulnerabilities, functions_report_m
 import argparse
 import re
 
-current_version = "1.0.7"
+current_version = "1.0.8"
 
 parser = argparse.ArgumentParser(description='An extensible framework for analyzing publicly available information about vulnerabilities')
 const = ""

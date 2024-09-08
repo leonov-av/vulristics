@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.8] - 2023-09-09
+
+Some minor usability improvements by dvppvd:
+- Padding was set in the css table to make the html report more readable.
+- When you run the utility without parameters, help and examples are displayed. The examples show how to run the utility to analyze MSPT vulnerabilities for a specific month and year, or to analyze an arbitrary set of CVE identifiers.
+- Empty lines for the text banner have been added.
+
 ## [1.0.7] - 2023-07-13
 
 - Now, if you see exploits in the report that are not actually exploits (but are, for example, detection scripts), you can exclude them. To do this, create a custom data source (json file) for the CVE identifier and add the identifiers of the exploits you want to exclude to the ignore_exploits tag.

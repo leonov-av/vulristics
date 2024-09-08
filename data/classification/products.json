@@ -2284,6 +2284,13 @@
         "additional_detection_strings": [
         ]
     },
+    "Rust Standard Library": {
+        "prevalence": 0.6,
+        "detection_priority_comment": "trust",
+        "description": "The Rust Standard Library is the foundation of portable Rust software, a set of minimal and battle-tested shared abstractions for the broader Rust ecosystem",
+        "additional_detection_strings": [ "Rust standard library"
+        ]
+    },
     "wpa_supplicant": {
         "prevalence": 0.6,
         "description": "wpa_supplicant is a free software implementation of an IEEE 802.11i supplicant for Linux, FreeBSD, NetBSD, QNX, AROS, Microsoft Windows, Solaris, OS/2 (including ArcaOS and eComStation) and Haiku",
@@ -3864,6 +3871,8 @@
     },
     "Docker": {
         "prevalence": 0.5,
+        "detection_priority": -1,
+        "detection_priority_comment": "Moby is an open-source project created by Docker ",
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -4068,8 +4077,10 @@
     },
     "Linux Kernel": {
         "prevalence": 0.9,
+        "detection_priority": 1,
+        "detection_priority_comment": "All vulnerabilities start with a line in additional",
         "description": "The Linux kernel is a free and open-source, monolithic, modular, multitasking, Unix-like operating system kernel",
-        "additional_detection_strings": ["Linux kernel"],
+        "additional_detection_strings": ["In the Linux kernel,"],
         "vendor": "Linux Foundation"
     },
     "Local Security Authority Subsystem Service": {
@@ -6970,6 +6981,7 @@
         "vendor": "Internet Systems Consortium"
     },
      "SQLite": {
+        "detection_priority": -0.1,
         "prevalence": 0.7,
         "description": "SQLite is a database engine written in the C programming language",
         "additional_detection_strings": [],
@@ -7569,5 +7581,56 @@
         "additional_detection_strings": [],
         "short_cpes": ["a:polkit_project:polkit"],
         "vendor": "polkit"
+    },
+    "GLPI": {
+        "prevalence": 0.8,
+        "description": "GLPI is an open source IT Asset Management, issue tracking system and service desk system",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:glpi-project:glpi"],
+        "vendor": "GLPI"
+    },
+    "Minio": {
+        "prevalence": 0.7,
+        "description": "Minio is a Multi-Cloud Object Storage framework",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:minio:minio"],
+        "vendor": "Minio"
+    },
+    "Neat VNC": {
+        "prevalence": 0.7,
+        "description": "A liberally licensed VNC server library with a clean interface ",
+        "additional_detection_strings": [],
+        "vendor": "Neat VNC"
+    },
+    "Envoy": {
+        "prevalence": 0.7,
+        "description": "Envoy is a cloud-native, open-source edge and service proxy",
+        "additional_detection_strings": [],
+        "vendor": "Envoy"
+    },
+    "Calibre": {
+        "prevalence": 0.7,
+        "description": "Calibre is a cross-platform free and open-source suite of e-book software",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:calibre-ebook:calibre"],
+        "vendor": "Calibre"
+    },
+    "Oracle VM VirtualBox": {
+        "prevalence": 0.7,
+        "description": "Oracle VM VirtualBox is a hosted hypervisor for x86 virtualization developed by Oracle Corporation",
+        "additional_detection_strings": [],
+        "vendor": "Oracle Corporation"
+    },
+    "NVIDIA GPU Display Driver": {
+        "prevalence": 0.5,
+        "description": "A NVIDIA driver is a software program that enables communication between your computer and the NVIDIA graphics processor installed in your system",
+        "additional_detection_strings": [],
+        "vendor": "NVIDIA"
+    },
+    "Moby Project": {
+        "prevalence": 0.5,
+        "description": "Moby is an open-source project, created by Docker, to enable and accelerate software containerization",
+        "additional_detection_strings": ["Moby is an open-source project"],
+        "vendor": "Docker"
     }
 }
