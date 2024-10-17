@@ -98,12 +98,12 @@
         "country_of_origin": "USA",
         "short_cpes":["o:apple:ipados"]
     },
-    "iOS": {
+    "Apple iOS": {
         "prevalence": 0.7,
         "detection_priority": -10,
         "detection_priority_comment": "Less than third-party and macOS; less than any products withi 'IOS' in name",
         "description": "iOS is an operating system developed and marketed by Apple Inc",
-        "additional_detection_strings": [],
+        "additional_detection_strings": ["iOS"],
         "vendor": "Apple Inc",
         "type_of_product": "operating system",
         "directly_accessible_from_the_internet": "never",
@@ -479,11 +479,59 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "MongoDB": {
+        "prevalence": 0.6,
+        "description": "MongoDB is a source-available, cross-platform, document-oriented database program",
+        "additional_detection_strings": [],
+        "vendor": "MongoDB Inc."
+    },
+    "wolfSSL": {
+        "prevalence": 0.5,
+        "description": "wolfSSL is a small, portable, embedded SSL/TLS library targeted for use by embedded systems developers",
+        "additional_detection_strings": [],
+        "vendor": "Todd Ouska"
+    },
+    "Pgpool-II": {
+        "prevalence": 0.6,
+        "description": "Pgpool-II is a middleware that works between PostgreSQL servers and a PostgreSQL database client",
+        "additional_detection_strings": [],
+        "vendor": "PostgreSQL"
+    },
+    "Ruby SAML library": {
+        "prevalence": 0.5,
+        "description": "The Ruby SAML library is for implementing the client side of a SAML authorization, i.e. it provides a means for managing authorization initialization and confirmation requests from identity providers",
+        "additional_detection_strings": [],
+        "vendor": "SAML-Toolkits"
+    },
+    "OpenSC": {
+        "prevalence": 0.5,
+        "description": "OpenSC is a set of software tools and libraries to work with smart cards, with the focus on smart cards with cryptographic capabilities",
+        "additional_detection_strings": [],
+        "vendor": "OpenSC"
+    },
+    "Vault": {
+        "prevalence": 0.6,
+        "description": "Vault secures, stores, and tightly controls access to tokens, passwords, certificates, API keys, and other secrets critical in modern computing",
+        "additional_detection_strings": [],
+        "vendor": "HashiCorp"
+    },
+    "Twig": {
+        "prevalence": 0.5,
+        "description": "Twig is a template language for PHP",
+        "additional_detection_strings": [],
+        "vendor": "Symfony SAS"
+    },
+    "CUPS": {
+        "prevalence": 0.8,
+        "description": "CUPS is a modular printing system for Unix-like computer operating systems which allows a computer to act as a print server",
+        "additional_detection_strings": [],
+        "vendor": " OpenPrinting CUPS"
+    },
     "389 Directory Server": {
         "prevalence": 0.5,
         "description": "389 Directory Server is a highly usable, fully featured, reliable and secure LDAP server implementation",
         "additional_detection_strings": [
-            "389-ds-base LDAP server"
+            "389-ds-base"
         ],
         "product_url": "https://github.com/389ds/389-ds-base",
         "vendor": "Red Hat, Inc."
@@ -501,7 +549,7 @@
     "Windows Kernel": {
         "prevalence": 0.9,
         "description": "Windows Kernel",
-        "detection_priority": -1,
+        "detection_priority": -2,
         "detection_priority_comment": "OS name, it is better to choose a specific name of the software",
         "additional_detection_strings": [
             "Windows Kernel",
@@ -520,6 +568,12 @@
     "SymCrypt": {
         "prevalence": 0.9,
         "description": "SymCrypt is the core cryptographic function library currently used by Windows",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Entra ID": {
+        "prevalence": 0.6,
+        "description": "Microsoft Entra ID is a cloud-based identity and access management solution",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -856,6 +910,14 @@
         ],
         "vendor": "Microsoft"
     },
+    "Linux NTFS3 driver": {
+        "prevalence": 0.8,
+        "description": "NTFS3 is fully functional NTFS Read-Write driver. The driver works with NTFS versions up to 3.1. File system type to use on mount is ntfs3.",
+        "additional_detection_strings": [
+            "ntfs3 in the Linux"
+        ],
+        "vendor": "Paragon Software"
+    },
     "Windows DirectX": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -1093,13 +1155,23 @@
         "vendor": "ntopng",
         "country_of_origin": "USA"
     },
-    "spip": {
+    "SPIP": {
         "prevalence": 0.5,
+        "detection_priority": 1,
         "description": "SPIP is an open-source software content management system designed for web site publishing, oriented towards online collaborative editing",
-        "additional_detection_strings": [],
+        "additional_detection_strings": ["spip"],
         "vendor": "SPIP",
         "country_of_origin": "France"
     },
+    "InVesalius": {
+        "prevalence": 0.5,
+        "detection_priority": 1,
+        "description": "InVesalius is a free medical software used to generate virtual reconstructions of structures in the human body",
+        "additional_detection_strings": ["spip"],
+        "vendor": "SPIP",
+        "country_of_origin": "France"
+    },
+
     "Chromium": {
         "prevalence": 0.8,
         "detection_priority": 0.3,
@@ -1177,7 +1249,7 @@
     "Git": {
         "prevalence": 0.4,
         "description": "",
-        "detection_priority": -0.5,
+        "detection_priority": -2,
         "detection_priority_comment": "False detections. E.g.: legitimate; Conflict with GitLab",
         "additional_detection_strings": []
     },
@@ -3866,6 +3938,13 @@
     "Windows NetBIOS": {
         "prevalence": 0.8,
         "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Windows Update": {
+        "detection_priority": 1,
+        "prevalence": 0.8,
+        "description": "Windows Update is a service that automates downloading and installing Windows software updates over the Internet",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -7626,6 +7705,34 @@
         "description": "A NVIDIA driver is a software program that enables communication between your computer and the NVIDIA graphics processor installed in your system",
         "additional_detection_strings": [],
         "vendor": "NVIDIA"
+    },
+    "NVIDIA CUDA Toolkit": {
+        "detection_priority": 1,
+        "prevalence": 0.5,
+        "description": "The NVIDIA CUDA Toolkit provides a development environment for creating high-performance, GPU-accelerated applications",
+        "additional_detection_strings": ["CUDA toolkit"],
+        "vendor": "NVIDIA"
+    },
+    "Znuny": {
+        "detection_priority": 1,
+        "prevalence": 0.5,
+        "description": "Znuny/Znuny LTS is a fork of the ((OTRS)) Community Edition, one of the most flexible web-based ticketing systems used for Customer Service, Help Desk, IT Service Management",
+        "additional_detection_strings": [],
+        "vendor": "Znuny"
+    },
+    "DOMPurify": {
+        "detection_priority": 1,
+        "prevalence": 0.5,
+        "description": "DOMPurify is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG",
+        "additional_detection_strings": [],
+        "vendor": "DOMPurify"
+    },
+    "Jose4j": {
+        "detection_priority": 1,
+        "prevalence": 0.5,
+        "description": "The jose.4.j library is a robust and easy to use open source implementation of JSON Web Token (JWT) and the JOSE specification suite (JWS, JWE, and JWK)",
+        "additional_detection_strings": ["jose.4.j"],
+        "vendor": "Jose4j"
     },
     "Moby Project": {
         "prevalence": 0.5,
