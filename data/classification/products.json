@@ -7073,6 +7073,12 @@
         "additional_detection_strings": ["Mediawiki"],
         "vendor": "Wikimedia Foundation"
     },
+    "XWiki Platform": {
+        "prevalence": 0.7,
+        "description": "XWiki offers a generic platform for developing projects and collaborative applications using the wiki paradigm",
+        "additional_detection_strings": [],
+        "vendor": "XWiki Community"
+    },
      "Safari": {
         "prevalence": 0.8,
         "detection_priority": 0.3,
