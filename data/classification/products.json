@@ -52,11 +52,11 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "Confluence": {
+    "Atlassian Confluence": {
         "prevalence": 0.7,
         "description": "Confluence is a web-based corporate wiki",
         "vendor": "Atlassian",
-        "additional_detection_strings": []
+        "additional_detection_strings": ["Confluence"]
     },
     "Cacti": {
         "prevalence": 0.5,
@@ -2254,6 +2254,18 @@
         "vendor": "SAP",
         "additional_detection_strings": []
     },
+    "Check Point Security Gateway": {
+        "prevalence": 0.5,
+        "description": "The Check Point Security Gateway is a core component of Check Point’s cybersecurity architecture, designed to protect networks and data by providing a range of security functions",
+        "vendor": "Check Point",
+        "additional_detection_strings": []
+    },
+    "PAN-OS": {
+        "prevalence": 0.5,
+        "description": "PAN-OS is the software that runs all Palo Alto Networks next-generation firewalls",
+        "vendor": "Palo Alto Networks",
+        "additional_detection_strings": ["o:paloaltonetworks:pan-os"]
+    },
     "FortiOS": {
         "prevalence": 0.5,
         "description": "FortiOS is Fortinet's operating system used in their hardware, such as the Fortigate firewall and switches",
@@ -2264,6 +2276,13 @@
         "prevalence": 0.5,
         "description": "FortiClient EMS provides efficient and effective administration of endpoints running FortiClient (a Fabric Agent that delivers protection, compliance, and secure access in a single, modular lightweight client)",
         "vendor": "Fortinet",
+        "additional_detection_strings": []
+    },
+    "FortiManager": {
+        "prevalence": 0.5,
+        "description": "FortiManager provides centralised policy-based provisioning, device configuration, and update management for FortiGate, FortiWiFi, and FortiMail appliances",
+        "vendor": "Fortinet",
+        "short_cpes": ["a:fortinet:fortimanager"],
         "additional_detection_strings": []
     },
     "QNAP NAS": {
@@ -2312,6 +2331,11 @@
     "Kibana": {
         "prevalence": 0.9,
         "description": "Data visualization dashboard software",
+        "additional_detection_strings": []
+    },
+    "Fluent Bit": {
+        "prevalence": 0.5,
+        "description": "Fluent Bit is a fast, lightweight, and scalable telemetry data agent and processor for logs, metrics, and traces",
         "additional_detection_strings": []
     },
     "Spring Cloud Function": {
@@ -2500,9 +2524,19 @@
         "description": "MyBB, formerly MyBBoard and originally MyBulletinBoard, is a free and open-source forum software developed by the MyBB Group",
         "additional_detection_strings": []
     },
+    "LiteSpeed Cache WordPress plugin": {
+        "prevalence": 0.6,
+        "description": "WordPress plugin",
+        "additional_detection_strings": ["LiteSpeed Cache"]
+    },
     "Envira Gallery Lite WordPress plugin": {
         "prevalence": 0.6,
         "description": "WordPress plugin",
+        "additional_detection_strings": []
+    },
+    "The Events Calendar plugin for WordPress": {
+        "prevalence": 0.6,
+        "description": "The Events Calendar is a plugin for creating an events listing website",
         "additional_detection_strings": []
     },
     "Facebook for WordPress plugin": {
@@ -4162,11 +4196,49 @@
         "additional_detection_strings": ["In the Linux kernel,"],
         "vendor": "Linux Foundation"
     },
+    "nftables": {
+        "prevalence": 0.9,
+        "detection_priority": 1,
+        "description": "nftables is a subsystem of the Linux kernel providing filtering and classification of network packets/datagrams/frames",
+        "additional_detection_strings": ["nf_tables"],
+        "vendor": "Linux Foundation"
+    },
     "Local Security Authority Subsystem Service": {
         "prevalence": 0.5,
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
+    },
+    "pure-ftpd": {
+        "prevalence": 0.5,
+        "description": "Pure-FTPd is a free (BSD), secure, production-quality and standard-conformant FTP server",
+        "additional_detection_strings": [],
+        "vendor": "PureFTPd Team"
+    },
+    "PyTorch": {
+        "prevalence": 0.6,
+        "description": "PyTorch is a machine learning library based on the Torch library, used for applications such as computer vision and natural language processing, originally developed by Meta AI and now part of the Linux Foundation umbrella",
+        "additional_detection_strings": [],
+        "vendor": "The Linux Foundation"
+    },
+    "Laravel": {
+        "prevalence": 0.6,
+        "description": "Laravel is a web application framework",
+        "additional_detection_strings": [],
+        "vendor": "Laravel"
+    },
+    "OpenJS Express": {
+        "prevalence": 0.5,
+        "description": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:openjsf:express"],
+        "vendor": "OpenJS"
+    },
+    "Starlette": {
+        "prevalence": 0.5,
+        "description": "Starlette is an Asynchronous Server Gateway Interface (ASGI) framework/toolkit",
+        "additional_detection_strings": [],
+        "vendor": "Starlette"
     },
     "Windows Picker Platform": {
         "prevalence": 0.8,
@@ -7158,6 +7230,18 @@
         "additional_detection_strings": ["libXpm", "libX11"],
         "vendor": "X.Org Foundation"
     },
+     "X.org server": {
+        "prevalence": 0.8,
+        "description": "X.Org Server is the free and open-source implementation of the X Window System (X11) display server stewarded by the X.Org Foundation",
+        "additional_detection_strings": [],
+        "vendor": "X.Org Foundation"
+    },
+    "gomarkdown/markdown": {
+        "prevalence": 0.4,
+        "description": "A Go library for parsing Markdown text and rendering as HTML",
+        "additional_detection_strings": [],
+        "vendor": "gomarkdown"
+    },
      "Netty": {
         "prevalence": 0.8,
         "description": "Netty is a non-blocking I/O client-server framework for the development of Java network applications such as protocol servers and clients",
@@ -7333,7 +7417,7 @@
         "directly_accessible_from_the_internet": "rarely",
         "type_of_license": "commercial",
         "country_of_origin": "USA",
-        "short_cves": ["a:veeam:backup_\\\\&_replication"]
+        "short_cpes": ["a:veeam:backup_\\\\&_replication", "a:veeam:veeam_backup_\\\\&_replication"]
     },
     "Oracle Web Applications Desktop Integrator": {
         "prevalence": 0.5,
@@ -7554,6 +7638,18 @@
         "type_of_license": "commercial",
         "country_of_origin": "Singapore",
         "product_url": "https://www.acronis.com/en-us/products/cyber-protect/"
+    },
+    "Acronis Cyber Infrastructure": {
+        "prevalence": 0.5,
+        "description": "A hyperconverged solution providing storage, compute, and network resources for businesses and service provider",
+        "additional_detection_strings": [],
+        "vendor": "Acronis",
+        "type_of_product": "server application",
+        "directly_accessible_from_the_internet": "never",
+        "type_of_license": "commercial",
+        "country_of_origin": "Singapore",
+        "product_url": "https://www.acronis.com/en-us/products/cyber-protect/",
+        "short_cpes": ["a:acronis:cyber_infrastructure"]
     },
     "Barracuda Email Security Gateway": {
         "prevalence": 0.5,
