@@ -17,29 +17,92 @@ def get_ranges(value_string, search_string):
     :param search_string:
     :return:
     """
+
+    temp_value_string = copy.copy(value_string)
+    # print(value_string)
+
     continue_processing = True
     last_end = 0
     ranges = list()
+    # print(value_string)
     while continue_processing:
         # print("search_string: " + search_string)
-        match = re.search(r"\b" + re.escape(str(search_string)) + r"\b", value_string)
-        match2 = re.search(re.escape(str(search_string)), value_string)
+
+        match = re.search(r"\b" + re.escape(str(search_string)) + r"\b", temp_value_string)
+        match2 = re.search(re.escape(str(search_string)), temp_value_string)
         if match:
             range = dict()
             range['start']  = match.start() + last_end
             range['end'] = match.end() + last_end
-            ranges.append(range)
-            value_string = value_string[range['end']:]
+
+            pre_start = copy.copy(range['start']) - 1
+            post_end = copy.copy(range['end']) + 1
+            pre_start_status = True
+            post_end_status = True
+            # print(value_string[range['start']:range['end']])
+            # print(pre_start)
+            # print(post_end)
+            # print(value_string[pre_start:post_end])
+            if pre_start > 0: # not the beginning of the text
+                # print(pre_start)
+                # print(value_string[pre_start])
+                if re.findall("[A-Za-z]", value_string[pre_start]):
+                    pre_start_status = False
+                    # This means that we have found not a word or several words in their entirety, but only a part of another word
+                    # This is most likely an error
+            if post_end < len(value_string)-1: # not the end of the text
+                # print(value_string[post_end-1])
+                if re.findall("[A-Za-z]", value_string[post_end-1]):
+                    post_end_status = False
+                    # This means that we have found not a word or several words in their entirety, but only a part of another word
+                    # This is most likely an error
+            # print(pre_start_status)
+            # print(post_end_status)
+            if pre_start_status and post_end_status:
+                ranges.append(range)
+
+            temp_value_string = temp_value_string[range['end']:]
             last_end = match.end()
+
         elif match2:
             range = dict()
             range['start']  = match2.start() + last_end
             range['end'] = match2.end() + last_end
-            ranges.append(range)
-            value_string = value_string[range['end']:]
+
+            # The same block of code, as above
+
+            pre_start = copy.copy(range['start']) - 1
+            post_end = copy.copy(range['end']) + 1
+            pre_start_status = True
+            post_end_status = True
+            # print(value_string[range['start']:range['end']])
+            # print(pre_start)
+            # print(post_end)
+            # print(value_string[pre_start:post_end])
+            if pre_start > 0: # not the beginning of the text
+                # print(pre_start)
+                # print(value_string[pre_start])
+                if re.findall("[A-Za-z]", value_string[pre_start]):
+                    pre_start_status = False
+                    # This means that we have found not a word or several words in their entirety, but only a part of another word
+                    # This is most likely an error
+            if post_end < len(value_string)-1: # not the end of the text
+                # print(value_string[post_end-1])
+                if re.findall("[A-Za-z]", value_string[post_end-1]):
+                    post_end_status = False
+                    # This means that we have found not a word or several words in their entirety, but only a part of another word
+                    # This is most likely an error
+            # print(pre_start_status)
+            # print(post_end_status)
+            if pre_start_status and post_end_status:
+                ranges.append(range)
+
+            temp_value_string = temp_value_string[range['end']:]
             last_end = match2.end()
         else:
             continue_processing = False
+    # if ranges != []:
+    #     print(ranges)
     return ranges
 
 # ranges = get_ranges(value_string=".NET Framework Denial of Service Vulnerability", search_string=".NET Framework")
@@ -57,7 +120,9 @@ def get_detected_products(description, product_detection_string2product_name):
     for detection_string in product_detection_string2product_name:
         if detection_string in description:
             product_name = product_detection_string2product_name[detection_string]
-            detected_products[product_name] = get_ranges(description, detection_string)
+            ranges = get_ranges(description, detection_string)
+            if ranges != []:
+                detected_products[product_name] = ranges
     return detected_products
 
 
@@ -68,6 +133,9 @@ def get_detected_vuln_types(full_description, vulnerability_type_data):
     :param vulnerability_type_data:
     :return:
     """
+
+    # Determine the vulnerability type based on the text description
+
     detected_entities = dict()
     for entity in vulnerability_type_data:
         detection_strings = set()
@@ -75,6 +143,7 @@ def get_detected_vuln_types(full_description, vulnerability_type_data):
             detection_strings.add(detection_string)
         detection_strings.add(entity)
         detection_strings.add(entity.lower())
+        # It turns out that we have a case-insensitive check, since we convert everything to lower case
         temp_ranges = list()
         for detection_string in detection_strings:
             temp_ranges += get_ranges(full_description, detection_string)
