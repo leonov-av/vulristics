@@ -1220,6 +1220,21 @@
         "prevalence": 0.9,
         "description": "A suite of security protocols to authenticate users' identity and protect the integrity and confidentiality of their activity",
         "additional_detection_strings": [],
+        "alternative_names": ["NTLM Hash Disclosure"],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Partner Network": {
+        "prevalence": 0.5,
+        "description": "The Microsoft AI Cloud Partner Program gives you the tools to create and market innovative Microsoft Cloud and AI solutions",
+        "additional_detection_strings": [],
+        "alternative_names": ["Partner.Microsoft.com"],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Copilot Studio": {
+        "prevalence": 0.5,
+        "description": "Copilot Studio is an end-to-end conversational AI platform that empowers you to create agents using natural language or a graphical interface",
+        "additional_detection_strings": [],
+        "alternative_names": [],
         "vendor": "Microsoft"
     },
     "TPM Device Driver": {
@@ -7763,6 +7778,13 @@
         "short_cpes": ["a:polkit_project:polkit"],
         "vendor": "polkit"
     },
+    "needrestart": {
+        "prevalence": 0.7,
+        "description": "Needrestart is a utility that scans a system to determine the services that need to be restarted after applying shared library updates in a manner that avoids a complete system reboot",
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "Thomas Liske"
+    },
     "GLPI": {
         "prevalence": 0.8,
         "description": "GLPI is an open source IT Asset Management, issue tracking system and service desk system",
@@ -7776,6 +7798,13 @@
         "additional_detection_strings": [],
         "short_cpes": ["a:minio:minio"],
         "vendor": "Minio"
+    },
+    "Zyxel firewall": {
+        "prevalence": 0.7,
+        "description": "Firewalls manufactured by Zyxel",
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "Zyxel"
     },
     "Neat VNC": {
         "prevalence": 0.7,
