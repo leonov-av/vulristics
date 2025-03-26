@@ -47,7 +47,31 @@
         ]
     },
     "Windows SMB": {
-        "prevalence": 1,
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Management Console": {
+        "prevalence": 0.8,
+        "description": "Microsoft Management Console (MMC) is a component of Microsoft Windows that provides system administrators and advanced users an interface for configuring and monitoring the system",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Synaptics Audio Drivers": {
+        "prevalence": 0.6,
+        "description": "Synaptics Audio Drivers are software components from Synaptics that manage audio hardware functionality on Windows devices",
+        "additional_detection_strings": ["Synaptics audio drivers"],
+        "vendor": "Synaptics"
+    },
+    "Kernel Streaming Service Driver": {
+        "prevalence": 0.8,
+        "description": "The Kernel Streaming Service Driver is a Windows kernel-mode component that manages low-latency, real-time streaming of multimedia data between hardware devices and applications",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Kernel Streaming WOW Thunk Service Driver": {
+        "prevalence": 0.8,
         "description": "Windows component",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
@@ -497,10 +521,24 @@
         "additional_detection_strings": [],
         "vendor": "PostgreSQL"
     },
+    "PostgreSQL": {
+        "prevalence": 0.6,
+        "detection_priority": -0.5,
+        "detection_priority_comment": "Must not take priority over database components",
+        "description": "PostgreSQL also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance.",
+        "additional_detection_strings": ["Postgres"],
+        "vendor": "PostgreSQL"
+    },
+    "Checkmk": {
+        "prevalence": 0.6,
+        "description": "Checkmk is a software system developed in Python and C++ for IT Infrastructure monitoring",
+        "additional_detection_strings": [],
+        "vendor": "Checkmk GmbH"
+    },
     "Ruby SAML library": {
         "prevalence": 0.5,
         "description": "The Ruby SAML library is for implementing the client side of a SAML authorization, i.e. it provides a means for managing authorization initialization and confirmation requests from identity providers",
-        "additional_detection_strings": [],
+        "additional_detection_strings": ["ruby-saml"],
         "vendor": "SAML-Toolkits"
     },
     "OpenSC": {
@@ -880,6 +918,28 @@
         "additional_detection_strings": ["ShellShock"],
         "vendor": "Linux"
     },
+    "Sccache": {
+        "prevalence": 0.5,
+        "detection_priority_comment": "",
+        "description": "Sccache helps avoid repeated recompilation for the same C, C++, and Rust object files by fetching result from a cache directory",
+        "additional_detection_strings": ["sccache client"],
+        "vendor": "Mozilla"
+    },
+    "Moodle": {
+        "prevalence": 0.7,
+        "detection_priority_comment": "",
+        "description": "Moodle is a free and open-source learning management system written in PHP and distributed under the GNU General Public License",
+        "additional_detection_strings": [],
+        "vendor": "Moodle Community"
+    },
+    "Go Cryptography SSH": {
+        "prevalence": 0.7,
+        "detection_priority_comment": "",
+        "description": "Package ssh implements an SSH client and server",
+        "additional_detection_strings": ["ServerConfig.PublicKeyCallback"],
+        "vendor": "Go"
+    },
+
     "Microsoft SCOM": {
         "prevalence": 0.9,
         "detection_priority": -0.1,
@@ -2283,6 +2343,7 @@
     },
     "FortiOS": {
         "prevalence": 0.5,
+        "detection_priority": 1,
         "description": "FortiOS is Fortinet's operating system used in their hardware, such as the Fortigate firewall and switches",
         "vendor": "Fortinet",
         "additional_detection_strings": []
@@ -2359,6 +2420,25 @@
         "vendor": "VMware",
         "additional_detection_strings": []
     },
+    "Spring Framework": {
+        "prevalence": 0.4,
+        "description": "SThe Spring Framework is an application framework and inversion of control container for the Java platform",
+        "vendor": "VMware",
+        "additional_detection_strings": []
+    },
+    "TuneD": {
+        "prevalence": 0.6,
+        "description": "Tuned is a daemon that uses udev to monitor connected devices and statically and dynamically tunes system settings according to a selected profile",
+        "vendor": "RedHat",
+        "additional_detection_strings": []
+    },
+    "virtualenv": {
+        "prevalence": 0.5,
+        "description": "virtualenv is a tool to create isolated Python environments",
+        "vendor": "virtualenv",
+        "short_cpes": ["a:virtualenv:virtualenv"],
+        "additional_detection_strings": []
+    },
     "WSO2 Identity Server": {
         "prevalence": 0.4,
         "description": "WSO2 Identity Server is an API-driven open source identity and access management (IAM) product designed to help you build effective customer IAM (CIAM) solutions",
@@ -2432,6 +2512,12 @@
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
+    },
+    "Theora": {
+        "prevalence": 0.6,
+        "description": "Theora was Xiph.Org's first publicly released video codec, intended for use within the Foundation's Ogg multimedia streaming system. Theora is derived directly from On2's VP3 codec, adds new features while allowing it a longer useful lifetime.",
+        "additional_detection_strings": [],
+        "vendor": "Xiph.Org"
     },
     "Dynamics Finance and Operations": {
         "prevalence": 0.7,
@@ -2544,6 +2630,11 @@
         "description": "WordPress plugin",
         "additional_detection_strings": ["LiteSpeed Cache"]
     },
+    "Hunk Companion WordPress plugin": {
+        "prevalence": 0.6,
+        "description": "Hunk Companion is a WordPress plugin designed to complement and enhance the functionality of themes developed by ThemeHunk, a provider of customizable WordPress themes",
+        "additional_detection_strings": ["ThemeHunk"]
+    },
     "Envira Gallery Lite WordPress plugin": {
         "prevalence": 0.6,
         "description": "WordPress plugin",
@@ -2578,6 +2669,12 @@
     "Microsoft Intune Portal for iOS": {
         "prevalence": 0.3,
         "description": "iOS store app for Microsoft Intune",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Purview": {
+        "prevalence": 0.3,
+        "description": "Microsoft Purview is a comprehensive set of solutions that can help your organization govern, protect, and manage data, wherever it lives",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
@@ -7035,6 +7132,12 @@
         "additional_detection_strings": ["Firefox"],
         "vendor": "Mozilla Foundation"
     },
+     "SINAMICS S200": {
+        "prevalence": 0.5,
+        "description": "SINAMICS S200 servo drive system",
+        "additional_detection_strings": [],
+        "vendor": "Siemens"
+    },
      "Jetty": {
         "prevalence": 0.6,
         "description": "Jetty is a Java based web server and servlet engine",
@@ -7146,6 +7249,13 @@
         "additional_detection_strings": [],
         "vendor": "Internet Systems Consortium"
     },
+    "libxslt": {
+        "detection_priority": 1,
+        "prevalence": 0.8,
+        "description": "ibxslt is the XSLT C library developed for the GNOME project",
+        "additional_detection_strings": [],
+        "vendor": "GNOME"
+    },
      "SQLite": {
         "detection_priority": -0.1,
         "prevalence": 0.7,
@@ -7208,7 +7318,14 @@
     },
      "Nokogiri": {
         "prevalence": 0.6,
+        "detection_priority": -0.1,
         "description": "Nokogiri is an open source XML and HTML library for the Ruby programming language",
+        "additional_detection_strings": [],
+        "vendor": "Nokogiri"
+    },
+     "axios": {
+        "prevalence": 0.6,
+        "description": "axios is a promise based HTTP client for the browser and node.js",
         "additional_detection_strings": [],
         "vendor": "Nokogiri"
     },
@@ -7271,9 +7388,16 @@
     },
      "Node.js": {
         "prevalence": 0.8,
+        "detection_priority": -0.1,
         "description": "Node.js is a cross-platform, open-source server environment that can run on Windows, Linux, Unix, macOS, and more",
         "additional_detection_strings": [],
         "vendor": "Node.js"
+    },
+     "libx264": {
+        "prevalence": 0.8,
+        "description": "libx264 is a free library for encoding H264/AVC video streams",
+        "additional_detection_strings": [],
+        "vendor": "libx264"
     },
      "semver": {
         "prevalence": 0.7,
@@ -7557,7 +7681,7 @@
         "country_of_origin": "USA",
         "product_url": "https://kubernetes.io/"
     },
-    "Struts": {
+    "Apache Struts": {
         "prevalence": 0.7,
         "description": "Apache Struts is a free, open-source, MVC framework for creating elegant, modern Java web applications. It favors convention over configuration, is extensible using a plugin architecture, and ships with plugins to support REST, AJAX and JSON",
         "additional_detection_strings": ["Struts"],
@@ -7806,6 +7930,13 @@
         "short_cpes": [],
         "vendor": "Zyxel"
     },
+    "Zyxel CPE Series": {
+        "prevalence": 0.8,
+        "description": "Zyxel offers a range of Customer Premise Equipment (CPE) devices, including those that support broadband, Ethernet, and WiFi extension. These devices are designed for both residential and business use.",
+        "additional_detection_strings": ["CPE Zyxel"],
+        "short_cpes": [],
+        "vendor": "Zyxel"
+    },
     "Neat VNC": {
         "prevalence": 0.7,
         "description": "A liberally licensed VNC server library with a clean interface ",
@@ -7834,7 +7965,7 @@
     "NVIDIA GPU Display Driver": {
         "prevalence": 0.5,
         "description": "A NVIDIA driver is a software program that enables communication between your computer and the NVIDIA graphics processor installed in your system",
-        "additional_detection_strings": [],
+        "additional_detection_strings": ["NVIDIA GPU display driver"],
         "vendor": "NVIDIA"
     },
     "NVIDIA CUDA Toolkit": {
