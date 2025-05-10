@@ -70,6 +70,18 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "Microsoft Streaming Service": {
+        "prevalence": 0.8,
+        "description": "Windows component",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft AutoUpdate": {
+        "prevalence": 0.8,
+        "description": "Microsoft AutoUpdate (MAU) is a utility designed to keep Microsoft applications up-to-date on macOS.",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Kernel Streaming WOW Thunk Service Driver": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -409,6 +421,7 @@
     "7-Zip": {
         "prevalence": 0.5,
         "description": "7-Zip is a free and open-source file archiver, a utility used to place groups of files within compressed containers known as \"archives\"",
+         "detection_priority": 1,
         "alternative_names": [],
         "additional_detection_strings": [
             "7z.dll"
@@ -963,8 +976,6 @@
     "Windows NTFS": {
         "prevalence": 0.8,
         "description": "The default file system of the Windows NT family",
-        "detection_priority": -0.1,
-        "detection_priority_comment": "CVE-2023-52168: The NtfsHandler.cpp NTFS handler in 7-Zip before...",
         "additional_detection_strings": [
             "NTFS"
         ],
@@ -3033,6 +3044,24 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
+    "Microsoft Virtual Hard Disk": {
+        "prevalence": 0.5,
+        "description": "The Virtual Hard Disk (VHD) format is a publicly-available image format specification that allows encapsulation of the hard disk into an individual file.",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft System Center": {
+        "prevalence": 0.5,
+        "description": "Microsoft System Center is a suite of software products designed to simplify the deployment, configuration and management of IT infrastructure and virtualized software-defined data centers (SDDCs).",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
+    "Microsoft Partner Center": {
+        "prevalence": 0.5,
+        "description": "Microsoft Partner Center is a powerful, all-in-one platform that Microsoft provides for managing your partnership with them.",
+        "additional_detection_strings": [],
+        "vendor": "Microsoft"
+    },
     "Microsoft Windows Store Installer": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -4332,6 +4361,12 @@
         "description": "PyTorch is a machine learning library based on the Torch library, used for applications such as computer vision and natural language processing, originally developed by Meta AI and now part of the Linux Foundation umbrella",
         "additional_detection_strings": [],
         "vendor": "The Linux Foundation"
+    },
+    "Libsoup": {
+        "prevalence": 0.6,
+        "description": "libsoup is an HTTP client/server library for GNOME. It uses GObjects and the glib main loop to integrate well with GNOME applications and also has a synchronous API for use in CLI tools.",
+        "additional_detection_strings": [],
+        "vendor": "GNOME"
     },
     "Laravel": {
         "prevalence": 0.6,
