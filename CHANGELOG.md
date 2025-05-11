@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.10] - 2025-05-11
+
+- Minor changes to the regular expression in the get_ranges function for identifying the product based on the description: replaced "[A-Za-z]" with "[A-Za-z/]".
+- New tags have appeared in the BDU data source. TODO: add proper handling. For now, I've commented out parts of the code to prevent the script from crashing.
+- In the MS (Microsoft) data source, the description is now taken from the title field. This is necessary to keep the simplified mode of determining the vulnerable product and the type of vulnerability working.
+- In the NVD data source, added handling for non-breaking space characters in the description.
+- In the Vulners data source, made minor fixes to vulners.com response parsing.
+
 ## [1.0.9] - 2024-12-19
 
 - I fixed a very annoying bug in Vulristics when determining the name of a vulnerable product in the CVE description. The product name sometimes appeared inside some words. For example, "Perl" - "properly", "Trie" - "retrieved". Now I check the characters to the left and right of the match. If it is something alphabetic, I ignore it.

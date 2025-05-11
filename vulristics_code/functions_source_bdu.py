@@ -97,9 +97,9 @@ def parse_bdu_file():
                             soft_dict["types"] = list()
                             for software_type in soft_param:
                                 soft_dict["types"].append(software_type.text)
-                        else:
-                            print("ERROR: " + soft_param.tag )
-                            exit()
+                        # else:
+                        #     print("ERROR: " + soft_param.tag )
+                        #     exit()
                     bdu_data[vul_id]["soft"].append(soft_dict)
             elif vul_param.tag == "environment":
                 bdu_data[vul_id]["environment"] = list()
@@ -117,9 +117,9 @@ def parse_bdu_file():
                             environment_dict["platform"] = soft_param.text
                         elif environment_param.tag == "registry_number":
                             environment_dict["registry_number"] = soft_param.text
-                        else:
-                            print("ERROR: " + environment_param.tag )
-                            exit()
+                        # else:
+                        #     print("ERROR: " + environment_param.tag )
+                        #     exit()
                     bdu_data[vul_id]["environment"].append(environment_dict)
             elif vul_param.tag == "cvss":
                 for cvss_param in vul_param:
@@ -136,9 +136,9 @@ def parse_bdu_file():
                 bdu_data[vul_id]["cwe"] = list()
                 for cwe_identifier in vul_param:
                     bdu_data[vul_id]["cwe"].append(cwe_identifier.text)
-            else:
-                print("ERROR: " + vul_param.tag)
-                exit()
+            # else:
+            #     print("ERROR: " + vul_param.tag)
+            #     exit()
         # print("----")
 
     for bdu_id in bdu_data:

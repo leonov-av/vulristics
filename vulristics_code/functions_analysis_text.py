@@ -46,13 +46,13 @@ def get_ranges(value_string, search_string):
             if pre_start > 0: # not the beginning of the text
                 # print(pre_start)
                 # print(value_string[pre_start])
-                if re.findall("[A-Za-z]", value_string[pre_start]):
+                if re.findall("[A-Za-z/]", value_string[pre_start]):
                     pre_start_status = False
                     # This means that we have found not a word or several words in their entirety, but only a part of another word
                     # This is most likely an error
             if post_end < len(value_string)-1: # not the end of the text
                 # print(value_string[post_end-1])
-                if re.findall("[A-Za-z]", value_string[post_end-1]):
+                if re.findall("[A-Za-z/]", value_string[post_end-1]):
                     post_end_status = False
                     # This means that we have found not a word or several words in their entirety, but only a part of another word
                     # This is most likely an error
@@ -82,13 +82,13 @@ def get_ranges(value_string, search_string):
             if pre_start > 0: # not the beginning of the text
                 # print(pre_start)
                 # print(value_string[pre_start])
-                if re.findall("[A-Za-z]", value_string[pre_start]):
+                if re.findall("[A-Za-z/]", value_string[pre_start]):
                     pre_start_status = False
                     # This means that we have found not a word or several words in their entirety, but only a part of another word
                     # This is most likely an error
             if post_end < len(value_string)-1: # not the end of the text
                 # print(value_string[post_end-1])
-                if re.findall("[A-Za-z]", value_string[post_end-1]):
+                if re.findall("[A-Za-z/]", value_string[post_end-1]):
                     post_end_status = False
                     # This means that we have found not a word or several words in their entirety, but only a part of another word
                     # This is most likely an error

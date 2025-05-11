@@ -195,11 +195,13 @@ def get_ms_cve_data(cve_id, source_config):
     rewrite_flag = source_config['rewrite_flag']
     download_ms_cve_data_raw(cve_id, rewrite_flag)
     ms_cve_data = get_ms_cve_data_raw(cve_id)
+
     if not ms_cve_data['not_found_error']:
         ms_cve_data['description'] = ""
-        if 'description' in ms_cve_data['main']:
-            ms_cve_data['description'] = re.sub("<[^>]*>","",ms_cve_data['main']['description'])
+        # if 'description' in ms_cve_data['main']:
+        #     ms_cve_data['description'] = re.sub("<[^>]*>","",ms_cve_data['main']['description'])
         ms_cve_data['title'] = ms_cve_data['main']['cveTitle']
+        ms_cve_data['description'] = ms_cve_data['title']
         if 'exploited' in ms_cve_data['main']:
             ms_cve_data['exploited'] = ms_cve_data['main']['exploited']
         else:

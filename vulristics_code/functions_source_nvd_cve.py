@@ -114,6 +114,7 @@ def get_nvd_cve_data(cve_id, source_config):
             for description in nvd_cve_data['raw']['vulnerabilities'][0]['cve']['descriptions']:
                 if description['lang'] == "en":
                     nvd_cve_data['description'] = re.sub("\\n"," ",description['value'])
+                    nvd_cve_data['description'] = re.sub("\\xa0"," ",nvd_cve_data['description'])
 
             short_cpes = list()
             if 'configurations' in nvd_cve_data['raw']['vulnerabilities'][0]['cve']:

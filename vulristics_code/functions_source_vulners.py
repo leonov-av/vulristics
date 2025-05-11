@@ -103,13 +103,14 @@ def collect_vulners_data(vulners_id, rewrite_flag):
     if not vulners_data['not_found_error']:
         vulners_data['bulletins_types'] = dict()
         if 'references' in vulners_data['data']:
-            for reference in vulners_data['data']['references'][vulners_id.upper()]:
-                for bulletin in vulners_data['data']['references'][vulners_id.upper()][reference]:
-                    if not "msf:ilities" in bulletin['id'].lower(): # Ignoring Rapid7 Metasploit IDs that are in fact vulnerabilities, not exploits
-                        if bulletin['bulletinFamily'] not in vulners_data['bulletins_types']:
-                            vulners_data['bulletins_types'][bulletin['bulletinFamily']] = list()
-                        vulners_data['bulletins_types'][bulletin['bulletinFamily']].append(
-                            {"id": bulletin['id'], "type": bulletin['type'], "title": bulletin['title'], "href": bulletin['href']})
+            if vulners_id.upper() in vulners_data['data']['references']:
+                for reference in vulners_data['data']['references'][vulners_id.upper()]:
+                    for bulletin in vulners_data['data']['references'][vulners_id.upper()][reference]:
+                        if not "msf:ilities" in bulletin['id'].lower(): # Ignoring Rapid7 Metasploit IDs that are in fact vulnerabilities, not exploits
+                            if bulletin['bulletinFamily'] not in vulners_data['bulletins_types']:
+                                vulners_data['bulletins_types'][bulletin['bulletinFamily']] = list()
+                            vulners_data['bulletins_types'][bulletin['bulletinFamily']].append(
+                                {"id": bulletin['id'], "type": bulletin['type'], "title": bulletin['title'], "href": bulletin['href']})
         if 'exploit' in vulners_data['bulletins_types']:
             vulners_data['public_exploit'] = True
             vulners_data['public_exploit_sources'] = list()
@@ -137,9 +138,10 @@ def collect_vulners_data(vulners_id, rewrite_flag):
             vulners_data['public_exploit_sources'] = list()
     vulners_data['wild_exploited'] = False
     bul_dict = dict()
-    for bul_type in vulners_data['bulletins_types']:
-        for bul in vulners_data['bulletins_types'][bul_type]:
-            bul_dict[bul['id']] = bul
+    if "bulletins_types" in vulners_data:
+        for bul_type in vulners_data['bulletins_types']:
+            for bul in vulners_data['bulletins_types'][bul_type]:
+                bul_dict[bul['id']] = bul
     if 'data' in vulners_data:
         if 'documents' in vulners_data['data']:
             if vulners_id in vulners_data['data']['documents']:
@@ -150,6 +152,7 @@ def collect_vulners_data(vulners_id, rewrite_flag):
                         if vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']:
                             if 'wildExploited' in vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']:
                                 wild_exploited = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploited']
+                            if 'wildExploitedSources' in vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']:
                                 wild_exploited_sources = vulners_data['data']['documents'][vulners_id]['enchantments']['exploitation']['wildExploitedSources']
 
                         new_wild_exploited_sources = list()

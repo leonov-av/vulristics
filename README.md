@@ -10,59 +10,64 @@ You can generate the report for the following entities:
 
 * Arbitrary CVE list
 ```buildoutcfg
-python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,bdu,epss,vulners,attackerkb" --rewrite-flag "True"
+./venv/bin/python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "bdu,nvd,epss,vulners,attackerkb,custom" --rewrite-flag "True" --bdu-use-vulnerability-descriptions-flag "False" --bdu-use-product-names-flag "False"
 ```
-* Microsoft Patch Tuesday ([HTML report example](https://avleonov.com/vulristics_reports/ms_patch_tuesday_november2021_report_with_comments_ext_img.html))
+* Custom profile for analysis ([Linux Patch Wednesday custom profile example](https://github.com/leonov-av/linux-patch-wednesday/blob/main/vulristics_profiles/linux_patch_wednesday_may2025.json))
 ```buildoutcfg
-python3 vulristics.py --report-type "ms_patch_tuesday" --mspt-year 2024 --mspt-month "July" --rewrite-flag "True"
+./venv/bin/python3 vulristics.py --report-type "custom_profile" --profile-json-path "linux_patch_wednesday_april2025.json" --cve-data-sources "bdu,nvd,epss,vulners,attackerkb,custom"  --rewrite-flag "False" --bdu-use-vulnerability-descriptions-flag "True" --bdu-use-product-names-flag "False" --result-html-label "lpw"
 ```
+* Microsoft Patch Tuesday ([HTML report example](https://avleonov.com/vulristics_reports/ms_patch_tuesday_april2025_report_with_comments_ext_img.html))
+```buildoutcfg
+./venv/bin/python3 vulristics.py --report-type "ms_patch_tuesday_extended" --mspt-year 2025 --mspt-month "April" --cve-data-sources "ms,nvd,epss,vulners,attackerkb,custom" --mspt-comments-links-path "comments_links.txt" --rewrite-flag "True" --bdu-use-vulnerability-descriptions-flag "False" --bdu-use-product-names-flag "False"
+ ```
 
 ### Example of output
 ```buildoutcfg
-$ python3 vulristics.py --report-type "cve_list" --cve-project-name "CVE-2024-20723" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,bdu,epss,vulners,attackerkb" --rewrite-flag "True"
-                      /$$           /$$             /$$     /$$                    
+$ ./venv/bin/python3 vulristics.py --report-type "cve_list" --cve-project-name "CVE-2025-24054" --cve-list-path "analyze_cve_list.txt" --cve-data-sources "bdu,nvd,epss,vulners,attackerkb,custom" --rewrite-flag "True" --bdu-use-vulnerability-descriptions-flag "False" --bdu-use-product-names-flag "False"
+
+                       /$$           /$$             /$$     /$$                    
                      | $$          |__/            | $$    |__/                    
  /$$    /$$ /$$   /$$| $$  /$$$$$$  /$$  /$$$$$$$ /$$$$$$   /$$  /$$$$$$$  /$$$$$$$
 |  $$  /$$/| $$  | $$| $$ /$$__  $$| $$ /$$_____/|_  $$_/  | $$ /$$_____/ /$$_____/
  \  $$/$$/ | $$  | $$| $$| $$  \__/| $$|  $$$$$$   | $$    | $$| $$      |  $$$$$$ 
   \  $$$/  | $$  | $$| $$| $$      | $$ \____  $$  | $$ /$$| $$| $$       \____  $$
    \  $/   |  $$$$$$/| $$| $$      | $$ /$$$$$$$/  |  $$$$/| $$|  $$$$$$$ /$$$$$$$/
-    \_/     \______/ |__/|__/      |__/|_______/    \___/  |__/ \_______/|_______/ 
-Reading existing profile data/profiles/CVE-2024-20723_profile.json...
+    \_/     \______/ |__/|__/      |__/|_______/    \___/  |__/ \_______/|_______/  
+
+Reading existing profile data/profiles/CVE-2025-24054_profile.json...
 Exclude CVEs: 0
 No specified products to analyze set in profile, reporting everything
 All CVEs: 1
-Enabled data sources: ['ms', 'nvd', 'bdu', 'epss', 'vulners', 'attackerkb']
+Enabled data sources: ['bdu', 'nvd', 'epss', 'vulners', 'attackerkb', 'custom']
 Counting CVE scores...
-Collecting MS CVE data...
-1/1 - CVE-2024-20723
-Requesting CVE-2024-20723 from Microsoft website
 Collecting NVD CVE data...
-1/1 - CVE-2024-20723
-Requesting CVE-2024-20723 from NVD website WITH authorization key
+1/1 - CVE-2025-24054
+Requesting CVE-2025-24054 from NVD website WITH authorization key
 Collecting EPSS CVE data...
-1/1 - CVE-2024-20723
-Requesting CVE-2024-20723 from epss website
+1/1 - CVE-2025-24054
+Requesting CVE-2025-24054 from epss website
 Collecting AttackerKB CVE data...
-1/1 - CVE-2024-20723
-Requesting CVE-2024-20723 from AttackerKB website WITHOUT authorization key
+1/1 - CVE-2025-24054
+Requesting CVE-2025-24054 from AttackerKB website WITHOUT authorization key
 Collecting Vulners CVE data...
-1/1 - CVE-2024-20723
-Requesting CVE-2024-20723 from Vulners website WITH authorization key
+1/1 - CVE-2025-24054
+Requesting CVE-2025-24054 from Vulners website WITH authorization key
 Collecting BDU CVE data...
 Updating BDU FSTEC data...
-1/1 - CVE-2024-20723
+1/1 - CVE-2025-24054
+Collecting CUSTOM CVE data...
+1/1 - CVE-2025-24054
 Combining CVE data...
-1/1 CVE-2024-20723
+1/1 CVE-2025-24054
 Counting CVE scores...
 Making vulnerability reports for each reports config...
 Report config: with_comments_ext_img
-HTML report generated: reports/cve-2024-20723_report_with_comments_ext_img.html
+HTML report generated: reports/cve-2025-24054_report_with_comments_ext_img.html
 ```
 
 ### Options
 ```buildoutcfg
-$ python3 vulristics.py -h
+$ ./venv/bin/python3 vulristics.py -h
 usage: vulristics.py [-h] [--report-type REPORT_TYPE] [--mspt-year MSPT_YEAR] [--mspt-month MSPT_MONTH]
                      [--mspt-comments-links-path MSPT_COMMENTS_LINKS_PATH]
                      [--cve-project-name CVE_PROJECT_NAME] [--cve-list-path CVE_LIST_PATH]
@@ -122,7 +127,8 @@ options:
 ### Installation
 Vulristics is developed and tested on Ubuntu 24.04 LTS, Python 3.12.3
 ```buildoutcfg
-pip3 install -r requirements.txt
+python3 -m venv venv
+./venv/bin/pip3 install -r requirements.txt
 ```
 
 ## Where to read more?
