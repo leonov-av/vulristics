@@ -10,20 +10,20 @@ You can generate the report for the following entities:
 
 * Arbitrary CVE list
 ```buildoutcfg
-./venv/bin/python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "bdu,nvd,epss,vulners,attackerkb,custom" --rewrite-flag "True" --bdu-use-vulnerability-descriptions-flag "False" --bdu-use-product-names-flag "False"
+./venv/bin/python3 vulristics.py --report-type "cve_list" --cve-project-name "New Project" --cve-list-path "analyze_cve_list.txt" --cve-comments-path "analyze_cve_comments.txt" --cve-data-sources "ms,nvd,epss,vulners,attackerkb,bdu,custom" --rewrite-flag "True" --bdu-use-vulnerability-descriptions-flag "False" --bdu-use-product-names-flag "False"
 ```
 * Custom profile for analysis ([Linux Patch Wednesday custom profile example](https://github.com/leonov-av/linux-patch-wednesday/blob/main/vulristics_profiles/linux_patch_wednesday_may2025.json))
 ```buildoutcfg
-./venv/bin/python3 vulristics.py --report-type "custom_profile" --profile-json-path "linux_patch_wednesday_april2025.json" --cve-data-sources "bdu,nvd,epss,vulners,attackerkb,custom"  --rewrite-flag "False" --bdu-use-vulnerability-descriptions-flag "True" --bdu-use-product-names-flag "False" --result-html-label "lpw"
+./venv/bin/python3 vulristics.py --report-type "custom_profile" --profile-json-path "linux_patch_wednesday_april2025.json" --cve-data-sources "ms,nvd,epss,vulners,attackerkb,bdu,custom"  --rewrite-flag "False" --bdu-use-vulnerability-descriptions-flag "True" --bdu-use-product-names-flag "False" --result-html-label "lpw"
 ```
 * Microsoft Patch Tuesday ([HTML report example](https://avleonov.com/vulristics_reports/ms_patch_tuesday_april2025_report_with_comments_ext_img.html))
 ```buildoutcfg
-./venv/bin/python3 vulristics.py --report-type "ms_patch_tuesday_extended" --mspt-year 2025 --mspt-month "April" --cve-data-sources "ms,nvd,epss,vulners,attackerkb,custom" --mspt-comments-links-path "comments_links.txt" --rewrite-flag "True" --bdu-use-vulnerability-descriptions-flag "False" --bdu-use-product-names-flag "False"
+./venv/bin/python3 vulristics.py --report-type "ms_patch_tuesday_extended" --mspt-year 2025 --mspt-month "April" --cve-data-sources "ms,nvd,epss,vulners,attackerkb,bdu,custom" --mspt-comments-links-path "comments_links.txt" --rewrite-flag "True" --bdu-use-vulnerability-descriptions-flag "False" --bdu-use-product-names-flag "False"
  ```
 
 ### Example of output
 ```buildoutcfg
-$ ./venv/bin/python3 vulristics.py --report-type "cve_list" --cve-project-name "CVE-2025-24054" --cve-list-path "analyze_cve_list.txt" --cve-data-sources "bdu,nvd,epss,vulners,attackerkb,custom" --rewrite-flag "True" --bdu-use-vulnerability-descriptions-flag "False" --bdu-use-product-names-flag "False"
+$ ./venv/bin/python3 vulristics.py --report-type "cve_list" --cve-project-name "CVE-2025-24054" --cve-list-path "analyze_cve_list.txt" --cve-data-sources "ms,nvd,epss,vulners,attackerkb,bdu,custom" --rewrite-flag "True" --bdu-use-vulnerability-descriptions-flag "False" --bdu-use-product-names-flag "False"
 
                        /$$           /$$             /$$     /$$                    
                      | $$          |__/            | $$    |__/                    
