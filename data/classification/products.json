@@ -8017,6 +8017,13 @@
         "additional_detection_strings": [],
         "vendor": "Znuny"
     },
+    "Erlang/OTP": {
+        "detection_priority": 1,
+        "prevalence": 0.4,
+        "description": "Erlang/OTP is a set of libraries for the Erlang programming language",
+        "additional_detection_strings": [],
+        "vendor": "Erlang"
+    },
     "DOMPurify": {
         "detection_priority": 1,
         "prevalence": 0.5,
