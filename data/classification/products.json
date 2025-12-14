@@ -601,6 +601,7 @@
         "prevalence": 0.9,
         "description": "Windows Kernel",
         "detection_priority": -2,
+        "short_cpes": ["o:microsoft:windows_10_1809"],
         "detection_priority_comment": "OS name, it is better to choose a specific name of the software",
         "additional_detection_strings": [
             "Windows Kernel",
@@ -1214,6 +1215,8 @@
     },
     "nginx": {
         "prevalence": 0.5,
+        "detection_priority": -0.1,
+        "detection_priority_comment": "ingress-nginx",
         "description": "Nginx is an open-source web server that can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache",
         "additional_detection_strings": [],
         "vendor": "F5",
@@ -1224,6 +1227,13 @@
         "description": "ntopng is an open-source computer software for monitoring traffic on a computer network",
         "additional_detection_strings": [],
         "vendor": "ntopng",
+        "country_of_origin": "USA"
+    },
+    "MDaemon Email Server": {
+        "prevalence": 0.6,
+        "description": "MDaemon Email Server is an email server application with groupware functions for Microsoft Windows. MDaemon supports multiple client-side protocols, including IMAP, POP3, SMTP/MSA, webmail, CalDAV, CardDAV, and optionally ActiveSync for mobile clients and Outlook, and its Connector for Outlook add-on.",
+        "additional_detection_strings": [],
+        "vendor": "MDaemon Technologies",
         "country_of_origin": "USA"
     },
     "SPIP": {
@@ -1242,7 +1252,13 @@
         "vendor": "SPIP",
         "country_of_origin": "France"
     },
-
+    "Hibernate Validator": {
+        "prevalence": 0.5,
+        "detection_priority": 1,
+        "description": "Hibernate Validator is the reference implementation of Jakarta Validation 3.1. Jakarta Validation defines a metadata model and API for JavaBean as well as method validation.",
+        "additional_detection_strings": [],
+        "vendor": "Hibernate"
+    },
     "Chromium": {
         "prevalence": 0.8,
         "detection_priority": 0.3,
@@ -2615,6 +2631,8 @@
     },
     "Samba": {
         "prevalence": 0.8,
+        "detection_priority": 0.1,
+        "detection_priority_comment": "shell command and executed by the Samba Active Directory Domain Controller’s wins hook",
         "description": "Samba is a free software re-implementation of the SMB networking protocol, and was originally developed by Andrew Tridgell",
         "additional_detection_strings": [],
         "vendor": "Samba"
@@ -5438,6 +5456,13 @@
         "additional_detection_strings": [],
         "vendor": "IETF"
     },
+    "Mbed TLS": {
+        "prevalence": 0.5,
+        "detection_priority_comment": "Mbed TLS (previously PolarSSL) is an implementation of the TLS and SSL protocols and the respective cryptographic algorithms and support code required",
+        "description": "",
+        "additional_detection_strings": [],
+        "vendor": "TrustedFirmware"
+    },
     "Windows Delivery Optimization": {
         "prevalence": 0.8,
         "description": "Windows component",
@@ -5449,6 +5474,24 @@
         "description": "",
         "additional_detection_strings": [],
         "vendor": "Microsoft"
+    },
+    "cpp-httplib": {
+        "prevalence": 0.7,
+        "description": "cpp-httplib is a C++11 single-file header-only cross platform HTTP/HTTPS library",
+        "additional_detection_strings": [],
+        "vendor": "yhirose"
+    },
+    "DjVuLibre": {
+        "prevalence": 0.5,
+        "description": "DjVuLibre is a GPL implementation of DjVu, a web-centric format for distributing documents and images",
+        "additional_detection_strings": [],
+        "vendor": "DjVuLibre"
+    },
+    "HashiCorp Nomad": {
+        "prevalence": 0.5,
+        "description": "HashiCorp Nomad is a workload scheduler and orchestrator designed to deploy and manage applications, including containerized and non-containerized workloads, across various infrastructure platforms",
+        "additional_detection_strings": ["Nomad Enterprise"],
+        "vendor": "HashiCorp"
     },
     "Microsoft Windows Infrared Data Association (IrDA)": {
         "prevalence": 0.8,
@@ -5679,10 +5722,10 @@
         "additional_detection_strings": [],
         "vendor": "Microsoft"
     },
-    "LNK": {
+    "Windows LNK File": {
         "prevalence": 0.5,
-        "description": "",
-        "additional_detection_strings": [],
+        "description": "Windows shortcut files use the .lnk file extension and function as a virtual link that allows people to easily access other files without having to navigate through multiple folders on a Windows host",
+        "additional_detection_strings": ["LNK"],
         "vendor": "Microsoft"
     },
     "Windows Security Support Provider Interface": {
@@ -6361,6 +6404,13 @@
         "prevalence": 0.8,
         "description": "The Internetworking Operating System is a family of proprietary network operating systems used on several router and network switch models manufactured by Cisco Systems",
         "additional_detection_strings": [],
+        "vendor": "Cisco"
+    },
+    "Cisco ISE": {
+        "prevalence": 0.8,
+        "description": "Cisco Identity Services Engine (ISE) is a network access control (NAC) and security policy management platform. It enables organizations to control and manage network access based on user and device identities, ensuring only authorized individuals and devices can connect and access specific resources.",
+        "additional_detection_strings": [],
+        "short_cpes": ["a:cisco:identity_services_engine"],
         "vendor": "Cisco"
     },
     "Cisco IOS XE": {
@@ -7458,19 +7508,13 @@
         "additional_detection_strings": [],
         "vendor": "tough-cookie"
     },
-     "FRRouting": {
-        "prevalence": 0.5,
-        "description": "Free Range Routing or FRRouting or FRR is a network routing software suite running on Unix-like platforms, particularly Linux, Solaris, OpenBSD, FreeBSD and NetBSD",
-        "additional_detection_strings": [],
-        "vendor": "FRRouting"
-    },
-     "ImageMagick": {
+    "ImageMagick": {
         "prevalence": 0.6,
         "description": "ImageMagick, invoked from the command line as magick, is a free and open-source cross-platform software suite for displaying, creating, converting, modifying, and editing raster images",
         "additional_detection_strings": [],
         "vendor": "ImageMagick"
     },
-     "Go Project": {
+    "Go Project": {
         "prevalence": 0.5,
         "description": "Go is an open source project developed by a team at Google and many contributors from the open source community",
         "additional_detection_strings": ["golang.org/x/net/http2", "httpTokenCacheKey"],
@@ -7706,7 +7750,7 @@
     "Kubernetes": {
         "prevalence": 0.7,
         "description": "Kubernetes is an open-source container orchestration system for automating software deployment, scaling, and management",
-        "additional_detection_strings": [],
+        "additional_detection_strings": ["ingress-nginx"],
         "vendor": "The Exim Maintainers",
         "type_of_product": "server application",
         "directly_accessible_from_the_internet": "seldom",
@@ -7900,12 +7944,6 @@
         "short_cpes": ["a:jenkins:jenkins"],
         "product_url": "www.jenkins.io"
     },
-    "Cisco ASA": {
-        "prevalence": 0.8,
-        "description": "A family of network security devices from Cisco that provide firewall, intrusion prevention (IPS) and virtual private network (VPN) capabilities",
-        "additional_detection_strings": ["Cisco Adaptive Security Appliance"],
-        "vendor": "Cisco"
-    },
     "ArubaOS": {
         "prevalence": 0.4,
         "description": "ArubaOS is a network operating system for Aruba networking equipment, including switches, access points, and gateways",
@@ -7936,6 +7974,78 @@
         "additional_detection_strings": [],
         "short_cpes": ["a:polkit_project:polkit"],
         "vendor": "polkit"
+    },
+    "libblockdev": {
+        "prevalence": 0.9,
+        "detection_priority": 1.1,
+        "detection_priority_comment": "More than Polkit",
+         "description": "libblockdev is a C library supporting GObject introspection for manipulation of block devices",
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "storaged-project"
+    },
+    "ClamAV": {
+        "prevalence": 0.6,
+        "description": "ClamAV (Clam AntiVirus) is a free software, cross-platform antimalware toolkit able to detect many types of malware, including viruses",
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "Cisco Talos"
+    },
+    "Node.js pbkdf2": {
+        "prevalence": 0.5,
+        "description": "The crypto.pbkdf2(), also known as Password-Based Key Derivation function, provides an asynchronous implementation of the derivative function. A key is derived by using the Hmac digest of a specified algorithm from password, salt and iterations.",
+        "additional_detection_strings": ["pbkdf2"],
+        "short_cpes": [],
+        "vendor": "Node.js"
+    },
+    "ModSecurity": {
+        "prevalence": 0.5,
+        "description": "ModSecurity is an open source, cross platform web application firewall (WAF) engine for Apache, IIS and Nginx",
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "OWASP"
+    },
+    "Apache Commons FileUpload": {
+        "prevalence": 0.7,
+        "description": "The Apache Commons FileUpload component provides a simple yet flexible means of adding support for multipart file upload functionality to servlets and web applications",
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "Apache"
+    },
+    "Open Asset Import Library Assimp": {
+        "prevalence": 0.7,
+        "description": "Open Asset Import Library is a library that loads various 3D file formats into a shared, in-memory format",
+        "additional_detection_strings": [],
+        "short_cpes": ["cpe:2.3:a:assimp:assimp"],
+        "vendor": "Kim Kulling"
+    },
+    "KDE Konsole": {
+        "prevalence": 0.6,
+        "description": "Konsole is a free and open-source terminal emulator graphical application which is part of KDE Applications and ships with the KDE desktop environment",
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "KDE"
+    },
+    "systemd-coredump": {
+        "prevalence": 0.8,
+        "description": "systemd-coredump@.service is a system service to process core dumps",
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "Red Hat"
+    },
+    "Canonical Apport": {
+        "prevalence": 0.8,
+        "description": "Apport intercepts Program crashes, collects debugging information about the crash and the operating system environment, and sends it to bug trackers in a standardized form",
+        "additional_detection_strings": ["Canonical apport"],
+        "short_cpes": [],
+        "vendor": "Canonical"
+    },
+    "Asterisk": {
+        "prevalence": 0.7,
+        "description": "Asterisk is a free and open source framework for building communications applications and is sponsored by Sangoma",
+        "additional_detection_strings": [],
+        "short_cpes": [],
+        "vendor": "Sangoma"
     },
     "needrestart": {
         "prevalence": 0.7,
@@ -8024,6 +8134,69 @@
         "additional_detection_strings": [],
         "vendor": "Erlang"
     },
+    "Gunicorn": {
+        "detection_priority": 1,
+        "prevalence": 0.4,
+        "description": "The Gunicorn \"Green Unicorn\" is a Python Web Server Gateway Interface (WSGI) HTTP server",
+        "additional_detection_strings": [],
+        "vendor": "Gunicorn"
+    },
+    "webpy": {
+        "detection_priority": 1,
+        "prevalence": 0.4,
+        "description": "web.py is a web framework for Python",
+        "additional_detection_strings": [],
+        "vendor": "Aaron Swartz"
+    },
+    "Horde IMP": {
+        "detection_priority": 1,
+        "prevalence": 0.4,
+        "description": "IMP is the Internet Messaging Program. It is written in PHP and provides webmail access to IMAP and POP3 accounts. It uses the best-of-class Horde/Imap_Client library to provide fast, robust connections to the remote IMAP/POP3 server.",
+        "additional_detection_strings": [],
+        "vendor": "Horde LLC"
+    },
+    "tar-fs": {
+        "detection_priority": 1,
+        "prevalence": 0.4,
+        "description": "Filesystem bindings for tar-stream that allow you to pack directories into tarballs and extract tarballs into directories",
+        "additional_detection_strings": [],
+        "vendor": "Mathias Buus"
+    },
+    "Finit": {
+        "detection_priority": 1,
+        "prevalence": 0.4,
+        "description": "Finit is a fast init for Linux systems",
+        "additional_detection_strings": [],
+        "vendor": "Joachim Wiberg"
+    },
+    "Libxmp": {
+        "detection_priority": 1,
+        "prevalence": 0.4,
+        "description": "Libxmp is a library that renders module files to PCM data",
+        "additional_detection_strings": [],
+        "vendor": "Libxmp"
+    },
+    "Yelp": {
+        "detection_priority": 1,
+        "prevalence": 0.7,
+        "description": "The Gnome user help application",
+        "additional_detection_strings": [],
+        "vendor": "Gnome"
+    },
+    "Flask-Cors": {
+        "detection_priority": 1,
+        "prevalence": 0.4,
+        "description": "A Flask extension for handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible",
+        "additional_detection_strings": ["corydolphin/flask-cors"],
+        "vendor": "Flask-Cors"
+    },
+    "CommuniGate Pro": {
+        "detection_priority": 1,
+        "prevalence": 0.4,
+        "description": "CommuniGate Pro is a highly scalable carrier grade unified communications server, as well as a development platform",
+        "additional_detection_strings": [],
+        "vendor": "CommuniGate Pro"
+    },
     "DOMPurify": {
         "detection_priority": 1,
         "prevalence": 0.5,
@@ -8043,5 +8216,909 @@
         "description": "Moby is an open-source project, created by Docker, to enable and accelerate software containerization",
         "additional_detection_strings": ["Moby is an open-source project"],
         "vendor": "Docker"
+    },
+    "WordPress": {
+        "prevalence": 0.9,
+        "description": "WordPress is a widely-used open source content management system (CMS) for building websites and blogs. It provides a plugin and theme architecture and is written in PHP, typically paired with MySQL/MariaDB for storage.",
+        "additional_detection_strings": [
+            "wp-login.php",
+            "wp-admin",
+            "wp-content",
+            "wp-includes",
+            "wp-json",
+            "wp-json/wp/v2",
+            "wordpress_logged_in_",
+            "wp-settings-",
+            "wp-content/plugins",
+            "wp-content/themes",
+            "WP_HTML_Token"
+        ],
+        "vendor": "WordPress Foundation / WordPress Community",
+        "type_of_product": "content management system / web application",
+        "type_of_license": "open source",
+        "license": "GPL-2.0-or-later",
+        "language": "PHP",
+        "country_of_origin": "USA",
+        "short_cpes": [
+            "a:wordpress:wordpress"
+        ],
+        "product_url": "https://wordpress.org",
+        "source": "LLM"
+    },
+    "NVIDIA Container Toolkit": {
+        "prevalence": 0.35,
+        "description": "The NVIDIA Container Toolkit provides the tooling and runtime components to build and run GPU-accelerated containers, exposing host NVIDIA GPUs into containerized workloads and integrating with container runtimes (Docker, containerd, CRI-O).",
+        "additional_detection_strings": [
+            "nvidia-container-toolkit",
+            "NVIDIA Container Toolkit",
+            "nvidia-container-cli",
+            "nvidia-container-runtime",
+            "nvidia-container-runtime-hook",
+            "nvidia-container-runtime-backed",
+            "nvidia-container-runtime-hook"
+        ],
+        "vendor": "NVIDIA Corporation",
+        "type_of_product": "container runtime / toolkit",
+        "type_of_license": "open source",
+        "license": "Apache-2.0",
+        "language": "Go",
+        "country_of_origin": "USA",
+        "short_cpes": [],
+        "product_url": "https://github.com/NVIDIA/nvidia-container-toolkit",
+        "source": "LLM"
+    },
+    "U-Boot": {
+        "prevalence": 0.4,
+        "description": "Das U-Boot (U-Boot) is an open-source universal boot loader used on many embedded boards and SoCs to initialize hardware, provide low-level diagnostics, and load an operating system kernel. It is implemented primarily in C with board-specific assembly.",
+        "additional_detection_strings": [
+            "Das U-Boot"
+        ],
+        "vendor": "DENX / U-Boot community",
+        "type_of_product": "boot loader / firmware",
+        "type_of_license": "open source",
+        "license": "GPL-2.0+",
+        "language": "C (and assembly)",
+        "country_of_origin": "Germany",
+        "short_cpes": [],
+        "product_url": "https://www.u-boot.org",
+        "source": "LLM"
+    },
+    "Keras": {
+        "prevalence": 0.4,
+        "description": "High-level neural networks API, running on top of TensorFlow, allowing model building and training",
+        "additional_detection_strings": ["keras"],
+        "vendor": "Keras Community / TensorFlow Team",
+        "type_of_product": "machine learning library",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "Python",
+        "country_of_origin": "USA",
+        "short_cpes": [],
+        "product_url": "https://keras.io",
+        "source": "LLM"
+    },
+    "IEEE P802.11-REVme mesh networks": {
+        "prevalence": 0.2,
+        "description": "Draft versions D1.1–D7.0 of the IEEE P802.11-REVme standard for mesh networking",
+        "additional_detection_strings": ["P802.11-REVme"],
+        "vendor": "IEEE",
+        "type_of_product": "wireless networking standard implementation",
+        "country_of_origin": "USA",
+        "short_cpes": [],
+        "product_url": "https://standards.ieee.org",
+        "source": "LLM"
+    },
+    "JOSE": {
+        "prevalence": 0.3,
+        "description": "JavaScript module for JSON Object Signing and Encryption (JOSE)",
+        "additional_detection_strings": ["jose", "jose-js"],
+        "type_of_product": "crypto / JWT library",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "JavaScript",
+        "short_cpes": [],
+        "product_url": "https://github.com/panva/jose",
+        "source": "LLM"
+    },
+    "pyjwt": {
+        "prevalence": 0.2,
+        "description": "Python JSON Web Token implementation",
+        "additional_detection_strings": [],
+        "vendor": "Jose Padilla (community)",
+        "type_of_product": "crypto / JWT library",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "Python",
+        "short_cpes": [],
+        "product_url": "https://github.com/jpadilla/pyjwt",
+        "source": "LLM"
+    },
+    "form-data": {
+        "prevalence": 0.25,
+        "description": "JavaScript library for constructing multipart form-data",
+        "additional_detection_strings": ["form-data.js"],
+        "vendor": "GitHub form-data maintainer",
+        "type_of_product": "library",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "JavaScript",
+        "short_cpes": [],
+        "product_url": "https://github.com/form-data/form-data",
+        "source": "LLM"
+    },
+    "CIRCL FourQ": {
+        "prevalence": 0.3,
+        "description": "CIRCL Go cryptographic library implementation of the FourQ elliptic curve",
+        "additional_detection_strings": ["CIRCL", "CIRCL FourQ"],
+        "vendor": "Cybersecurity Research Center (Switzerland)",
+        "type_of_product": "cryptographic library",
+        "type_of_license": "open source",
+        "license": "Apache-2.0",
+        "language": "Go",
+        "country_of_origin": "Switzerland",
+        "short_cpes": [],
+        "product_url": "https://github.com/cloudflare/circl",
+        "source": "LLM"
+    },
+    "Sipwise rtpengine": {
+        "prevalence": 0.3,
+        "description": "Media-relay RTP/SRTP engine commonly deployed in SIP/VoIP infrastructure",
+        "additional_detection_strings": ["rtpengine", "Sipwise rtpengine"],
+        "vendor": "Sipwise GmbH",
+        "type_of_product": "media-relay / signaling server component",
+        "type_of_license": "open source",
+        "license": "GPL-2.0",
+        "language": "C",
+        "country_of_origin": "Austria",
+        "short_cpes": [],
+        "product_url": "https://github.com/sipwise/rtpengine",
+        "source": "LLM"
+    },
+    "Wasmtime": {
+        "prevalence": 0.25,
+        "description": "Standalone WebAssembly runtime written in Rust",
+        "additional_detection_strings": ["wasmtime"],
+        "vendor": "Bytecode Alliance",
+        "type_of_product": "WebAssembly runtime",
+        "type_of_license": "open source",
+        "license": "Apache-2.0",
+        "language": "Rust",
+        "country_of_origin": "USA",
+        "short_cpes": [],
+        "product_url": "https://github.com/bytecodealliance/wasmtime",
+        "source": "LLM"
+    },
+    "Artifex MuPDF mutool": {
+        "prevalence": 0.2,
+        "description": "Command-line utility 'mutool' for MuPDF, a lightweight PDF and XPS viewer",
+        "additional_detection_strings": ["mutool"],
+        "vendor": "Artifex Software",
+        "type_of_product": "PDF parsing / processing utility",
+        "type_of_license": "dual (open source/commercial)",
+        "license": "AGPL-3.0 or commercial",
+        "language": "C",
+        "country_of_origin": "USA",
+        "short_cpes": [],
+        "product_url": "https://mupdf.com",
+        "source": "LLM"
+    },
+    "freedesktop Poppler pdfseparate": {
+        "prevalence": 0.2,
+        "description": "Utility 'pdfseparate' part of Poppler, a PDF rendering library",
+        "additional_detection_strings": ["pdfseparate"],
+        "vendor": "freedesktop.org",
+        "type_of_product": "PDF manipulation utility",
+        "type_of_license": "open source",
+        "license": "GPL-2.0",
+        "language": "C++",
+        "country_of_origin": "Open source community",
+        "short_cpes": [],
+        "product_url": "https://poppler.freedesktop.org",
+        "source": "LLM"
+    },
+    "Cairo": {
+        "prevalence": 0.2,
+        "description": "2D graphics library used for rendering vector graphics, including PDF via Poppler",
+        "additional_detection_strings": ["cairo", "libcairo"],
+        "vendor": "freedesktop.org",
+        "type_of_product": "graphics rendering library",
+        "type_of_license": "open source",
+        "license": "LGPL-2.1+",
+        "language": "C",
+        "country_of_origin": "Open source community",
+        "short_cpes": [],
+        "product_url": "https://cairographics.org",
+        "source": "LLM"
+    },
+    "orjson": {
+        "prevalence": 0.2,
+        "description": "Python library for fast JSON parsing and serialization",
+        "additional_detection_strings": [],
+        "vendor": "ijl / open source community",
+        "type_of_product": "JSON parsing library",
+        "type_of_license": "open source",
+        "license": "MIT/Apache-2.0",
+        "language": "Python",
+        "country_of_origin": "Unknown",
+        "short_cpes": [],
+        "product_url": "https://github.com/ijl/orjson",
+        "source": "LLM"
+    },
+    "WeasyPrint": {
+        "prevalence": 0.3,
+        "description": "Python library to generate PDF documents from HTML/CSS",
+        "additional_detection_strings": [],
+        "vendor": "Kozea",
+        "type_of_product": "PDF generation library",
+        "type_of_license": "open source",
+        "license": "BSD",
+        "language": "Python",
+        "country_of_origin": "France",
+        "short_cpes": [],
+        "product_url": "https://weasyprint.org",
+        "source": "LLM"
+    },
+    "spytrap-adb": {
+        "prevalence": 0.3,
+        "description": "Android-based tool scanning for stalkerware artifacts via ADB",
+        "additional_detection_strings": ["spytrap"],
+        "vendor": "spytrap-adb project (open source)",
+        "type_of_product": "security scanning tool",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "Rust",
+        "short_cpes": [],
+        "product_url": "https://github.com/spytrap-org/spytrap-adb",
+        "source": "LLM"
+    },
+    "GoldenDict": {
+        "prevalence": 0.5,
+        "description": "Cross-platform dictionary lookup program supporting multiple formats",
+        "additional_detection_strings": [],
+        "vendor": "GoldenDict project",
+        "type_of_product": "dictionary application",
+        "type_of_license": "open source",
+        "license": "GPL",
+        "language": "C++/Qt",
+        "short_cpes": [],
+        "product_url": "https://github.com/goldendict/goldendict",
+        "source": "LLM"
+    },
+    "Thor": {
+        "prevalence": 0.3,
+        "description": "Toolkit for building command-line interfaces in Ruby",
+        "additional_detection_strings": [],
+        "vendor": "Thor maintainers ",
+        "type_of_product": "CLI toolkit library",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "Ruby",
+        "short_cpes": [],
+        "product_url": "https://github.com/rails/thor",
+        "source": "LLM"
+    },
+    "gh (R package)": {
+        "prevalence": 0.2,
+        "description": "R client for interacting with GitHub API",
+        "additional_detection_strings": ["gh package for R", "The gh package"],
+        "vendor": "r-lib (open source)",
+        "type_of_product": "API client library",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "R",
+        "short_cpes": [],
+        "product_url": "https://github.com/r-lib/gh",
+        "source": "LLM"
+    },
+    "c-blosc2": {
+        "prevalence": 0.3,
+        "description": "c-blosc2 is a high-performance blocking data compression library optimized for binary data, offering multi-threaded and lightweight compression.",
+        "additional_detection_strings": [],
+        "vendor": "Blosc (part of ALISTA-Blosc project)",
+        "type_of_product": "compression library",
+        "type_of_license": "open source",
+        "license": "MIT or BSD-style (depends on build)",
+        "language": "C",
+        "short_cpes": [],
+        "product_url": "https://github.com/Blosc/c-blosc2",
+        "source": "LLM"
+    },
+    "jqlang jq": {
+        "prevalence": 0.3,
+        "description": "jq is a lightweight and flexible command-line JSON processor, allowing powerful querying and manipulation of JSON data streams.",
+        "additional_detection_strings": ["jq"],
+        "vendor": "stedolan (original creator) / open source community",
+        "type_of_product": "command-line tool / JSON processor",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "C",
+        "short_cpes": [],
+        "product_url": "https://github.com/jqlang/jq",
+        "source": "LLM"
+    },
+    "libtiff": {
+        "prevalence": 0.2,
+        "description": "libtiff is a widely used library for reading and writing TIFF (Tagged Image File Format) files, offering tools like tiff2ps.",
+        "additional_detection_strings": [],
+        "vendor": "Open Group / libtiff contributors",
+        "type_of_product": "image library",
+        "type_of_license": "open source",
+        "license": "libtiff license (MIT-style)",
+        "language": "C",
+        "short_cpes": [],
+        "product_url": "http://www.libtiff.org/",
+        "source": "LLM"
+    },
+    "Xdebug": {
+        "prevalence": 0.3,
+        "description": "Xdebug is a PHP extension that provides debugging and profiling capabilities. An unauthenticated OS command injection vulnerability exists within Xdebug versions 2.5.5 and earlier, allowing attackers to execute arbitrary OS commands via crafted input.",
+        "additional_detection_strings": [],
+        "vendor": "Derick Rethans",
+        "type_of_product": "PHP extension",
+        "type_of_license": "open source",
+        "license": "PHP-3.01",
+        "language": "C",
+        "country_of_origin": "Netherlands",
+        "product_url": "https://xdebug.org",
+        "source": "LLM"
+    },
+    "gitoxide": {
+        "prevalence": 0.3,
+        "description": "gitoxide is an idiomatic, lean, fast & safe pure Rust implementation of Git, designed for correctness and performance, available both as a Rust library (gix crate) and command-line interface tools.",
+        "additional_detection_strings": [],
+        "vendor": "GitoxideLabs (open source community)",
+        "type_of_product": "version control library/tool",
+        "type_of_license": "open source",
+        "license": "Apache-2.0 OR MIT",
+        "language": "Rust",
+        "short_cpes": [],
+        "product_url": "https://github.com/GitoxideLabs/gitoxide",
+        "source": "LLM"
+    },
+    "Newtonsoft.Json": {
+        "prevalence": 0.7,
+        "description": "Newtonsoft.Json (also known as Json.NET) is a popular high-performance JSON framework for .NET, providing easy-to-use APIs for serializing, deserializing, and manipulating JSON data with extensive flexibility and configurability.",
+        "additional_detection_strings": ["Json.NET"],
+        "vendor": "James Newton-King / open source community",
+        "type_of_product": "JSON serialization library",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "C#",
+        "short_cpes": ["a:newtonsoft:json.net"],
+        "product_url": "https://www.newtonsoft.com/json",
+        "source": "LLM"
+    },
+    "Django": {
+        "prevalence": 0.9,
+        "description": "Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. It provides built-in tools for database models, authentication, URL routing, templates, and security features, making it one of the most widely used frameworks for building scalable and maintainable web applications.",
+        "additional_detection_strings": [],
+        "vendor": "Django Software Foundation / open source community",
+        "type_of_product": "Web framework",
+        "type_of_license": "open source",
+        "license": "BSD-3-Clause",
+        "language": "Python",
+        "short_cpes": [
+            "a:djangoproject:django"
+        ],
+        "product_url": "https://www.djangoproject.com/",
+        "source": "LLM"
+    },
+    "UDisks": {
+        "prevalence": 0.6,
+        "description": "UDisks is a system service daemon that provides interfaces to enumerate, query, and manage storage devices such as hard drives, SSDs, removable media, and loop devices. It exposes functionality over the D-Bus system bus, allowing unprivileged applications to perform safe disk operations while privileged actions are mediated by PolicyKit.",
+        "additional_detection_strings": [
+            "Udisks daemon"
+        ],
+        "vendor": "freedesktop.org / open source community",
+        "type_of_product": "Storage management daemon",
+        "type_of_license": "open source",
+        "license": "GPL-2.0-or-later",
+        "language": "C",
+        "short_cpes": [],
+        "product_url": "https://www.freedesktop.org/wiki/Software/udisks/",
+        "source": "LLM"
+    },
+    "libretro-common": {
+        "prevalence": 0.4,
+        "description": "libretro-common is a collection of reusable coding blocks and utilities (primarily written in C) used by libretro cores and frontends to simplify common tasks such as filesystem handling, CDFS parsing, and platform portability. It is widely used across the libretro ecosystem (RetroArch and cores) for shared functionality.",
+        "additional_detection_strings": [],
+        "vendor": "Libretro / open source community",
+        "type_of_product": "Utility library (common code for emulator cores / frontends)",
+        "type_of_license": "open source / permissive",
+        "license": "Permissive (primarily MIT/ISC; file-level licenses may vary)",
+        "language": "C",
+        "short_cpes": [],
+        "product_url": "https://github.com/libretro/libretro-common",
+        "source": "LLM"
+    },
+    "GNU Screen": {
+        "prevalence": 0.6,
+        "detection_priority": -1,
+        "detection_priority_comment": "Screen is a common word",
+        "description": "GNU Screen is a terminal multiplexer that allows multiple virtual terminal sessions to be accessed and controlled from a single physical terminal. It supports session detaching/reattaching, multiple windows, logging, and scripting — and historically is distributed as part of the GNU Project for use on Unix-like systems. When run with setuid-root privileges (as in CVE-2025-23395), Screen may perform privileged file operations on user-supplied paths without dropping elevated privileges, enabling unprivileged users to create root-owned files and potentially escalate to root.",
+        "additional_detection_strings": ["Screen"],
+        "vendor": "GNU Project / Free Software Foundation",
+        "type_of_product": "Terminal multiplexer / system utility",
+        "type_of_license": "open source",
+        "license": "GPL-3.0-or-later",
+        "language": "C",
+        "short_cpes": [],
+        "product_url": "https://www.gnu.org/software/screen/",
+        "source": "LLM"
+    },
+    "Notepad++":
+    {
+        "prevalence": 0.8,
+        "description": "Notepad++ is a free, open-source text and source code editor for Windows, featuring syntax highlighting, multi-document editing, and support for various programming languages and plugins.",
+        "additional_detection_strings": [],
+        "vendor": "Don Ho / open source community",
+        "type_of_product": "text and source code editor",
+        "type_of_license": "open source",
+        "license": "GPL-2.0-or-later",
+        "language": "C++",
+        "short_cpes": ["a:notepadplusplus:notepad++"],
+        "product_url": "https://notepad-plus-plus.org/",
+        "source": "LLM"
+    },
+    "Cisco ASA": {
+        "prevalence": 0.8,
+        "description": "Cisco Secure Firewall Adaptive Security Appliance (ASA) Software is a security platform that combines firewall, VPN, intrusion prevention, and advanced threat protection capabilities.",
+        "additional_detection_strings": ["Adaptive Security Appliance"],
+        "vendor": "Cisco Systems",
+        "type_of_product": "Firewall and VPN appliance software",
+        "type_of_license": "proprietary",
+        "license": "commercial",
+        "language": "C / proprietary firmware",
+        "short_cpes": ["o:cisco:adaptive_security_appliance_software"],
+        "product_url": "https://www.cisco.com/site/us/en/products/security/firewalls/adaptive-security-appliance-asa-software/index.html",
+        "source": "LLM"
+    },
+    "Oracle E-Business Suite":
+    {
+        "prevalence": 0.6,
+        "description": "Oracle E-Business Suite (EBS) is a comprehensive suite of integrated business applications including modules for ERP, CRM, and SCM. Some modules, like Oracle Configurator (Runtime UI), have known vulnerabilities in versions 12.2.3–12.2.14 that allow unauthenticated remote attackers to access sensitive data (CVSS 3.1 Base Score 7.5 — high confidentiality impact).",
+        "additional_detection_strings": ["E-Business Suite"],
+        "vendor": "Oracle Corporation",
+        "type_of_product": "Enterprise resource planning (ERP) and business applications suite",
+        "type_of_license": "commercial / proprietary",
+        "license": "Proprietary (Oracle E-Business Suite)",
+        "language": "PL/SQL, Java, web technologies (HTML/JavaScript)",
+        "short_cpes": [],
+        "product_url": "https://www.oracle.com/applications/ebusiness/",
+        "source": "LLM"
+    },
+    "Go net/http": {
+        "prevalence": 0.5,
+        "description": "The Go standard library net/http package provides HTTP client and server primitives used by Go applications and many Go-based servers and containers. It includes routing (ServeMux), request handling, and helpers for building web services.",
+        "additional_detection_strings": ["http.CrossOriginProtection"],
+        "vendor": "The Go Project / Google",
+        "type_of_product": "standard library HTTP package",
+        "type_of_license": "open source",
+        "license": "BSD-style (Go license)",
+        "language": "Go",
+        "short_cpes": [],
+        "product_url": "https://pkg.go.dev/net/http",
+        "source": "LLM"
+    },
+    "Canonical LXD": {
+        "prevalence": 0.6,
+        "description": "Canonical LXD is a system container and VM manager for Linux. LXD-UI is the web UI component of LXD that provides a browser-based interface for creating, managing and starting containers and instances.",
+        "additional_detection_strings": [],
+        "vendor": "Canonical Ltd.",
+        "type_of_product": "container management platform (web UI component)",
+        "type_of_license": "open source / upstream maintained by Canonical",
+        "license": "various (GPL/MIT/compatible for different components) — see upstream",
+        "language": "Go (primary implementation)",
+        "short_cpes": [],
+        "product_url": "https://linuxcontainers.org/lxd/",
+        "source": "LLM"
+    },
+    "Open Babel": {
+        "prevalence": 0.5,
+        "detection_priority": 1,
+        "detection_priority_comment": "More priority then Babel",
+        "description": "Open Babel is an open-source chemical toolbox for converting, analyzing and working with many molecular file formats. It provides a C/C++ library and command-line tools widely used in cheminformatics and computational chemistry workflows.",
+        "additional_detection_strings": [],
+        "vendor": "Open Babel development team / open source community",
+        "type_of_product": "cheminformatics / chemical file-format toolkit (library + CLI)",
+        "type_of_license": "open source",
+        "license": "GNU General Public License (GPL, v2)",
+        "language": "C, C++",
+        "short_cpes": [],
+        "product_url": "https://openbabel.org/",
+        "source": "LLM"
+    },
+    "expr-eval": {
+        "prevalence": 0.6,
+        "description": "expr-eval is a lightweight JavaScript expression parser and evaluator used to safely parse and compute mathematical expressions. It supports variables, functions, and custom operators, making it useful in applications requiring dynamic math evaluation.",
+        "additional_detection_strings": [],
+        "vendor": "silentmatt / open source community",
+        "type_of_product": "expression parsing library",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "JavaScript",
+        "short_cpes": [],
+        "product_url": "https://github.com/silentmatt/expr-eval",
+        "source": "LLM"
+    },
+    "Control Web Panel": {
+        "prevalence": 0.6,
+        "description": "Control Web Panel (CWP), formerly known as CentOS Web Panel, is a Linux server administration interface that provides a graphical dashboard for managing web hosting environments. It includes tools for user management, file operations, service control, security configuration, and system monitoring.",
+        "additional_detection_strings": ["CWP", "Control Web Panel", "CentOS Web Panel"],
+        "vendor": "Control-WebPanel project / open source community",
+        "type_of_product": "web hosting control panel",
+        "type_of_license": "open source / proprietary mixed",
+        "license": "GPL / proprietary modules",
+        "language": "PHP",
+        "short_cpes": ["a:control-webpanel:webpanel"],
+        "product_url": "https://control-webpanel.com/",
+        "source": "LLM"
+    },
+    "Sudo": {
+        "prevalence": 0.9,
+        "description": "Sudo is a widely used Unix/Linux utility that allows permitted users to execute commands with elevated (typically root) privileges while providing extensive logging and fine-grained security controls. It is a foundational component in most Linux and BSD distributions.",
+        "additional_detection_strings": ["sudo"],
+        "vendor": "Sudo Project",
+        "type_of_product": "privilege escalation / access control utility",
+        "type_of_license": "open source",
+        "license": "ISC",
+        "language": "C",
+        "short_cpes": ["a:sudo_project:sudo"],
+        "product_url": "https://www.sudo.ws/",
+        "source": "LLM"
+    },
+    "Webmin": {
+        "prevalence": 0.6,
+        "description": "Webmin is a web-based system administration tool for Unix-like servers and services, with about 1,000,000 yearly installations worldwide. It allows administrators to configure operating system internals such as users, disk quotas, services, and configuration files, as well as modify and control open-source applications such as BIND DNS Server, Apache HTTP Server, PHP, MySQL, and more.",
+        "additional_detection_strings": [],
+        "vendor": "Webmin / Jamie Cameron",
+        "type_of_product": "Web-based system administration tool",
+        "type_of_license": "open source",
+        "license": "BSD",
+        "language": "Perl",
+        "short_cpes": ["a:webmin:webmin"],
+        "product_url": "https://www.webmin.com/",
+        "source": "LLM"
+    },
+    "NVIDIA vGPU": {
+        "prevalence": 0.5,
+        "description": "NVIDIA vGPU (Virtual GPU) is a virtualization solution for Windows and Linux that enables multiple virtual machines to share a single physical GPU, providing accelerated graphics and compute capabilities. It includes the Virtual GPU Manager component that runs on the hypervisor and manages GPU resource allocation for guest VMs.",
+        "additional_detection_strings": [],
+        "vendor": "NVIDIA",
+        "type_of_product": "GPU virtualization software",
+        "type_of_license": "commercial",
+        "license": "proprietary",
+        "language": "C/C++",
+        "short_cpes": [],
+        "product_url": "https://www.nvidia.com/en-us/data-center/virtual-solutions/",
+        "source": "LLM"
+    },
+    "QEMU e1000": {
+        "prevalence": 0.7,
+        "detection_priority": 0.1,
+        "detection_priority_comment": "...individual network devices and moved to the net core code",
+        "description": "QEMU is an open-source machine emulator and virtualization platform. It supports various virtual hardware devices, including the e1000 network device, which emulates an Intel PRO/1000 network adapter for virtual machines. The e1000 component handles network packet transmission and reception for guest systems.",
+        "additional_detection_strings": [],
+        "vendor": "QEMU Project",
+        "type_of_product": "Virtualization platform / Network device emulation",
+        "type_of_license": "open source",
+        "license": "GPL-2.0",
+        "language": "C",
+        "short_cpes": ["a:qemu:qemu"],
+        "product_url": "https://www.qemu.org/",
+        "source": "LLM"
+    },
+    "GeographicLib": {
+        "prevalence": 0.3,
+        "description": "GeographicLib is a C++ library for geographic calculations, including conversions between geographic, UTM, MGRS, geocentric, and local coordinates. It provides tools such as GeoConvert to perform precise coordinate transformations.",
+        "additional_detection_strings": [],
+        "vendor": "Charles Karney",
+        "type_of_product": "Geographic computation library",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "C++",
+        "short_cpes": [],
+        "product_url": "https://geographiclib.sourceforge.io/",
+        "source": "LLM"
+    },
+    "MinIO": {
+        "prevalence": 0.7,
+        "description": "MinIO is a high-performance, S3-compatible object storage system designed for large-scale data infrastructure. It supports cloud-native workloads and provides APIs for storing, retrieving, and managing unstructured data such as photos, videos, log files, and backups, with a focus on scalability, speed, and simplicity.",
+        "additional_detection_strings": [],
+        "vendor": "MinIO, Inc.",
+        "type_of_product": "Object storage software",
+        "type_of_license": "open source (AGPL-3.0) / commercial",
+        "license": "AGPL-3.0",
+        "language": "Go",
+        "short_cpes": [],
+        "product_url": "https://min.io/",
+        "source": "LLM"
+    },
+    "Netsurf": {
+        "prevalence": 0.5,
+        "description": "NetSurf is a lightweight open-source web browser designed for efficiency and portability, supporting HTML, CSS, and basic web standards. It is commonly used in embedded and resource-constrained environments.",
+        "additional_detection_strings": [],
+        "vendor": "NetSurf Developers",
+        "type_of_product": "Web browser",
+        "type_of_license": "open source",
+        "license": "GPL-2.0",
+        "language": "C",
+        "short_cpes": ["a:netsurf-browser:netsurf"],
+        "product_url": "https://www.netsurf-browser.org/",
+        "source": "LLM"
+    },
+    "Pillow": {
+        "prevalence": 0.5,
+        "description": "Pillow is a Python imaging library that adds image processing capabilities to Python, supporting formats such as PNG, JPEG, GIF, TIFF, and BMP.",
+        "additional_detection_strings": [],
+        "vendor": "Pillow Project / Python Imaging Library community",
+        "type_of_product": "Image processing library",
+        "type_of_license": "open source",
+        "license": "HPND",
+        "language": "Python",
+        "short_cpes": ["a:python:pillow"],
+        "product_url": "https://python-pillow.org/",
+        "source": "LLM"
+    },
+    "Pypdf": {
+        "prevalence": 0.5,
+        "description": "PyPDF is a Python library for reading, manipulating, and writing PDF files, including extraction, splitting, merging, and encryption features.",
+        "additional_detection_strings": [],
+        "vendor": "PyPDF Project",
+        "type_of_product": "PDF processing library",
+        "type_of_license": "open source",
+        "license": "BSD-3-Clause",
+        "language": "Python",
+        "short_cpes": ["a:pypdf_project:pypdf"],
+        "product_url": "https://pypdf.readthedocs.io/",
+        "source": "LLM"
+    },
+    "QuickJS": {
+        "prevalence": 0.5,
+        "description": "QuickJS is a lightweight JavaScript engine that supports modern ECMAScript features and can be embedded into applications for scripting purposes.",
+        "additional_detection_strings": [],
+        "vendor": "QuickJS Project",
+        "type_of_product": "JavaScript engine",
+        "type_of_license": "open source",
+        "license": "MIT",
+        "language": "C",
+        "short_cpes": ["a:quickjs_project:quickjs"],
+        "product_url": "https://bellard.org/quickjs/",
+        "source": "LLM"
+    },
+    "Radare2": {
+        "prevalence": 0.5,
+        "description": "Radare2 is an open-source reverse engineering framework that includes tools for binary analysis, disassembly, debugging, and forensics.",
+        "additional_detection_strings": [],
+        "vendor": "Radare Project",
+        "type_of_product": "Reverse engineering framework",
+        "type_of_license": "open source",
+        "license": "GPL-3.0",
+        "language": "C",
+        "short_cpes": ["a:radare:radare2"],
+        "product_url": "https://rada.re/",
+        "source": "LLM"
+    },
+    "Squid": {
+        "prevalence": 0.5,
+        "description": "Squid is a caching and forwarding HTTP proxy supporting web acceleration, content filtering, and caching for HTTP, HTTPS, and FTP.",
+        "additional_detection_strings": [],
+        "vendor": "Squid-cache",
+        "type_of_product": "Proxy / caching server",
+        "type_of_license": "open source",
+        "license": "GPL-2.0",
+        "language": "C++",
+        "short_cpes": ["a:squid-cache:squid"],
+        "product_url": "http://www.squid-cache.org/",
+        "source": "LLM"
+    },
+    "Suricata": {
+        "prevalence": 0.5,
+        "description": "Suricata is an open-source intrusion detection and prevention system (IDS/IPS) and network security monitoring engine that supports deep packet inspection and threat detection.",
+        "additional_detection_strings": [],
+        "vendor": "OISF (Open Information Security Foundation)",
+        "type_of_product": "IDS/IPS / network security engine",
+        "type_of_license": "open source",
+        "license": "GPL-2.0",
+        "language": "C",
+        "short_cpes": ["a:oisf:suricata"],
+        "product_url": "https://suricata.io/",
+        "source": "LLM"
+    },
+    "Terraform": {
+        "prevalence": 0.5,
+        "description": "Terraform is an infrastructure-as-code (IaC) tool that enables users to define, provision, and manage cloud and on-premises infrastructure using declarative configuration files.",
+        "additional_detection_strings": [],
+        "vendor": "HashiCorp",
+        "type_of_product": "Infrastructure-as-Code software",
+        "type_of_license": "open source",
+        "license": "MPL-2.0",
+        "language": "Go",
+        "short_cpes": ["a:hashicorp:terraform"],
+        "product_url": "https://www.terraform.io/",
+        "source": "LLM"
+    },
+    "Audiofile": {
+        "prevalence": 0.5,
+        "description": "audiofile is an open-source library for reading and writing audio files in various formats, including AIFF, WAV, and others.",
+        "additional_detection_strings": [],
+        "vendor": "Audiofile Project",
+        "type_of_product": "Audio processing library",
+        "type_of_license": "open source",
+        "license": "LGPL-2.1",
+        "language": "C",
+        "short_cpes": ["a:audiofile:audiofile"],
+        "product_url": "https://audiofile.68k.org/",
+        "source": "LLM"
+    },
+    "Authlib": {
+        "prevalence": 0.5,
+        "description": "Authlib is a Python library for building OAuth and OpenID Connect clients and servers, providing tools for secure authentication, token management, and authorization flows.",
+        "additional_detection_strings": ["authlib"],
+        "vendor": "Authlib Project",
+        "type_of_product": "Authentication framework",
+        "type_of_license": "open source",
+        "license": "BSD-3-Clause",
+        "language": "Python",
+        "short_cpes": ["a:authlib:authlib"],
+        "product_url": "https://authlib.org/",
+        "source": "LLM"
+    },
+    "FontForge": {
+        "prevalence": 0.5,
+        "description": "FontForge is an open-source font editor used for creating, editing, and converting fonts in formats such as TrueType, OpenType, and PostScript.",
+        "additional_detection_strings": [],
+        "vendor": "FontForge Project",
+        "type_of_product": "Font editor / typography tool",
+        "type_of_license": "open source",
+        "license": "GPL-3.0",
+        "language": "C / Python",
+        "short_cpes": ["a:fontforge:fontforge"],
+        "product_url": "https://fontforge.org/",
+        "source": "LLM"
+    },
+    "FRRouting": {
+        "prevalence": 0.5,
+        "description": "FRRouting (FRR) is an IP routing protocol suite for Linux and Unix platforms, supporting BGP, OSPF, RIP, IS-IS, and other routing protocols for network infrastructure.",
+        "additional_detection_strings": [],
+        "vendor": "FRRouting Project",
+        "type_of_product": "Network routing software",
+        "type_of_license": "open source",
+        "license": "GPL-2.0",
+        "language": "C",
+        "short_cpes": ["a:frrouting:frrouting"],
+        "product_url": "https://frrouting.org/",
+        "source": "LLM"
+    },
+    "GIMP": {
+        "prevalence": 0.5,
+        "description": "GIMP is an open-source image manipulation program used for photo editing, graphic design, and digital art creation.",
+        "additional_detection_strings": [],
+        "vendor": "GIMP Team",
+        "type_of_product": "Image editing software",
+        "type_of_license": "open source",
+        "license": "GPL-3.0",
+        "language": "C",
+        "short_cpes": ["a:gimp:gimp"],
+        "product_url": "https://www.gimp.org/",
+        "source": "LLM"
+    },
+    "Gnulib": {
+        "prevalence": 0.5,
+        "description": "Gnulib is a portability library used in GNU software to provide reusable implementations of common functions across different platforms.",
+        "additional_detection_strings": [],
+        "vendor": "GNU Project",
+        "type_of_product": "Portability library",
+        "type_of_license": "open source",
+        "license": "GPL-3.0",
+        "language": "C",
+        "short_cpes": ["a:gnulib:gnulib"],
+        "product_url": "https://www.gnu.org/software/gnulib/",
+        "source": "LLM"
+    },
+    "Icinga": {
+        "prevalence": 0.5,
+        "description": "Icinga is an open-source IT monitoring application that checks network resources, generates performance data, and notifies users of outages.",
+        "additional_detection_strings": [],
+        "vendor": "Icinga GmbH",
+        "type_of_product": "Monitoring software",
+        "type_of_license": "open source",
+        "license": "GPL-2.0",
+        "language": "C++ / PHP",
+        "short_cpes": ["a:icinga:icinga"],
+        "product_url": "https://icinga.com/",
+        "source": "LLM"
+    },
+    "Jitsi": {
+        "prevalence": 0.5,
+        "description": "Jitsi is an open-source platform for video conferencing and real-time communication, including video, voice, chat, and encrypted group meetings.",
+        "additional_detection_strings": [],
+        "vendor": "Jitsi / 8x8 Inc.",
+        "type_of_product": "Video conferencing platform",
+        "type_of_license": "open source",
+        "license": "Apache-2.0",
+        "language": "Java / JavaScript",
+        "short_cpes": ["a:jitsi:jitsi"],
+        "product_url": "https://jitsi.org/",
+        "source": "LLM"
+    },
+    "Kamailio": {
+        "prevalence": 0.5,
+        "description": "Kamailio is an open-source SIP server used for building scalable VoIP, instant messaging, and real-time communications systems.",
+        "additional_detection_strings": [],
+        "vendor": "Kamailio Project",
+        "type_of_product": "SIP server / VoIP platform",
+        "type_of_license": "open source",
+        "license": "GPL-2.0",
+        "language": "C",
+        "short_cpes": ["a:kamailio:kamailio"],
+        "product_url": "https://www.kamailio.org/",
+        "source": "LLM"
+    },
+    "libmicrohttpd": {
+        "prevalence": 0.5,
+        "description": "libmicrohttpd is a small C library that makes it easy to run an HTTP server as part of another application. It is designed to be lightweight and embedded.",
+        "additional_detection_strings": [],
+        "vendor": "GNU Project",
+        "type_of_product": "Embedded HTTP server library",
+        "type_of_license": "open source",
+        "license": "LGPL-2.1",
+        "language": "C",
+        "short_cpes": ["a:gnu:libmicrohttpd"],
+        "product_url": "https://www.gnu.org/software/libmicrohttpd/",
+        "source": "LLM"
+    },
+    "The Visualization Toolkit (VTK)": {
+        "prevalence": 0.5,
+        "description": "The Visualization Toolkit (VTK) is an open-source software system for 3D computer graphics, image processing, and visualization.",
+        "additional_detection_strings": [],
+        "vendor": "Kitware, Inc.",
+        "type_of_product": "3D visualization / graphics library",
+        "type_of_license": "open source",
+        "license": "BSD-3-Clause",
+        "language": "C++ / Python",
+        "short_cpes": ["a:vtk:vtk"],
+        "product_url": "https://vtk.org/",
+        "source": "LLM"
+    },
+    "JasPer": {
+        "prevalence": 0.5,
+        "description": "JasPer is an open-source JPEG-2000 codec library that provides tools for encoding, decoding, and manipulating JPEG-2000 images. It supports a wide range of features for image compression and decompression, including file format handling and color management.",
+        "additional_detection_strings": [],
+        "vendor": "JasPer Project",
+        "type_of_product": "Image compression / codec library",
+        "type_of_license": "open source",
+        "license": "BSD / MIT-style",
+        "language": "C",
+        "short_cpes": ["a:jasper_project:jasper"],
+        "product_url": "https://www.ece.uvic.ca/~mdadams/jasper/",
+        "source": "LLM"
+    },
+    "DCMTK":
+    {
+        "prevalence": 0.5,
+        "description": "DCMTK (DICOM Toolkit) is an open-source collection of libraries and applications implementing large parts of the DICOM standard, including image processing, storage, and network services for medical imaging.",
+        "additional_detection_strings": [],
+        "vendor": "OFFIS e.V.",
+        "type_of_product": "Medical imaging / DICOM toolkit",
+        "type_of_license": "open source",
+        "license": "BSD-3-Clause",
+        "language": "C++",
+        "short_cpes": ["a:offis:dcmtk"],
+        "product_url": "https://dicom.offis.de/dcmtk.php.en",
+        "source": "LLM"
+    },
+    "Lasso": {
+        "prevalence": 0.6,
+        "description": "Lasso is an open-source library that implements the SAML (Security Assertion Markup Language) standard for identity federation, single sign-on (SSO), and identity management, supporting protocols like SAML 1.1, SAML 2.0, Liberty ID-FF, and ID-WSF.",
+        "additional_detection_strings": [],
+        "vendor": "Entr'ouvert",
+        "type_of_product": "Identity federation / SAML library",
+        "type_of_license": "open source",
+        "license": "GNU LGPL",
+        "language": "C",
+        "short_cpes": ["a:entrouvert:lasso"],
+        "product_url": "https://lasso.entrouvert.org/",
+        "source": "LLM"
     }
 }
