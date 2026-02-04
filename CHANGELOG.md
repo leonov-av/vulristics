@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.11] - 2026-02-04
+
+- Separated SSRF into a distinct vulnerability type
+
 ## [1.0.10] - 2025-05-11
 
 - Minor changes to the regular expression in the get_ranges function for identifying the product based on the description: replaced "[A-Za-z]" with "[A-Za-z/]".
