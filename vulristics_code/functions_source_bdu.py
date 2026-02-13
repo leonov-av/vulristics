@@ -34,7 +34,7 @@ def unzip_bdu_file():
         zip_ref.extractall(directory_to_extract_to)
 
 def parse_bdu_file():
-    tree = ET.parse('data/bdu/vulxml/bdu_extracted/export/export.xml')
+    tree = ET.parse('data/bdu/vulxml/bdu_extracted/export/vulxml.xml')
     root = tree.getroot()
 
     bdu_data = dict()
